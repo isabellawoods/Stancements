@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "S S"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+      }
+  },
+  "result": {
+    "item": "stancements:dark_oak_shelf",
+    "count": 3
+  }
+}

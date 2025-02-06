@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_shelf",
+  "textures": {
+    "shelf": "stancements:block/spruce_shelf",
+    "support": "stancements:block/spruce_shelf_support"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "melonystudios.stancements.mixin",
+  "refmap": "stancements.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "block.STBlockMixin",
+    "item.STBannerItemMixin",
+    "item.STFireworkRocketItemMixin",
+    "item.STHangingEntityItemMixin",
+    "item.STItemStackMixin",
+    "item.STShearsItemMixin",
+    "item.STSimpleItemMixins$ItemMixin",
+    "item.STSimpleItemMixins$PotionItemMixin",
+    "item.STSpawnEggItemMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

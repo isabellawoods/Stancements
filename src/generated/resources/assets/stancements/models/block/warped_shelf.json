@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_shelf",
+  "textures": {
+    "shelf": "stancements:block/warped_shelf",
+    "support": "stancements:block/warped_shelf_support"
+  }
+}

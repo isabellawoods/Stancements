@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_shelf",
+  "textures": {
+    "shelf": "stancements:block/jungle_shelf",
+    "support": "stancements:block/jungle_shelf_support"
+  }
+}

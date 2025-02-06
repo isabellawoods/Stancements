@@ -1,0 +1,51 @@
+{
+  "credit": "Made with Blockbench by isabellawods (8-11-24)",
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#shelf"
+  },
+  "elements": [
+    {
+      "name": "shelf",
+      "from": [0, 14, 6],
+      "to": [16, 16, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 15, 15]},
+      "faces": {
+        "north": {"uv": [0, 10, 16, 12], "texture": "#shelf"},
+        "east": {"uv": [0, 12, 10, 14], "texture": "#shelf"},
+        "south": {"uv": [0, 10, 16, 12], "texture": "#shelf"},
+        "west": {"uv": [0, 12, 10, 14], "texture": "#shelf"},
+        "up": {"uv": [16, 10, 0, 0], "texture": "#shelf"},
+        "down": {"uv": [16, 10, 0, 0], "texture": "#shelf"}
+      }
+    },
+    {
+      "name": "support_1",
+      "from": [1, 10, 15],
+      "to": [3, 16, 17],
+      "rotation": {"angle": -45, "axis": "x", "origin": [1, 11, 15]},
+      "faces": {
+        "north": {"uv": [4, 0, 6, 6], "texture": "#support"},
+        "east": {"uv": [4, 0, 6, 6], "texture": "#support"},
+        "south": {"uv": [4, 0, 6, 6], "texture": "#support"},
+        "west": {"uv": [4, 0, 6, 6], "texture": "#support"},
+        "up": {"uv": [6, 0, 8, 2], "texture": "#support"},
+        "down": {"uv": [6, 0, 8, 2], "texture": "#support"}
+      }
+    },
+    {
+      "name": "support_2",
+      "from": [13, 10, 15],
+      "to": [15, 16, 17],
+      "rotation": {"angle": -45, "axis": "x", "origin": [13, 11, 15]},
+      "faces": {
+        "north": {"uv": [0, 0, 2, 6], "texture": "#support"},
+        "east": {"uv": [0, 0, 2, 6], "texture": "#support"},
+        "south": {"uv": [0, 0, 2, 6], "texture": "#support"},
+        "west": {"uv": [0, 0, 2, 6], "texture": "#support"},
+        "up": {"uv": [2, 0, 4, 2], "texture": "#support"},
+        "down": {"uv": [2, 0, 4, 2], "texture": "#support"}
+      }
+    }
+  ]
+}

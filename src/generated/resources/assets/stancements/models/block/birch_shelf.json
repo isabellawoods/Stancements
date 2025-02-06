@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_shelf",
+  "textures": {
+    "shelf": "stancements:block/birch_shelf",
+    "support": "stancements:block/birch_shelf_support"
+  }
+}

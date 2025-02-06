@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "stancements:block/spruce_shelf",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "stancements:block/spruce_shelf"
+    },
+    "facing=west": {
+      "model": "stancements:block/spruce_shelf",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "stancements:block/spruce_shelf",
+      "y": 270
+    }
+  }
+}

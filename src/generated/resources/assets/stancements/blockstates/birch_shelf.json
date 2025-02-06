@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "stancements:block/birch_shelf",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "stancements:block/birch_shelf"
+    },
+    "facing=west": {
+      "model": "stancements:block/birch_shelf",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "stancements:block/birch_shelf",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "block.spawner.break": {
+    "sounds": [
+      "stancements:block/spawner/break1",
+      "stancements:block/spawner/break2",
+      "stancements:block/spawner/break3",
+      "stancements:block/spawner/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.spawner.hit": {
+    "sounds": [
+      "stancements:block/spawner/step1",
+      "stancements:block/spawner/step2",
+      "stancements:block/spawner/step3",
+      "stancements:block/spawner/step4",
+      "stancements:block/spawner/step5"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.spawner.place": {
+    "sounds": [
+      "stancements:block/spawner/break1",
+      "stancements:block/spawner/break2",
+      "stancements:block/spawner/break3",
+      "stancements:block/spawner/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.spawner.step": {
+    "sounds": [
+      "stancements:block/spawner/step1",
+      "stancements:block/spawner/step2",
+      "stancements:block/spawner/step3",
+      "stancements:block/spawner/step4",
+      "stancements:block/spawner/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.cobweb.break": {
+    "sounds": [
+      "stancements:block/cobweb/break1",
+      "stancements:block/cobweb/break2",
+      "stancements:block/cobweb/break3",
+      "stancements:block/cobweb/break4",
+      "stancements:block/cobweb/break5",
+      "stancements:block/cobweb/break6"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.cobweb.fall": {
+    "sounds": [
+      "stancements:block/cobweb/step1",
+      "stancements:block/cobweb/step2",
+      "stancements:block/cobweb/step3",
+      "stancements:block/cobweb/step4",
+      "stancements:block/cobweb/step5",
+      "stancements:block/cobweb/step6"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.cobweb.hit": {
+    "sounds": [
+      "stancements:block/cobweb/step1",
+      "stancements:block/cobweb/step2",
+      "stancements:block/cobweb/step3",
+      "stancements:block/cobweb/step4",
+      "stancements:block/cobweb/step5",
+      "stancements:block/cobweb/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.cobweb.place": {
+    "sounds": [
+      "stancements:block/cobweb/break1",
+      "stancements:block/cobweb/break2",
+      "stancements:block/cobweb/break3",
+      "stancements:block/cobweb/break4",
+      "stancements:block/cobweb/break5",
+      "stancements:block/cobweb/break6"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.cobweb.step": {
+    "sounds": [
+      "stancements:block/cobweb/step1",
+      "stancements:block/cobweb/step2",
+      "stancements:block/cobweb/step3",
+      "stancements:block/cobweb/step4",
+      "stancements:block/cobweb/step5",
+      "stancements:block/cobweb/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.sponge.break": {
+    "sounds": [
+      "stancements:block/sponge/break1",
+      "stancements:block/sponge/break2",
+      "stancements:block/sponge/break3",
+      "stancements:block/sponge/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.sponge.fall": {
+    "sounds": [
+      "stancements:block/sponge/step1",
+      "stancements:block/sponge/step2",
+      "stancements:block/sponge/step3",
+      "stancements:block/sponge/step4",
+      "stancements:block/sponge/step5",
+      "stancements:block/sponge/step6"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.sponge.hit": {
+    "sounds": [
+      {
+        "name": "stancements:block/sponge/step1",
+        "volume": 0.8
+      },
+      {
+        "name": "stancements:block/sponge/step2",
+        "volume": 0.8
+      },
+      {
+        "name": "stancements:block/sponge/step3",
+        "volume": 0.8
+      },
+      {
+        "name": "stancements:block/sponge/step4",
+        "volume": 0.8
+      },
+      {
+        "name": "stancements:block/sponge/step5",
+        "volume": 0.8
+      },
+      {
+        "name": "stancements:block/sponge/step6",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.sponge.place": {
+    "sounds": [
+      "stancements:block/sponge/break1",
+      "stancements:block/sponge/break2",
+      "stancements:block/sponge/break3",
+      "stancements:block/sponge/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.sponge.step": {
+    "sounds": [
+      "stancements:block/sponge/step1",
+      "stancements:block/sponge/step2",
+      "stancements:block/sponge/step3",
+      "stancements:block/sponge/step4",
+      "stancements:block/sponge/step5",
+      "stancements:block/sponge/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.wet_sponge.break": {
+    "sounds": [
+      "stancements:block/wet_sponge/break1",
+      "stancements:block/wet_sponge/break2",
+      "stancements:block/wet_sponge/break3",
+      "stancements:block/wet_sponge/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.wet_sponge.fall": {
+    "sounds": [
+      "stancements:block/wet_sponge/step1",
+      "stancements:block/wet_sponge/step2",
+      "stancements:block/wet_sponge/step3",
+      "stancements:block/wet_sponge/step4"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.wet_sponge.hit": {
+    "sounds": [
+      "stancements:block/wet_sponge/step1",
+      "stancements:block/wet_sponge/step2",
+      "stancements:block/wet_sponge/step3",
+      "stancements:block/wet_sponge/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.wet_sponge.place": {
+    "sounds": [
+      "stancements:block/wet_sponge/break1",
+      "stancements:block/wet_sponge/break2",
+      "stancements:block/wet_sponge/break3",
+      "stancements:block/wet_sponge/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.wet_sponge.step": {
+    "sounds": [
+      "stancements:block/wet_sponge/step1",
+      "stancements:block/wet_sponge/step2",
+      "stancements:block/wet_sponge/step3",
+      "stancements:block/wet_sponge/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.vine.break": {
+    "sounds": [
+      {
+        "name": "stancements:block/vine/break1",
+        "volume": 0.9
+      },
+      {
+        "name": "stancements:block/vine/break2",
+        "volume": 0.9
+      },
+      {
+        "name": "stancements:block/vine/break3",
+        "volume": 0.9
+      },
+      {
+        "name": "stancements:block/vine/break4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.vine.fall": {
+    "sounds": [
+      "block/vine/climb1",
+      "block/vine/climb2",
+      "block/vine/climb3",
+      "block/vine/climb4",
+      "block/vine/climb5"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.vine.hit": {
+    "sounds": [
+      "step/grass1",
+      "step/grass2",
+      "step/grass3",
+      "step/grass4",
+      "step/grass5",
+      "step/grass6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.vine.place": {
+    "sounds": [
+      {
+        "name": "stancements:block/vine/break1",
+        "volume": 0.9
+      },
+      {
+        "name": "stancements:block/vine/break2",
+        "volume": 0.9
+      },
+      {
+        "name": "stancements:block/vine/break3",
+        "volume": 0.9
+      },
+      {
+        "name": "stancements:block/vine/break4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.lily_pad.break": {
+    "sounds": [
+      "stancements:block/lily_pad/break1",
+      "stancements:block/lily_pad/break2",
+      "stancements:block/lily_pad/break3",
+      "stancements:block/lily_pad/break4",
+      "stancements:block/lily_pad/break5",
+      "stancements:block/lily_pad/break6"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.lily_pad.fall": {
+    "sounds": [
+      "stancements:block/lily_pad/step1",
+      "stancements:block/lily_pad/step2",
+      "stancements:block/lily_pad/step3",
+      "stancements:block/lily_pad/step4",
+      "stancements:block/lily_pad/step5",
+      "stancements:block/lily_pad/step6"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.lily_pad.hit": {
+    "sounds": [
+      "stancements:block/lily_pad/step1",
+      "stancements:block/lily_pad/step2",
+      "stancements:block/lily_pad/step3",
+      "stancements:block/lily_pad/step4",
+      "stancements:block/lily_pad/step5",
+      "stancements:block/lily_pad/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.lily_pad.step": {
+    "sounds": [
+      "stancements:block/lily_pad/step1",
+      "stancements:block/lily_pad/step2",
+      "stancements:block/lily_pad/step3",
+      "stancements:block/lily_pad/step4",
+      "stancements:block/lily_pad/step5",
+      "stancements:block/lily_pad/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.iron.break": {
+    "sounds": [
+      "stancements:block/iron/break1",
+      "stancements:block/iron/break2",
+      "stancements:block/iron/break3",
+      "stancements:block/iron/break4",
+      "stancements:block/iron/break5",
+      "stancements:block/iron/break6",
+      "stancements:block/iron/break7",
+      "stancements:block/iron/break8"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.iron.fall": {
+    "sounds": [
+      "stancements:block/iron/step1",
+      "stancements:block/iron/step2",
+      "stancements:block/iron/step3",
+      "stancements:block/iron/step4"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.iron.hit": {
+    "sounds": [
+      "stancements:block/iron/step1",
+      "stancements:block/iron/step2",
+      "stancements:block/iron/step3",
+      "stancements:block/iron/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.iron.place": {
+    "sounds": [
+      "stancements:block/iron/break1",
+      "stancements:block/iron/break2",
+      "stancements:block/iron/break3",
+      "stancements:block/iron/break4",
+      "stancements:block/iron/break5",
+      "stancements:block/iron/break6",
+      "stancements:block/iron/break7",
+      "stancements:block/iron/break8"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.iron.step": {
+    "sounds": [
+      "stancements:block/iron/step1",
+      "stancements:block/iron/step2",
+      "stancements:block/iron/step3",
+      "stancements:block/iron/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  }
+}
