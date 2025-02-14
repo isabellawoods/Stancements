@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -23,6 +24,6 @@ public class STBlockTagsProvider extends BlockTagsProvider {
 
         // Backport related tags
         this.tag(STBlockTags.MINEABLE_SHEARS).addTag(BlockTags.LEAVES).addTag(BlockTags.WOOL).add(Blocks.COBWEB, Blocks.GRASS, Blocks.FERN, Blocks.DEAD_BUSH, Blocks.VINE, Blocks.TRIPWIRE, Blocks.REDSTONE_WIRE);
-        this.tag(STBlockTags.MAKES_IRON_SOUNDS).add(Blocks.IRON_BLOCK, Blocks.IRON_BARS, Blocks.IRON_DOOR, Blocks.IRON_TRAPDOOR, Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, Blocks.CAULDRON, Blocks.HOPPER);
+        this.tag(STBlockTags.MAKES_IRON_SOUNDS).addTag(Tags.Blocks.STORAGE_BLOCKS_IRON).add(Blocks.IRON_BARS, Blocks.IRON_DOOR, Blocks.IRON_TRAPDOOR, Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, Blocks.CAULDRON, Blocks.HOPPER);
     }
 }

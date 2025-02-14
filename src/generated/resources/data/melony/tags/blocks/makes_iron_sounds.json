@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:iron_block",
+    "#forge:storage_blocks/iron",
     "minecraft:iron_bars",
     "minecraft:iron_door",
     "minecraft:iron_trapdoor",

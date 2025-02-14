@@ -22,7 +22,7 @@ ca0edea0aecfeac979d60d58bbcae67078bb298e assets/stancements/models/item/dark_oak
 a0fdb20cb24817503bfea1654a7adbaf8dcfbd02 assets/stancements/models/item/oak_shelf.json
 ffc22c5ad82ae48e4252e5f6ad3c8c0ab839d24e assets/stancements/models/item/spruce_shelf.json
 2975c122f3913965b9c6dee0f1ffed020fbe461a assets/stancements/models/item/warped_shelf.json
-7fdb47480e7a9fff13f97967a349348cdef149c9 data/melony/tags/blocks/makes_iron_sounds.json
+4bbfd3a177d2ff5ad428ae9e80e1fe2e78b2cf34 data/melony/tags/blocks/makes_iron_sounds.json
 d1b371ff653d2aa87f9ce000538f2202c1a098dc data/melony/tags/blocks/mineable/shears.json
 2fda406ccf45a750d9a4bcb025ad0069a8e7df76 data/melony/tags/items/with_rarity/common.json
 7fafe08aa2d2e4967df30dd319fa06a705868477 data/melony/tags/items/with_rarity/epic.json
