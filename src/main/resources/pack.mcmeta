@@ -1,6 +1,8 @@
 {
   "pack": {
-    "description": "Mod data for Stancements.",
+    "description": {
+      "translate": "datapack.stancements.desc"
+    },
     "pack_format": 6
   }
 }

@@ -15,7 +15,10 @@
     "item.STSimpleItemMixins$PotionItemMixin",
     "item.STSpawnEggItemMixin"
   ],
-  "client": [],
+  "client": [
+    "client.STMusicTickerMixin",
+    "client.STWorldRendererMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1

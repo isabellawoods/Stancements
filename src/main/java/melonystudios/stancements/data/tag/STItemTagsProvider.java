@@ -6,6 +6,7 @@ import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Items;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -29,6 +30,8 @@ public class STItemTagsProvider extends ItemTagsProvider {
         this.tag(STItemTags.WITH_EPIC_RARITY).add(Items.ELYTRA, Items.DRAGON_HEAD, Items.BARRIER, Items.STRUCTURE_VOID, Items.COMMAND_BLOCK_MINECART, Items.DEBUG_STICK, Items.KNOWLEDGE_BOOK).addOptional(
                 revaried("debug_bow")).addOptional(revaried("debug_arrow")).addOptional(revaried("enchanted_knowledge_book"));
         this.tag(STItemTags.WITH_POTATO_RARITY);
+
+        this.tag(ItemTags.MUSIC_DISCS).add(VINYL_DISC.get(), RECORDED_DISC.get());
     }
 
     public static ResourceLocation revaried(String name) {

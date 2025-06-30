@@ -16,7 +16,7 @@ public class STBlockMixin {
             callback.setReturnValue(SoundType.STONE);
         } else if (state.is(Blocks.JUKEBOX) || state.is(Blocks.TRIPWIRE_HOOK)) {
             callback.setReturnValue(SoundType.WOOD);
-        } else if (state.is(STBlockTags.MAKES_IRON_SOUNDS)) {
+        } else if (state.is(STBlockTags.USES_IRON_SOUNDS)) {
             callback.setReturnValue(STSoundTypes.IRON);
         } else if (state.is(Blocks.SPONGE)) {
             callback.setReturnValue(STSoundTypes.SPONGE);

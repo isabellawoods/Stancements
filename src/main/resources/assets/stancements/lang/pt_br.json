@@ -11,11 +11,14 @@
   "block.stancements.dark_oak_shelf": "Estante de carvalho escuro",
   "block.stancements.crimson_shelf": "Estante carmesim",
   "block.stancements.warped_shelf": "Estante distorcida",
+  "block.stancements.music_recorder": "Gravador de músicas",
   "block.variants.potted_grass": "Grama curta envasada",
   "block.minecraft.grass": "Grama curta",
   "block.minecraft.lapis_block": "Bloco de lapis lazúli",
   "block.minecraft.spawner": "Gerador de criaturas",
 
+  "item.stancements.vinyl_disc": "Disco de vinil",
+  "item.stancements.recorded_disc": "Disco musical",
   "item.minecraft.scute": "Escama de tartaruga",
   "item.variants.spawner_minecart": "Carrinho de minas com gerador de criaturas",
 
@@ -80,8 +83,18 @@
   "subtitles.item.axe.strip": "Machado descasca",
   "subtitles.entity.painting.break": "Pintura quebrada",
 
+  "stat.stancements.songs_recorded": "Músicas gravadas",
+
   "tooltip.stancements.random_painting": "Variante aleatória",
   "tooltip.stancements.painting_dimensions": "%sx%s",
   "tooltip.stancements.honey_level": "Mel: %s / %s",
-  "tooltip.stancements.bees_in_hive": "Abelhas: %s / %s"
+  "tooltip.stancements.bees_in_hive": "Abelhas: %s / %s",
+  "tooltip.stancements.no_music_playing": "Nenhuma música tocando...",
+  "tooltip.stancements.recording_music": "Gravando música...",
+  "tooltip.stancements.finished_recording": "Gravação completa!",
+  "tooltip.stancements.recorded_disc.blank": "Em branco",
+  "tooltip.stancements.recorded_disc.sound_id": "ID do som: \"%s\"",
+
+  "error.stancements.stack_loading.tag": "Stancements: Não conseguiu ler a stack de item da NBT (%s)",
+  "datapack.stancements.desc": "Dados para o mod Stancements."
 }

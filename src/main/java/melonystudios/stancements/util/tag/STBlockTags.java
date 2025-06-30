@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class STBlockTags {
     public static final ITag.INamedTag<Block> SHELVES = stancements("shelves");
-    public static final ITag.INamedTag<Block> MAKES_IRON_SOUNDS = melony("makes_iron_sounds");
+    public static final ITag.INamedTag<Block> USES_IRON_SOUNDS = melony("uses_sounds/iron");
     public static final ITag.INamedTag<Block> MINEABLE_SHEARS = melony("mineable/shears");
 
     private static ITag.INamedTag<Block> stancements(String name) {

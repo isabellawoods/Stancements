@@ -7,6 +7,10 @@
     "minecraft:iron_trapdoor",
     "minecraft:heavy_weighted_pressure_plate",
     "minecraft:cauldron",
-    "minecraft:hopper"
+    "minecraft:hopper",
+    {
+      "id": "#minecraft:cauldrons",
+      "required": false
+    }
   ]
 }

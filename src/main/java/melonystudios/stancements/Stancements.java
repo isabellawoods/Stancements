@@ -1,11 +1,16 @@
 package melonystudios.stancements;
 
 import melonystudios.stancements.block.STBlocks;
+import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.config.STConfig;
 import melonystudios.stancements.item.STItems;
+import melonystudios.stancements.misc.STStats;
 import melonystudios.stancements.sound.STSounds;
+import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -28,7 +33,9 @@ public class Stancements {
 
         STItems.ITEMS.register(eventBus);
         STBlocks.BLOCKS.register(eventBus);
+        STBlockEntities.BLOCK_ENTITIES.register(eventBus);
         STSounds.SOUNDS.register(eventBus);
+        STStats.init();
 
         MinecraftForge.EVENT_BUS.register(this);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, STConfig.COMMON_SPEC, "melonystudios/stancements-common.toml");
@@ -38,7 +45,13 @@ public class Stancements {
         return new ResourceLocation(MOD_ID, name);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {}
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        ItemModelsProperties.register(STItems.RECORDED_DISC.get(), stancements("label"), (stack, world, livEntity) -> {
+            CompoundNBT tag = stack.getTag();
+            if (tag != null && tag.contains("label", Constants.NBT.TAG_ANY_NUMERIC)) return tag.getInt("label");
+            return 0;
+        });
+    }
 
     private void clientSetup(final FMLClientSetupEvent event) {}
 }

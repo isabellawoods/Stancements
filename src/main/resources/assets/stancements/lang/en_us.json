@@ -11,11 +11,14 @@
   "block.stancements.dark_oak_shelf": "Dark Oak Shelf",
   "block.stancements.crimson_shelf": "Crimson Shelf",
   "block.stancements.warped_shelf": "Warped Shelf",
+  "block.stancements.music_recorder": "Music Recorder",
   "block.variants.potted_grass": "Potted Short Grass",
   "block.minecraft.grass": "Short Grass",
   "block.minecraft.lapis_block": "Block of Lapis Lazuli",
   "block.minecraft.spawner": "Monster Spawner",
 
+  "item.stancements.vinyl_disc": "Vinyl Disc",
+  "item.stancements.recorded_disc": "Music Disc",
   "item.minecraft.scute": "Turtle Scute",
   "item.variants.spawner_minecart": "Minecart with Monster Spawner",
 
@@ -80,8 +83,18 @@
   "subtitles.item.axe.strip": "Axe strips",
   "subtitles.entity.painting.break": "Painting broken",
 
+  "stat.stancements.songs_recorded": "Songs Recorded",
+
   "tooltip.stancements.random_painting": "Random variant",
   "tooltip.stancements.painting_dimensions": "%sx%s",
   "tooltip.stancements.honey_level": "Honey: %s / %s",
-  "tooltip.stancements.bees_in_hive": "Bees: %s / %s"
+  "tooltip.stancements.bees_in_hive": "Bees: %s / %s",
+  "tooltip.stancements.no_music_playing": "No music playing...",
+  "tooltip.stancements.recording_music": "Recording music...",
+  "tooltip.stancements.finished_recording": "Finished recording!",
+  "tooltip.stancements.recorded_disc.blank": "Blank",
+  "tooltip.stancements.recorded_disc.sound_id": "Sound ID: \"%s\"",
+
+  "error.stancements.stack_loading.tag": "Stancements: Could not parse an item stack from NBT (%s)",
+  "datapack.stancements.desc": "Mod data for Stancements."
 }

@@ -34,6 +34,9 @@ public class STBlockStateProvider extends BlockStateProvider {
         shelf(STBlocks.DARK_OAK_SHELF.get(), "dark_oak");
         shelf(STBlocks.CRIMSON_SHELF.get(), "crimson");
         shelf(STBlocks.WARPED_SHELF.get(), "warped");
+
+        // Functional blocks
+        simpleBlock(STBlocks.MUSIC_RECORDER.get(), models().cubeBottomTop("music_recorder", modLoc("block/music_recorder_side"), modLoc("block/music_recorder_bottom"), modLoc("block/music_recorder_top")));
     }
 
     public void shelf(Block shelf, String woodType) {
