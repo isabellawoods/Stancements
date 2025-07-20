@@ -9,8 +9,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${forgegradle_version}", changing: true
+        classpath "org.spongepowered:mixingradle:${mixingradle_version}"
     }
 }
 
@@ -137,7 +137,7 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
     // Annotation Processors
-    annotationProcessor 'org.spongepowered:mixin:0.8:processor'
+    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     // You may put jars on which you depend on in ./libs or you may define them like so:
     // compile "some.group:artifact:version:classifier"
