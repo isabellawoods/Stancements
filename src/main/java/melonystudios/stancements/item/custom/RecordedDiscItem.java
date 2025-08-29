@@ -1,125 +1,132 @@
 package melonystudios.stancements.item.custom;
 
 import com.google.common.collect.Lists;
+import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
-import melonystudios.stancements.util.InterfaceMethods;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.JukeboxBlock;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.PlainTextContents;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.*;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.DyedItemColor;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.JukeboxBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Random;
 
-public class RecordedDiscItem extends Item implements IDyeableArmorItem {
+public class RecordedDiscItem extends Item {
+    public static final int DEFAULT_DISC_COLOR = 0xFFF9FFFE;
+
     public RecordedDiscItem(Properties properties) {
-        super(properties);
+        super(properties.component(STDataComponents.LABEL, 1F).component(DataComponents.DYED_COLOR, new DyedItemColor(DEFAULT_DISC_COLOR, true)));
     }
 
     @Override
-    @Nonnull
-    public ActionResultType useOn(ItemUseContext context) {
-        World world = context.getLevel();
+    @NotNull
+    public InteractionResult useOn(UseOnContext context) {
+        Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
         if (state.is(Blocks.JUKEBOX) && !state.getValue(JukeboxBlock.HAS_RECORD)) {
             ItemStack handStack = context.getItemInHand();
             if (world.isClientSide) {
                 ResourceLocation musicID = this.getMusicID(handStack);
-                ((InterfaceMethods.WorldRenderer) Minecraft.getInstance().levelRenderer).playRecordedDisc(musicID, world, pos, handStack);
+                // ((InterfaceMethods.WorldRenderer) Minecraft.getInstance().levelRenderer).playRecordedDisc(musicID, world, pos, handStack);
             }
 
             if (!world.isClientSide) {
-                ((JukeboxBlock) state.getBlock()).setRecord(world, pos, state, handStack);
+                // ((JukeboxBlock) state.getBlock()).setRecord(world, pos, state, handStack);
                 handStack.shrink(1);
-                PlayerEntity player = context.getPlayer();
+                Player player = context.getPlayer();
                 if (player != null) player.awardStat(Stats.PLAY_RECORD);
             }
 
-            return ActionResultType.sidedSuccess(world.isClientSide);
+            return InteractionResult.sidedSuccess(world.isClientSide);
         }
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 
     @Override
-    public int getColor(ItemStack stack) {
-        CompoundNBT displayTag = stack.getTagElement("display");
-        return displayTag != null && displayTag.contains("color", Constants.NBT.TAG_ANY_NUMERIC) ? displayTag.getInt("color") : 16383998;
-    }
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
+        String musicID = stack.get(STDataComponents.MUSIC_ID);
+        if (musicID != null) {
+            MutableComponent musicName = this.getMusicName(stack);
+            if (musicName == null) return;
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-        super.appendHoverText(stack, world, tooltip, flag);
-        CompoundNBT tag = stack.getTag();
-        if (tag != null && tag.contains("music_id", Constants.NBT.TAG_STRING)) {
-            IFormattableTextComponent musicName = this.getMusicName(stack);
-            if (musicName instanceof TranslationTextComponent) {
-                tooltip.add(musicName.withStyle(TextFormatting.GRAY));
-            } else if (musicName instanceof StringTextComponent) {
-                tooltip.add(new TranslationTextComponent("tooltip.stancements.recorded_disc.sound_id", tag.getString("music_id")).withStyle(TextFormatting.GRAY));
+            if (musicName.getContents() instanceof TranslatableContents) {
+                tooltip.add(musicName.withStyle(ChatFormatting.GRAY));
+            } else if (musicName.getContents() instanceof PlainTextContents.LiteralContents) {
+                tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.sound_id", musicName).withStyle(ChatFormatting.GRAY));
             }
         } else {
-            tooltip.add(new TranslationTextComponent("tooltip.stancements.recorded_disc.blank").withStyle(TextFormatting.GRAY));
+            tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.blank").withStyle(ChatFormatting.GRAY));
         }
     }
 
+    /// Gets the translated name for a {@linkplain STDataComponents#MUSIC_ID music id}, in the same format as the 1.21.6 music toast.
+    /// @param stack The item stack.
+    /// @return A translatable or literal component if the component exists, or <code>null</code> if it doesn't.
     @Nullable
     @OnlyIn(Dist.CLIENT)
-    public IFormattableTextComponent getMusicName(ItemStack stack) {
-        CompoundNBT tag = stack.getTag();
-        if (tag != null && tag.contains("music_id", Constants.NBT.TAG_STRING)) {
-            String translation = "music." + tag.getString("music_id")
+    public MutableComponent getMusicName(ItemStack stack) {
+        String musicID = stack.get(STDataComponents.MUSIC_ID);
+        if (musicID != null) {
+            String translation = "music." + musicID
                     .replace(":", ".")
                     .replace("/", ".")
                     .replace("sounds.", "")
                     .replace("music.", "")
                     .replace(".ogg", "");
-            return I18n.exists(translation) ? new TranslationTextComponent(translation) : new StringTextComponent(translation);
+            return I18n.exists(translation) ? Component.translatable(translation) : Component.literal(translation);
         }
         return null;
     }
 
-    public static ItemStack getRecordedDisc(ResourceLocation musicID, ItemStack originalStack) {
+    public static ItemStack getRecordedDisc(ResourceLocation musicID, ItemStack originalStack, RandomSource rand) {
         if (originalStack.isEmpty()) return ItemStack.EMPTY;
         ItemStack discStack = new ItemStack(STItems.RECORDED_DISC.get());
-        discStack.getOrCreateTag().putString("music_id", musicID.toString());
-        discStack.getOrCreateTag().putInt("label", random.nextInt(11));
-        return getRandomLabelColor(discStack, random);
+        discStack.set(STDataComponents.MUSIC_ID, musicID.toString());
+        discStack.set(STDataComponents.LABEL, (float) (rand.nextInt(10) + 1));
+        return getRandomLabelColor(discStack, rand);
     }
 
-    public static ItemStack getRandomLabelColor(ItemStack stack, Random rand) {
+    public static ItemStack getRandomLabelColor(ItemStack stack, RandomSource rand) {
         List<DyeItem> dyes = Lists.newArrayList();
         dyes.add(getRandomDye(rand));
         if (rand.nextFloat() > 0.7F) dyes.add(getRandomDye(rand));
         if (rand.nextFloat() > 0.8F) dyes.add(getRandomDye(rand));
-        return IDyeableArmorItem.dyeArmor(stack, dyes);
+        ItemStack dyedStack = DyedItemColor.applyDyes(stack.copy(), dyes);
+        return dyedStack.isEmpty() ? stack : dyedStack;
     }
 
-    private static DyeItem getRandomDye(Random rand) {
+    /// Picks a random {@link DyeColor} from the existing 16 colors.
+    /// @param rand The random source of randomize the colors.
+    private static DyeItem getRandomDye(RandomSource rand) {
         return DyeItem.byColor(DyeColor.byId(rand.nextInt(16)));
     }
 
+    /// Gets the {@linkplain STDataComponents#MUSIC_ID music id} component from an item stack.
+    /// @return A resource location of the stack's music id, or null if it doesn't exist.
+    @Nullable
     public ResourceLocation getMusicID(ItemStack discStack) {
-        CompoundNBT tag = discStack.getTag();
-        if (tag != null && tag.contains("music_id", Constants.NBT.TAG_STRING)) {
-            return new ResourceLocation(tag.getString("music_id"));
-        }
-        return null;
+        String musicID = discStack.get(STDataComponents.MUSIC_ID);
+        return musicID != null ? ResourceLocation.parse(musicID) : null;
     }
 }

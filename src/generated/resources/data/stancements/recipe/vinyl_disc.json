@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "vinyl_disc",
+  "key": {
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "D": {
+      "tag": "stancements:vinyl_disc_dyes"
+    },
+    "H": {
+      "item": "minecraft:honeycomb"
+    }
+  },
+  "pattern": [
+    "DC",
+    "CH"
+  ],
+  "result": {
+    "count": 4,
+    "id": "stancements:vinyl_disc"
+  }
+}

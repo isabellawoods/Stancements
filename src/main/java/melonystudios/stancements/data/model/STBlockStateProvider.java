@@ -1,51 +1,59 @@
 package melonystudios.stancements.data.model;
 
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.block.STBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import static melonystudios.stancements.block.STBlocks.*;
 
 public class STBlockStateProvider extends BlockStateProvider {
-    public STBlockStateProvider(DataGenerator generator, ExistingFileHelper fileHelper) {
-        super(generator, Stancements.MOD_ID, fileHelper);
+    public STBlockStateProvider(PackOutput output, ExistingFileHelper fileHelper) {
+        super(output, Stancements.MOD_ID, fileHelper);
     }
 
-    @Nonnull
+    @Override
+    @NotNull
     public String getName() {
         return "Stancements - Block State Definitions & Models";
     }
 
     @Override
     protected void registerStatesAndModels() {
-        // Shelves
-        shelf(STBlocks.OAK_SHELF.get(), "oak");
-        shelf(STBlocks.SPRUCE_SHELF.get(), "spruce");
-        shelf(STBlocks.BIRCH_SHELF.get(), "birch");
-        shelf(STBlocks.JUNGLE_SHELF.get(), "jungle");
-        shelf(STBlocks.ACACIA_SHELF.get(), "acacia");
-        shelf(STBlocks.DARK_OAK_SHELF.get(), "dark_oak");
-        shelf(STBlocks.CRIMSON_SHELF.get(), "crimson");
-        shelf(STBlocks.WARPED_SHELF.get(), "warped");
+        // Decorative
+        shelf(OAK_SHELF.get(), "oak");
+        shelf(SPRUCE_SHELF.get(), "spruce");
+        shelf(BIRCH_SHELF.get(), "birch");
+        shelf(JUNGLE_SHELF.get(), "jungle");
+        shelf(ACACIA_SHELF.get(), "acacia");
+        shelf(DARK_OAK_SHELF.get(), "dark_oak");
+        shelf(CRIMSON_SHELF.get(), "crimson");
+        shelf(WARPED_SHELF.get(), "warped");
 
-        // Functional blocks
-        simpleBlock(STBlocks.MUSIC_RECORDER.get(), models().cubeBottomTop("music_recorder", modLoc("block/music_recorder_side"), modLoc("block/music_recorder_bottom"), modLoc("block/music_recorder_top")));
+        // Functional
+        simpleBlock(MUSIC_RECORDER.get(), models().cubeBottomTop("music_recorder",
+                modLoc("block/music_recorder_side"),
+                modLoc("block/music_recorder_bottom"),
+                modLoc("block/music_recorder_top")));
     }
 
+    /// Makes the block states and models for a {@linkplain melonystudios.stancements.block.custom.ShelfBlock shelf block}.
+    /// @param shelf The shelf block.
+    /// @param woodType A string representing this shelf's wood type, used to get the textures.
     public void shelf(Block shelf, String woodType) {
         getVariantBuilder(shelf).forAllStatesExcept(state -> {
             Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-            ResourceLocation registry = shelf.getRegistryName();
+            ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(shelf);
 
-            return ConfiguredModel.builder().modelFile(models().getBuilder(shelf.getRegistryName().getPath())
-                            .parent(models().getExistingFile(modLoc("block/template_shelf")))
+            return ConfiguredModel.builder().modelFile(models().getBuilder(registry.getPath())
+                            .parent(models().getExistingFile(Stancements.stancements("block/template_shelf")))
                             .texture("shelf", registry.getNamespace() + ":block/" + woodType + "_shelf")
                             .texture("support", registry.getNamespace() + ":block/" + woodType + "_shelf_support"))
                     .rotationY((int) facing.toYRot()).build();

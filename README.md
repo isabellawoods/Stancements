@@ -1,6 +1,6 @@
 ![Stancements logo](src/main/resources/stancements.png)
 
-<sup>*For Forge 1.16.5*</sup>
+<sup>*For NeoForge 1.21.1*</sup>
 
 **Stancements** is a mod that adds many miscellaneous but relatively useful features for Minecraft.
 

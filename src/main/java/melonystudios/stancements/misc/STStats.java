@@ -1,20 +1,13 @@
 package melonystudios.stancements.misc;
 
 import melonystudios.stancements.Stancements;
-import net.minecraft.stats.IStatFormatter;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class STStats {
-    public static final ResourceLocation SONGS_RECORDED = register("songs_recorded");
+    public static final DeferredRegister<ResourceLocation> STATS = DeferredRegister.create(Registries.CUSTOM_STAT, Stancements.MOD_ID);
 
-    private static ResourceLocation register(String name) {
-        ResourceLocation registryName = Stancements.stancements(name);
-        Registry.register(Registry.CUSTOM_STAT, name, registryName);
-        Stats.CUSTOM.get(registryName, IStatFormatter.DEFAULT);
-        return registryName;
-    }
-
-    public static void init() {}
+    public static final DeferredHolder<ResourceLocation, ResourceLocation> SONGS_RECORDED = STATS.register("songs_recorded", () -> Stancements.stancements("songs_recorded"));
 }

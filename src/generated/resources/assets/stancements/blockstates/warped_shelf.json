@@ -1,5 +1,9 @@
 {
   "variants": {
+    "facing=east": {
+      "model": "stancements:block/warped_shelf",
+      "y": 270
+    },
     "facing=north": {
       "model": "stancements:block/warped_shelf",
       "y": 180
@@ -10,10 +14,6 @@
     "facing=west": {
       "model": "stancements:block/warped_shelf",
       "y": 90
-    },
-    "facing=east": {
-      "model": "stancements:block/warped_shelf",
-      "y": 270
     }
   }
 }

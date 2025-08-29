@@ -1,57 +1,57 @@
 package melonystudios.stancements;
 
+import com.mojang.logging.LogUtils;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.STBlockEntities;
-import melonystudios.stancements.config.STConfig;
+import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
+import melonystudios.stancements.item.tab.STCreativeTabs;
 import melonystudios.stancements.misc.STStats;
-import melonystudios.stancements.sound.STSounds;
-import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import melonystudios.stancements.misc.STVanillaCompatibility;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import org.slf4j.Logger;
 
 @Mod(Stancements.MOD_ID)
 public class Stancements {
-    public static final Logger LOGGER = LogManager.getLogger();
-    public static final String MOD_ID = "stancements"; // Portmanteau of "stacked" and "enhancements".
+    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final String MOD_ID = "stancements";
 
-    public Stancements() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public Stancements(IEventBus eventBus, ModContainer container) {
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::clientSetup);
 
-        STItems.ITEMS.register(eventBus);
         STBlocks.BLOCKS.register(eventBus);
         STBlockEntities.BLOCK_ENTITIES.register(eventBus);
-        STSounds.SOUNDS.register(eventBus);
-        STStats.init();
-
-        MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, STConfig.COMMON_SPEC, "melonystudios/stancements-common.toml");
+        STItems.ITEMS.register(eventBus);
+        STDataComponents.COMPONENTS.register(eventBus);
+        STCreativeTabs.TABS.register(eventBus);
+        STStats.STATS.register(eventBus);
     }
 
     public static ResourceLocation stancements(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
+    }
+
+    public static ResourceLocation common(String name) {
+        return ResourceLocation.fromNamespaceAndPath("c", name);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ItemModelsProperties.register(STItems.RECORDED_DISC.get(), stancements("label"), (stack, world, livEntity) -> {
-            CompoundNBT tag = stack.getTag();
-            if (tag != null && tag.contains("label", Constants.NBT.TAG_ANY_NUMERIC)) return tag.getInt("label");
-            return 0;
-        });
+        // Miscellaneous
+        STVanillaCompatibility.flammables();
     }
 
-    private void clientSetup(final FMLClientSetupEvent event) {}
+    private void clientSetup(final FMLClientSetupEvent event) {
+        // Item Overrides
+        ItemProperties.register(STItems.RECORDED_DISC.get(), stancements("label"), (stack, world, entity, seed) -> {
+            Float label = stack.get(STDataComponents.LABEL);
+            return label == null ? 1 : label;
+        });
+    }
 }

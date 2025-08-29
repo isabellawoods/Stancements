@@ -2,30 +2,28 @@ package melonystudios.stancements.data.tag;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.util.tag.STBlockTags;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.BlockTagsProvider;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
 
 import static melonystudios.stancements.block.STBlocks.*;
 
 public class STBlockTagsProvider extends BlockTagsProvider {
-    public STBlockTagsProvider(DataGenerator generator, @Nullable ExistingFileHelper fileHelper) {
-        super(generator, Stancements.MOD_ID, fileHelper);
+    public STBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, @Nullable ExistingFileHelper fileHelper) {
+        super(output, registries, Stancements.MOD_ID, fileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
+        // Stancements' tags
         this.tag(STBlockTags.SHELVES).add(OAK_SHELF.get(), SPRUCE_SHELF.get(), BIRCH_SHELF.get(), JUNGLE_SHELF.get(), ACACIA_SHELF.get(), DARK_OAK_SHELF.get(), CRIMSON_SHELF.get(), WARPED_SHELF.get());
 
-        // Backport related tags
-        this.tag(STBlockTags.MINEABLE_SHEARS).addTag(BlockTags.LEAVES).addTag(BlockTags.WOOL).add(Blocks.COBWEB, Blocks.GRASS, Blocks.FERN, Blocks.DEAD_BUSH, Blocks.VINE, Blocks.TRIPWIRE, Blocks.REDSTONE_WIRE);
-        this.tag(STBlockTags.USES_IRON_SOUNDS).addTag(Tags.Blocks.STORAGE_BLOCKS_IRON).add(Blocks.IRON_BARS, Blocks.IRON_DOOR, Blocks.IRON_TRAPDOOR, Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, Blocks.CAULDRON, Blocks.HOPPER)
-                .addOptionalTag(new ResourceLocation("cauldrons"));
+        // Minecraft tags
+        this.tag(BlockTags.MINEABLE_WITH_AXE).addTag(STBlockTags.SHELVES);
     }
 }

@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "side": "stancements:block/music_recorder_side",
     "bottom": "stancements:block/music_recorder_bottom",
+    "side": "stancements:block/music_recorder_side",
     "top": "stancements:block/music_recorder_top"
   }
 }

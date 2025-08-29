@@ -6,7 +6,7 @@ bin
 .classpath
 .project
 
-# IntelliJ
+# IntelliJ IDEA
 out
 *.ipr
 *.iws
@@ -20,6 +20,8 @@ build
 # Other
 eclipse
 run
+runs
+run-data
 
-# Files from Forge's MDK
-forge*changelog.txt
+# Added by NeoForge
+repo

@@ -1,21 +1,15 @@
 package melonystudios.stancements.util.tag;
 
 import melonystudios.stancements.Stancements;
-import net.minecraft.block.Block;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 
 public class STBlockTags {
-    public static final ITag.INamedTag<Block> SHELVES = stancements("shelves");
-    public static final ITag.INamedTag<Block> USES_IRON_SOUNDS = melony("uses_sounds/iron");
-    public static final ITag.INamedTag<Block> MINEABLE_SHEARS = melony("mineable/shears");
+    // Stancements' tags
+    public static final TagKey<Block> SHELVES = stancements("shelves");
 
-    private static ITag.INamedTag<Block> stancements(String name) {
-        return BlockTags.bind(Stancements.stancements(name).toString());
-    }
-
-    private static ITag.INamedTag<Block> melony(String name) {
-        return BlockTags.bind(new ResourceLocation("melony", name).toString());
+    public static TagKey<Block> stancements(String name) {
+        return BlockTags.create(Stancements.stancements(name));
     }
 }

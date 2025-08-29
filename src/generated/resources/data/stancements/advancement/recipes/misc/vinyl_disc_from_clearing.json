@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_recorded_disc": {
+      "conditions": {
+        "items": [
+          {
+            "items": "stancements:recorded_disc"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "stancements:vinyl_disc_from_clearing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_recorded_disc"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "stancements:vinyl_disc_from_clearing"
+    ]
+  }
+}
