@@ -1,0 +1,8 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "music.minecraft.game.floating_dream"
+  },
+  "length_in_seconds": 205.0,
+  "sound_event": "stancements:music.game.floating_dream"
+}

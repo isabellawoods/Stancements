@@ -2,6 +2,8 @@ package melonystudios.stancements.event;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.data.loot.STLootTableProvider;
+import melonystudios.stancements.data.misc.STDataMapsProvider;
+import melonystudios.stancements.data.misc.STDataPackRegistriesProvider;
 import melonystudios.stancements.data.misc.STRecipeProvider;
 import melonystudios.stancements.data.model.STBlockStateProvider;
 import melonystudios.stancements.data.model.STItemModelProvider;
@@ -45,8 +47,10 @@ public class STEvents {
             generator.addProvider(true, new STItemTagsProvider(output, registries, blockTags.contentsGetter(), fileHelper));
 
             // Miscellaneous
+            generator.addProvider(true, new STDataPackRegistriesProvider(output, registries));
             generator.addProvider(true, new STRecipeProvider(output, registries));
             generator.addProvider(true, new STLootTableProvider(output, registries));
+            generator.addProvider(true, new STDataMapsProvider(output, registries));
         }
     }
 

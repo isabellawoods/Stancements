@@ -1,5 +1,6 @@
 package melonystudios.stancements.data.model;
 
+import melonystudios.reutilities.data.model.ReBlockStateProvider;
 import melonystudios.stancements.Stancements;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -7,14 +8,13 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import static melonystudios.stancements.block.STBlocks.*;
 
-public class STBlockStateProvider extends BlockStateProvider {
+public class STBlockStateProvider extends ReBlockStateProvider {
     public STBlockStateProvider(PackOutput output, ExistingFileHelper fileHelper) {
         super(output, Stancements.MOD_ID, fileHelper);
     }
@@ -22,7 +22,7 @@ public class STBlockStateProvider extends BlockStateProvider {
     @Override
     @NotNull
     public String getName() {
-        return "Stancements - Block State Definitions & Models";
+        return "Stancements - Block States and Models";
     }
 
     @Override
@@ -48,12 +48,12 @@ public class STBlockStateProvider extends BlockStateProvider {
     /// @param shelf The shelf block.
     /// @param woodType A string representing this shelf's wood type, used to get the textures.
     public void shelf(Block shelf, String woodType) {
-        getVariantBuilder(shelf).forAllStatesExcept(state -> {
+        this.getVariantBuilder(shelf).forAllStatesExcept(state -> {
             Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
             ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(shelf);
 
-            return ConfiguredModel.builder().modelFile(models().getBuilder(registry.getPath())
-                            .parent(models().getExistingFile(Stancements.stancements("block/template_shelf")))
+            return ConfiguredModel.builder().modelFile(this.models().getBuilder(registry.getPath())
+                            .parent(this.models().getExistingFile(Stancements.stancements("block/template_shelf")))
                             .texture("shelf", registry.getNamespace() + ":block/" + woodType + "_shelf")
                             .texture("support", registry.getNamespace() + ":block/" + woodType + "_shelf_support"))
                     .rotationY((int) facing.toYRot()).build();

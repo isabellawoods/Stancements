@@ -69,7 +69,7 @@ public class MusicRecorderBlockEntity extends BlockEntity {
             --recorder.ticksUntilFinishedRecording;
             recorder.setChanged();
             if (recorder.ticksUntilFinishedRecording() == 0 && recorder.musicID() != null) {
-                recorder.finishRecording(RecordedDiscItem.getRecordedDisc(recorder.musicID(), recorder.getDiscStack(), world.getRandom()), false);
+                recorder.finishRecording(RecordedDiscItem.getRecordedDisc(world, recorder.musicID(), recorder.getDiscStack()), false);
                 world.setBlock(pos, state.setValue(MusicRecorderBlock.RECORDING, false), 3);
             }
         }

@@ -9,6 +9,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,6 +19,12 @@ import static melonystudios.stancements.item.STItems.*;
 public class STItemTagsProvider extends ItemTagsProvider {
     public STItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper fileHelper) {
         super(output, registries, blockTags, Stancements.MOD_ID, fileHelper);
+    }
+
+    @Override
+    @NotNull
+    public String getName() {
+        return "Stancements - Item Tags";
     }
 
     @Override
@@ -31,5 +38,6 @@ public class STItemTagsProvider extends ItemTagsProvider {
 
         // Minecraft tags
         this.tag(ItemTags.NON_FLAMMABLE_WOOD).add(CRIMSON_SHELF.get(), WARPED_SHELF.get());
+        this.tag(ItemTags.DYEABLE).add(RECORDED_DISC.get());
     }
 }

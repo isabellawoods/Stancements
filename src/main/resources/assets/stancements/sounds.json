@@ -1,369 +1,482 @@
 {
-  "block.spawner.break": {
-    "sounds": [
-      "stancements:block/spawner/break1",
-      "stancements:block/spawner/break2",
-      "stancements:block/spawner/break3",
-      "stancements:block/spawner/break4"
-    ],
-    "subtitle": "subtitles.block.generic.break"
-  },
-  "block.spawner.hit": {
-    "sounds": [
-      "stancements:block/spawner/step1",
-      "stancements:block/spawner/step2",
-      "stancements:block/spawner/step3",
-      "stancements:block/spawner/step4",
-      "stancements:block/spawner/step5"
-    ],
-    "subtitle": "subtitles.block.generic.hit"
-  },
-  "block.spawner.place": {
-    "sounds": [
-      "stancements:block/spawner/break1",
-      "stancements:block/spawner/break2",
-      "stancements:block/spawner/break3",
-      "stancements:block/spawner/break4"
-    ],
-    "subtitle": "subtitles.block.generic.place"
-  },
-  "block.spawner.step": {
-    "sounds": [
-      "stancements:block/spawner/step1",
-      "stancements:block/spawner/step2",
-      "stancements:block/spawner/step3",
-      "stancements:block/spawner/step4",
-      "stancements:block/spawner/step5"
-    ],
-    "subtitle": "subtitles.block.generic.footsteps"
-  },
-  "block.cobweb.break": {
-    "sounds": [
-      "stancements:block/cobweb/break1",
-      "stancements:block/cobweb/break2",
-      "stancements:block/cobweb/break3",
-      "stancements:block/cobweb/break4",
-      "stancements:block/cobweb/break5",
-      "stancements:block/cobweb/break6"
-    ],
-    "subtitle": "subtitles.block.generic.break"
-  },
-  "block.cobweb.fall": {
-    "sounds": [
-      "stancements:block/cobweb/step1",
-      "stancements:block/cobweb/step2",
-      "stancements:block/cobweb/step3",
-      "stancements:block/cobweb/step4",
-      "stancements:block/cobweb/step5",
-      "stancements:block/cobweb/step6"
-    ],
-    "subtitle": "subtitles.block.generic.fall"
-  },
-  "block.cobweb.hit": {
-    "sounds": [
-      "stancements:block/cobweb/step1",
-      "stancements:block/cobweb/step2",
-      "stancements:block/cobweb/step3",
-      "stancements:block/cobweb/step4",
-      "stancements:block/cobweb/step5",
-      "stancements:block/cobweb/step6"
-    ],
-    "subtitle": "subtitles.block.generic.hit"
-  },
-  "block.cobweb.place": {
-    "sounds": [
-      "stancements:block/cobweb/break1",
-      "stancements:block/cobweb/break2",
-      "stancements:block/cobweb/break3",
-      "stancements:block/cobweb/break4",
-      "stancements:block/cobweb/break5",
-      "stancements:block/cobweb/break6"
-    ],
-    "subtitle": "subtitles.block.generic.place"
-  },
-  "block.cobweb.step": {
-    "sounds": [
-      "stancements:block/cobweb/step1",
-      "stancements:block/cobweb/step2",
-      "stancements:block/cobweb/step3",
-      "stancements:block/cobweb/step4",
-      "stancements:block/cobweb/step5",
-      "stancements:block/cobweb/step6"
-    ],
-    "subtitle": "subtitles.block.generic.footsteps"
-  },
-  "block.sponge.break": {
-    "sounds": [
-      "stancements:block/sponge/break1",
-      "stancements:block/sponge/break2",
-      "stancements:block/sponge/break3",
-      "stancements:block/sponge/break4"
-    ],
-    "subtitle": "subtitles.block.generic.break"
-  },
-  "block.sponge.fall": {
-    "sounds": [
-      "stancements:block/sponge/step1",
-      "stancements:block/sponge/step2",
-      "stancements:block/sponge/step3",
-      "stancements:block/sponge/step4",
-      "stancements:block/sponge/step5",
-      "stancements:block/sponge/step6"
-    ],
-    "subtitle": "subtitles.block.generic.fall"
-  },
-  "block.sponge.hit": {
+  "music.game.minecraft": {
     "sounds": [
       {
-        "name": "stancements:block/sponge/step1",
-        "volume": 0.8
-      },
-      {
-        "name": "stancements:block/sponge/step2",
-        "volume": 0.8
-      },
-      {
-        "name": "stancements:block/sponge/step3",
-        "volume": 0.8
-      },
-      {
-        "name": "stancements:block/sponge/step4",
-        "volume": 0.8
-      },
-      {
-        "name": "stancements:block/sponge/step5",
-        "volume": 0.8
-      },
-      {
-        "name": "stancements:block/sponge/step6",
-        "volume": 0.8
+        "name": "minecraft:music/game/minecraft",
+        "stream": true
       }
-    ],
-    "subtitle": "subtitles.block.generic.hit"
+    ]
   },
-  "block.sponge.place": {
-    "sounds": [
-      "stancements:block/sponge/break1",
-      "stancements:block/sponge/break2",
-      "stancements:block/sponge/break3",
-      "stancements:block/sponge/break4"
-    ],
-    "subtitle": "subtitles.block.generic.place"
-  },
-  "block.sponge.step": {
-    "sounds": [
-      "stancements:block/sponge/step1",
-      "stancements:block/sponge/step2",
-      "stancements:block/sponge/step3",
-      "stancements:block/sponge/step4",
-      "stancements:block/sponge/step5",
-      "stancements:block/sponge/step6"
-    ],
-    "subtitle": "subtitles.block.generic.footsteps"
-  },
-  "block.wet_sponge.break": {
-    "sounds": [
-      "stancements:block/wet_sponge/break1",
-      "stancements:block/wet_sponge/break2",
-      "stancements:block/wet_sponge/break3",
-      "stancements:block/wet_sponge/break4"
-    ],
-    "subtitle": "subtitles.block.generic.break"
-  },
-  "block.wet_sponge.fall": {
-    "sounds": [
-      "stancements:block/wet_sponge/step1",
-      "stancements:block/wet_sponge/step2",
-      "stancements:block/wet_sponge/step3",
-      "stancements:block/wet_sponge/step4"
-    ],
-    "subtitle": "subtitles.block.generic.fall"
-  },
-  "block.wet_sponge.hit": {
-    "sounds": [
-      "stancements:block/wet_sponge/step1",
-      "stancements:block/wet_sponge/step2",
-      "stancements:block/wet_sponge/step3",
-      "stancements:block/wet_sponge/step4"
-    ],
-    "subtitle": "subtitles.block.generic.hit"
-  },
-  "block.wet_sponge.place": {
-    "sounds": [
-      "stancements:block/wet_sponge/break1",
-      "stancements:block/wet_sponge/break2",
-      "stancements:block/wet_sponge/break3",
-      "stancements:block/wet_sponge/break4"
-    ],
-    "subtitle": "subtitles.block.generic.place"
-  },
-  "block.wet_sponge.step": {
-    "sounds": [
-      "stancements:block/wet_sponge/step1",
-      "stancements:block/wet_sponge/step2",
-      "stancements:block/wet_sponge/step3",
-      "stancements:block/wet_sponge/step4"
-    ],
-    "subtitle": "subtitles.block.generic.footsteps"
-  },
-  "block.vine.break": {
+  "music.game.clark": {
     "sounds": [
       {
-        "name": "stancements:block/vine/break1",
-        "volume": 0.9
-      },
-      {
-        "name": "stancements:block/vine/break2",
-        "volume": 0.9
-      },
-      {
-        "name": "stancements:block/vine/break3",
-        "volume": 0.9
-      },
-      {
-        "name": "stancements:block/vine/break4",
-        "volume": 0.9
+        "name": "minecraft:music/game/clark",
+        "stream": true
       }
-    ],
-    "subtitle": "subtitles.block.generic.break"
+    ]
   },
-  "block.vine.fall": {
-    "sounds": [
-      "block/vine/climb1",
-      "block/vine/climb2",
-      "block/vine/climb3",
-      "block/vine/climb4",
-      "block/vine/climb5"
-    ],
-    "subtitle": "subtitles.block.generic.fall"
-  },
-  "block.vine.hit": {
-    "sounds": [
-      "step/grass1",
-      "step/grass2",
-      "step/grass3",
-      "step/grass4",
-      "step/grass5",
-      "step/grass6"
-    ],
-    "subtitle": "subtitles.block.generic.hit"
-  },
-  "block.vine.place": {
+  "music.game.sweden": {
     "sounds": [
       {
-        "name": "stancements:block/vine/break1",
-        "volume": 0.9
-      },
-      {
-        "name": "stancements:block/vine/break2",
-        "volume": 0.9
-      },
-      {
-        "name": "stancements:block/vine/break3",
-        "volume": 0.9
-      },
-      {
-        "name": "stancements:block/vine/break4",
-        "volume": 0.9
+        "name": "minecraft:music/game/sweden",
+        "stream": true
       }
-    ],
-    "subtitle": "subtitles.block.generic.place"
+    ]
   },
-  "block.lily_pad.break": {
+  "music.game.subwoofer_lullaby": {
     "sounds": [
-      "stancements:block/lily_pad/break1",
-      "stancements:block/lily_pad/break2",
-      "stancements:block/lily_pad/break3",
-      "stancements:block/lily_pad/break4",
-      "stancements:block/lily_pad/break5",
-      "stancements:block/lily_pad/break6"
-    ],
-    "subtitle": "subtitles.block.generic.break"
+      {
+        "name": "minecraft:music/game/subwoofer_lullaby",
+        "stream": true
+      }
+    ]
   },
-  "block.lily_pad.fall": {
+  "music.game.living_mice": {
     "sounds": [
-      "stancements:block/lily_pad/step1",
-      "stancements:block/lily_pad/step2",
-      "stancements:block/lily_pad/step3",
-      "stancements:block/lily_pad/step4",
-      "stancements:block/lily_pad/step5",
-      "stancements:block/lily_pad/step6"
-    ],
-    "subtitle": "subtitles.block.generic.fall"
+      {
+        "name": "minecraft:music/game/living_mice",
+        "stream": true
+      }
+    ]
   },
-  "block.lily_pad.hit": {
+  "music.game.haggstrom": {
     "sounds": [
-      "stancements:block/lily_pad/step1",
-      "stancements:block/lily_pad/step2",
-      "stancements:block/lily_pad/step3",
-      "stancements:block/lily_pad/step4",
-      "stancements:block/lily_pad/step5",
-      "stancements:block/lily_pad/step6"
-    ],
-    "subtitle": "subtitles.block.generic.hit"
+      {
+        "name": "minecraft:music/game/haggstrom",
+        "stream": true
+      }
+    ]
   },
-  "block.lily_pad.step": {
+  "music.game.danny": {
     "sounds": [
-      "stancements:block/lily_pad/step1",
-      "stancements:block/lily_pad/step2",
-      "stancements:block/lily_pad/step3",
-      "stancements:block/lily_pad/step4",
-      "stancements:block/lily_pad/step5",
-      "stancements:block/lily_pad/step6"
-    ],
-    "subtitle": "subtitles.block.generic.footsteps"
+      {
+        "name": "minecraft:music/game/danny",
+        "stream": true
+      }
+    ]
   },
-  "block.iron.break": {
+  "music.game.key": {
     "sounds": [
-      "stancements:block/iron/break1",
-      "stancements:block/iron/break2",
-      "stancements:block/iron/break3",
-      "stancements:block/iron/break4",
-      "stancements:block/iron/break5",
-      "stancements:block/iron/break6",
-      "stancements:block/iron/break7",
-      "stancements:block/iron/break8"
-    ],
-    "subtitle": "subtitles.block.generic.break"
+      {
+        "name": "minecraft:music/game/key",
+        "stream": true
+      }
+    ]
   },
-  "block.iron.fall": {
+  "music.game.oxygene": {
     "sounds": [
-      "stancements:block/iron/step1",
-      "stancements:block/iron/step2",
-      "stancements:block/iron/step3",
-      "stancements:block/iron/step4"
-    ],
-    "subtitle": "subtitles.block.generic.fall"
+      {
+        "name": "minecraft:music/game/oxygene",
+        "stream": true
+      }
+    ]
   },
-  "block.iron.hit": {
+  "music.game.dry_hands": {
     "sounds": [
-      "stancements:block/iron/step1",
-      "stancements:block/iron/step2",
-      "stancements:block/iron/step3",
-      "stancements:block/iron/step4"
-    ],
-    "subtitle": "subtitles.block.generic.hit"
+      {
+        "name": "minecraft:music/game/dry_hands",
+        "stream": true
+      }
+    ]
   },
-  "block.iron.place": {
+  "music.game.wet_hands": {
     "sounds": [
-      "stancements:block/iron/break1",
-      "stancements:block/iron/break2",
-      "stancements:block/iron/break3",
-      "stancements:block/iron/break4",
-      "stancements:block/iron/break5",
-      "stancements:block/iron/break6",
-      "stancements:block/iron/break7",
-      "stancements:block/iron/break8"
-    ],
-    "subtitle": "subtitles.block.generic.place"
+      {
+        "name": "minecraft:music/game/wet_hands",
+        "stream": true
+      }
+    ]
   },
-  "block.iron.step": {
+  "music.game.mice_on_venus": {
     "sounds": [
-      "stancements:block/iron/step1",
-      "stancements:block/iron/step2",
-      "stancements:block/iron/step3",
-      "stancements:block/iron/step4"
-    ],
-    "subtitle": "subtitles.block.generic.footsteps"
+      {
+        "name": "minecraft:music/game/mice_on_venus",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.creative.biome_fest": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/creative/biome_fest",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.creative.blind_spots": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/creative/blind_spots",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.creative.haunt_muskie": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/creative/haunt_muskie",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.creative.aria_math": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/creative/aria_math",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.creative.dreiton": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/creative/dreiton",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.creative.taswell": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/creative/taswell",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.nether.concrete_halls": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/nether/concrete_halls",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.nether.dead_voxel": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/nether/dead_voxel",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.nether.warmth": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/nether/warmth",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.nether.ballad_of_the_cats": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/nether/ballad_of_the_cats",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.end.boss": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/end/boss",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.end.the_end": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/end/the_end",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.water.shuniji": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/water/shuniji",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.water.dragon_fish": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/water/dragon_fish",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.water.axolotl": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/water/axolotl",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.nether.nether_wastes.rubedo": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/nether/nether_wastes/rubedo",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.nether.crimson_forest.chrysopoeia": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/nether/crimson_forest/chrysopoeia",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.nether.soulsand_valley.so_below": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/nether/soulsand_valley/so_below",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.stand_tall": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/stand_tall",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.left_to_bloom": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/left_to_bloom",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.ancestry": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/ancestry",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.wending": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/wending",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.infinite_amethyst": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/infinite_amethyst",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.one_more_day": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/one_more_day",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.floating_dream": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/floating_dream",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.comforting_memories": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/comforting_memories",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.an_ordinary_day": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/an_ordinary_day",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.swamp.firebugs": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/swamp/firebugs",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.swamp.aerie": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/swamp/aerie",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.swamp.labyrinthine": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/swamp/labyrinthine",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.echo_in_the_wind": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/echo_in_the_wind",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.a_familiar_room": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/a_familiar_room",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.bromeliad": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/bromeliad",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.crescent_dunes": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/crescent_dunes",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.featherfall": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/featherfall",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.watcher": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/watcher",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.puzzlebox": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/puzzlebox",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.komorebi": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/komorebi",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.pokopoko": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/pokopoko",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.yakusoku": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/yakusoku",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.deeper": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/deeper",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.eld_unknown": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/eld_unknown",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.endless": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/endless",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.lilypad": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/lilypad",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.below_and_above": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/below_and_above",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.os_piano": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/os_piano",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.broken_clocks": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/broken_clocks",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.fireflies": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/fireflies",
+        "stream": true
+      }
+    ]
   }
 }

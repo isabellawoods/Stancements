@@ -1,0 +1,8 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "music.minecraft.game.left_to_bloom"
+  },
+  "length_in_seconds": 342.0,
+  "sound_event": "stancements:music.game.left_to_bloom"
+}

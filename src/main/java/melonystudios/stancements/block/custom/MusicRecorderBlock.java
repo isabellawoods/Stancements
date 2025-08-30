@@ -10,8 +10,6 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -51,16 +49,8 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     @Override
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(world, pos, state, placer, stack);
-        CustomData data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
-        CompoundTag tag = null;
-        if (data != null) tag = data.copyTag();
-
-        if (tag != null && tag.contains("BlockEntityTag", Tag.TAG_COMPOUND)) {
-            CompoundTag blockEntityTag = tag.getCompound("BlockEntityTag");
-            if (blockEntityTag.contains("recording", Tag.TAG_ANY_NUMERIC)) {
-                world.setBlock(pos, state.setValue(RECORDING, true), 3);
-            }
-        }
+        CustomData data = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
+        if (data.contains("recording")) world.setBlock(pos, state.setValue(RECORDING, true), 3);
     }
 
     @Override

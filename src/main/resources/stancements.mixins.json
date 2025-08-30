@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "melonystudios.stancements.mixin",
+  "refmap": "stancements.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "STShearsItemMixin"
+  ],
+  "client": [
+    "CurrentMusicAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

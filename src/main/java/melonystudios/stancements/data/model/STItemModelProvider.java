@@ -1,14 +1,14 @@
 package melonystudios.stancements.data.model;
 
+import melonystudios.reutilities.data.model.ReItemModelProvider;
 import melonystudios.stancements.Stancements;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-public class STItemModelProvider extends ItemModelProvider {
+public class STItemModelProvider extends ReItemModelProvider {
     public STItemModelProvider(PackOutput output, ExistingFileHelper fileHelper) {
         super(output, Stancements.MOD_ID, fileHelper);
     }
@@ -21,8 +21,6 @@ public class STItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ModelFile generated = getExistingFile(mcLoc("item/generated"));
-
         // Decorative blocks
         block("oak_shelf");
         block("spruce_shelf");
@@ -37,26 +35,13 @@ public class STItemModelProvider extends ItemModelProvider {
         block("music_recorder");
 
         // Items
-        standard(generated, "vinyl_disc");
-        recordedDisc(generated, "recorded_disc");
+        standard("vinyl_disc");
+        recordedDisc(this.generated, "recorded_disc");
     }
 
-    /// Makes a model for an item.
-    /// @param parent The location of the parent model, usually <code>item/generated</code> or <code>item/handheld</code>.
-    /// @param name The item's registry id, used to locate the texture.
-    public void standard(ModelFile parent, String name) {
-        getBuilder(name).parent(parent).texture("layer0", "item/" + name);
-    }
-
-    /// Makes a model for a block, using the <code>models/block</code> folder as the source.
-    /// @param name The block's registry id and model file name.
-    public void block(String name) {
-        withExistingParent(name, modLoc("block/" + name));
-    }
-
-    /// Makes a {@linkplain melonystudios.stancements.item.custom.RecordedDiscItem recorded disc} model, with <b>11</b> different
+    /// Makes a {@linkplain melonystudios.stancements.item.custom.RecordedDiscItem recorded disc} model, with **11** different
     /// override models for each music disc {@linkplain melonystudios.stancements.component.STDataComponents#LABEL label}.
-    /// @param parent The location of the parent model, usually <code>item/generated</code>.
+    /// @param parent The location of the parent model, usually `item/generated`.
     /// @param name The item's registry id, used for the model name and texture locations.
     public void recordedDisc(ModelFile parent, String name) {
         ResourceLocation label = Stancements.stancements("label");

@@ -9,7 +9,14 @@ public class STBlockTags {
     // Stancements' tags
     public static final TagKey<Block> SHELVES = stancements("shelves");
 
+    // Common tags
+    public static final TagKey<Block> MINEABLE_WITH_SHEARS = common("mineable/shears");
+
     public static TagKey<Block> stancements(String name) {
         return BlockTags.create(Stancements.stancements(name));
+    }
+
+    public static TagKey<Block> common(String name) {
+        return BlockTags.create(Stancements.common(name));
     }
 }

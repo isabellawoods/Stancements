@@ -1,0 +1,25 @@
+{
+  "values": {
+    "stancements:acacia_shelf": {
+      "burn_time": 300
+    },
+    "stancements:birch_shelf": {
+      "burn_time": 300
+    },
+    "stancements:dark_oak_shelf": {
+      "burn_time": 300
+    },
+    "stancements:jungle_shelf": {
+      "burn_time": 300
+    },
+    "stancements:music_recorder": {
+      "burn_time": 300
+    },
+    "stancements:oak_shelf": {
+      "burn_time": 300
+    },
+    "stancements:spruce_shelf": {
+      "burn_time": 300
+    }
+  }
+}

@@ -2,6 +2,7 @@ package melonystudios.stancements.item.custom;
 
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.block.custom.MusicRecorderBlock;
+import melonystudios.stancements.mixin.CurrentMusicAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
@@ -27,8 +28,7 @@ public class VinylDiscItem extends Item {
 
         if (state.is(STBlocks.MUSIC_RECORDER.get()) && !state.getValue(MusicRecorderBlock.RECORDING)) {
             ItemStack handStack = context.getItemInHand();
-            SoundInstance currentMusic = null;
-            //SoundInstance currentMusic = ((InterfaceMethods.MusicTicker) Minecraft.getInstance().getMusicManager()).getCurrentMusic();
+            SoundInstance currentMusic = ((CurrentMusicAccessor) Minecraft.getInstance().getMusicManager()).stancements$getCurrentMusic();
             ((MusicRecorderBlock) state.getBlock()).startRecording(world, state, pos, context.getPlayer(), handStack.split(1), currentMusic);
             return InteractionResult.SUCCESS;
         }
