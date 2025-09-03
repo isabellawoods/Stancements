@@ -3,7 +3,7 @@ package melonystudios.stancements.block.custom;
 import com.mojang.serialization.MapCodec;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
-import melonystudios.stancements.misc.STStats;
+import melonystudios.stancements.misc.STStatistics;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -74,7 +74,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
             if (currentMusic != null && currentMusic.getSound() != null) {
                 this.sendMessage(Component.translatable("tooltip.stancements.recording_music"), world, recorder.startRecording(currentMusic.getSound().getPath(), player));
                 world.setBlock(pos, state.setValue(RECORDING, true), 3);
-                 if (player != null) player.awardStat(STStats.SONGS_RECORDED.get());
+                 if (player != null) player.awardStat(STStatistics.SONGS_RECORDED.get());
             } else {
                 this.sendMessage(Component.translatable("tooltip.stancements.no_music_playing").withStyle(ChatFormatting.GRAY), world, recorder.startRecording(null, player));
             }

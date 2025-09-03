@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -27,18 +26,18 @@ import java.util.stream.Stream;
 public class ShelfBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final VoxelShape NORTH_SHAPE = Stream.of(Shapes.box(0, 0.875, 0.375, 1, 1, 1),
-            Shapes.box(0.0625, 0.625, 0.9375, 0.1875, 1, 1.0625),
-            Shapes.box(0.8125, 0.625, 0.9375, 0.9375, 1, 1.0625)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
-    public static final VoxelShape SOUTH_SHAPE = Stream.of(Shapes.box(0, 0.875, 0, 1, 1, 0.625),
-            Shapes.box(0.8125, 0.625, -0.0625, 0.9375, 1, 0.0625),
-            Shapes.box(0.0625, 0.625, -0.0625, 0.1875, 1, 0.0625)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
-    public static final VoxelShape EAST_SHAPE = Stream.of(Shapes.box(0.375, 0.875, 0, 1, 1, 1),
-            Shapes.box(0.9375, 0.625, 0.8125, 1.0625, 1, 0.9375),
-            Shapes.box(0.9375, 0.625, 0.0625, 1.0625, 1, 0.1875)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
-    public static final VoxelShape WEST_SHAPE = Stream.of(Shapes.box(0, 0.875, 0, 0.625, 1, 1),
-            Shapes.box(-0.0625, 0.625, 0.0625, 0.0625, 1, 0.1875),
-            Shapes.box(-0.0625, 0.625, 0.8125, 0.0625, 1, 0.9375)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
+    public static final VoxelShape NORTH_SHAPE = Stream.of(Shapes.box(0, 0.8125, 0, 1, 1, 1),
+            Shapes.box(0.125, 0.5625, 0.6875, 0.25, 0.8125, 1),
+            Shapes.box(0.75, 0.5625, 0.6875, 0.875, 0.8125, 1)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
+    public static final VoxelShape SOUTH_SHAPE = Stream.of(Shapes.box(0, 0.8125, 0, 1, 1, 1),
+            Shapes.box(0.75, 0.5625, 0, 0.875, 0.8125, 0.3125),
+            Shapes.box(0.125, 0.5625, 0, 0.25, 0.8125, 0.3125)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
+    public static final VoxelShape EAST_SHAPE = Stream.of(Shapes.box(0, 0.8125, 0, 1, 1, 1),
+            Shapes.box(0.6875, 0.5625, 0.75, 1, 0.8125, 0.875),
+            Shapes.box(0.6875, 0.5625, 0.125, 1, 0.8125, 0.25)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
+    public static final VoxelShape WEST_SHAPE = Stream.of(Shapes.box(0, 0.8125, 0, 1, 1, 1),
+            Shapes.box(0, 0.5625, 0.125, 0.3125, 0.8125, 0.25),
+            Shapes.box(0, 0.5625, 0.75, 0.3125, 0.8125, 0.875)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
 
     public ShelfBlock(Properties properties) {
         super(properties);
@@ -48,19 +47,7 @@ public class ShelfBlock extends Block {
     @Override
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        BlockState state = this.defaultBlockState();
-        Level world = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        Direction[] lookingDirections = context.getNearestLookingDirections();
-
-        for (Direction direction : lookingDirections) {
-            if (direction.getAxis().isHorizontal()) {
-                state = state.setValue(FACING, direction).setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
-                if (!world.getBlockState(pos.relative(direction)).canBeReplaced(context)) return state;
-            }
-        }
-
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection()).setValue(WATERLOGGED, world.getFluidState(pos).getType() == Fluids.WATER);
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection()).setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
     }
 
     @Override
@@ -83,7 +70,7 @@ public class ShelfBlock extends Block {
 
     @Override
     @NotNull
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACING)) {
             case SOUTH -> NORTH_SHAPE;
             case EAST -> EAST_SHAPE;

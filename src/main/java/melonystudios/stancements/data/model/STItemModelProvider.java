@@ -22,14 +22,36 @@ public class STItemModelProvider extends ReItemModelProvider {
     @Override
     protected void registerModels() {
         // Decorative blocks
+        // Shelves
         block("oak_shelf");
         block("spruce_shelf");
         block("birch_shelf");
         block("jungle_shelf");
         block("acacia_shelf");
         block("dark_oak_shelf");
+        block("mangrove_shelf");
+        block("cherry_shelf");
+        block("bamboo_shelf");
         block("crimson_shelf");
         block("warped_shelf");
+
+        // Crafting Table Cloths
+        block("white_crafting_table_cloth");
+        block("light_gray_crafting_table_cloth");
+        block("gray_crafting_table_cloth");
+        block("black_crafting_table_cloth");
+        block("brown_crafting_table_cloth");
+        block("red_crafting_table_cloth");
+        block("orange_crafting_table_cloth");
+        block("yellow_crafting_table_cloth");
+        block("lime_crafting_table_cloth");
+        block("green_crafting_table_cloth");
+        block("cyan_crafting_table_cloth");
+        block("light_blue_crafting_table_cloth");
+        block("blue_crafting_table_cloth");
+        block("purple_crafting_table_cloth");
+        block("magenta_crafting_table_cloth");
+        block("pink_crafting_table_cloth");
 
         // Functional blocks
         block("music_recorder");

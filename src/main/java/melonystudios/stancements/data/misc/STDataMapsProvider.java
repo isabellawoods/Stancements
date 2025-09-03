@@ -1,6 +1,7 @@
 package melonystudios.stancements.data.misc;
 
 import melonystudios.stancements.item.STItems;
+import melonystudios.stancements.util.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.DataMapProvider;
@@ -24,12 +25,8 @@ public class STDataMapsProvider extends DataMapProvider {
     @Override
     protected void gather(HolderLookup.Provider provider) {
         this.builder(NeoForgeDataMaps.FURNACE_FUELS)
-                .add(STItems.OAK_SHELF.getKey(), new FurnaceFuel(300), false)
-                .add(STItems.SPRUCE_SHELF.getKey(), new FurnaceFuel(300), false)
-                .add(STItems.BIRCH_SHELF.getKey(), new FurnaceFuel(300), false)
-                .add(STItems.JUNGLE_SHELF.getKey(), new FurnaceFuel(300), false)
-                .add(STItems.ACACIA_SHELF.getKey(), new FurnaceFuel(300), false)
-                .add(STItems.DARK_OAK_SHELF.getKey(), new FurnaceFuel(300), false)
+                .add(STItemTags.SHELVES, new FurnaceFuel(300), false)
+                .add(STItemTags.CRAFTING_TABLE_CLOTHS, new FurnaceFuel(67), false)
                 .add(STItems.MUSIC_RECORDER.getKey(), new FurnaceFuel(300), false);
     }
 }

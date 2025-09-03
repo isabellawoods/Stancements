@@ -1,4 +1,7 @@
-// 1.21.1	2025-08-30T01:58:55.7237706	Stancements - Block Tags
+// 1.21.1	2025-09-03T17:32:30.2484323	Stancements - Block Tags
 4164db15f00815de08671cd775022cba04d3dd1d data/c/tags/block/mineable/shears.json
+6b5166b7a4912cb49c0be28e19bcce18858ed9e1 data/minecraft/tags/block/combination_step_sound_blocks.json
+6b5166b7a4912cb49c0be28e19bcce18858ed9e1 data/minecraft/tags/block/dampens_vibrations.json
 a7a9e02f8669baa98085b4e9a05af96a305b8a25 data/minecraft/tags/block/mineable/axe.json
-f14ee06126958b058d8e6722e2af75ff735a94e4 data/stancements/tags/block/shelves.json
+40d8409068ef76856df6dad04690c54d8678a6c7 data/stancements/tags/block/crafting_table_cloths.json
+4657390613a992c24eb86291770a20c08a1d2670 data/stancements/tags/block/shelves.json

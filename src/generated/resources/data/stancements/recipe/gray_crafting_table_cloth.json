@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "crafting_table_cloths",
+  "key": {
+    "#": {
+      "item": "minecraft:gray_carpet"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 2,
+    "id": "stancements:gray_crafting_table_cloth"
+  }
+}

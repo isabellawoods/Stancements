@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "stancements:cyan_crafting_table_cloth"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "stancements:blocks/cyan_crafting_table_cloth"
+}

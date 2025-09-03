@@ -1,5 +1,6 @@
 {
-  "credit": "Made with Blockbench by isabellawods (8-11-24)",
+  "format_version": "1.9.0",
+  "credit": "Made with Blockbench by isabellawoods (3-9-25)",
   "parent": "minecraft:block/block",
   "textures": {
     "particle": "#shelf"
@@ -7,44 +8,43 @@
   "elements": [
     {
       "name": "shelf",
-      "from": [0, 14, 6],
+      "from": [0, 13, 0],
       "to": [16, 16, 16],
-      "rotation": {"angle": 0, "axis": "y", "origin": [0, 15, 15]},
       "faces": {
-        "north": {"uv": [0, 10, 16, 12], "texture": "#shelf"},
-        "east": {"uv": [0, 12, 10, 14], "texture": "#shelf"},
-        "south": {"uv": [0, 10, 16, 12], "texture": "#shelf"},
-        "west": {"uv": [0, 12, 10, 14], "texture": "#shelf"},
-        "up": {"uv": [16, 10, 0, 0], "texture": "#shelf"},
-        "down": {"uv": [16, 10, 0, 0], "texture": "#shelf"}
+        "north": {"uv": [0, 0, 16, 3], "texture": "#support", "cullface": "north"},
+        "east": {"uv": [0, 0, 16, 3], "texture": "#support", "cullface": "east"},
+        "south": {"uv": [0, 0, 16, 3], "texture": "#support", "cullface": "south"},
+        "west": {"uv": [0, 0, 16, 3], "texture": "#support", "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#shelf", "cullface": "up"},
+        "down": {"uv": [0, 16, 16, 0], "texture": "#shelf"}
       }
     },
     {
       "name": "support_1",
-      "from": [1, 10, 15],
-      "to": [3, 16, 17],
-      "rotation": {"angle": -45, "axis": "x", "origin": [1, 11, 15]},
+      "from": [2, 9, 15],
+      "to": [4, 15, 17],
+      "rotation": {"angle": -45, "axis": "x", "origin": [2, 9, 15]},
       "faces": {
-        "north": {"uv": [4, 0, 6, 6], "texture": "#support"},
-        "east": {"uv": [4, 0, 6, 6], "texture": "#support"},
-        "south": {"uv": [4, 0, 6, 6], "texture": "#support"},
-        "west": {"uv": [4, 0, 6, 6], "texture": "#support"},
-        "up": {"uv": [6, 0, 8, 2], "texture": "#support"},
-        "down": {"uv": [6, 0, 8, 2], "texture": "#support"}
+        "north": {"uv": [2, 5, 4, 11], "texture": "#support"},
+        "east": {"uv": [0, 5, 2, 11], "texture": "#support"},
+        "south": {"uv": [6, 5, 8, 11], "texture": "#support"},
+        "west": {"uv": [4, 5, 6, 11], "texture": "#support"},
+        "up": {"uv": [2, 3, 4, 5], "texture": "#support"},
+        "down": {"uv": [4, 3, 6, 5], "texture": "#support"}
       }
     },
     {
       "name": "support_2",
-      "from": [13, 10, 15],
-      "to": [15, 16, 17],
-      "rotation": {"angle": -45, "axis": "x", "origin": [13, 11, 15]},
+      "from": [12, 9, 15],
+      "to": [14, 15, 17],
+      "rotation": {"angle": -45, "axis": "x", "origin": [12, 9, 15]},
       "faces": {
-        "north": {"uv": [0, 0, 2, 6], "texture": "#support"},
-        "east": {"uv": [0, 0, 2, 6], "texture": "#support"},
-        "south": {"uv": [0, 0, 2, 6], "texture": "#support"},
-        "west": {"uv": [0, 0, 2, 6], "texture": "#support"},
-        "up": {"uv": [2, 0, 4, 2], "texture": "#support"},
-        "down": {"uv": [2, 0, 4, 2], "texture": "#support"}
+        "north": {"uv": [10, 5, 12, 11], "texture": "#support"},
+        "east": {"uv": [8, 5, 10, 11], "texture": "#support"},
+        "south": {"uv": [14, 5, 16, 11], "texture": "#support"},
+        "west": {"uv": [12, 5, 14, 11], "texture": "#support"},
+        "up": {"uv": [10, 3, 12, 5], "texture": "#support"},
+        "down": {"uv": [12, 3, 14, 5], "texture": "#support"}
       }
     }
   ]

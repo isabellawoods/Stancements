@@ -85,7 +85,7 @@ public class STJukeboxSongs {
     public static final ResourceKey<JukeboxSong> LILYPAD = register("game/lilypad");
     public static final ResourceKey<JukeboxSong> BELOW_AND_ABOVE = register("game/below_and_above");
     public static final ResourceKey<JukeboxSong> OS_PIANO = register("game/os_piano");
-    public static final ResourceKey<JukeboxSong> BROKEN_CLOCKS = register("game/broken_blocks");
+    public static final ResourceKey<JukeboxSong> BROKEN_CLOCKS = register("game/broken_clocks");
     public static final ResourceKey<JukeboxSong> FIREFLIES = register("game/fireflies");
 
     public static void bootstrap(BootstrapContext<JukeboxSong> context) {

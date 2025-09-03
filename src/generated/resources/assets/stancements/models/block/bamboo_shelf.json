@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_shelf",
+  "textures": {
+    "shelf": "stancements:block/bamboo_shelf",
+    "support": "stancements:block/bamboo_shelf_support"
+  }
+}

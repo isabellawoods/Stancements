@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_shelf",
+  "textures": {
+    "shelf": "stancements:block/mangrove_shelf",
+    "support": "stancements:block/mangrove_shelf_support"
+  }
+}

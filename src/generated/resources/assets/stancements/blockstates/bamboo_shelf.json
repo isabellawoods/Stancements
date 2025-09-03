@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "stancements:block/bamboo_shelf",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "stancements:block/bamboo_shelf",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "stancements:block/bamboo_shelf"
+    },
+    "facing=west": {
+      "model": "stancements:block/bamboo_shelf",
+      "y": 90
+    }
+  }
+}

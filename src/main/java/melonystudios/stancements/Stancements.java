@@ -6,9 +6,9 @@ import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.tab.STCreativeTabs;
-import melonystudios.stancements.misc.STStats;
-import melonystudios.stancements.misc.STVanillaCompatibility;
+import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.sound.STSounds;
+import melonystudios.stancements.util.STVanillaCompatibility;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -33,7 +33,7 @@ public class Stancements {
         STDataComponents.COMPONENTS.register(eventBus);
         STCreativeTabs.TABS.register(eventBus);
         STSounds.SOUNDS.register(eventBus);
-        STStats.STATS.register(eventBus);
+        STStatistics.STATS.register(eventBus);
     }
 
     public static ResourceLocation stancements(String name) {

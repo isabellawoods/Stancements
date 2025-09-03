@@ -1,6 +1,7 @@
-// 1.21.1	2025-08-29T23:24:16.5636486	Stancements - Item Tags
+// 1.21.1	2025-09-03T17:32:30.2464243	Stancements - Item Tags
 a1a56cc9f79d660d5e42156a7498a6b21a888991 data/c/tags/item/music_discs.json
 5f5b1934e1c8f2ffefb6a363bca9ef0d7fbb4cf5 data/minecraft/tags/item/dyeable.json
 d0b7f8a83b1fdfda116980f4a67e093b1c7cfd8c data/minecraft/tags/item/non_flammable_wood.json
-f14ee06126958b058d8e6722e2af75ff735a94e4 data/stancements/tags/item/shelves.json
+40d8409068ef76856df6dad04690c54d8678a6c7 data/stancements/tags/item/crafting_table_cloths.json
+a7056ffac9e145d9091b56854789cb6c2e713e0e data/stancements/tags/item/shelves.json
 9d7d3c76d6d17e0cb6014946910bcb2883a78cf9 data/stancements/tags/item/vinyl_disc_dyes.json

@@ -20,7 +20,7 @@ public class RecordedDiscItem extends Item {
     public static final int DEFAULT_DISC_COLOR = 0xFFF9FFFE;
 
     public RecordedDiscItem(Properties properties) {
-        super(properties.component(STDataComponents.LABEL, 1F).component(DataComponents.DYED_COLOR, new DyedItemColor(DEFAULT_DISC_COLOR, true)));
+        super(properties.component(STDataComponents.LABEL, 1F).component(DataComponents.DYED_COLOR, new DyedItemColor(DEFAULT_DISC_COLOR, false)));
     }
 
     @Override
@@ -29,6 +29,8 @@ public class RecordedDiscItem extends Item {
         if (!stack.has(DataComponents.JUKEBOX_PLAYABLE)) tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.blank").withStyle(ChatFormatting.GRAY));
     }
 
+    /// Returns the location of a {@linkplain melonystudios.stancements.misc.STJukeboxSongs jukebox song} based on the recorded `music_id`.
+    /// @param musicID A resource location of the song's location within the game's files.
     public static ResourceLocation getJukeboxSongLocation(ResourceLocation musicID) {
         String namespace = musicID.getNamespace().equals("minecraft") ? "stancements" : musicID.getNamespace();
         return ResourceLocation.parse(namespace + ":" + musicID.getPath()
@@ -37,17 +39,24 @@ public class RecordedDiscItem extends Item {
                 .replace(".ogg", ""));
     }
 
+    public static boolean setJukeboxSong(ItemStack stack, Level world, ResourceLocation musicID) {
+        var jukeboxSongs = world.registryAccess().registry(Registries.JUKEBOX_SONG);
+        if (jukeboxSongs.isPresent()) {
+            var song = jukeboxSongs.get().getHolder(getJukeboxSongLocation(musicID));
+            if (song.isPresent()) {
+                stack.set(DataComponents.JUKEBOX_PLAYABLE, new JukeboxPlayable(new EitherHolder<>(song.get()), true));
+            } else {
+                stack.set(STDataComponents.MUSIC_ID, musicID);
+            }
+            return true;
+        }
+        return false;
+    }
+
     public static ItemStack getRecordedDisc(Level world, ResourceLocation musicID, ItemStack originalStack) {
         if (originalStack.isEmpty()) return ItemStack.EMPTY;
         ItemStack discStack = new ItemStack(STItems.RECORDED_DISC.get());
-        world.registryAccess().registry(Registries.JUKEBOX_SONG).ifPresent(songs -> {
-            var song = songs.getHolder(getJukeboxSongLocation(musicID));
-            if (song.isPresent()) {
-                discStack.set(DataComponents.JUKEBOX_PLAYABLE, new JukeboxPlayable(new EitherHolder<>(song.get()), true));
-            } else {
-                discStack.set(STDataComponents.MUSIC_ID, musicID.toString());
-            }
-        });
+        setJukeboxSong(discStack, world, musicID);
         discStack.set(STDataComponents.LABEL, (float) (world.getRandom().nextInt(10) + 1));
         return getRandomLabelColor(discStack, world.getRandom());
     }

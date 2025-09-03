@@ -84,7 +84,7 @@ public class STSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> LILYPAD_SONG = register("music.game.lilypad");
     public static final DeferredHolder<SoundEvent, SoundEvent> BELOW_AND_ABOVE_SONG = register("music.game.below_and_above");
     public static final DeferredHolder<SoundEvent, SoundEvent> OS_PIANO_SONG = register("music.game.os_piano");
-    public static final DeferredHolder<SoundEvent, SoundEvent> BROKEN_CLOCKS_SONG = register("music.game.broken_blocks");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BROKEN_CLOCKS_SONG = register("music.game.broken_clocks");
     public static final DeferredHolder<SoundEvent, SoundEvent> FIREFLIES_SONG = register("music.game.fireflies");
 
     public static DeferredHolder<SoundEvent, SoundEvent> register(String name) {

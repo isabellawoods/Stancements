@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_crafting_table_cloth",
+  "textures": {
+    "side": "stancements:block/green_crafting_table_cloth_side",
+    "top": "stancements:block/green_crafting_table_cloth_top"
+  }
+}
