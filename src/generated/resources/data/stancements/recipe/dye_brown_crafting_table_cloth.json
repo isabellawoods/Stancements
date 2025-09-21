@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "crafting_table_cloths",
+  "ingredients": [
+    {
+      "tag": "c:dyes/brown"
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:crafting_table_cloths"
+      },
+      "subtracted": {
+        "item": "stancements:brown_crafting_table_cloth"
+      }
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "stancements:brown_crafting_table_cloth"
+  }
+}

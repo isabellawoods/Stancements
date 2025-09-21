@@ -9,6 +9,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class STSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, Stancements.MOD_ID);
 
+    // Items
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_DYE = SOUNDS.register("item.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.cauldron.dye")));
+
     // Volume Alpha
     public static final DeferredHolder<SoundEvent, SoundEvent> MINECRAFT_SONG = register("music.game.minecraft");
     public static final DeferredHolder<SoundEvent, SoundEvent> CLARK_SONG = register("music.game.clark");

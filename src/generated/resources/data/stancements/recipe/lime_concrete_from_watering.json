@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "dye_concrete",
+  "key": {
+    "#": {
+      "item": "minecraft:lime_concrete_powder"
+    },
+    "W": {
+      "tag": "c:buckets/water"
+    }
+  },
+  "pattern": [
+    "###",
+    "#W#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "minecraft:lime_concrete"
+  }
+}

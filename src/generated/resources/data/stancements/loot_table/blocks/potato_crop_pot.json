@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "stancements:crop_pot"
+        }
+      ],
+      "functions": [
+        {
+          "block": "stancements:potato_crop_pot",
+          "function": "minecraft:copy_state",
+          "properties": [
+            "hopping"
+          ]
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potato"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "stancements:blocks/potato_crop_pot"
+}

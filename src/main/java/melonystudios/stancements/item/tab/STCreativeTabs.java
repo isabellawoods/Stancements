@@ -1,12 +1,22 @@
 package melonystudios.stancements.item.tab;
 
+import melonystudios.stancements.STConfigs;
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.block.STBlockStateProperties;
+import melonystudios.stancements.item.custom.DyedWaterBucketItem;
+import net.minecraft.Util;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.DyedItemColor;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
 
 import static melonystudios.stancements.item.STItems.*;
 
@@ -15,6 +25,9 @@ public class STCreativeTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS.register("main", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MUSIC_RECORDER.get())).title(Component.translatable("tab.stancements.main")).displayItems(((parameters, output) -> {
+                // Functional blocks
+                output.accept(MUSIC_RECORDER);
+
                 // Decorative blocks
                 // Shelves
                 output.accept(OAK_SHELF);
@@ -48,10 +61,38 @@ public class STCreativeTabs {
                 output.accept(PINK_CRAFTING_TABLE_CLOTH);
 
                 // Functional blocks
-                output.accept(MUSIC_RECORDER);
+                output.accept(CROP_POT);
+                output.accept(Util.make(new ItemStack(CROP_POT.get()), stack -> stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, true))));
 
                 // Items
+                addDyedWaterBuckets(output);
                 output.accept(VINYL_DISC);
                 output.accept(RECORDED_DISC);
             })).build());
+
+    /// Adds all variants of {@linkplain DyedWaterBucketItem dyed water buckets} to *Stancements*' main creative tab.
+    /// @param output The tab's item adder.
+    private static void addDyedWaterBuckets(CreativeModeTab.Output output) {
+        addBucket(output, DyedWaterBucketItem.DEFAULT_WATER_COLOR);
+        if (!STConfigs.POPULATE_DYED_WATER_BUCKETS.get()) return;
+
+        List<Integer> colors = List.of(16383998, 10329495, 4673362, 1908001, 8606770, 11546150, 16351261, 16701501, 8439583, 6192150, 1481884, 3847130, 3949738, 8991416, 13061821, 15961002);
+        for (Integer color : colors) {
+            addBucket(output, color);
+            if (color == 16383998 && ModList.get().isLoaded("f10elements")) {
+                addBucket(output, 15457757);
+            } else if (color == 3847130 && ModList.get().isLoaded("revaried")) {
+                addBucket(output, 8454080);
+            }
+        }
+    }
+
+    /// Adds a single dyed water bucket to *Stancements*' main creative tab.
+    /// @param output The tab's item adder.
+    /// @param color The color to apply to the bucket stack.
+    private static void addBucket(CreativeModeTab.Output output, Integer color) {
+        ItemStack dyedBucket = new ItemStack(DYED_WATER_BUCKET.get());
+        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color, false));
+        output.accept(dyedBucket);
+    }
 }

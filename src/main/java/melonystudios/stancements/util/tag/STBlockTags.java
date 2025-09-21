@@ -9,6 +9,7 @@ public class STBlockTags {
     // Stancements' tags
     public static final TagKey<Block> SHELVES = stancements("shelves");
     public static final TagKey<Block> CRAFTING_TABLE_CLOTHS = stancements("crafting_table_cloths");
+    public static final TagKey<Block> CROP_POTS = stancements("crop_pots");
 
     // Common tags
     public static final TagKey<Block> MINEABLE_WITH_SHEARS = common("mineable/shears");

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "stancements:crop_pot",
+    "stancements:wheat_crop_pot",
+    "stancements:carrot_crop_pot",
+    "stancements:potato_crop_pot",
+    "stancements:beetroot_crop_pot",
+    "stancements:nether_wart_crop_pot"
+  ]
+}

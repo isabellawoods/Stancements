@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0,hopping=false": {
+      "model": "stancements:block/nether_wart_crop_pot_stage0"
+    },
+    "age=0,hopping=true": {
+      "model": "stancements:block/hopping_nether_wart_crop_pot_stage0"
+    },
+    "age=1,hopping=false": {
+      "model": "stancements:block/nether_wart_crop_pot_stage1"
+    },
+    "age=1,hopping=true": {
+      "model": "stancements:block/hopping_nether_wart_crop_pot_stage1"
+    },
+    "age=2,hopping=false": {
+      "model": "stancements:block/nether_wart_crop_pot_stage2"
+    },
+    "age=2,hopping=true": {
+      "model": "stancements:block/hopping_nether_wart_crop_pot_stage2"
+    },
+    "age=3,hopping=false": {
+      "model": "stancements:block/nether_wart_crop_pot_stage3"
+    },
+    "age=3,hopping=true": {
+      "model": "stancements:block/hopping_nether_wart_crop_pot_stage3"
+    }
+  }
+}

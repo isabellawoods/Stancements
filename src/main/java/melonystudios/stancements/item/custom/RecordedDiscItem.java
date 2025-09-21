@@ -1,6 +1,8 @@
 package melonystudios.stancements.item.custom;
 
 import com.google.common.collect.Lists;
+import melonystudios.reutilities.api.ReAPI;
+import melonystudios.stancements.Stancements;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
 import net.minecraft.ChatFormatting;
@@ -15,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-// todo: make discs with the "music_id" component automatically resolve to the jukebox song when available ~isa 3--8-25
+// todo: make discs with the "music_id" component automatically resolve to the jukebox song when available ~isa 3-8-25
 public class RecordedDiscItem extends Item {
     public static final int DEFAULT_DISC_COLOR = 0xFFF9FFFE;
 
@@ -26,7 +28,9 @@ public class RecordedDiscItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
-        if (!stack.has(DataComponents.JUKEBOX_PLAYABLE)) tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.blank").withStyle(ChatFormatting.GRAY));
+        if (!stack.has(DataComponents.JUKEBOX_PLAYABLE) && ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/blank"))) {
+            tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.blank").withStyle(ChatFormatting.GRAY));
+        }
     }
 
     /// Returns the location of a {@linkplain melonystudios.stancements.misc.STJukeboxSongs jukebox song} based on the recorded `music_id`.

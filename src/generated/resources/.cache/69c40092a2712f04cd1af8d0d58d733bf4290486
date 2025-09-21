@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-03T17:33:57.3868991	Stancements - Item Models
+// 1.21.1	2025-09-20T23:26:39.3609155	Stancements - Item Models
 5c7c026d76aecade3d914245180f0c0b9b58b22f assets/stancements/models/item/acacia_shelf.json
 730dddd40b80312304ca6b54a3ecf9e3a4cfe0e9 assets/stancements/models/item/bamboo_shelf.json
 96c0a874ea3a254fc35cdcf08a3ef771a04b3562 assets/stancements/models/item/birch_shelf.json
@@ -7,10 +7,13 @@
 acfd2ef2bbb67debc87acf4b908e1c2058285e83 assets/stancements/models/item/brown_crafting_table_cloth.json
 e450e9a13c551fcb74ff28c8316f55b478a578a9 assets/stancements/models/item/cherry_shelf.json
 07638131b79cdd9f1e44566d07473c06ffeb612a assets/stancements/models/item/crimson_shelf.json
+454d719c434270e6d9c1481f0f91011b9ecfd45e assets/stancements/models/item/crop_pot.json
 6506c947e09c15d25e3acb34626b4a1605832fb5 assets/stancements/models/item/cyan_crafting_table_cloth.json
 68ab7ee599dd979d8610ddbd31448f3f7b8f0c40 assets/stancements/models/item/dark_oak_shelf.json
+76a7ba3ccefd2959719b6db10b7919df812efa53 assets/stancements/models/item/dyed_water_bucket.json
 0c4d618b1491c8832a55d814f995962bc58c56b3 assets/stancements/models/item/gray_crafting_table_cloth.json
 b9b67fc900aa66deab08f5673d5ada0404d7b7a4 assets/stancements/models/item/green_crafting_table_cloth.json
+3fcc2fe342e6d84cdc2f82159969c0d6ec38599a assets/stancements/models/item/hopping_crop_pot.json
 888753dcb0ef2595bc13d49113b68e5f6bf8d5e8 assets/stancements/models/item/jungle_shelf.json
 92f5b8947dc81ac9551ddab5a754564f7700cf10 assets/stancements/models/item/light_blue_crafting_table_cloth.json
 3eaf56d01aed9f95c8a207d3af20a5dbd2307d14 assets/stancements/models/item/light_gray_crafting_table_cloth.json

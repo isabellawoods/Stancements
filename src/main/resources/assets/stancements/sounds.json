@@ -1,4 +1,11 @@
 {
+  "item.cauldron.dye": {
+    "sounds": [
+      "item/bottle/empty1",
+      "item/bottle/empty2"
+    ],
+    "subtitle": "subtitles.item.cauldron.dye"
+  },
   "music.game.minecraft": {
     "sounds": [
       {

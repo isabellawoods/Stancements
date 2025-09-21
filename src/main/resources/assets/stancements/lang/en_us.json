@@ -1,6 +1,23 @@
 {
   "tab.stancements.main": "Stancements",
 
+  "stancements.configuration.title": "[Stancements] Settings",
+  "stancements.configuration.section.melonystudios.stancements.common.toml.title": "[Stancements] Settings > Common",
+  "stancements.configuration.item": "Items",
+  "stancements.configuration.item.tooltip": "Settings related to items added by Stancements.",
+  "stancements.configuration.block": "Blocks",
+  "stancements.configuration.block.tooltip": "Settings related to blocks added by Stancements.",
+
+  "config.stancements.populate_dyed_water_buckets": "Populate Dyed Water Buckets",
+  "config.stancements.populate_dyed_water_buckets.tooltip": "Whether to populate all dyed water buckets in Stancements' creative tab.",
+  "config.stancements.crop_pot_growth_chance": "Crop Pot Growth Chance",
+  "config.stancements.crop_pot_growth_chance.tooltip": "The chance of a planted crop pot advancing its growth stage.\nVanilla defaults to 1 in 25, and Stancements to 1 in 15.",
+
+  "commands.stancements.update_recorded_disc.both": "Successfully updated sound id and label of %s.",
+  "commands.stancements.update_recorded_disc.music_id": "Successfully updated sound id of %s.",
+  "commands.stancements.update_recorded_disc.label": "Successfully updated disc label of %s.",
+  "commands.stancements.update_recorded_disc.fail": "%s has no music id or label to convert.",
+
   "block.stancements.oak_shelf": "Oak Shelf",
   "block.stancements.spruce_shelf": "Spruce Shelf",
   "block.stancements.birch_shelf": "Birch Shelf",
@@ -29,29 +46,48 @@
   "block.stancements.magenta_crafting_table_cloth": "Magenta Crafting Table Cloth",
   "block.stancements.pink_crafting_table_cloth": "Pink Crafting Table Cloth",
   "block.stancements.music_recorder": "Music Recorder",
+  "block.stancements.dyed_water_cauldron": "Dyed Water Cauldron",
+  "block.stancements.milk_cauldron": "Milk Cauldron",
+  "block.stancements.crop_pot": "Crop Pot",
+  "block.stancements.hopping_crop_pot": "Hopping Crop Pot",
+  "block.stancements.wheat_crop_pot": "Wheat Crop Pot",
+  "block.stancements.hopping_wheat_crop_pot": "Hopping Wheat Crop Pot",
+  "block.stancements.carrot_crop_pot": "Carrot Crop Pot",
+  "block.stancements.hopping_carrot_crop_pot": "Hopping Carrot Crop Pot",
+  "block.stancements.potato_crop_pot": "Potato Crop Pot",
+  "block.stancements.hopping_potato_crop_pot": "Hopping Potato Crop Pot",
+  "block.stancements.beetroot_crop_pot": "Beetroot Crop Pot",
+  "block.stancements.hopping_beetroot_crop_pot": "Hopping Beetroot Crop Pot",
+  "block.stancements.nether_wart_crop_pot": "Nether Wart Crop Pot",
+  "block.stancements.hopping_nether_wart_crop_pot": "Hopping Nether Wart Crop Pot",
 
   "item.stancements.vinyl_disc": "Vinyl Disc",
   "item.stancements.recorded_disc": "Music Disc",
+  "item.stancements.dyed_water_bucket": "Dyed Water Bucket",
+
+  "subtitles.item.cauldron.dye": "Water splashes",
 
   "stat.stancements.songs_recorded": "Songs Recorded",
-
-  "commands.stancements.update_recorded_disc.both": "Successfully updated sound id and label of %s.",
-  "commands.stancements.update_recorded_disc.music_id": "Successfully updated sound id of %s.",
-  "commands.stancements.update_recorded_disc.label": "Successfully updated disc label of %s.",
-  "commands.stancements.update_recorded_disc.fail": "%s has no music id or label to convert.",
+  "stat.stancements.seeds_planted_in_crop_pots": "Seeds Planted in Crop Pots",
 
   "tooltip.stancements.no_music_playing": "No music playing...",
   "tooltip.stancements.recording_music": "Recording music...",
   "tooltip.stancements.finished_recording": "Finished recording!",
   "tooltip.stancements.recorded_disc.blank": "Blank",
   "tooltip.stancements.recorded_disc.sound_id": "Sound ID: \"%s\"",
+  "tooltip.stancements.dyed_water_color": "Color: %s",
+
+  "logger.stancements.outside_bounds": "Value must be within %s and %s; is %s",
 
   "tag.block.c.mineable.shears": "Mineable with Shears",
   "tag.block.stancements.shelves": "Shelves",
   "tag.block.stancements.crafting_table_cloths": "Crafting Table Cloths",
+  "tag.block.stancements.crop_pots": "Crop Pots",
+  "tag.item.c.buckets.dyed_water": "Dyed Water Buckets",
   "tag.item.stancements.shelves": "Shelves",
   "tag.item.stancements.crafting_table_cloths": "Crafting Table Cloths",
   "tag.item.stancements.vinyl_disc_dyes": "Vinyl Disc Dyes",
+  "tag.item.stancements.recordable_discs": "Recordable Discs",
 
   "music.minecraft.game.minecraft": "C418 - Minecraft",
   "music.minecraft.game.clark": "C418 - Clark",

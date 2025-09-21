@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_full_crop_pot",
+  "textures": {
+    "crop": "minecraft:block/carrots_stage3",
+    "pot": "stancements:block/crop_pot"
+  }
+}

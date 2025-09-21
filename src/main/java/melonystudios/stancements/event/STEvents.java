@@ -9,19 +9,15 @@ import melonystudios.stancements.data.model.STBlockStateProvider;
 import melonystudios.stancements.data.model.STItemModelProvider;
 import melonystudios.stancements.data.tag.STBlockTagsProvider;
 import melonystudios.stancements.data.tag.STItemTagsProvider;
-import melonystudios.stancements.item.STItems;
-import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.misc.datamap.STDataMaps;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.component.DyedItemColor;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -54,9 +50,8 @@ public class STEvents {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        event.register((stack, tintIndex) -> tintIndex == 0 ? -1 : DyedItemColor.getOrDefault(stack, RecordedDiscItem.DEFAULT_DISC_COLOR), STItems.RECORDED_DISC.get());
+    public static void registerDataMaps(RegisterDataMapTypesEvent event) {
+        event.register(STDataMaps.POT_PLANTABLE);
     }
 }

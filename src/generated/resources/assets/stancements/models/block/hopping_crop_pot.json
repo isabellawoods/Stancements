@@ -1,0 +1,6 @@
+{
+  "parent": "stancements:block/template_crop_pot",
+  "textures": {
+    "pot": "stancements:block/hopping_crop_pot"
+  }
+}

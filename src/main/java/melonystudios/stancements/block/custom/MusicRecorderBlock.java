@@ -1,9 +1,12 @@
 package melonystudios.stancements.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
 import melonystudios.stancements.misc.STStatistics;
+import melonystudios.stancements.mixin.CurrentMusicAccessor;
+import melonystudios.stancements.util.tag.STItemTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -11,7 +14,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -28,12 +33,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MusicRecorderBlock extends BaseEntityBlock {
-    public static final BooleanProperty RECORDING = BooleanProperty.create("recording");
+    public static final BooleanProperty RECORDING = STBlockStateProperties.RECORDING;
 
     public MusicRecorderBlock(Properties properties) {
         super(properties);
@@ -58,13 +64,26 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
-            if (!recorder.getDiscStack().isEmpty()) {
+            if (!recorder.isEmpty()) {
                 this.stopRecording(world, pos, true);
                 world.setBlock(pos, state.setValue(RECORDING, false), 3);
+                world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
                 return InteractionResult.sidedSuccess(!world.isClientSide);
             }
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    @NotNull
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!state.getValue(RECORDING) && stack.is(STItemTags.RECORDABLE_DISCS) && world.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
+            SoundInstance currentMusic = ((CurrentMusicAccessor) Minecraft.getInstance().getMusicManager()).stancements$getCurrentMusic();
+            ItemStack handStack = player.getItemInHand(hand);
+            this.startRecording(world, state, pos, player, handStack.consumeAndReturn(1, player), currentMusic);
+            return ItemInteractionResult.sidedSuccess(!world.isClientSide);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     public void startRecording(Level world, BlockState state, BlockPos pos, @Nullable Player player, ItemStack discStack, @Nullable SoundInstance currentMusic) {
@@ -74,6 +93,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
             if (currentMusic != null && currentMusic.getSound() != null) {
                 this.sendMessage(Component.translatable("tooltip.stancements.recording_music"), world, recorder.startRecording(currentMusic.getSound().getPath(), player));
                 world.setBlock(pos, state.setValue(RECORDING, true), 3);
+                world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
                  if (player != null) player.awardStat(STStatistics.SONGS_RECORDED.get());
             } else {
                 this.sendMessage(Component.translatable("tooltip.stancements.no_music_playing").withStyle(ChatFormatting.GRAY), world, recorder.startRecording(null, player));
@@ -84,7 +104,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public void stopRecording(Level world, BlockPos pos, boolean fromTop) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
-            ItemStack discStack = recorder.getDiscStack();
+            ItemStack discStack = recorder.getTheItem();
             recorder.finishRecording(ItemStack.EMPTY, true);
             if (discStack.isEmpty()) return;
 
@@ -141,9 +161,8 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
-            if (!recorder.recording()) return 0;
-            int minimum = state.getValue(RECORDING) ? 1 : 0;
-            return Math.max((int) ((recorder.ticksUntilFinishedRecording() * 15) / 600F), minimum);
+            if (!state.getValue(RECORDING)) return 0;
+            return ((recorder.ticksUntilFinishedRecording() * 14) / MusicRecorderBlockEntity.DEFAULT_RECORDING_DURATION) + 1;
         }
         return 0;
     }

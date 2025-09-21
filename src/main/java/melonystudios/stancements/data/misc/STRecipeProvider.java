@@ -1,16 +1,25 @@
 package melonystudios.stancements.data.misc;
 
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.util.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -52,10 +61,53 @@ public class STRecipeProvider extends RecipeProvider {
         addCraftingTableCloth(output, STItems.MAGENTA_CRAFTING_TABLE_CLOTH, Items.MAGENTA_CARPET);
         addCraftingTableCloth(output, STItems.PINK_CRAFTING_TABLE_CLOTH, Items.PINK_CARPET);
 
+        // Crafting table cloth dyeing
+        dyeCraftingTableCloth(output, STItems.WHITE_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_WHITE);
+        dyeCraftingTableCloth(output, STItems.LIGHT_GRAY_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_LIGHT_GRAY);
+        dyeCraftingTableCloth(output, STItems.GRAY_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_GRAY);
+        dyeCraftingTableCloth(output, STItems.BLACK_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_BLACK);
+        dyeCraftingTableCloth(output, STItems.BROWN_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_BROWN);
+        dyeCraftingTableCloth(output, STItems.RED_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_RED);
+        dyeCraftingTableCloth(output, STItems.ORANGE_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_ORANGE);
+        dyeCraftingTableCloth(output, STItems.YELLOW_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_YELLOW);
+        dyeCraftingTableCloth(output, STItems.LIME_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_LIME);
+        dyeCraftingTableCloth(output, STItems.GREEN_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_GREEN);
+        dyeCraftingTableCloth(output, STItems.CYAN_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_CYAN);
+        dyeCraftingTableCloth(output, STItems.LIGHT_BLUE_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_LIGHT_BLUE);
+        dyeCraftingTableCloth(output, STItems.PURPLE_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_PURPLE);
+        dyeCraftingTableCloth(output, STItems.MAGENTA_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_MAGENTA);
+        dyeCraftingTableCloth(output, STItems.PINK_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_PINK);
+
+        // Concrete watering
+        waterConcrete(output, Items.WHITE_CONCRETE_POWDER, Items.WHITE_CONCRETE);
+        waterConcrete(output, Items.LIGHT_GRAY_CONCRETE_POWDER, Items.LIGHT_GRAY_CONCRETE);
+        waterConcrete(output, Items.GRAY_CONCRETE_POWDER, Items.GRAY_CONCRETE);
+        waterConcrete(output, Items.BLACK_CONCRETE_POWDER, Items.BLACK_CONCRETE);
+        waterConcrete(output, Items.BROWN_CONCRETE_POWDER, Items.BROWN_CONCRETE);
+        waterConcrete(output, Items.RED_CONCRETE_POWDER, Items.RED_CONCRETE);
+        waterConcrete(output, Items.ORANGE_CONCRETE_POWDER, Items.ORANGE_CONCRETE);
+        waterConcrete(output, Items.YELLOW_CONCRETE_POWDER, Items.YELLOW_CONCRETE);
+        waterConcrete(output, Items.LIME_CONCRETE_POWDER, Items.LIME_CONCRETE);
+        waterConcrete(output, Items.GREEN_CONCRETE_POWDER, Items.GREEN_CONCRETE);
+        waterConcrete(output, Items.CYAN_CONCRETE_POWDER, Items.CYAN_CONCRETE);
+        waterConcrete(output, Items.LIGHT_BLUE_CONCRETE_POWDER, Items.LIGHT_BLUE_CONCRETE);
+        waterConcrete(output, Items.PURPLE_CONCRETE_POWDER, Items.PURPLE_CONCRETE);
+        waterConcrete(output, Items.MAGENTA_CONCRETE_POWDER, Items.MAGENTA_CONCRETE);
+        waterConcrete(output, Items.PINK_CONCRETE_POWDER, Items.PINK_CONCRETE);
+
         // Functional blocks
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('D', Tags.Items.DYES)
                 .pattern("###").pattern("DRD").pattern("###").unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
                 .save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.CROP_POT, 8).define('#', Items.TERRACOTTA)
+                .pattern("# #").pattern(" # ").unlockedBy("has_terracotta", has(Items.TERRACOTTA))
+                .save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, hoppingCropPot(8)).define('#', Items.TERRACOTTA).define('H', Items.HOPPER)
+                .pattern("#H#").pattern(" # ").unlockedBy("has_terracotta", has(Items.TERRACOTTA)).unlockedBy("has_hopper", has(Items.HOPPER))
+                .group("hopping_crop_pot").save(output, Stancements.stancements("hopping_crop_pot"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, hoppingCropPot(8)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
+                .pattern("###").pattern("#H#").pattern("###").unlockedBy("has_hopper", has(Items.HOPPER))
+                .group("hopping_crop_pot").save(output, Stancements.stancements("hopping_crop_pot_from_existing"));
 
         // Items
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.VINYL_DISC, 4).define('C', ItemTags.COALS).define('D', STItemTags.VINYL_DISC_DYES).define('H', Items.HONEYCOMB)
@@ -64,6 +116,12 @@ public class STRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, STItems.VINYL_DISC).requires(STItems.RECORDED_DISC)
                 .unlockedBy("has_recorded_disc", has(STItems.RECORDED_DISC))
                 .group("vinyl_disc").save(output, Stancements.stancements("vinyl_disc_from_clearing"));
+    }
+
+    public static ItemStack hoppingCropPot(int count) {
+        ItemStack stack = new ItemStack(STItems.CROP_POT.get(), count);
+        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, true));
+        return stack;
     }
 
     /// Makes a shelf recipe.
@@ -84,5 +142,27 @@ public class STRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, tableCloth, 2).define('#', carpet)
                 .pattern("##").unlockedBy("has_carpet", has(carpet))
                 .group("crafting_table_cloths").save(output);
+    }
+
+    /// Makes a crafting table cloth coloring/dyeing recipe.
+    /// @param output Used to save the recipe to a `.json` file.
+    /// @param tableCloth The table cloth item.
+    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_WHITE c:dyes:white}.
+    public static void dyeCraftingTableCloth(RecipeOutput output, ItemLike tableCloth, TagKey<Item> dyeTag) {
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(tableCloth.asItem());
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, tableCloth).requires(dyeTag).requires(DifferenceIngredient.of(Ingredient.of(STItemTags.CRAFTING_TABLE_CLOTHS), Ingredient.of(tableCloth)))
+                .unlockedBy("has_needed_dye", has(dyeTag)).group("crafting_table_cloths")
+                .save(output, ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "dye_" + location.getPath()));
+    }
+
+    /// Makes a recipe for watering concrete powder into concrete using a water bucket.
+    /// @param output Used to save the recipe to a `.json` file.
+    /// @param concretePowder The concrete powder item.
+    /// @param concrete The concrete item.
+    public static void waterConcrete(RecipeOutput output, ItemLike concretePowder, ItemLike concrete) {
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(concrete.asItem());
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, concrete, 8).define('#', concretePowder).define('W', Tags.Items.BUCKETS_WATER)
+                .pattern("###").pattern("#W#").pattern("###").unlockedBy("has_concrete_powder", has(concretePowder))
+                .group("dye_concrete").save(output, Stancements.stancements(location.getPath() + "_from_watering"));
     }
 }

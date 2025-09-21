@@ -5,6 +5,7 @@
   "refmap": "stancements.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "STBannerItemMixin",
     "STShearsItemMixin"
   ],
   "client": [

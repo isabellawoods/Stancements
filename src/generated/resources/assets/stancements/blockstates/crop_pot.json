@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hopping=false": {
+      "model": "stancements:block/crop_pot"
+    },
+    "hopping=true": {
+      "model": "stancements:block/hopping_crop_pot"
+    }
+  }
+}

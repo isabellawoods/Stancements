@@ -1,11 +1,20 @@
 package melonystudios.stancements.data.loot;
 
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.block.STBlockStateProperties;
+import melonystudios.stancements.item.STItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.CopyBlockState;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -54,6 +63,32 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
 
         // Functional
         this.dropSelf(MUSIC_RECORDER.get());
+        this.dropOther(DYED_WATER_CAULDRON.get(), Items.CAULDRON);
+        this.dropOther(MILK_CAULDRON.get(), Items.CAULDRON);
+        this.cropPot(CROP_POT.get());
+        this.cropPot(WHEAT_CROP_POT.get(), Items.WHEAT_SEEDS);
+        this.cropPot(CARROT_CROP_POT.get(), Items.CARROT);
+        this.cropPot(POTATO_CROP_POT.get(), Items.POTATO);
+        this.cropPot(BEETROOT_CROP_POT.get(), Items.BEETROOT_SEEDS);
+        this.cropPot(NETHER_WART_CROP_POT.get(), Items.NETHER_WART);
+    }
+
+    /// Creates a loot table for an empty {@linkplain melonystudios.stancements.block.custom.croppot.CropPotBlock crop pot block}.
+    /// @param cropPot The crop pot block.
+    public void cropPot(Block cropPot) {
+        this.add(cropPot, LootTable.lootTable()
+                .withPool(this.applyExplosionCondition(cropPot, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(STItems.CROP_POT))
+                        .apply(CopyBlockState.copyState(cropPot).copy(STBlockStateProperties.HOPPING)))));
+    }
+
+    /// Creates a loot table for a full {@linkplain melonystudios.stancements.block.custom.croppot.WheatCropPotBlock crop pot block}.
+    /// @param cropPot The crop pot block.
+    /// @param seeds The seeds item that drops when breaking this block.
+    public void cropPot(Block cropPot, ItemLike seeds) {
+        this.add(cropPot, LootTable.lootTable()
+                .withPool(this.applyExplosionCondition(cropPot, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(STItems.CROP_POT))
+                        .apply(CopyBlockState.copyState(cropPot).copy(STBlockStateProperties.HOPPING))))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(seeds))));
     }
 
     @Override

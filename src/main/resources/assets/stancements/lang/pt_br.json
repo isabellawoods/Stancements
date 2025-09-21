@@ -1,6 +1,23 @@
 {
   "tab.stancements.main": "Stancements",
 
+  "stancements.configuration.title": "[Stancements] Configurações",
+  "stancements.configuration.section.melonystudios.stancements.common.toml.title": "[Stancements] Configurações > Comum",
+  "stancements.configuration.item": "Itens",
+  "stancements.configuration.item.tooltip": "Configurações relacionadas a itens adicionados pelo Stancements.",
+  "stancements.configuration.block": "Blocos",
+  "stancements.configuration.block.tooltip": "Configurações relacionadas a blocos adicionados pelo Stancements.",
+
+  "config.stancements.populate_dyed_water_buckets": "Popular baldes de água colorida",
+  "config.stancements.populate_dyed_water_buckets.tooltip": "Se deve-se popular todos os baldes de água colorida na aba do criativo do Stancements.",
+  "config.stancements.crop_pot_growth_chance": "Chance de crescimento de potes de plantas",
+  "config.stancements.crop_pot_growth_chance.tooltip": "A chance de um pote de plantas avançar seu estágio de crescimento.\nNo vanila o padrão é 1 em 25, e 1 em 15 no Stancements.",
+
+  "commands.stancements.update_recorded_disc.both": "Converteu com sucesso o id do som e/ou rótulo de %s.",
+  "commands.stancements.update_recorded_disc.music_id": "Converteu com sucesso o id do som de %s.",
+  "commands.stancements.update_recorded_disc.label": "Converteu com sucesso o rótulo de %s.",
+  "commands.stancements.update_recorded_disc.fail": "%s não tem id de música ou rótulo para converter.",
+
   "block.stancements.oak_shelf": "Estante de Carvalho",
   "block.stancements.spruce_shelf": "Estante de Pinheiro",
   "block.stancements.birch_shelf": "Estante de Eucalipto",
@@ -29,29 +46,48 @@
   "block.stancements.magenta_crafting_table_cloth": "Pano de Mesa de Trabalho Magenta",
   "block.stancements.pink_crafting_table_cloth": "Pano de Mesa de Trabalho Rosa",
   "block.stancements.music_recorder": "Gravador de Música",
+  "block.stancements.dyed_water_cauldron": "Caldeirão de Água Colorida",
+  "block.stancements.milk_cauldron": "Caldeirão de Leite",
+  "block.stancements.crop_pot": "Pote de Plantas",
+  "block.stancements.hopping_crop_pot": "Pote de Plantas Afunilado",
+  "block.stancements.wheat_crop_pot": "Pote de Plantas com Trigo",
+  "block.stancements.hopping_wheat_crop_pot": "Pote de Plantas com Trigo Afunilado",
+  "block.stancements.carrot_crop_pot": "Pote de Plantas com Cenoura",
+  "block.stancements.hopping_carrot_crop_pot": "Pote de Plantas com Cenoura Afunilado",
+  "block.stancements.potato_crop_pot": "Pote de Plantas com Batata",
+  "block.stancements.hopping_potato_crop_pot": "Pote de Plantas com Batata Afunilado",
+  "block.stancements.beetroot_crop_pot": "Pote de Plantas com Beterraba",
+  "block.stancements.hopping_beetroot_crop_pot": "Pote de Plantas com Beterraba Afunilado",
+  "block.stancements.nether_wart_crop_pot": "Pote de Plantas com Fungos do Nether",
+  "block.stancements.hopping_nether_wart_crop_pot": "Pote de Plantas com Fungos do Nether Afunilado",
 
   "item.stancements.vinyl_disc": "Disco de Vinil",
   "item.stancements.recorded_disc": "Disco Musical",
+  "item.stancements.dyed_water_bucket": "Balde de Água Colorida",
+
+  "subtitles.item.cauldron.dye": "Respingos de água",
 
   "stat.stancements.songs_recorded": "Músicas gravadas",
-
-  "commands.stancements.update_recorded_disc.both": "Converteu com sucesso o id do som e/ou rótulo de %s.",
-  "commands.stancements.update_recorded_disc.music_id": "Converteu com sucesso o id do som de %s.",
-  "commands.stancements.update_recorded_disc.label": "Converteu com sucesso o rótulo de %s.",
-  "commands.stancements.update_recorded_disc.fail": "%s não tem id de música ou rótulo para converter.",
+  "stat.stancements.seeds_planted_in_crop_pots": "Sementes plantadas em potes de plantas",
 
   "tooltip.stancements.no_music_playing": "Nenhuma música tocando...",
   "tooltip.stancements.recording_music": "Gravando música...",
   "tooltip.stancements.finished_recording": "Gravação completa!",
   "tooltip.stancements.recorded_disc.blank": "Em branco",
   "tooltip.stancements.recorded_disc.sound_id": "ID do som: \"%s\"",
+  "tooltip.stancements.dyed_water_color": "Cor: %s",
+
+  "logger.stancements.outside_bounds": "Valor tem que estar entre %s e %s; é %s",
 
   "tag.block.c.mineable.shears": "Quebrável com Tesoura",
   "tag.block.stancements.shelves": "Estantes",
   "tag.block.stancements.crafting_table_cloths": "Panos de Mesa de Trabalho",
+  "tag.block.stancements.crop_pots": "Potes de Plantas",
+  "tag.item.c.buckets.dyed_water": "Baldes de Água Colorida",
   "tag.item.stancements.shelves": "Estantes",
   "tag.item.stancements.crafting_table_cloths": "Panos de Mesa de Trabalho",
   "tag.item.stancements.vinyl_disc_dyes": "Corantes de Discos de Vinil",
+  "tag.item.stancements.recordable_discs": "Discos Graváveis",
 
   "music.minecraft.game.minecraft": "C418 - Minecraft",
   "music.minecraft.game.clark": "C418 - Clark",

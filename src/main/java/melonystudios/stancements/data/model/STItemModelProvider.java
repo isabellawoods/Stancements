@@ -55,10 +55,23 @@ public class STItemModelProvider extends ReItemModelProvider {
 
         // Functional blocks
         block("music_recorder");
+        cropPot(this.generated, "crop_pot");
 
         // Items
         standard("vinyl_disc");
         recordedDisc(this.generated, "recorded_disc");
+        this.getBuilder("dyed_water_bucket").parent(this.generated).texture("layer0", this.modLoc("item/dyed_water_bucket_overlay")).texture("layer1", this.modLoc("item/dyed_water_bucket"));
+    }
+
+    /// Makes a {@linkplain melonystudios.stancements.item.custom.CropPotBlockItem crop pot} model, with a **hopping** variation using the `stancements:hopping` override.
+    /// @param parent The location of the parent model, usually `item/generated`.
+    /// @param name The item's registry id, used for the model name and texture locations.
+    private void cropPot(ModelFile parent, String name) {
+        ResourceLocation hopping = Stancements.stancements("hopping");
+        this.standard(parent, "hopping_" + name);
+
+        this.getBuilder(name).parent(parent).texture("layer0", this.modLoc("item/" + name))
+                .override().predicate(hopping, 1).model(this.getExistingFile(this.modLoc("item/hopping_" + name))).end();
     }
 
     /// Makes a {@linkplain melonystudios.stancements.item.custom.RecordedDiscItem recorded disc} model, with **11** different

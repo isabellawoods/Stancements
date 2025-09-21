@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "crafting_table_cloths",
+  "ingredients": [
+    {
+      "tag": "c:dyes/light_blue"
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:crafting_table_cloths"
+      },
+      "subtracted": {
+        "item": "stancements:light_blue_crafting_table_cloth"
+      }
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "stancements:light_blue_crafting_table_cloth"
+  }
+}

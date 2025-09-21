@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "hopping_crop_pot",
+  "key": {
+    "#": {
+      "item": "minecraft:terracotta"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    }
+  },
+  "pattern": [
+    "#H#",
+    " # "
+  ],
+  "result": {
+    "components": {
+      "minecraft:block_state": {
+        "hopping": "true"
+      }
+    },
+    "count": 8,
+    "id": "stancements:crop_pot"
+  }
+}
