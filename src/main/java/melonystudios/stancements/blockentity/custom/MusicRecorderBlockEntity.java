@@ -1,10 +1,13 @@
 package melonystudios.stancements.blockentity.custom;
 
+import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
+import melonystudios.stancements.block.custom.MusicRecorderBlock;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.misc.STStatistics;
+import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
 import melonystudios.stancements.util.tag.STItemTags;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -35,6 +38,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
     private ResourceLocation musicID;
     private int ticksUntilFinishedRecording = DEFAULT_TICKS_UNTIL_FINISHED;
     private UUID recorderPlayer;
+    private boolean copyingSong;
 
     public MusicRecorderBlockEntity(BlockPos pos, BlockState state) {
         super(STBlockEntities.MUSIC_RECORDER.get(), pos, state);
@@ -44,23 +48,32 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
         this.discStack = discStack;
     }
 
-    public boolean startRecording(@Nullable ResourceLocation musicID, @Nullable Player recorderPlayer) {
+    public void startRecording(@Nullable ResourceLocation musicID, boolean copyingSong, @Nullable Player recorderPlayer) {
+        this.startRecording(musicID, copyingSong, musicID == null ? DEFAULT_TICKS_UNTIL_FINISHED : DEFAULT_RECORDING_DURATION, recorderPlayer);
+    }
+
+    public void startRecording(@Nullable ResourceLocation musicID, boolean copyingSong, int recordingDuration, @Nullable Player recorderPlayer) {
         this.musicID = musicID;
         this.recorderPlayer = recorderPlayer == null ? null : recorderPlayer.getUUID();
-        this.ticksUntilFinishedRecording = musicID == null ? DEFAULT_TICKS_UNTIL_FINISHED : DEFAULT_RECORDING_DURATION;
-        return this.musicID != null;
+        this.ticksUntilFinishedRecording = recordingDuration;
+        this.copyingSong = copyingSong && musicID != null;
     }
 
     public void finishRecording(ItemStack discStack, boolean canceled) {
         if (this.getLevel() != null && !canceled && this.recorderPlayer != null) {
             Player player = this.getLevel().getPlayerByUUID(this.recorderPlayer);
-            this.sendMessage(Component.translatable("tooltip.stancements.finished_recording").withStyle(ChatFormatting.GOLD), player);
+            this.sendMessage(Component.translatable("tooltip.stancements.finished_recording").withColor(Stancements.ACCENT_COLOR), player);
+            if (player instanceof ServerPlayer serverPlayer) {
+                serverPlayer.awardStat(STStatistics.SONGS_RECORDED.get());
+                STCriteriaTriggers.RECORD_SONG.trigger(RecordedDiscItem.sanitizeMusicIDLocation(this.musicID), this.copyingSong(), serverPlayer);
+            }
         }
 
-        this.discStack = discStack;
+        this.insertDisc(discStack);
         this.musicID = null;
         if (canceled) this.recorderPlayer = null;
         this.ticksUntilFinishedRecording = DEFAULT_TICKS_UNTIL_FINISHED;
+        this.copyingSong = false;
         this.setChanged();
     }
 
@@ -73,7 +86,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
             --recorder.ticksUntilFinishedRecording;
             recorder.setChanged();
             if (recorder.ticksUntilFinishedRecording() == 0 && recorder.musicID() != null) {
-                recorder.finishRecording(RecordedDiscItem.getRecordedDisc(world, recorder.musicID(), recorder.getTheItem()), false);
+                recorder.finishRecording(RecordedDiscItem.getRecordedDisc(world, recorder.musicID(), recorder.copyingSong(), recorder.getTheItem()), false);
                 world.setBlock(pos, state.setValue(STBlockStateProperties.RECORDING, false), 3);
             }
         }
@@ -92,6 +105,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
         if (this.musicID != null) tag.putString("music_id", this.musicID.toString());
         tag.putInt("ticks_until_finished_recording", this.ticksUntilFinishedRecording);
         if (this.recorderPlayer != null) tag.putUUID("recorder_player", this.recorderPlayer);
+        if (this.copyingSong) tag.putBoolean("copying_song", true);
     }
 
     @Override
@@ -99,10 +113,11 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
         super.loadAdditional(tag, registries);
 
         ItemStack discStack = ItemStack.parse(registries, tag.getCompound("item")).orElse(ItemStack.EMPTY);
-        if (!discStack.isEmpty()) this.discStack = discStack;
+        if (!discStack.isEmpty()) this.insertDisc(discStack);
         if (tag.contains("music_id", Tag.TAG_STRING)) this.musicID = ResourceLocation.tryParse(tag.getString("music_id"));
         this.ticksUntilFinishedRecording = tag.getInt("ticks_until_finished_recording");
         if (tag.hasUUID("recorder_player")) this.recorderPlayer = tag.getUUID("recorder_player");
+        if (tag.contains("copying_song", Tag.TAG_ANY_NUMERIC)) this.copyingSong = tag.getBoolean("copying_song");
     }
 
     @Override
@@ -119,6 +134,10 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
         return this.ticksUntilFinishedRecording;
     }
 
+    public boolean copyingSong() {
+        return this.copyingSong;
+    }
+
     @Override
     @NotNull
     public ItemStack splitTheItem(int amount) {
@@ -129,8 +148,13 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
 
     @Override
     public void setTheItem(ItemStack stack) {
+        Level world = this.getLevel();
         this.insertDisc(stack);
-        if (this.discStack.isEmpty()) this.finishRecording(this.discStack, true);
+        if (this.discStack.isEmpty()) {
+            this.finishRecording(this.discStack, true);
+        } else if (this.getBlockState().getBlock() instanceof MusicRecorderBlock recorder && world != null) {
+            recorder.tryRecordingFromAdjacentJukebox(world, this.getBlockState(), this.getBlockPos(), null, this.discStack);
+        }
     }
 
     @Override

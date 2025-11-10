@@ -1,11 +1,9 @@
 package melonystudios.stancements.data.misc;
 
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.util.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -13,9 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
@@ -96,16 +92,16 @@ public class STRecipeProvider extends RecipeProvider {
         waterConcrete(output, Items.PINK_CONCRETE_POWDER, Items.PINK_CONCRETE);
 
         // Functional blocks
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('D', Tags.Items.DYES)
-                .pattern("###").pattern("DRD").pattern("###").unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('I', Tags.Items.GEMS_DIAMOND).define('D', Tags.Items.DYES)
+                .pattern("#R#").pattern("DID").pattern("#R#").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
                 .save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.CROP_POT, 8).define('#', Items.TERRACOTTA)
                 .pattern("# #").pattern(" # ").unlockedBy("has_terracotta", has(Items.TERRACOTTA))
                 .save(output);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, hoppingCropPot(8)).define('#', Items.TERRACOTTA).define('H', Items.HOPPER)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.hoppingCropPot(8)).define('#', Items.TERRACOTTA).define('H', Items.HOPPER)
                 .pattern("#H#").pattern(" # ").unlockedBy("has_terracotta", has(Items.TERRACOTTA)).unlockedBy("has_hopper", has(Items.HOPPER))
                 .group("hopping_crop_pot").save(output, Stancements.stancements("hopping_crop_pot"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, hoppingCropPot(8)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.hoppingCropPot(8)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
                 .pattern("###").pattern("#H#").pattern("###").unlockedBy("has_hopper", has(Items.HOPPER))
                 .group("hopping_crop_pot").save(output, Stancements.stancements("hopping_crop_pot_from_existing"));
 
@@ -116,12 +112,6 @@ public class STRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, STItems.VINYL_DISC).requires(STItems.RECORDED_DISC)
                 .unlockedBy("has_recorded_disc", has(STItems.RECORDED_DISC))
                 .group("vinyl_disc").save(output, Stancements.stancements("vinyl_disc_from_clearing"));
-    }
-
-    public static ItemStack hoppingCropPot(int count) {
-        ItemStack stack = new ItemStack(STItems.CROP_POT.get(), count);
-        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, true));
-        return stack;
     }
 
     /// Makes a shelf recipe.

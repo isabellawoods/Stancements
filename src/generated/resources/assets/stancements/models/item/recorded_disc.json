@@ -26,7 +26,7 @@
       }
     },
     {
-      "model": "stancements:item/recorded_disc_label_1",
+      "model": "stancements:item/recorded_disc_label_5",
       "predicate": {
         "stancements:label": 5.0
       }
@@ -65,6 +65,18 @@
       "model": "stancements:item/recorded_disc_label_11",
       "predicate": {
         "stancements:label": 11.0
+      }
+    },
+    {
+      "model": "stancements:item/recorded_disc_label_12",
+      "predicate": {
+        "stancements:label": 12.0
+      }
+    },
+    {
+      "model": "stancements:item/recorded_disc_label_13",
+      "predicate": {
+        "stancements:label": 13.0
       }
     }
   ],

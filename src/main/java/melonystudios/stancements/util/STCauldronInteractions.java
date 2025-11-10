@@ -29,7 +29,7 @@ public class STCauldronInteractions {
     public static final CauldronInteraction FILL_DYED_WATER = (state, world, pos, player, hand, stack) -> {
         BlockState cauldronState = STBlocks.DYED_WATER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3);
         ItemInteractionResult result = CauldronInteraction.emptyBucket(world, pos, player, hand, stack, cauldronState, SoundEvents.BUCKET_EMPTY);
-        world.setBlockAndUpdate(pos, state);
+        world.setBlockAndUpdate(pos, cauldronState);
         DyedWaterCauldronBlockEntity cauldron = new DyedWaterCauldronBlockEntity(pos, cauldronState);
         cauldron.setWaterColor(DyedWaterBucketItem.getColor(stack));
         world.setBlockEntity(cauldron);

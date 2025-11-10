@@ -1,0 +1,50 @@
+{
+  "parent": "minecraft:husbandry/plant_seed",
+  "criteria": {
+    "plant_crop": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "stancements:crop_pot"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "minecraft:wheat_seeds",
+                "minecraft:carrot",
+                "minecraft:potato",
+                "minecraft:beetroot_seeds",
+                "minecraft:nether_wart"
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.stancements.plant_in_crop_pot.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "stancements:crop_pot"
+    },
+    "title": {
+      "translate": "advancements.stancements.plant_in_crop_pot.title"
+    }
+  },
+  "requirements": [
+    [
+      "plant_crop"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

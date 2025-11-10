@@ -1,0 +1,97 @@
+package melonystudios.stancements.item.tab;
+
+import melonystudios.stancements.STConfigs;
+import melonystudios.stancements.Stancements;
+import melonystudios.stancements.item.STItems;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.DyedItemColor;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+
+import java.util.List;
+
+import static melonystudios.stancements.item.STItems.DYED_WATER_BUCKET;
+import static net.minecraft.world.item.CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS;
+
+@EventBusSubscriber(modid = Stancements.MOD_ID)
+public class STVanillaTabs {
+    @SubscribeEvent
+    public static void addToVanillaTabs(BuildCreativeModeTabContentsEvent event) {
+        if (!STConfigs.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
+
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.insertAfter(new ItemStack(Items.OAK_BUTTON), new ItemStack(STItems.OAK_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.SPRUCE_BUTTON), new ItemStack(STItems.SPRUCE_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.BIRCH_BUTTON), new ItemStack(STItems.BIRCH_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.JUNGLE_BUTTON), new ItemStack(STItems.JUNGLE_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.ACACIA_BUTTON), new ItemStack(STItems.ACACIA_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.DARK_OAK_BUTTON), new ItemStack(STItems.DARK_OAK_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.MANGROVE_BUTTON), new ItemStack(STItems.MANGROVE_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.CHERRY_BUTTON), new ItemStack(STItems.CHERRY_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.BAMBOO_BUTTON), new ItemStack(STItems.BAMBOO_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.CRIMSON_BUTTON), new ItemStack(STItems.CRIMSON_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.WARPED_BUTTON), new ItemStack(STItems.WARPED_SHELF.get()), PARENT_AND_SEARCH_TABS);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS) {
+            event.insertAfter(new ItemStack(Items.PINK_CARPET), new ItemStack(STItems.WHITE_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.WHITE_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.GRAY_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.GRAY_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.BLACK_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BLACK_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.BROWN_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BROWN_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.RED_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.RED_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.ORANGE_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.ORANGE_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.YELLOW_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.YELLOW_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.LIME_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIME_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.GREEN_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.GREEN_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.CYAN_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.CYAN_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.LIGHT_BLUE_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIGHT_BLUE_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.BLUE_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BLUE_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.PURPLE_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.PURPLE_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.MAGENTA_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.MAGENTA_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.PINK_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS || event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+            event.insertAfter(new ItemStack(Items.JUKEBOX), new ItemStack(STItems.MUSIC_RECORDER.get()), PARENT_AND_SEARCH_TABS);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.insertAfter(new ItemStack(Items.FLOWER_POT), new ItemStack(STItems.CROP_POT.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.CROP_POT.get()), STItems.hoppingCropPot(1), PARENT_AND_SEARCH_TABS);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.insertBefore(new ItemStack(Items.MUSIC_DISC_13), new ItemStack(STItems.VINYL_DISC.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.VINYL_DISC.get()), new ItemStack(STItems.RECORDED_DISC.get()), PARENT_AND_SEARCH_TABS);
+            addDyedWaterBuckets(event);
+        }
+    }
+
+    /// Adds all variants of {@linkplain melonystudios.stancements.item.custom.DyedWaterBucketItem dyed water buckets} to the *"Tools & Utilities"* creative tab.
+    /// @param event The {@link BuildCreativeModeTabContentsEvent}, in order to add the buckets.
+    private static void addDyedWaterBuckets(BuildCreativeModeTabContentsEvent event) {
+        event.insertAfter(new ItemStack(Items.WATER_BUCKET), new ItemStack(STItems.DYED_WATER_BUCKET.get()), PARENT_AND_SEARCH_TABS);
+        if (!STConfigs.POPULATE_DYED_WATER_BUCKETS.get()) return;
+
+        List<Integer> colors = List.of(16383998, 15457757, 10329495, 4673362, 1908001, 8606770, 11546150, 16351261, 16701501, 8439583, 6192150, 1481884, 3847130, 8454080, 3949738, 8991416, 13061821, 15961002);
+        ItemStack previousBucket = new ItemStack(STItems.DYED_WATER_BUCKET.get());
+        for (Integer color : colors) {
+            ItemStack stack = addBucket(color);
+            event.insertAfter(previousBucket, stack, PARENT_AND_SEARCH_TABS);
+            previousBucket = stack;
+        }
+    }
+
+    /// Makes an {@link ItemStack} of a single dyed water bucket.
+    /// @param color The color to apply to the bucket stack.
+    private static ItemStack addBucket(int color) {
+        ItemStack dyedBucket = new ItemStack(DYED_WATER_BUCKET.get());
+        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color, false));
+        return dyedBucket;
+    }
+}

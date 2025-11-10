@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CraftingTableClothBlock extends Block {
-    public static final MapCodec<CraftingTableClothBlock> CODEC = simpleCodec(CraftingTableClothBlock::new);
+    public static final MapCodec<? extends CraftingTableClothBlock> CODEC = simpleCodec(CraftingTableClothBlock::new);
     public static final VoxelShape SHAPE = Shapes.join(Shapes.empty(), Shapes.box(-0.000625, -0.188125, -0.000625, 1.000625, 0.000625, 1.000625), BooleanOp.OR);
 
     @Override

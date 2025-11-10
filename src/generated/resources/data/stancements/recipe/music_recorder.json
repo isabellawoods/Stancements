@@ -8,14 +8,17 @@
     "D": {
       "tag": "c:dyes"
     },
+    "I": {
+      "tag": "c:gems/diamond"
+    },
     "R": {
       "tag": "c:dusts/redstone"
     }
   },
   "pattern": [
-    "###",
-    "DRD",
-    "###"
+    "#R#",
+    "DID",
+    "#R#"
   ],
   "result": {
     "count": 1,

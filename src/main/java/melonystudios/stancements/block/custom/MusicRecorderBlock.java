@@ -1,10 +1,12 @@
 package melonystudios.stancements.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import melonystudios.reutilities.api.ReAPI;
+import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
-import melonystudios.stancements.misc.STStatistics;
+import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.mixin.CurrentMusicAccessor;
 import melonystudios.stancements.util.tag.STItemTags;
 import net.minecraft.ChatFormatting;
@@ -13,23 +15,30 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.JukeboxSong;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -38,8 +47,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class MusicRecorderBlock extends BaseEntityBlock {
     public static final BooleanProperty RECORDING = STBlockStateProperties.RECORDING;
+    public static final Component NO_MUSIC_PLAYING_TEXT = Component.translatable("tooltip.stancements.no_music_playing").withStyle(ChatFormatting.GRAY);
+    public static final Component CANNOT_COPY_TEXT = Component.translatable("tooltip.stancements.cannot_copy").withStyle(ChatFormatting.GRAY);
 
     public MusicRecorderBlock(Properties properties) {
         super(properties);
@@ -55,8 +68,12 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     @Override
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(world, pos, state, placer, stack);
+
         CustomData data = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
-        if (data.contains("recording")) world.setBlock(pos, state.setValue(RECORDING, true), 3);
+        CompoundTag tag = data.copyTag();
+        if (tag.contains("ticks_until_finished_recording", Tag.TAG_ANY_NUMERIC) && tag.getInt("ticks_until_finished_recording") >= 0) {
+            world.setBlock(pos, state.setValue(RECORDING, true), 3);
+        }
     }
 
     @Override
@@ -64,11 +81,12 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
+//            if (recorder.isEmpty()) world.setBlock(pos, state.setValue(RECORDING, false), 3);
             if (!recorder.isEmpty()) {
                 this.stopRecording(world, pos, true);
                 world.setBlock(pos, state.setValue(RECORDING, false), 3);
                 world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
-                return InteractionResult.sidedSuccess(!world.isClientSide);
+                return InteractionResult.sidedSuccess(!world.isClientSide());
             }
         }
         return InteractionResult.PASS;
@@ -77,11 +95,20 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     @Override
     @NotNull
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        // todo: this will likely crash if run on a dedicated server, but how will the server know about the song? ~isa 8-11-25
         if (!state.getValue(RECORDING) && stack.is(STItemTags.RECORDABLE_DISCS) && world.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
             SoundInstance currentMusic = ((CurrentMusicAccessor) Minecraft.getInstance().getMusicManager()).stancements$getCurrentMusic();
             ItemStack handStack = player.getItemInHand(hand);
-            this.startRecording(world, state, pos, player, handStack.consumeAndReturn(1, player), currentMusic);
-            return ItemInteractionResult.sidedSuccess(!world.isClientSide);
+            ItemStack splitStack = handStack.consumeAndReturn(1, player);
+
+            if (currentMusic != null) {
+                // always record current song first
+                this.startRecording(world, state, pos, player, splitStack, currentMusic);
+            } else {
+                // if none is playing, try recording from an adjacent jukebox
+                this.tryRecordingFromAdjacentJukebox(world, state, pos, player, splitStack);
+            }
+            return ItemInteractionResult.sidedSuccess(!world.isClientSide());
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
@@ -91,14 +118,50 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             recorder.insertDisc(discStack.copy());
             if (currentMusic != null && currentMusic.getSound() != null) {
-                this.sendMessage(Component.translatable("tooltip.stancements.recording_music"), world, recorder.startRecording(currentMusic.getSound().getPath(), player));
+                recorder.startRecording(currentMusic.getSound().getPath(), false, player);
+                this.sendMessage(Component.translatable("tooltip.stancements.recording_music").withColor(Stancements.ACCENT_COLOR), player);
                 world.setBlock(pos, state.setValue(RECORDING, true), 3);
                 world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
-                 if (player != null) player.awardStat(STStatistics.SONGS_RECORDED.get());
             } else {
-                this.sendMessage(Component.translatable("tooltip.stancements.no_music_playing").withStyle(ChatFormatting.GRAY), world, recorder.startRecording(null, player));
+                this.sendMessage(NO_MUSIC_PLAYING_TEXT, player);
             }
         }
+    }
+
+    public void tryRecordingFromAdjacentJukebox(Level world, BlockState state, BlockPos pos, @Nullable Player player, ItemStack discStack) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
+        Component errorMessage = NO_MUSIC_PLAYING_TEXT;
+
+        recorder.insertDisc(discStack.copy());
+        for (Direction direction : Direction.values()) {
+            BlockPos adjacentPos = pos.relative(direction);
+            BlockState adjacentState = world.getBlockState(adjacentPos);
+
+            if (adjacentState.is(Blocks.JUKEBOX) && world.getBlockEntity(adjacentPos) instanceof JukeboxBlockEntity jukebox) {
+                JukeboxSong song = jukebox.getSongPlayer().getSong();
+                var jukeboxSongs = world.registryAccess().registry(Registries.JUKEBOX_SONG);
+
+                // block recording if the disc is a copy
+                if (jukeboxSongs.isEmpty() || MusicData.isCopied(jukebox.getTheItem())) {
+                    errorMessage = CANNOT_COPY_TEXT;
+                    break;
+                }
+                ResourceLocation songLocation = song == null ? null : jukeboxSongs.get().getKey(song);
+
+                if (song != null) {
+                    // exact duration of the song, so it always finishes when the song ends
+                    int recordingDuration = (int) (song.lengthInTicks() - jukebox.getSongPlayer().getTicksSinceSongStarted()) + 20; // 20 ticks for padding
+                    recorder.startRecording(songLocation, true, recordingDuration, player);
+                    this.sendMessage(Component.translatable("tooltip.stancements.recording_music_disc").withColor(Stancements.ACCENT_COLOR), player);
+                    world.setBlock(pos, state.setValue(RECORDING, true), 3);
+                    world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
+                    return;
+                }
+            }
+        }
+
+        if (errorMessage != null && !world.isClientSide()) this.sendMessage(errorMessage, player);
     }
 
     public void stopRecording(Level world, BlockPos pos, boolean fromTop) {
@@ -123,8 +186,16 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         }
     }
 
-    public void sendMessage(Component component, Level world, boolean recording) {
-        if (world.isClientSide) Minecraft.getInstance().gui.setOverlayMessage(component, recording);
+    public void sendMessage(Component component, Player player) {
+        if (player instanceof ServerPlayer serverPlayer) serverPlayer.sendSystemMessage(component, true);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
+        if (ReAPI.shouldDisplay(stack, Stancements.stancements("music_recorder/tooltip"))) {
+            tooltip.add(Component.translatable("tooltip.stancements.music_recorder").withStyle(ChatFormatting.GRAY));
+        }
     }
 
     @Override
@@ -144,7 +215,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : createTickerHelper(type, STBlockEntities.MUSIC_RECORDER.get(), MusicRecorderBlockEntity::tick);
+        return world.isClientSide() ? null : createTickerHelper(type, STBlockEntities.MUSIC_RECORDER.get(), MusicRecorderBlockEntity::tick);
     }
 
     @Override

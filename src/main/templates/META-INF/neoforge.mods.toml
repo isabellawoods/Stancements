@@ -34,6 +34,11 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
     # The description text for the mod (multi line!) (#mandatory)
     description='''${mod_description}'''
 
+# The [modproperties] block is used by MrCrayfish's mods to change features about its menus
+[modproperties.${mod_id}]
+    # A small image displayed to the left of your mod’s name in Catalogue's mod list.
+    catalogueImageIcon="assets/${mod_id}/textures/items/${mod_id}_logo.png"
+
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]
     config="${mod_id}.mixins.json"
@@ -76,7 +81,7 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
 [[dependencies.${mod_id}]]
     modId = "reutilities"
     type = "required"
-    versionRange = "[1.0.0,)"
+    versionRange = "[1.3.0,)"
     ordering = "NONE"
     side = "BOTH"
 

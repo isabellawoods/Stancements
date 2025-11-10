@@ -24,6 +24,6 @@ public class STDataPackRegistriesProvider extends DatapackBuiltinEntriesProvider
     @Override
     @NotNull
     public String getName() {
-        return "Stancements - Data Pack Registries";
+        return Stancements.generatorName("Data Pack Registries");
     }
 }

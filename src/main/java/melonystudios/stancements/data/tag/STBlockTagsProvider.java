@@ -24,7 +24,7 @@ public class STBlockTagsProvider extends BlockTagsProvider {
     @Override
     @NotNull
     public String getName() {
-        return "Stancements - Block Tags";
+        return Stancements.generatorName("Block Tags");
     }
 
     @Override

@@ -1,17 +1,31 @@
 {
   "tab.stancements.main": "Stancements",
 
+  "advancements.stancements.record_song.title": "Radio Recording",
+  "advancements.stancements.record_song.description": "Record any song using the Music Recorder",
+  "advancements.stancements.record_all_songs.title": "Miner's Music Group",
+  "advancements.stancements.record_all_songs.description": "Record all songs playable in-game using the Music Recorder",
+  "advancements.stancements.plant_in_crop_pot.title": "Bonsai Plantation",
+  "advancements.stancements.plant_in_crop_pot.description": "Plant a seed in a Crop Pot",
+  "advancements.stancements.plant_in_hopping_pot.title": "Hopping Potables",
+  "advancements.stancements.plant_in_hopping_pot.description": "Plant a seed in a Hopping Crop Pot",
+
   "stancements.configuration.title": "[Stancements] Settings",
   "stancements.configuration.section.melonystudios.stancements.common.toml.title": "[Stancements] Settings > Common",
   "stancements.configuration.item": "Items",
+  "stancements.configuration.item.button": "Edit",
   "stancements.configuration.item.tooltip": "Settings related to items added by Stancements.",
   "stancements.configuration.block": "Blocks",
+  "stancements.configuration.block.button": "Edit",
   "stancements.configuration.block.tooltip": "Settings related to blocks added by Stancements.",
 
+  "config.jade.plugin_stancements.music_recorder": "Music Recorder",
   "config.stancements.populate_dyed_water_buckets": "Populate Dyed Water Buckets",
   "config.stancements.populate_dyed_water_buckets.tooltip": "Whether to populate all dyed water buckets in Stancements' creative tab.",
   "config.stancements.crop_pot_growth_chance": "Crop Pot Growth Chance",
   "config.stancements.crop_pot_growth_chance.tooltip": "The chance of a planted crop pot advancing its growth stage.\nVanilla defaults to 1 in 25, and Stancements to 1 in 15.",
+  "config.stancements.add_items_to_vanilla_tabs": "Add Items to Vanilla Tabs",
+  "config.stancements.add_items_to_vanilla_tabs.tooltip": "Whether to add Stancements' items to vanilla creative tabs instead of its own.",
 
   "commands.stancements.update_recorded_disc.both": "Successfully updated sound id and label of %s.",
   "commands.stancements.update_recorded_disc.music_id": "Successfully updated sound id of %s.",
@@ -61,6 +75,7 @@
   "block.stancements.nether_wart_crop_pot": "Nether Wart Crop Pot",
   "block.stancements.hopping_nether_wart_crop_pot": "Hopping Nether Wart Crop Pot",
 
+  "item.stancements.stancements_logo": "Stancements Logo",
   "item.stancements.vinyl_disc": "Vinyl Disc",
   "item.stancements.recorded_disc": "Music Disc",
   "item.stancements.dyed_water_bucket": "Dyed Water Bucket",
@@ -70,14 +85,17 @@
   "stat.stancements.songs_recorded": "Songs Recorded",
   "stat.stancements.seeds_planted_in_crop_pots": "Seeds Planted in Crop Pots",
 
+  "tooltip.stancements.music_recorder": "Records songs playing to you or in adjacent jukeboxes using Vinyl Discs.",
   "tooltip.stancements.no_music_playing": "No music playing...",
   "tooltip.stancements.recording_music": "Recording music...",
+  "tooltip.stancements.recording_music_disc": "Recording music disc...",
+  "tooltip.stancements.cannot_copy": "Cannot record a copied music disc.",
   "tooltip.stancements.finished_recording": "Finished recording!",
+  "tooltip.stancements.recording": "Recording: %s (%s)",
   "tooltip.stancements.recorded_disc.blank": "Blank",
+  "tooltip.stancements.recorded_disc.copied": "Copies can't be recorded",
   "tooltip.stancements.recorded_disc.sound_id": "Sound ID: \"%s\"",
   "tooltip.stancements.dyed_water_color": "Color: %s",
-
-  "logger.stancements.outside_bounds": "Value must be within %s and %s; is %s",
 
   "tag.block.c.mineable.shears": "Mineable with Shears",
   "tag.block.stancements.shelves": "Shelves",

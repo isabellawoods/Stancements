@@ -64,13 +64,18 @@ public class UpdateRecordedDiscCommand {
                 }
                 tag.remove("music_id");
                 handStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-                updatedID = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), ResourceLocation.parse(musicID));
+                updatedID = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), ResourceLocation.parse(musicID), false);
             }
 
             if (tag.contains("label", Tag.TAG_ANY_NUMERIC)) {
                 handStack.set(STDataComponents.LABEL, tag.getFloat("label"));
                 tag.remove("label");
                 handStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+                updatedLabel = true;
+            }
+
+            if (handStack.has(DataComponents.DYED_COLOR)) {
+                handStack.set(DataComponents.DYED_COLOR, handStack.get(DataComponents.DYED_COLOR).withTooltip(false));
                 updatedLabel = true;
             }
 

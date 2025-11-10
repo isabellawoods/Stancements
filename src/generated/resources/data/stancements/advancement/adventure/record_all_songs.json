@@ -1,0 +1,472 @@
+{
+  "parent": "stancements:adventure/record_song",
+  "criteria": {
+    "recorded/a_familiar_room": {
+      "conditions": {
+        "music_id": "minecraft:game/a_familiar_room"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/aerie": {
+      "conditions": {
+        "music_id": "minecraft:game/swamp/aerie"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/an_ordinary_day": {
+      "conditions": {
+        "music_id": "minecraft:game/an_ordinary_day"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/ancestry": {
+      "conditions": {
+        "music_id": "minecraft:game/ancestry"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/axolotl": {
+      "conditions": {
+        "music_id": "minecraft:game/water/axolotl"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/ballad_of_the_cats": {
+      "conditions": {
+        "music_id": "minecraft:game/nether/ballad_of_the_cats"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/boss": {
+      "conditions": {
+        "music_id": "minecraft:game/end/boss"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/bromeliad": {
+      "conditions": {
+        "music_id": "minecraft:game/bromeliad"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/chrysopoeia": {
+      "conditions": {
+        "music_id": "minecraft:game/nether/crimson_forest/chrysopoeia"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/clark": {
+      "conditions": {
+        "music_id": "minecraft:game/clark"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/comforting_memories": {
+      "conditions": {
+        "music_id": "minecraft:game/comforting_memories"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/concrete_halls": {
+      "conditions": {
+        "music_id": "minecraft:game/nether/concrete_halls"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/crescent_dunes": {
+      "conditions": {
+        "music_id": "minecraft:game/crescent_dunes"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/danny": {
+      "conditions": {
+        "music_id": "minecraft:game/danny"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/dead_voxel": {
+      "conditions": {
+        "music_id": "minecraft:game/nether/dead_voxel"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/deeper": {
+      "conditions": {
+        "music_id": "minecraft:game/deeper"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/dragon_fish": {
+      "conditions": {
+        "music_id": "minecraft:game/water/dragon_fish"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/dry_hands": {
+      "conditions": {
+        "music_id": "minecraft:game/dry_hands"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/echo_in_the_wind": {
+      "conditions": {
+        "music_id": "minecraft:game/echo_in_the_wind"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/eld_unknown": {
+      "conditions": {
+        "music_id": "minecraft:game/eld_unknown"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/endless": {
+      "conditions": {
+        "music_id": "minecraft:game/endless"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/featherfall": {
+      "conditions": {
+        "music_id": "minecraft:game/featherfall"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/firebugs": {
+      "conditions": {
+        "music_id": "minecraft:game/swamp/firebugs"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/floating_dream": {
+      "conditions": {
+        "music_id": "minecraft:game/floating_dream"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/haggstrom": {
+      "conditions": {
+        "music_id": "minecraft:game/haggstrom"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/infinite_amethyst": {
+      "conditions": {
+        "music_id": "minecraft:game/infinite_amethyst"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/key": {
+      "conditions": {
+        "music_id": "minecraft:game/key"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/komorebi": {
+      "conditions": {
+        "music_id": "minecraft:game/komorebi"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/labyrinthine": {
+      "conditions": {
+        "music_id": "minecraft:game/swamp/labyrinthine"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/left_to_bloom": {
+      "conditions": {
+        "music_id": "minecraft:game/left_to_bloom"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/living_mice": {
+      "conditions": {
+        "music_id": "minecraft:game/living_mice"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/mice_on_venus": {
+      "conditions": {
+        "music_id": "minecraft:game/mice_on_venus"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/minecraft": {
+      "conditions": {
+        "music_id": "minecraft:game/minecraft"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/one_more_day": {
+      "conditions": {
+        "music_id": "minecraft:game/one_more_day"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/oxygene": {
+      "conditions": {
+        "music_id": "minecraft:game/oxygene"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/pokopoko": {
+      "conditions": {
+        "music_id": "minecraft:game/pokopoko"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/puzzlebox": {
+      "conditions": {
+        "music_id": "minecraft:game/puzzlebox"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/rubedo": {
+      "conditions": {
+        "music_id": "minecraft:game/nether/nether_wastes/rubedo"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/shuniji": {
+      "conditions": {
+        "music_id": "minecraft:game/water/shuniji"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/so_below": {
+      "conditions": {
+        "music_id": "minecraft:game/nether/soulsand_valley/so_below"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/stand_tall": {
+      "conditions": {
+        "music_id": "minecraft:game/stand_tall"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/subwoofer_lullaby": {
+      "conditions": {
+        "music_id": "minecraft:game/subwoofer_lullaby"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/sweden": {
+      "conditions": {
+        "music_id": "minecraft:game/sweden"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/the_end": {
+      "conditions": {
+        "music_id": "minecraft:game/end/the_end"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/warmth": {
+      "conditions": {
+        "music_id": "minecraft:game/nether/warmth"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/watcher": {
+      "conditions": {
+        "music_id": "minecraft:game/watcher"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/wending": {
+      "conditions": {
+        "music_id": "minecraft:game/wending"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/wet_hands": {
+      "conditions": {
+        "music_id": "minecraft:game/wet_hands"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/yakusoku": {
+      "conditions": {
+        "music_id": "minecraft:game/yakusoku"
+      },
+      "trigger": "stancements:record_song"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.stancements.record_all_songs.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "components": {
+        "minecraft:dyed_color": {
+          "rgb": -11141291,
+          "show_in_tooltip": false
+        },
+        "stancements:label": 7.0
+      },
+      "count": 1,
+      "id": "stancements:recorded_disc"
+    },
+    "title": {
+      "translate": "advancements.stancements.record_all_songs.title"
+    }
+  },
+  "requirements": [
+    [
+      "recorded/minecraft"
+    ],
+    [
+      "recorded/clark"
+    ],
+    [
+      "recorded/sweden"
+    ],
+    [
+      "recorded/subwoofer_lullaby"
+    ],
+    [
+      "recorded/living_mice"
+    ],
+    [
+      "recorded/haggstrom"
+    ],
+    [
+      "recorded/danny"
+    ],
+    [
+      "recorded/key"
+    ],
+    [
+      "recorded/oxygene"
+    ],
+    [
+      "recorded/dry_hands"
+    ],
+    [
+      "recorded/wet_hands"
+    ],
+    [
+      "recorded/mice_on_venus"
+    ],
+    [
+      "recorded/concrete_halls"
+    ],
+    [
+      "recorded/dead_voxel"
+    ],
+    [
+      "recorded/warmth"
+    ],
+    [
+      "recorded/ballad_of_the_cats"
+    ],
+    [
+      "recorded/boss"
+    ],
+    [
+      "recorded/the_end"
+    ],
+    [
+      "recorded/shuniji"
+    ],
+    [
+      "recorded/dragon_fish"
+    ],
+    [
+      "recorded/axolotl"
+    ],
+    [
+      "recorded/rubedo"
+    ],
+    [
+      "recorded/chrysopoeia"
+    ],
+    [
+      "recorded/so_below"
+    ],
+    [
+      "recorded/stand_tall"
+    ],
+    [
+      "recorded/left_to_bloom"
+    ],
+    [
+      "recorded/ancestry"
+    ],
+    [
+      "recorded/wending"
+    ],
+    [
+      "recorded/infinite_amethyst"
+    ],
+    [
+      "recorded/one_more_day"
+    ],
+    [
+      "recorded/floating_dream"
+    ],
+    [
+      "recorded/comforting_memories"
+    ],
+    [
+      "recorded/an_ordinary_day"
+    ],
+    [
+      "recorded/firebugs"
+    ],
+    [
+      "recorded/aerie"
+    ],
+    [
+      "recorded/labyrinthine"
+    ],
+    [
+      "recorded/echo_in_the_wind"
+    ],
+    [
+      "recorded/a_familiar_room"
+    ],
+    [
+      "recorded/bromeliad"
+    ],
+    [
+      "recorded/crescent_dunes"
+    ],
+    [
+      "recorded/featherfall"
+    ],
+    [
+      "recorded/watcher"
+    ],
+    [
+      "recorded/puzzlebox"
+    ],
+    [
+      "recorded/komorebi"
+    ],
+    [
+      "recorded/pokopoko"
+    ],
+    [
+      "recorded/yakusoku"
+    ],
+    [
+      "recorded/deeper"
+    ],
+    [
+      "recorded/eld_unknown"
+    ],
+    [
+      "recorded/endless"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  },
+  "sends_telemetry_event": true
+}

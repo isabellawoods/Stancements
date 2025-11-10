@@ -2,21 +2,24 @@ package melonystudios.stancements;
 
 import com.mojang.logging.LogUtils;
 import melonystudios.stancements.block.STBlockStateProperties;
+import melonystudios.stancements.block.STBlockTypes;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.tab.STCreativeTabs;
 import melonystudios.stancements.misc.STStatistics;
+import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
 import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.util.STCauldronInteractions;
-import melonystudios.stancements.util.STVanillaCompatibility;
+import melonystudios.stancements.util.STCompatibility;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -26,9 +29,12 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import org.slf4j.Logger;
 
+import java.util.function.Supplier;
+
 @Mod(Stancements.MOD_ID)
 public class Stancements {
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final int ACCENT_COLOR = 0xCF8EDA;
     public static final String MOD_ID = "stancements"; // Portmanteau of "stacked" and "enhancements".
 
     public Stancements(IEventBus eventBus, ModContainer container) {
@@ -36,16 +42,23 @@ public class Stancements {
         eventBus.addListener(this::clientSetup);
 
         STBlocks.BLOCKS.register(eventBus);
+        STBlockTypes.TYPES.register(eventBus);
         STBlockEntities.BLOCK_ENTITIES.register(eventBus);
         STItems.ITEMS.register(eventBus);
         STDataComponents.COMPONENTS.register(eventBus);
         STCreativeTabs.TABS.register(eventBus);
         STSounds.SOUNDS.register(eventBus);
         STStatistics.STATS.register(eventBus);
+        STCriteriaTriggers.TRIGGERS.register(eventBus);
 
         NeoForgeMod.enableMilkFluid();
         container.registerConfig(ModConfig.Type.COMMON, STConfigs.SPEC, "melonystudios/stancements-common.toml");
-        container.registerExtensionPoint(IConfigScreenFactory.class, (minecraft, lastScreen) -> new ConfigurationScreen(container, lastScreen));
+    }
+
+    /// Creates a name for a data generator using ***Stancements***' name.
+    /// @param name The name of the generator, like *"Item Models"*.
+    public static String generatorName(String name) {
+        return "Stancements — " + name;
     }
 
     /// Creates a new resource location under ***Stancements***' namespace.
@@ -62,11 +75,18 @@ public class Stancements {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Miscellaneous
-        STVanillaCompatibility.flammables();
+        STCompatibility.flammables();
         STCauldronInteractions.registerInteractions();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
+        // Configs
+        ModContainer container = ModList.get()
+                .getModContainerById(MOD_ID)
+                .orElseThrow(() -> new IllegalStateException("Could not find Stancements' mod container"));
+        Supplier<IConfigScreenFactory> screenFactory = () -> (minecraft, lastScreen) -> new ConfigurationScreen(container, lastScreen);
+        container.registerExtensionPoint(IConfigScreenFactory.class, screenFactory);
+
         // Item overrides
         ItemProperties.register(STItems.RECORDED_DISC.get(), stancements("label"), (stack, world, livEntity, seed) -> {
             Float label = stack.get(STDataComponents.LABEL);

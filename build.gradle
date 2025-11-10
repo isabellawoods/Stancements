@@ -45,7 +45,7 @@ neoForge {
     runs {
         client {
             client()
-            programArguments.addAll '--uuid', project.getProperty('mc_uuid'), '--username', project.getProperty('mc_username')
+            programArguments.addAll '--uuid', project.getProperty('mc_uuid'), '--username', project.getProperty('mc_username')//, '--quickPlaySingleplayer', 'New World'
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
@@ -121,6 +121,9 @@ dependencies {
     // At runtime, we use the full JEI jar for NeoForge
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
+    // Jade
+    implementation "maven.modrinth:jade:${jade_version}+neoforge"
+
     // External libraries
     // Reutilities
     implementation files("build/libs/reutilities-neoforge-${reutilities_version}+${minecraft_version}.jar")
@@ -144,13 +147,17 @@ dependencies {
 repositories {
     maven {
         // Location of the maven that hosts Just Enough Items files since January 2023.
-        name = "Jared's maven"
+        name = "Jared's Maven"
         url = "https://maven.blamejared.com/"
     }
     maven {
         // Location of a maven mirror for Just Enough Items files, as a fallback.
         name = "ModMaven"
         url = "https://modmaven.dev"
+    }
+    maven {
+        name = "Modrinth API"
+        url = "https://api.modrinth.com/maven"
     }
 }
 

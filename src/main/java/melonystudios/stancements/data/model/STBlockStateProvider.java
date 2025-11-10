@@ -26,7 +26,7 @@ public class STBlockStateProvider extends ReBlockStateProvider {
     @Override
     @NotNull
     public String getName() {
-        return "Stancements - Block States and Models";
+        return Stancements.generatorName("Block States and Models");
     }
 
     @Override
@@ -76,14 +76,6 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         fullCropPot((WheatCropPotBlock) POTATO_CROP_POT.get(), age -> this.mcLoc("block/potatoes_stage" + potatoAgeIndex(age)));
         fullCropPot((WheatCropPotBlock) BEETROOT_CROP_POT.get(), age -> this.mcLoc("block/beetroots_stage" + wheatAgeIndex(age)));
         fullCropPot((WheatCropPotBlock) NETHER_WART_CROP_POT.get(), age -> this.modLoc("block/nether_wart_stage" + netherWartAgeIndex(age)));
-    }
-
-    public static int netherWartAgeIndex(int age) {
-        return switch (age) {
-            case 1, 2 -> 1;
-            case 3 -> 2;
-            default -> 0;
-        };
     }
 
     /// Makes the block states and models for a {@linkplain melonystudios.stancements.block.custom.ShelfBlock shelf block}.
@@ -139,27 +131,6 @@ public class STBlockStateProvider extends ReBlockStateProvider {
                     .parent(this.models().getExistingFile(this.modLoc("block/template_full_crop_pot")))
                     .texture("pot", this.modLoc("block/" + name + "crop_pot"))
                     .texture("crop", crop.apply(age))
-            ).build();
-        });
-    }
-
-    /// Makes the block states and models for a {@linkplain net.minecraft.world.level.block.LayeredCauldronBlock layered cauldron block}.
-    /// @param cauldron The cauldron block.
-    /// @param contents The texture of the cauldron's contents.
-    public void layeredCauldron(Block cauldron, ResourceLocation contents) {
-        this.getVariantBuilder(cauldron).forAllStates(state -> {
-            ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(cauldron);
-            int level = state.getValue(BlockStateProperties.LEVEL_CAULDRON);
-            String name = level == 3 ? "full" : (level == 2 ? "level2" : "level1");
-
-            return ConfiguredModel.builder().modelFile(this.models().getBuilder(registry.getPath() + "_" + name)
-                    .parent(this.models().getExistingFile(this.mcLoc("block/template_cauldron_" + name)))
-                    .texture("content", contents)
-                    .texture("side", this.mcLoc("block/cauldron_side"))
-                    .texture("inside", this.mcLoc("block/cauldron_inner"))
-                    .texture("bottom", this.mcLoc("block/cauldron_bottom"))
-                    .texture("top", this.mcLoc("block/cauldron_top"))
-                    .texture("particle", this.mcLoc("block/cauldron_side"))
             ).build();
         });
     }

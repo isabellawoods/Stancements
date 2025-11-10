@@ -1,5 +1,6 @@
 package melonystudios.stancements.data.tag;
 
+import melonystudios.reutilities.util.tag.ReItemTags;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.util.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
@@ -24,7 +25,7 @@ public class STItemTagsProvider extends ItemTagsProvider {
     @Override
     @NotNull
     public String getName() {
-        return "Stancements - Item Tags";
+        return Stancements.generatorName("Item Tags");
     }
 
     @Override
@@ -41,8 +42,9 @@ public class STItemTagsProvider extends ItemTagsProvider {
 
         // Common tags
         this.tag(Tags.Items.MUSIC_DISCS).add(VINYL_DISC.get(), RECORDED_DISC.get());
-        this.tag(STItemTags.DYED_WATER_BUCKETS).add(DYED_WATER_BUCKET.get());
         this.tag(Tags.Items.BUCKETS).addTag(STItemTags.DYED_WATER_BUCKETS);
+        this.tag(ReItemTags.LOGOS).add(STANCEMENTS_LOGO.get());
+        this.tag(STItemTags.DYED_WATER_BUCKETS).add(DYED_WATER_BUCKET.get());
 
         this.tag(Tags.Items.DYED_WHITE).add(WHITE_CRAFTING_TABLE_CLOTH.get());
         this.tag(Tags.Items.DYED_LIGHT_GRAY).add(LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get());

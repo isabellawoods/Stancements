@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-20T23:26:39.3609155	Stancements - Item Models
+// 1.21.1	2025-11-08T17:46:33.8290575	Stancements — Item Models
 5c7c026d76aecade3d914245180f0c0b9b58b22f assets/stancements/models/item/acacia_shelf.json
 730dddd40b80312304ca6b54a3ecf9e3a4cfe0e9 assets/stancements/models/item/bamboo_shelf.json
 96c0a874ea3a254fc35cdcf08a3ef771a04b3562 assets/stancements/models/item/birch_shelf.json
@@ -25,10 +25,12 @@ b697cd6ee5388104ddd2cbf65e405220f4d1e1fa assets/stancements/models/item/music_re
 08f0596eb2721ab03a910122be6a71561e875804 assets/stancements/models/item/orange_crafting_table_cloth.json
 b817da1499bfb506e0dbb70fe3d684554b3cb379 assets/stancements/models/item/pink_crafting_table_cloth.json
 d9fc66ecb70ab7ae2ae0c5107dd00397aee200ea assets/stancements/models/item/purple_crafting_table_cloth.json
-e2920fc2c88b64b1cbe0655a052d100c35870a46 assets/stancements/models/item/recorded_disc.json
+4835242f81f9eec674441df252bc2b20cbcc8dc3 assets/stancements/models/item/recorded_disc.json
 5a0ee01e3be0a9fe5091de4af0a12826d176c5e8 assets/stancements/models/item/recorded_disc_label_1.json
 36b02dfd33c9ccaaeac9aeaad6aeb0cbf7f2aab2 assets/stancements/models/item/recorded_disc_label_10.json
 3266443e6768fb025be0ad40983992164ca5d3bd assets/stancements/models/item/recorded_disc_label_11.json
+a0e4b9ddc68f313eee86d693fb69016f7926ade8 assets/stancements/models/item/recorded_disc_label_12.json
+e083d8a7c83d9312d1f14ec2e285f33ade184f1f assets/stancements/models/item/recorded_disc_label_13.json
 c26678e0dc024542d016f36a7cb54add5cc4e527 assets/stancements/models/item/recorded_disc_label_2.json
 5ce8549ecf2d230d7e7e84e5b7ed7fc618ab1570 assets/stancements/models/item/recorded_disc_label_3.json
 f4dc068004fa5c6b83b86ff9b1893c3c738ba24d assets/stancements/models/item/recorded_disc_label_4.json
@@ -39,6 +41,7 @@ f4dc068004fa5c6b83b86ff9b1893c3c738ba24d assets/stancements/models/item/recorded
 8ec77232426c23eb9504b08094d79ce24fd3501e assets/stancements/models/item/recorded_disc_label_9.json
 cc1c2e621c8932d86e85a78fdcc3ecb9d28b28ab assets/stancements/models/item/red_crafting_table_cloth.json
 674456d1c96ab439dd8aa3ab580d302e5654c526 assets/stancements/models/item/spruce_shelf.json
+274d2ceb23535066ec05010388ba0cf2cb69187f assets/stancements/models/item/stancements_logo.json
 22eec9ca161f90163258a7c983a8c7ff450d12ac assets/stancements/models/item/vinyl_disc.json
 1c3b62294cb8bff79a5302421390786d061f5e26 assets/stancements/models/item/warped_shelf.json
 b861c3331c066d0e2bdf4a8ebe224d8ab877f99e assets/stancements/models/item/white_crafting_table_cloth.json

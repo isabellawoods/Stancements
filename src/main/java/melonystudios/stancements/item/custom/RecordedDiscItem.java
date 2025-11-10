@@ -4,11 +4,14 @@ import com.google.common.collect.Lists;
 import melonystudios.reutilities.api.ReAPI;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.component.STDataComponents;
+import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.item.STItems;
+import melonystudios.stancements.misc.datamap.STDataMaps;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.*;
@@ -28,6 +31,11 @@ public class RecordedDiscItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
+        MusicData data = stack.get(STDataComponents.MUSIC_DATA);
+        if (data != null && data.copied() && ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/copied"))) {
+            data.addToTooltip(context, tooltip::add, flag);
+        }
+
         if (!stack.has(DataComponents.JUKEBOX_PLAYABLE) && ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/blank"))) {
             tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.blank").withStyle(ChatFormatting.GRAY));
         }
@@ -43,26 +51,64 @@ public class RecordedDiscItem extends Item {
                 .replace(".ogg", ""));
     }
 
-    public static boolean setJukeboxSong(ItemStack stack, Level world, ResourceLocation musicID) {
+    /// Sanitizes the id the music currently being recorded for usage in advancements.
+    /// @param musicID A resource location of the song's location within the game's files.
+    public static ResourceLocation sanitizeMusicIDLocation(ResourceLocation musicID) {
+        return ResourceLocation.parse(musicID.toString()
+                .replace("sounds/", "")
+                .replace("music/", "")
+                .replace(".ogg", ""));
+    }
+
+    public static boolean setJukeboxSong(ItemStack stack, Level world, ResourceLocation musicID, boolean copyingSong) {
         var jukeboxSongs = world.registryAccess().registry(Registries.JUKEBOX_SONG);
         if (jukeboxSongs.isPresent()) {
-            var song = jukeboxSongs.get().getHolder(getJukeboxSongLocation(musicID));
+            var song = jukeboxSongs.get().getHolder(copyingSong ? musicID : getJukeboxSongLocation(musicID));
             if (song.isPresent()) {
+                if (copyingSong) {
+                    stack.set(STDataComponents.MUSIC_DATA, stack.getOrDefault(STDataComponents.MUSIC_DATA, MusicData.copiedDisc()).markCopied(true));
+                }
                 stack.set(DataComponents.JUKEBOX_PLAYABLE, new JukeboxPlayable(new EitherHolder<>(song.get()), true));
             } else {
-                stack.set(STDataComponents.MUSIC_ID, musicID);
+                stack.set(STDataComponents.MUSIC_DATA, MusicData.unknownSong(musicID, copyingSong));
             }
             return true;
         }
         return false;
     }
 
-    public static ItemStack getRecordedDisc(Level world, ResourceLocation musicID, ItemStack originalStack) {
+    public static ItemStack getRecordedDisc(Level world, ResourceLocation musicID, boolean copyingSong, ItemStack originalStack) {
         if (originalStack.isEmpty()) return ItemStack.EMPTY;
         ItemStack discStack = new ItemStack(STItems.RECORDED_DISC.get());
-        setJukeboxSong(discStack, world, musicID);
-        discStack.set(STDataComponents.LABEL, (float) (world.getRandom().nextInt(10) + 1));
-        return getRandomLabelColor(discStack, world.getRandom());
+
+        if (copyingSong) {
+            ItemStack stack = setAppearanceFromDataMap(world, discStack, musicID);
+            return stack == null ? randomizeAppearance(world, discStack, musicID, true) : stack;
+        }
+        return randomizeAppearance(world, discStack, musicID, false);
+    }
+
+    public static ItemStack randomizeAppearance(Level world, ItemStack stack, ResourceLocation musicID, boolean copyingSong) {
+        setJukeboxSong(stack, world, musicID, copyingSong);
+        stack.set(STDataComponents.LABEL, (float) (world.getRandom().nextInt(13) + 1));
+        return getRandomLabelColor(stack, world.getRandom());
+    }
+
+    public static ItemStack setAppearanceFromDataMap(Level world, ItemStack stack, ResourceLocation musicID) {
+        var jukeboxSongs = world.registryAccess().registry(Registries.JUKEBOX_SONG);
+        if (jukeboxSongs.isEmpty()) return null;
+        var copyStyle = jukeboxSongs.get().getDataMap(STDataMaps.RECORDED_DISC_STYLES);
+
+        for (ResourceKey<JukeboxSong> song : copyStyle.keySet()) {
+            if (song.location().equals(musicID)) {
+                setJukeboxSong(stack, world, musicID, true);
+                stack.set(STDataComponents.LABEL, copyStyle.get(song).label());
+                stack.set(STDataComponents.MUSIC_DATA, MusicData.copiedDisc());
+                stack.set(DataComponents.DYED_COLOR, new DyedItemColor(copyStyle.get(song).color(), false));
+                return stack;
+            }
+        }
+        return null;
     }
 
     public static ItemStack getRandomLabelColor(ItemStack stack, RandomSource rand) {

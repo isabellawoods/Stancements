@@ -1,0 +1,80 @@
+{
+  "values": {
+    "minecraft:11": {
+      "color": 0,
+      "label": 1.0
+    },
+    "minecraft:13": {
+      "color": 16766976,
+      "label": 9.0
+    },
+    "minecraft:5": {
+      "color": 2744299,
+      "label": 11.0
+    },
+    "minecraft:blocks": {
+      "color": 14832699,
+      "label": 1.0
+    },
+    "minecraft:cat": {
+      "color": 5046016,
+      "label": 2.0
+    },
+    "minecraft:chirp": {
+      "color": 16711684,
+      "label": 3.0
+    },
+    "minecraft:creator": {
+      "color": 16768409,
+      "label": 10.0
+    },
+    "minecraft:creator_music_box": {
+      "color": 16768409,
+      "label": 10.0
+    },
+    "minecraft:far": {
+      "color": 11992832,
+      "label": 4.0
+    },
+    "minecraft:mall": {
+      "color": 10122751,
+      "label": 2.0
+    },
+    "minecraft:mellohi": {
+      "color": 11665663,
+      "label": 5.0
+    },
+    "minecraft:otherside": {
+      "color": 2001804,
+      "label": 2.0
+    },
+    "minecraft:pigstep": {
+      "color": 16643423,
+      "label": 6.0
+    },
+    "minecraft:precipice": {
+      "color": 8042393,
+      "label": 7.0
+    },
+    "minecraft:relic": {
+      "color": 8972031,
+      "label": 6.0
+    },
+    "minecraft:stal": {
+      "color": 0,
+      "label": 1.0
+    },
+    "minecraft:strad": {
+      "color": 16777215,
+      "label": 1.0
+    },
+    "minecraft:wait": {
+      "color": 8497634,
+      "label": 12.0
+    },
+    "minecraft:ward": {
+      "color": 9356800,
+      "label": 9.0
+    }
+  }
+}

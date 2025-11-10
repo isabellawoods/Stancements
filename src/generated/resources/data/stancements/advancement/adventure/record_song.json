@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:adventure/sleep_in_bed",
+  "criteria": {
+    "record_song": {
+      "trigger": "stancements:record_song"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.stancements.record_song.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "stancements:music_recorder"
+    },
+    "title": {
+      "translate": "advancements.stancements.record_song.title"
+    }
+  },
+  "requirements": [
+    [
+      "record_song"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

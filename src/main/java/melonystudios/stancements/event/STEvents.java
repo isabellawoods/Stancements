@@ -1,10 +1,12 @@
 package melonystudios.stancements.event;
 
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.command.UpdateRecordedDiscCommand;
 import melonystudios.stancements.data.loot.STLootTableProvider;
 import melonystudios.stancements.data.misc.STDataMapsProvider;
 import melonystudios.stancements.data.misc.STDataPackRegistriesProvider;
 import melonystudios.stancements.data.misc.STRecipeProvider;
+import melonystudios.stancements.data.misc.Stadvancements;
 import melonystudios.stancements.data.model.STBlockStateProvider;
 import melonystudios.stancements.data.model.STItemModelProvider;
 import melonystudios.stancements.data.tag.STBlockTagsProvider;
@@ -15,13 +17,16 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = Stancements.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Stancements.MOD_ID)
 public class STEvents {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
@@ -44,6 +49,7 @@ public class STEvents {
 
             // Miscellaneous
             generator.addProvider(true, new STDataPackRegistriesProvider(output, registries));
+            generator.addProvider(true, new AdvancementProvider(output, registries, fileHelper, List.of(new Stadvancements())));
             generator.addProvider(true, new STRecipeProvider(output, registries));
             generator.addProvider(true, new STLootTableProvider(output, registries));
             generator.addProvider(true, new STDataMapsProvider(output, registries));
@@ -52,6 +58,12 @@ public class STEvents {
 
     @SubscribeEvent
     public static void registerDataMaps(RegisterDataMapTypesEvent event) {
-        event.register(STDataMaps.POT_PLANTABLE);
+        event.register(STDataMaps.POT_PLANTABLES);
+        event.register(STDataMaps.RECORDED_DISC_STYLES);
+    }
+
+    @SubscribeEvent
+    public static void registerCommands(RegisterCommandsEvent event) {
+        UpdateRecordedDiscCommand.register(event.getDispatcher());
     }
 }

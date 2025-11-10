@@ -3,7 +3,8 @@ package melonystudios.stancements.util;
 import static melonystudios.reutilities.api.ReAPI.flammable;
 import static melonystudios.stancements.block.STBlocks.*;
 
-public class STVanillaCompatibility {
+public class STCompatibility {
+    /// Adds all of *Stancements*' blocks into the flammability map.
     public static void flammables() {
         // Shelves
         flammable(OAK_SHELF.get(), 5, 20);

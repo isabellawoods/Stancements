@@ -16,7 +16,7 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 import static melonystudios.stancements.item.custom.DyedWaterBucketItem.DEFAULT_WATER_COLOR;
 
-@EventBusSubscriber(modid = Stancements.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Stancements.MOD_ID, value = Dist.CLIENT)
 public class STClientBusEvents {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent

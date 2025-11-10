@@ -4,10 +4,12 @@ import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.datamap.STDataMaps;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -72,7 +74,7 @@ public class CropPotBlock extends Block {
 
         var items = world.registryAccess().registry(Registries.ITEM);
         if (items.isPresent()) {
-            var potPlantables = items.get().getDataMap(STDataMaps.POT_PLANTABLE);
+            var potPlantables = items.get().getDataMap(STDataMaps.POT_PLANTABLES);
             for (ResourceKey<Item> item : potPlantables.keySet()) {
                 if (handStack.is(items.get().get(item))) {
                     return this.placeSeed(world, state, pos, handStack, player, potPlantables.get(item).cropPot(), potPlantables.get(item).plantingSound());
@@ -85,6 +87,7 @@ public class CropPotBlock extends Block {
 
     private ItemInteractionResult placeSeed(Level world, BlockState state, BlockPos pos, ItemStack stack, Player player, Block cropPot, SoundEvent placingSound) {
         stack.consume(1, player);
+        if (player instanceof ServerPlayer serverPlayer) CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
         world.playLocalSound(pos, placingSound, SoundSource.BLOCKS, 1, 0.8F, false);
         world.setBlockAndUpdate(pos, cropPot.defaultBlockState().setValue(HOPPING, state.getValue(HOPPING)));
         world.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, state));

@@ -1,7 +1,7 @@
 package melonystudios.stancements.util.tag;
 
 import melonystudios.stancements.Stancements;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -16,10 +16,10 @@ public class STItemTags {
     public static final TagKey<Item> DYED_WATER_BUCKETS = common("buckets/dyed_water");
 
     public static TagKey<Item> stancements(String name) {
-        return ItemTags.create(Stancements.stancements(name));
+        return TagKey.create(Registries.ITEM, Stancements.stancements(name));
     }
 
     public static TagKey<Item> common(String name) {
-        return ItemTags.create(Stancements.common(name));
+        return TagKey.create(Registries.ITEM, Stancements.common(name));
     }
 }

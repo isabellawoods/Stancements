@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-03T19:39:22.0400272	Stancements - Data Pack Registries
+// 1.21.1	2025-11-09T20:57:35.2027207	Stancements — Data Pack Registries
 7c82487965cda9265c7faf61d35e753a38cb0e44 data/stancements/jukebox_song/game/ancestry.json
 5522d0edab6bc50763a4319e6358e8e62682c48b data/stancements/jukebox_song/game/an_ordinary_day.json
 69272ed60ce6b4a063ede7c0d6bc6c99a802c9a3 data/stancements/jukebox_song/game/a_familiar_room.json
@@ -6,7 +6,7 @@
 2ee0879706bad8f9f495348cef3f731e4a06898c data/stancements/jukebox_song/game/broken_clocks.json
 0171ca032aaf19600bc93357838a61a4e36a89f8 data/stancements/jukebox_song/game/bromeliad.json
 a18ab954977b8f0bbe976834f36e2e7723dec39a data/stancements/jukebox_song/game/clark.json
-e73a49e6b29fccf622d7be87820c71e20173d4fb data/stancements/jukebox_song/game/comforting_memories.json
+724d6af73d3bf397b4a7947be15691cccb65c912 data/stancements/jukebox_song/game/comforting_memories.json
 45e80a424ad5177affda1d3ba44f5d1bfd538876 data/stancements/jukebox_song/game/creative/aria_math.json
 391c41580cad95e357b6a1118b81c2d894769152 data/stancements/jukebox_song/game/creative/biome_fest.json
 4dd8059f8e832b1e272b60de56cda38c2f489915 data/stancements/jukebox_song/game/creative/blind_spots.json
@@ -45,7 +45,7 @@ b7ff6054433728e921ebda4cd7aa3604886e8e30 data/stancements/jukebox_song/game/neth
 6a0581f4acee23df357f71b162b50251e1e701c8 data/stancements/jukebox_song/game/os_piano.json
 e0b683512e81c6ecf0e3517f8052ca0e909de871 data/stancements/jukebox_song/game/oxygene.json
 4b9e1a215491050d2286bccd73c59fb21c3cf1f3 data/stancements/jukebox_song/game/pokopoko.json
-4b1cb6d48b2e8c22de416c2bdacba7546e3dadaf data/stancements/jukebox_song/game/puzzlebox.json
+40824fcbdad508b8e27e2a573217ab9804556830 data/stancements/jukebox_song/game/puzzlebox.json
 f11f1d0258e03599c7d875637bbab9c27c9c196d data/stancements/jukebox_song/game/stand_tall.json
 bcbc40cfc9c81d0817451948941f132769caf13e data/stancements/jukebox_song/game/subwoofer_lullaby.json
 912cdf83be2f037781a1d1417fb0fc560219f417 data/stancements/jukebox_song/game/swamp/aerie.json

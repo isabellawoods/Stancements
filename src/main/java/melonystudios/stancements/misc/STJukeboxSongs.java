@@ -135,7 +135,7 @@ public class STJukeboxSongs {
         register(context, INFINITE_AMETHYST, STSounds.INFINITE_AMETHYST_SONG.getKey(), 271);
         register(context, ONE_MORE_DAY, STSounds.ONE_MORE_DAY_SONG.getKey(), 278);
         register(context, FLOATING_DREAM, STSounds.FLOATING_DREAM_SONG.getKey(), 205);
-        register(context, COMFORTING_MEMORIES, STSounds.COMFORTING_MEMORIES_SONG.getKey(), 215);
+        register(context, COMFORTING_MEMORIES, STSounds.COMFORTING_MEMORIES_SONG.getKey(), 275);
         register(context, AN_ORDINARY_DAY, STSounds.AN_ORDINARY_DAY_SONG.getKey(), 331);
 
         // The Wild Update (1.19)
@@ -152,7 +152,7 @@ public class STJukeboxSongs {
         // Tricky Trials (1.21)
         register(context, FEATHERFALL, STSounds.FEATHERFALL_SONG.getKey(), 344);
         register(context, WATCHER, STSounds.WATCHER_SONG.getKey(), 332);
-        register(context, PUZZLEBOX, STSounds.PUZZLEBOX_SONG.getKey(), 279);
+        register(context, PUZZLEBOX, STSounds.PUZZLEBOX_SONG.getKey(), 299);
         register(context, KOMOREBI, STSounds.KOMOREBI_SONG.getKey(), 287);
         register(context, POKOPOKO, STSounds.POKOPOKO_SONG.getKey(), 304);
         register(context, YAKUSOKU, STSounds.YAKUSOKU_SONG.getKey(), 271);

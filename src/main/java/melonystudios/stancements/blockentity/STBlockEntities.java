@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class STBlockEntities { // block en-titty
+public class STBlockEntities { // block en-titties
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Stancements.MOD_ID);
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MusicRecorderBlockEntity>> MUSIC_RECORDER = BLOCK_ENTITIES.register("music_recorder",

@@ -1,15 +1,15 @@
 package melonystudios.stancements.item;
 
+import melonystudios.reutilities.item.custom.LogoItem;
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.item.custom.CropPotBlockItem;
 import melonystudios.stancements.item.custom.DyedWaterBucketItem;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -54,7 +54,16 @@ public class STItems {
     public static final DeferredItem<Item> CROP_POT = ITEMS.register("crop_pot", () -> new CropPotBlockItem(STBlocks.CROP_POT.get(), new Item.Properties()));
 
     // Items
+    public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.register("stancements_logo", () -> new LogoItem(Stancements.ACCENT_COLOR, new Item.Properties().fireResistant().rarity(Rarity.EPIC)));
     public static final DeferredItem<Item> VINYL_DISC = ITEMS.register("vinyl_disc", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<Item> RECORDED_DISC = ITEMS.register("recorded_disc", () -> new RecordedDiscItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1)));
     public static final DeferredItem<Item> DYED_WATER_BUCKET = ITEMS.register("dyed_water_bucket", () -> new DyedWaterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).component(DataComponents.DYED_COLOR, new DyedItemColor(DyedWaterBucketItem.DEFAULT_WATER_COLOR, false))));
+
+    /// Makes an {@link ItemStack} of a hopping crop pot with a variable count.
+    /// @param count The amount of pots in the stack.
+    public static ItemStack hoppingCropPot(int count) {
+        ItemStack stack = new ItemStack(STItems.CROP_POT.get(), count);
+        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, true));
+        return stack;
+    }
 }

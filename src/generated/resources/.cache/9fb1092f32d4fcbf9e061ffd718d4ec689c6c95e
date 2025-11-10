@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-20T23:53:45.3001139	Recipes
+// 1.21.1	2025-10-04T23:07:40.6577257	Recipes
 e08de5fd22355879fae197dd268c3b39f2a7447a data/stancements/advancement/recipes/building_blocks/black_concrete_from_watering.json
 581603e005b9e43df6af84542616a57ee5e16176 data/stancements/advancement/recipes/building_blocks/brown_concrete_from_watering.json
 106fb5da6e6eeaadbeca9d1cc05dfab111d8a16a data/stancements/advancement/recipes/building_blocks/cyan_concrete_from_watering.json
@@ -60,7 +60,7 @@ e05d97052639fe1e810cbc68dc4b366e9fade130 data/stancements/advancement/recipes/mi
 a4c3513cecb08221560821345d9155867d1832ab data/stancements/advancement/recipes/misc/hopping_crop_pot_from_existing.json
 bf050327f28cb2ccc140ee384b410e7934c9cbfe data/stancements/advancement/recipes/misc/vinyl_disc.json
 504456455c3033dd2ebd58b8cd6fcfe2bb66b7f4 data/stancements/advancement/recipes/misc/vinyl_disc_from_clearing.json
-650466267b9c12af738d7c5e0d67eb4f73c497b4 data/stancements/advancement/recipes/redstone/music_recorder.json
+fd50515fbf6852451f5ba818a7bc947e4bf08b64 data/stancements/advancement/recipes/redstone/music_recorder.json
 f119336195dac9251d516476367fafc844eb45bd data/stancements/recipe/acacia_shelf.json
 3bd47721a9695106e961517673d4d4e6e48aee3f data/stancements/recipe/bamboo_shelf.json
 1a9497167fe40df27057f113a9bea04040efa0b2 data/stancements/recipe/birch_shelf.json
@@ -105,7 +105,7 @@ cd18196e1b48a7ad5eee6d570c7425278a0e677e data/stancements/recipe/lime_concrete_f
 bf361f2afda85cb1da39b09dec649c357e6b2878 data/stancements/recipe/magenta_concrete_from_watering.json
 d1680e6ed92e1d64284e5727091eaa5bfc38be9c data/stancements/recipe/magenta_crafting_table_cloth.json
 c81d919bfd4fafe69ebbf609044bdb574e2305e1 data/stancements/recipe/mangrove_shelf.json
-35d147bc9851bab3d4b413565832fca74303df97 data/stancements/recipe/music_recorder.json
+8e38fc541241c09969ddf840e79288a92673b5d0 data/stancements/recipe/music_recorder.json
 bb82b2445c4ded67483ddc39662b67dac17cb20a data/stancements/recipe/oak_shelf.json
 edcc05e3fa25f40ee79e9126d362e2461d1661ca data/stancements/recipe/orange_concrete_from_watering.json
 5b8907838f94bf2cc4a5cb1c440be6c1169ee014 data/stancements/recipe/orange_crafting_table_cloth.json
