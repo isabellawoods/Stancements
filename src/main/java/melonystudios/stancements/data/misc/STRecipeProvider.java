@@ -53,6 +53,7 @@ public class STRecipeProvider extends RecipeProvider {
         addCraftingTableCloth(output, STItems.GREEN_CRAFTING_TABLE_CLOTH, Items.GREEN_CARPET);
         addCraftingTableCloth(output, STItems.CYAN_CRAFTING_TABLE_CLOTH, Items.CYAN_CARPET);
         addCraftingTableCloth(output, STItems.LIGHT_BLUE_CRAFTING_TABLE_CLOTH, Items.LIGHT_BLUE_CARPET);
+        addCraftingTableCloth(output, STItems.BLUE_CRAFTING_TABLE_CLOTH, Items.BLUE_CARPET);
         addCraftingTableCloth(output, STItems.PURPLE_CRAFTING_TABLE_CLOTH, Items.PURPLE_CARPET);
         addCraftingTableCloth(output, STItems.MAGENTA_CRAFTING_TABLE_CLOTH, Items.MAGENTA_CARPET);
         addCraftingTableCloth(output, STItems.PINK_CRAFTING_TABLE_CLOTH, Items.PINK_CARPET);
@@ -70,6 +71,7 @@ public class STRecipeProvider extends RecipeProvider {
         dyeCraftingTableCloth(output, STItems.GREEN_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_GREEN);
         dyeCraftingTableCloth(output, STItems.CYAN_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_CYAN);
         dyeCraftingTableCloth(output, STItems.LIGHT_BLUE_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_LIGHT_BLUE);
+        dyeCraftingTableCloth(output, STItems.BLUE_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_BLUE);
         dyeCraftingTableCloth(output, STItems.PURPLE_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_PURPLE);
         dyeCraftingTableCloth(output, STItems.MAGENTA_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_MAGENTA);
         dyeCraftingTableCloth(output, STItems.PINK_CRAFTING_TABLE_CLOTH, Tags.Items.DYES_PINK);
@@ -87,6 +89,7 @@ public class STRecipeProvider extends RecipeProvider {
         waterConcrete(output, Items.GREEN_CONCRETE_POWDER, Items.GREEN_CONCRETE);
         waterConcrete(output, Items.CYAN_CONCRETE_POWDER, Items.CYAN_CONCRETE);
         waterConcrete(output, Items.LIGHT_BLUE_CONCRETE_POWDER, Items.LIGHT_BLUE_CONCRETE);
+        waterConcrete(output, Items.BLUE_CONCRETE_POWDER, Items.BLUE_CONCRETE);
         waterConcrete(output, Items.PURPLE_CONCRETE_POWDER, Items.PURPLE_CONCRETE);
         waterConcrete(output, Items.MAGENTA_CONCRETE_POWDER, Items.MAGENTA_CONCRETE);
         waterConcrete(output, Items.PINK_CONCRETE_POWDER, Items.PINK_CONCRETE);
