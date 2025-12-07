@@ -57,7 +57,7 @@ public class STItems {
     public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.register("stancements_logo", () -> new LogoItem(Stancements.ACCENT_COLOR, new Item.Properties().fireResistant().rarity(Rarity.EPIC)));
     public static final DeferredItem<Item> VINYL_DISC = ITEMS.register("vinyl_disc", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<Item> RECORDED_DISC = ITEMS.register("recorded_disc", () -> new RecordedDiscItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1)));
-    public static final DeferredItem<Item> DYED_WATER_BUCKET = ITEMS.register("dyed_water_bucket", () -> new DyedWaterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).component(DataComponents.DYED_COLOR, new DyedItemColor(DyedWaterBucketItem.DEFAULT_WATER_COLOR, false))));
+    public static final DeferredItem<Item> DYED_WATER_BUCKET = ITEMS.register("dyed_water_bucket", () -> new DyedWaterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).component(DataComponents.DYED_COLOR, new DyedItemColor(DyedWaterBucketItem.DEFAULT_WATER_COLOR, true))));
 
     /// Makes an {@link ItemStack} of a hopping crop pot with a variable count.
     /// @param count The amount of pots in the stack.

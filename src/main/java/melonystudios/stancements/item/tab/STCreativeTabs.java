@@ -84,7 +84,7 @@ public class STCreativeTabs {
     /// @param color The color to apply to the bucket stack.
     private static void addBucket(CreativeModeTab.Output output, Integer color) {
         ItemStack dyedBucket = new ItemStack(DYED_WATER_BUCKET.get());
-        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color, false));
+        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color, true));
         output.accept(dyedBucket);
     }
 }

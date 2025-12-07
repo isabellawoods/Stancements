@@ -91,7 +91,7 @@ public class STVanillaTabs {
     /// @param color The color to apply to the bucket stack.
     private static ItemStack addBucket(int color) {
         ItemStack dyedBucket = new ItemStack(DYED_WATER_BUCKET.get());
-        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color, false));
+        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color, true));
         return dyedBucket;
     }
 }

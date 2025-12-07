@@ -2,7 +2,7 @@ package melonystudios.stancements.misc.datamap;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import melonystudios.reutilities.api.ReAPI;
+import melonystudios.reutilities.api.ReCodecs;
 
 /// Data map value for the style used when {@linkplain STDataMaps#RECORDED_DISC_STYLES recording songs}, allowing mods to register
 /// custom looks for recording discs with existing jukebox songs.
@@ -11,6 +11,6 @@ import melonystudios.reutilities.api.ReAPI;
 public record RecordedDiscStyles(int color, float label) {
     public static final Codec<RecordedDiscStyles> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.fieldOf("color").forGetter(RecordedDiscStyles::color),
-            ReAPI.floatRange(1, 13).fieldOf("label").forGetter(RecordedDiscStyles::label)
+            ReCodecs.floatRange(1, 13).fieldOf("label").forGetter(RecordedDiscStyles::label)
     ).apply(instance, RecordedDiscStyles::new));
 }

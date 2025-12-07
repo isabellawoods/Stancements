@@ -1,6 +1,6 @@
 package melonystudios.stancements.component;
 
-import melonystudios.reutilities.api.ReAPI;
+import melonystudios.reutilities.api.ReCodecs;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.component.custom.MusicData;
 import net.minecraft.core.component.DataComponentType;
@@ -18,5 +18,5 @@ public class STDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<MusicData>> MUSIC_DATA = COMPONENTS.registerComponentType("music_data",
             builder -> builder.persistent(MusicData.CODEC).networkSynchronized(MusicData.STREAM_CODEC));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> LABEL = COMPONENTS.registerComponentType("label",
-            builder -> builder.persistent(ReAPI.floatRange(1, 13)).networkSynchronized(ByteBufCodecs.FLOAT));
+            builder -> builder.persistent(ReCodecs.floatRange(1, 13)).networkSynchronized(ByteBufCodecs.FLOAT));
 }
