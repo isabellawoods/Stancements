@@ -24,6 +24,9 @@ public class STCreativeTabs {
                 if (STConfigs.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
                 // Functional blocks
                 output.accept(MUSIC_RECORDER);
+                // Vinyl & recorded discs (items but should be grouped together with the recorder)
+                output.accept(VINYL_DISC);
+                output.accept(RECORDED_DISC);
 
                 // Decorative blocks
                 // Shelves
@@ -58,13 +61,28 @@ public class STCreativeTabs {
                 output.accept(PINK_CRAFTING_TABLE_CLOTH);
 
                 // Functional blocks
+                output.accept(GILDED_RAIL);
                 output.accept(CROP_POT);
                 output.accept(hoppingCropPot(1));
 
                 // Items
+                output.accept(WHITE_TAG);
+                output.accept(LIGHT_GRAY_TAG);
+                output.accept(GRAY_TAG);
+                output.accept(BLACK_TAG);
+                output.accept(BROWN_TAG);
+                output.accept(RED_TAG);
+                output.accept(ORANGE_TAG);
+                output.accept(YELLOW_TAG);
+                output.accept(LIME_TAG);
+                output.accept(GREEN_TAG);
+                output.accept(CYAN_TAG);
+                output.accept(LIGHT_BLUE_TAG);
+                output.accept(BLUE_TAG);
+                output.accept(PURPLE_TAG);
+                output.accept(MAGENTA_TAG);
+                output.accept(PINK_TAG);
                 addDyedWaterBuckets(output);
-                output.accept(VINYL_DISC);
-                output.accept(RECORDED_DISC);
             })).build());
 
     /// Adds all variants of {@linkplain DyedWaterBucketItem dyed water buckets} to *Stancements*' main creative tab.

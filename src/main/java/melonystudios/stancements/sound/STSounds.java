@@ -11,6 +11,10 @@ public class STSounds {
 
     // Items
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_DYE = SOUNDS.register("item.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.cauldron.dye")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> TAG_MINECART = SOUNDS.register("item.tag.latch", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.tag.latch")));
+
+    // Entities
+    public static final DeferredHolder<SoundEvent, SoundEvent> SHEAR_MINECART = SOUNDS.register("entity.minecart.shear", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("entity.minecart.shear")));
 
     // Volume Alpha
     public static final DeferredHolder<SoundEvent, SoundEvent> MINECRAFT_SONG = register("music.game.minecraft");

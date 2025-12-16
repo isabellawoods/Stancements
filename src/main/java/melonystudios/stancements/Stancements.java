@@ -10,6 +10,7 @@ import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.tab.STCreativeTabs;
 import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
+import melonystudios.stancements.misc.attachment.STAttachmentTypes;
 import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.util.STCauldronInteractions;
 import melonystudios.stancements.util.STCompatibility;
@@ -45,6 +46,7 @@ public class Stancements {
         STSounds.SOUNDS.register(eventBus);
         STStatistics.STATS.register(eventBus);
         STCriteriaTriggers.TRIGGERS.register(eventBus);
+        STAttachmentTypes.ATTACHMENTS.register(eventBus);
 
         NeoForgeMod.enableMilkFluid();
         container.registerConfig(ModConfig.Type.COMMON, STConfigs.SPEC, "melonystudios/stancements-common.toml");

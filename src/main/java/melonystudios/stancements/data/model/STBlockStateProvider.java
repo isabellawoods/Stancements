@@ -8,8 +8,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.RailShape;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -64,6 +66,7 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         craftingTableCloth(PINK_CRAFTING_TABLE_CLOTH.get());
 
         // Functional
+        straightRail((BaseRailBlock) GILDED_RAIL.get());
         simpleBlock(MUSIC_RECORDER.get(), models().cubeBottomTop("music_recorder",
                 modLoc("block/music_recorder_side"),
                 modLoc("block/music_recorder_bottom"),
@@ -133,5 +136,36 @@ public class STBlockStateProvider extends ReBlockStateProvider {
                     .texture("crop", crop.apply(age))
             ).build();
         });
+    }
+
+    /// Makes the block states and models for a {@linkplain net.minecraft.world.level.block.PoweredRailBlock straight rail}.
+    /// @param rail The rail block.
+    public void straightRail(BaseRailBlock rail) {
+        this.getVariantBuilder(rail).forAllStatesExcept(state -> {
+            ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(rail);
+            boolean powered = state.getValue(BlockStateProperties.POWERED);
+            RailShape shape = state.getValue(BlockStateProperties.RAIL_SHAPE_STRAIGHT);
+            String name = String.format("%s%s%s", registry.getPath(), powered ? "_on" : "", shape.isAscending() ? this.shortenName(shape) : "");
+
+            int railRotation = switch (shape) {
+                case EAST_WEST, ASCENDING_WEST, ASCENDING_EAST -> 90;
+                default -> 0;
+            };
+            String parent = !shape.isAscending() ? "rail_flat" : "template_rail" + this.shortenName(shape);
+
+            return ConfiguredModel.builder().modelFile(this.models().getBuilder(name)
+                    .parent(this.models().getExistingFile(this.mcLoc("block/" + parent)))
+                    .texture("rail", registry.getNamespace() + ":block/" + registry.getPath() + (powered ? "_on" : ""))
+                    .renderType("cutout")
+            ).rotationY(railRotation).build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
+    private String shortenName(RailShape name) {
+        return switch (name) {
+            case ASCENDING_NORTH, ASCENDING_EAST -> "_raised_ne";
+            case ASCENDING_SOUTH, ASCENDING_WEST -> "_raised_sw";
+            default -> "";
+        };
     }
 }

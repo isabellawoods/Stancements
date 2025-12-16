@@ -6,6 +6,21 @@
     ],
     "subtitle": "subtitles.item.cauldron.dye"
   },
+  "item.tag.latch": {
+    "sounds": [
+      "stancements:item/tag/latch1",
+      "stancements:item/tag/latch2",
+      "stancements:item/tag/latch3",
+      "stancements:item/tag/latch4"
+    ],
+    "subtitle": "subtitles.item.tag.latch"
+  },
+  "entity.minecart.shear": {
+    "sounds": [
+      "stancements:entity/minecart/shear"
+    ],
+    "subtitle": "subtitles.entity.minecart.shear"
+  },
   "music.game.minecraft": {
     "sounds": [
       {

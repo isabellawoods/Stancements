@@ -66,5 +66,6 @@ public class STBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.COMBINATION_STEP_SOUND_BLOCKS).addTag(STBlockTags.CRAFTING_TABLE_CLOTHS);
         this.tag(BlockTags.DAMPENS_VIBRATIONS).addTag(STBlockTags.CRAFTING_TABLE_CLOTHS);
         this.tag(BlockTags.CAULDRONS).add(DYED_WATER_CAULDRON.get(), MILK_CAULDRON.get());
+        this.tag(BlockTags.RAILS).add(GILDED_RAIL.get());
     }
 }

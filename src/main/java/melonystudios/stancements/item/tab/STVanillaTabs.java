@@ -60,6 +60,10 @@ public class STVanillaTabs {
             event.insertAfter(new ItemStack(Items.JUKEBOX), new ItemStack(STItems.MUSIC_RECORDER.get()), PARENT_AND_SEARCH_TABS);
         }
 
+        if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS || event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.insertAfter(new ItemStack(Items.POWERED_RAIL), new ItemStack(STItems.GILDED_RAIL.get()), PARENT_AND_SEARCH_TABS);
+        }
+
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.insertAfter(new ItemStack(Items.FLOWER_POT), new ItemStack(STItems.CROP_POT.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.CROP_POT.get()), STItems.hoppingCropPot(1), PARENT_AND_SEARCH_TABS);

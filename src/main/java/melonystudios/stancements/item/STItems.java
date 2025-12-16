@@ -4,6 +4,7 @@ import melonystudios.reutilities.item.custom.LogoItem;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
+import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.CropPotBlockItem;
 import melonystudios.stancements.item.custom.DyedWaterBucketItem;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
@@ -13,6 +14,8 @@ import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import static melonystudios.stancements.component.custom.MinecartTagColor.of;
 
 public class STItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Stancements.MOD_ID);
@@ -50,6 +53,7 @@ public class STItems {
     public static final DeferredItem<Item> PINK_CRAFTING_TABLE_CLOTH = ITEMS.register("pink_crafting_table_cloth", () -> new BlockItem(STBlocks.PINK_CRAFTING_TABLE_CLOTH.get(), new Item.Properties()));
 
     // Functional blocks
+    public static final DeferredItem<Item> GILDED_RAIL = ITEMS.register("gilded_rail", () -> new BlockItem(STBlocks.GILDED_RAIL.get(), new Item.Properties()));
     public static final DeferredItem<Item> MUSIC_RECORDER = ITEMS.register("music_recorder", () -> new BlockItem(STBlocks.MUSIC_RECORDER.get(), new Item.Properties()));
     public static final DeferredItem<Item> CROP_POT = ITEMS.register("crop_pot", () -> new CropPotBlockItem(STBlocks.CROP_POT.get(), new Item.Properties()));
 
@@ -58,6 +62,24 @@ public class STItems {
     public static final DeferredItem<Item> VINYL_DISC = ITEMS.register("vinyl_disc", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<Item> RECORDED_DISC = ITEMS.register("recorded_disc", () -> new RecordedDiscItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1)));
     public static final DeferredItem<Item> DYED_WATER_BUCKET = ITEMS.register("dyed_water_bucket", () -> new DyedWaterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).component(DataComponents.DYED_COLOR, new DyedItemColor(DyedWaterBucketItem.DEFAULT_WATER_COLOR, true))));
+
+    // Minecart tags
+    public static final DeferredItem<Item> WHITE_TAG = ITEMS.register("white_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.WHITE))));
+    public static final DeferredItem<Item> LIGHT_GRAY_TAG = ITEMS.register("light_gray_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.LIGHT_GRAY))));
+    public static final DeferredItem<Item> GRAY_TAG = ITEMS.register("gray_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.GRAY))));
+    public static final DeferredItem<Item> BLACK_TAG = ITEMS.register("black_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.BLACK))));
+    public static final DeferredItem<Item> BROWN_TAG = ITEMS.register("brown_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.BROWN))));
+    public static final DeferredItem<Item> RED_TAG = ITEMS.register("red_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.RED))));
+    public static final DeferredItem<Item> ORANGE_TAG = ITEMS.register("orange_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.ORANGE))));
+    public static final DeferredItem<Item> YELLOW_TAG = ITEMS.register("yellow_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.YELLOW))));
+    public static final DeferredItem<Item> LIME_TAG = ITEMS.register("lime_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.LIME))));
+    public static final DeferredItem<Item> GREEN_TAG = ITEMS.register("green_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.GREEN))));
+    public static final DeferredItem<Item> CYAN_TAG = ITEMS.register("cyan_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.CYAN))));
+    public static final DeferredItem<Item> LIGHT_BLUE_TAG = ITEMS.register("light_blue_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.LIGHT_BLUE))));
+    public static final DeferredItem<Item> BLUE_TAG = ITEMS.register("blue_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.BLUE))));
+    public static final DeferredItem<Item> PURPLE_TAG = ITEMS.register("purple_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.PURPLE))));
+    public static final DeferredItem<Item> MAGENTA_TAG = ITEMS.register("magenta_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.MAGENTA))));
+    public static final DeferredItem<Item> PINK_TAG = ITEMS.register("pink_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.PINK))));
 
     /// Makes an {@link ItemStack} of a hopping crop pot with a variable count.
     /// @param count The amount of pots in the stack.

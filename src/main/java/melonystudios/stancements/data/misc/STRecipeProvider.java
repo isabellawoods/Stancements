@@ -95,6 +95,12 @@ public class STRecipeProvider extends RecipeProvider {
         waterConcrete(output, Items.PINK_CONCRETE_POWDER, Items.PINK_CONCRETE);
 
         // Functional blocks
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, STItems.GILDED_RAIL, 6).define('#', Tags.Items.INGOTS_GOLD).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
+                .pattern("# #").pattern("#S#").pattern("#R#").unlockedBy("has_rail", has(Items.RAIL))
+                .save(output);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Items.POWERED_RAIL, 6).define('#', Tags.Items.INGOTS_COPPER).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
+                .pattern("# #").pattern("#S#").pattern("#R#").unlockedBy("has_rail", has(Items.RAIL))
+                .save(output);
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('I', Tags.Items.GEMS_DIAMOND).define('D', Tags.Items.DYES)
                 .pattern("#R#").pattern("DID").pattern("#R#").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
                 .save(output);
@@ -115,6 +121,24 @@ public class STRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, STItems.VINYL_DISC).requires(STItems.RECORDED_DISC)
                 .unlockedBy("has_recorded_disc", has(STItems.RECORDED_DISC))
                 .group("vinyl_disc").save(output, Stancements.stancements("vinyl_disc_from_clearing"));
+
+        // Minecart tags
+        addMinecartTag(output, STItems.WHITE_TAG, Tags.Items.DYES_WHITE);
+        addMinecartTag(output, STItems.LIGHT_GRAY_TAG, Tags.Items.DYES_LIGHT_GRAY);
+        addMinecartTag(output, STItems.GRAY_TAG, Tags.Items.DYES_GRAY);
+        addMinecartTag(output, STItems.BLACK_TAG, Tags.Items.DYES_BLACK);
+        addMinecartTag(output, STItems.BROWN_TAG, Tags.Items.DYES_BROWN);
+        addMinecartTag(output, STItems.RED_TAG, Tags.Items.DYES_RED);
+        addMinecartTag(output, STItems.ORANGE_TAG, Tags.Items.DYES_ORANGE);
+        addMinecartTag(output, STItems.YELLOW_TAG, Tags.Items.DYES_YELLOW);
+        addMinecartTag(output, STItems.LIME_TAG, Tags.Items.DYES_LIME);
+        addMinecartTag(output, STItems.GREEN_TAG, Tags.Items.DYES_GREEN);
+        addMinecartTag(output, STItems.CYAN_TAG, Tags.Items.DYES_CYAN);
+        addMinecartTag(output, STItems.LIGHT_BLUE_TAG, Tags.Items.DYES_LIGHT_BLUE);
+        addMinecartTag(output, STItems.BLUE_TAG, Tags.Items.DYES_BLUE);
+        addMinecartTag(output, STItems.PURPLE_TAG, Tags.Items.DYES_PURPLE);
+        addMinecartTag(output, STItems.MAGENTA_TAG, Tags.Items.DYES_MAGENTA);
+        addMinecartTag(output, STItems.PINK_TAG, Tags.Items.DYES_PINK);
     }
 
     /// Makes a shelf recipe.
@@ -157,5 +181,15 @@ public class STRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, concrete, 8).define('#', concretePowder).define('W', Tags.Items.BUCKETS_WATER)
                 .pattern("###").pattern("#W#").pattern("###").unlockedBy("has_concrete_powder", has(concretePowder))
                 .group("dye_concrete").save(output, Stancements.stancements(location.getPath() + "_from_watering"));
+    }
+
+    /// Makes a minecart tag recipe.
+    /// @param output Used to save the recipe to a `.json` file.
+    /// @param tag The tag item.
+    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_PINK c:dyes/pink}.
+    public static void addMinecartTag(RecipeOutput output, ItemLike tag, TagKey<Item> dyeTag) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, tag).requires(Items.PAPER).requires(Tags.Items.STRINGS).requires(dyeTag)
+                .unlockedBy("has_paper", has(Items.PAPER)).group("minecart_tags")
+                .save(output);
     }
 }

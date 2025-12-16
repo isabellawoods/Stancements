@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-21T15:28:05.4262822	Loot Tables
+// 1.21.1	2025-12-15T21:28:10.1562049	Loot Tables
 ba1f1d526cf9bc8871d4881a91cbae820b98b5ef data/stancements/loot_table/blocks/acacia_shelf.json
 646114eb4ecbe72ab1dea880ca24a6e2d6e324a7 data/stancements/loot_table/blocks/bamboo_shelf.json
 6f25adcc6abd9130559e7d391cadbf35f73cc9bf data/stancements/loot_table/blocks/beetroot_crop_pot.json
@@ -13,6 +13,7 @@ c8867cb74a8726305290ddfc66765175e3b4dcf3 data/stancements/loot_table/blocks/crim
 f5e11005cf3d72c4cade8ff26bd1202c3e351112 data/stancements/loot_table/blocks/cyan_crafting_table_cloth.json
 ad43ae8e2374a543b14369151e808ef0268e3f3c data/stancements/loot_table/blocks/dark_oak_shelf.json
 1b43ebc04c1642f49add5292594299609276d044 data/stancements/loot_table/blocks/dyed_water_cauldron.json
+7dc01e234d724aea7bf81df95425de6ab009a4be data/stancements/loot_table/blocks/gilded_rail.json
 512d8e36fb72c4c4bbe62caab747ccee1d5ede7b data/stancements/loot_table/blocks/gray_crafting_table_cloth.json
 a23ff201b79f82411c79a9fb7e827713876cb0d3 data/stancements/loot_table/blocks/green_crafting_table_cloth.json
 830fdbff15e9f00a64e33340f27f94f39aa31df8 data/stancements/loot_table/blocks/jungle_shelf.json

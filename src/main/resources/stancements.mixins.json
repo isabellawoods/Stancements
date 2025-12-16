@@ -6,7 +6,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "STBannerItemMixin",
-    "STShearsItemMixin"
+    "STShearsItemMixin",
+    "entity.STAbstractMinecartMixin"
   ],
   "client": [
     "CurrentMusicAccessor"

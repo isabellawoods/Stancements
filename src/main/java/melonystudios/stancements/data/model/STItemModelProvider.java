@@ -54,6 +54,7 @@ public class STItemModelProvider extends ReItemModelProvider {
         block("pink_crafting_table_cloth");
 
         // Functional blocks
+        blockItem("gilded_rail");
         block("music_recorder");
         cropPot(this.generated, "crop_pot");
 
@@ -61,6 +62,22 @@ public class STItemModelProvider extends ReItemModelProvider {
         standard("stancements_logo");
         standard("vinyl_disc");
         recordedDisc(this.generated, "recorded_disc");
+        standard("white_tag");
+        standard("light_gray_tag");
+        standard("gray_tag");
+        standard("black_tag");
+        standard("brown_tag");
+        standard("red_tag");
+        standard("orange_tag");
+        standard("yellow_tag");
+        standard("lime_tag");
+        standard("green_tag");
+        standard("cyan_tag");
+        standard("light_blue_tag");
+        standard("blue_tag");
+        standard("purple_tag");
+        standard("magenta_tag");
+        standard("pink_tag");
         this.getBuilder("dyed_water_bucket").parent(this.generated).texture("layer0", this.modLoc("item/dyed_water_bucket_overlay")).texture("layer1", this.modLoc("item/dyed_water_bucket"));
     }
 

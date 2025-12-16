@@ -1,0 +1,20 @@
+{
+  "values": [
+    "stancements:white_tag",
+    "stancements:light_gray_tag",
+    "stancements:gray_tag",
+    "stancements:black_tag",
+    "stancements:brown_tag",
+    "stancements:red_tag",
+    "stancements:orange_tag",
+    "stancements:yellow_tag",
+    "stancements:lime_tag",
+    "stancements:green_tag",
+    "stancements:cyan_tag",
+    "stancements:light_blue_tag",
+    "stancements:blue_tag",
+    "stancements:purple_tag",
+    "stancements:magenta_tag",
+    "stancements:pink_tag"
+  ]
+}

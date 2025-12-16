@@ -46,6 +46,7 @@ public class STBlocks {
     public static final DeferredBlock<Block> PINK_CRAFTING_TABLE_CLOTH = BLOCKS.register("pink_crafting_table_cloth", () -> new CraftingTableClothBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_CARPET)));
 
     // Functional
+    public static final DeferredBlock<Block> GILDED_RAIL = BLOCKS.register("gilded_rail", () -> new GildedRailBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
     public static final DeferredBlock<Block> MUSIC_RECORDER = BLOCKS.register("music_recorder", () -> new MusicRecorderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUKEBOX)));
     public static final DeferredBlock<Block> DYED_WATER_CAULDRON = BLOCKS.register("dyed_water_cauldron", () -> new DyedWaterCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
     public static final DeferredBlock<Block> MILK_CAULDRON = BLOCKS.register("milk_cauldron", () -> new MilkCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));

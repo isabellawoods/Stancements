@@ -1,6 +1,9 @@
 package melonystudios.stancements.event;
 
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.block.STBlocks;
+import melonystudios.stancements.misc.attachment.STAttachmentTypes;
+import melonystudios.stancements.misc.attachment.STCapabilities;
 import melonystudios.stancements.command.UpdateRecordedDiscCommand;
 import melonystudios.stancements.data.loot.STLootTableProvider;
 import melonystudios.stancements.data.misc.STDataMapsProvider;
@@ -13,14 +16,22 @@ import melonystudios.stancements.data.tag.STBlockTagsProvider;
 import melonystudios.stancements.data.tag.STItemTagsProvider;
 import melonystudios.stancements.misc.datamap.STDataMaps;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.RegisterCauldronFluidContentEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.List;
@@ -65,5 +76,19 @@ public class STEvents {
     @SubscribeEvent
     public static void registerCommands(RegisterCommandsEvent event) {
         UpdateRecordedDiscCommand.register(event.getDispatcher());
+    }
+
+    @SubscribeEvent
+    public static void registerCauldrons(RegisterCauldronFluidContentEvent event) {
+        event.register(STBlocks.MILK_CAULDRON.get(), NeoForgeMod.MILK.get(), FluidType.BUCKET_VOLUME, BlockStateProperties.LEVEL_CAULDRON);
+    }
+
+    @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        for (EntityType<?> type : BuiltInRegistries.ENTITY_TYPE) {
+            if (type.getBaseClass().isAssignableFrom(AbstractMinecart.class)) {
+                event.registerEntity(STCapabilities.MINECART_TAGS, type, (entity, data) -> entity.getData(STAttachmentTypes.MINECART_TAGS.get()));
+            }
+        }
     }
 }
