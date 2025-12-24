@@ -82,6 +82,7 @@ public class Stadvancements implements AdvancementProvider.AdvancementGenerator 
                 .addCriterion("recorded/ballad_of_the_cats", RecordSongTrigger.TriggerInstance.recordedSong(ResourceLocation.withDefaultNamespace("game/nether/ballad_of_the_cats")))
                 .addCriterion("recorded/boss", RecordSongTrigger.TriggerInstance.recordedSong(ResourceLocation.withDefaultNamespace("game/end/boss")))
                 .addCriterion("recorded/the_end", RecordSongTrigger.TriggerInstance.recordedSong(ResourceLocation.withDefaultNamespace("game/end/the_end")))
+                .addCriterion("recorded/alpha", RecordSongTrigger.TriggerInstance.recordedSong(ResourceLocation.withDefaultNamespace("game/end/alpha")))
 
                 // Underwater Singles (1.13)
                 .addCriterion("recorded/shuniji", RecordSongTrigger.TriggerInstance.recordedSong(ResourceLocation.withDefaultNamespace("game/water/shuniji")))
@@ -177,7 +178,7 @@ public class Stadvancements implements AdvancementProvider.AdvancementGenerator 
 
     private static ItemStack createIconStack() {
         ItemStack stack = new ItemStack(STItems.RECORDED_DISC.get());
-        stack.set(DataComponents.DYED_COLOR, new DyedItemColor(0xFF55FF55, false));
+        stack.set(DataComponents.DYED_COLOR, new DyedItemColor(0x55FF55, false));
         stack.set(STDataComponents.LABEL, 7F);
         return stack;
     }

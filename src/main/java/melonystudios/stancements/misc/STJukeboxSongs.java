@@ -37,6 +37,7 @@ public class STJukeboxSongs {
     public static final ResourceKey<JukeboxSong> BALLAD_OF_THE_CATS = register("game/nether/ballad_of_the_cats");
     public static final ResourceKey<JukeboxSong> BOSS = register("game/end/boss");
     public static final ResourceKey<JukeboxSong> THE_END = register("game/end/the_end");
+    public static final ResourceKey<JukeboxSong> ALPHA = register("game/end/alpha");
 
     // Underwater Singles (1.13)
     public static final ResourceKey<JukeboxSong> SHUNIJI = register("game/water/shuniji");
@@ -116,6 +117,7 @@ public class STJukeboxSongs {
         register(context, BALLAD_OF_THE_CATS, STSounds.BALLAD_OF_THE_CATS_SONG.getKey(), 275);
         register(context, BOSS, STSounds.BOSS_SONG.getKey(), 344);
         register(context, THE_END, STSounds.THE_END_SONG.getKey(), 904);
+        register(context, ALPHA, STSounds.ALPHA_SONG.getKey(), 603);
 
         // Underwater Singles (1.13)
         register(context, SHUNIJI, STSounds.SHUNIJI_SONG.getKey(), 244);

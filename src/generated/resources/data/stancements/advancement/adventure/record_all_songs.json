@@ -13,6 +13,12 @@
       },
       "trigger": "stancements:record_song"
     },
+    "recorded/alpha": {
+      "conditions": {
+        "music_id": "minecraft:game/end/alpha"
+      },
+      "trigger": "stancements:record_song"
+    },
     "recorded/an_ordinary_day": {
       "conditions": {
         "music_id": "minecraft:game/an_ordinary_day"
@@ -304,7 +310,7 @@
     "icon": {
       "components": {
         "minecraft:dyed_color": {
-          "rgb": -11141291,
+          "rgb": 5635925,
           "show_in_tooltip": false
         },
         "stancements:label": 7.0
@@ -370,6 +376,9 @@
     ],
     [
       "recorded/the_end"
+    ],
+    [
+      "recorded/alpha"
     ],
     [
       "recorded/shuniji"

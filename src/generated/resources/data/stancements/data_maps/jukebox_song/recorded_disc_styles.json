@@ -75,6 +75,10 @@
     "minecraft:ward": {
       "color": 9356800,
       "label": 9.0
+    },
+    "stancements:game/end/alpha": {
+      "color": 10144191,
+      "label": 13.0
     }
   }
 }

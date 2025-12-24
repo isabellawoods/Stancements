@@ -7,7 +7,8 @@
   "mixins": [
     "STBannerItemMixin",
     "STShearsItemMixin",
-    "entity.STAbstractMinecartMixin"
+    "entity.STAbstractMinecartMixin",
+    "entity.STServerPlayerMixin"
   ],
   "client": [
     "CurrentMusicAccessor"

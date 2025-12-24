@@ -43,6 +43,7 @@ public class STSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> BALLAD_OF_THE_CATS_SONG = register("music.game.nether.ballad_of_the_cats");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_SONG = register("music.game.end.boss");
     public static final DeferredHolder<SoundEvent, SoundEvent> THE_END_SONG = register("music.game.end.the_end");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ALPHA_SONG = register("music.game.end.alpha");
 
     // Underwater Singles
     public static final DeferredHolder<SoundEvent, SoundEvent> SHUNIJI_SONG = register("music.game.water.shuniji");

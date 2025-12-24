@@ -21,6 +21,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -44,6 +45,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,6 +56,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public static final BooleanProperty RECORDING = STBlockStateProperties.RECORDING;
     public static final Component NO_MUSIC_PLAYING_TEXT = Component.translatable("tooltip.stancements.no_music_playing").withStyle(ChatFormatting.GRAY);
     public static final Component CANNOT_COPY_TEXT = Component.translatable("tooltip.stancements.cannot_copy").withStyle(ChatFormatting.GRAY);
+    public static final int JUKEBOX_PADDING_TICKS = 20;
 
     public MusicRecorderBlock(Properties properties) {
         super(properties);
@@ -86,7 +90,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
                 this.stopRecording(world, pos, true);
                 world.setBlock(pos, state.setValue(RECORDING, false), 3);
                 world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
-                return InteractionResult.sidedSuccess(!world.isClientSide());
+                return InteractionResult.sidedSuccess(world.isClientSide());
             }
         }
         return InteractionResult.PASS;
@@ -101,14 +105,15 @@ public class MusicRecorderBlock extends BaseEntityBlock {
             ItemStack handStack = player.getItemInHand(hand);
             ItemStack splitStack = handStack.consumeAndReturn(1, player);
 
-            if (currentMusic != null) {
+            if (currentMusic != null && FMLLoader.getDist() != Dist.DEDICATED_SERVER) { // band-aid fix until I try using packets ~isa 23-12-25
                 // always record current song first
                 this.startRecording(world, state, pos, player, splitStack, currentMusic);
             } else {
                 // if none is playing, try recording from an adjacent jukebox
                 this.tryRecordingFromAdjacentJukebox(world, state, pos, player, splitStack);
             }
-            return ItemInteractionResult.sidedSuccess(!world.isClientSide());
+            player.awardStat(Stats.ITEM_USED.get(splitStack.getItem()));
+            return ItemInteractionResult.sidedSuccess(world.isClientSide());
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
@@ -151,7 +156,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
 
                 if (song != null) {
                     // exact duration of the song, so it always finishes when the song ends
-                    int recordingDuration = (int) (song.lengthInTicks() - jukebox.getSongPlayer().getTicksSinceSongStarted()) + 20; // 20 ticks for padding
+                    int recordingDuration = (int) (song.lengthInTicks() - jukebox.getSongPlayer().getTicksSinceSongStarted()) + JUKEBOX_PADDING_TICKS; // 20 ticks for padding
                     recorder.startRecording(songLocation, true, recordingDuration, player);
                     this.sendMessage(Component.translatable("tooltip.stancements.recording_music_disc").withColor(Stancements.ACCENT_COLOR), player);
                     world.setBlock(pos, state.setValue(RECORDING, true), 3);

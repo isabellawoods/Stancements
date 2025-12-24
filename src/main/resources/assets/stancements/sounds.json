@@ -213,6 +213,14 @@
       }
     ]
   },
+  "music.game.end.alpha": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/end/alpha",
+        "stream": true
+      }
+    ]
+  },
   "music.game.water.shuniji": {
     "sounds": [
       {

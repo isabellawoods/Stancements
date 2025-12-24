@@ -35,9 +35,10 @@ public class UpdateRecordedDiscCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("melonystudios")
-                .then(Commands.literal(Stancements.MOD_ID)
-                        .then(Commands.literal("update_recorded_disc").executes(context -> updateRecordedDisc(context.getSource())))
-                ));
+                .then(Commands.literal(Stancements.stancements("update_recorded_disc").toString())
+                        .executes(context -> updateRecordedDisc(context.getSource()))
+                )
+        );
     }
 
     private static int updateRecordedDisc(CommandSourceStack source) {

@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-09T20:57:35.2027207	Stancements — Data Pack Registries
+// 1.21.1	2025-12-23T17:24:35.2462002	Stancements — Data Pack Registries
 7c82487965cda9265c7faf61d35e753a38cb0e44 data/stancements/jukebox_song/game/ancestry.json
 5522d0edab6bc50763a4319e6358e8e62682c48b data/stancements/jukebox_song/game/an_ordinary_day.json
 69272ed60ce6b4a063ede7c0d6bc6c99a802c9a3 data/stancements/jukebox_song/game/a_familiar_room.json
@@ -20,6 +20,7 @@ cf289db5e6c7d7754ed7ac899c90680eb7e0c592 data/stancements/jukebox_song/game/dry_
 f165d65c24a9ec34eb35a7fbc7b5ecd621e60b34 data/stancements/jukebox_song/game/echo_in_the_wind.json
 74907118a42b14143d1dda22d4e14d3b4b05f29b data/stancements/jukebox_song/game/eld_unknown.json
 0ec286476fee9800790c43238d147d2969e7a5c9 data/stancements/jukebox_song/game/endless.json
+91acc98a62997621ca912b7a13971abc96a45eac data/stancements/jukebox_song/game/end/alpha.json
 e6232c7bd140e017a00faadf66d771f5767dc7a0 data/stancements/jukebox_song/game/end/boss.json
 b091fc1efa6d77debf8cca69c2c1f0accc6e10a3 data/stancements/jukebox_song/game/end/the_end.json
 ae63f343c7b09627e43015e75b458431cc823107 data/stancements/jukebox_song/game/featherfall.json

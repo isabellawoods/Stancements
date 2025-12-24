@@ -3,6 +3,7 @@ package melonystudios.stancements.data.misc;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.item.STItems;
+import melonystudios.stancements.misc.STJukeboxSongs;
 import melonystudios.stancements.misc.datamap.PotPlantables;
 import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.misc.datamap.RecordedDiscStyles;
@@ -60,7 +61,8 @@ public class STDataMapsProvider extends DataMapProvider {
                 .add(JukeboxSongs.RELIC, new RecordedDiscStyles(0x88E6FF, 6), false)
                 .add(JukeboxSongs.PRECIPICE, new RecordedDiscStyles(0x7AB799, 7), false)
                 .add(JukeboxSongs.CREATOR, new RecordedDiscStyles(0xFFDD99, 10), false)
-                .add(JukeboxSongs.CREATOR_MUSIC_BOX, new RecordedDiscStyles(0xFFDD99, 10), false);
+                .add(JukeboxSongs.CREATOR_MUSIC_BOX, new RecordedDiscStyles(0xFFDD99, 10), false)
+                .add(STJukeboxSongs.ALPHA, new RecordedDiscStyles(0x9AC9BF, 13), false);
 
         // NeoForge data maps
         this.builder(NeoForgeDataMaps.FURNACE_FUELS)
