@@ -27,6 +27,8 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
     displayURL="https://github.com/isabellawoods/Stancements/tree/neoforge-1.21.1" #optional
     # A file name (in the root of the mod JAR) containing a logo for display
     logoFile="${mod_id}.png" #optional
+    # Whether the logo is blurry when viewed from up close
+    logoBlur=false
     # A text field displayed in the mod UI
     #credits="The friends we've made along the way" #optional
     # A text field displayed in the mod UI
@@ -36,8 +38,10 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
 
 # The [modproperties] block is used by MrCrayfish's mods to change features about its menus
 [modproperties.${mod_id}]
-    # A small image displayed to the left of your mod’s name in Catalogue's mod list.
-    catalogueImageIcon="assets/${mod_id}/textures/items/${mod_id}_logo.png"
+    # A small image displayed to the left of your mod’s name in Catalogue's mod list
+    catalogueImageIcon="assets/${mod_id}/textures/item/${mod_id}_logo.png"
+    # An image displayed on the background of the mod's logo. Catalogue makes the texture fade out at the bottom to blend into the description
+    catalogueBackground="assets/${mod_id}/textures/gui/catalogue_background.png"
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]

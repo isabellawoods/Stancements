@@ -8,6 +8,7 @@ import melonystudios.stancements.misc.attachment.STCapabilities;
 import melonystudios.stancements.sound.STSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -52,6 +53,7 @@ public abstract class STAbstractMinecartMixin extends VehicleEntity implements I
 
         if (handStack.has(STDataComponents.MINECART_TAG_COLOR) && tags.addTag(handStack.get(STDataComponents.MINECART_TAG_COLOR).color())) {
             world.playSound(null, this.blockPosition(), STSounds.TAG_MINECART.get(), SoundSource.NEUTRAL, 1, 1);
+            player.awardStat(Stats.ITEM_USED.get(handStack.getItem()));
             handStack.shrink(1);
             return InteractionResult.SUCCESS;
         } else if (handStack.is(Tags.Items.TOOLS_SHEAR)) {
@@ -64,6 +66,7 @@ public abstract class STAbstractMinecartMixin extends VehicleEntity implements I
                     handStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 }
                 this.minecart().gameEvent(GameEvent.SHEAR, player);
+                player.awardStat(Stats.ITEM_USED.get(handStack.getItem()));
                 world.playSound(null, this.minecart(), STSounds.SHEAR_MINECART.get(), SoundSource.NEUTRAL, 1, 1);
                 shearedTag = true;
             }

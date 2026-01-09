@@ -1,11 +1,8 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:not",
-      "value": {
-        "type": "neoforge:mod_loaded",
-        "modid": "railcraft"
-      }
+      "type": "neoforge:mod_loaded",
+      "modid": "railcraft"
     }
   ],
   "parent": "minecraft:recipes/root",
@@ -22,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:powered_rail"
+        "recipe": "stancements:compat/railcraft/gilded_rail_using_railbed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -35,7 +32,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:powered_rail"
+      "stancements:compat/railcraft/gilded_rail_using_railbed"
     ]
   }
 }

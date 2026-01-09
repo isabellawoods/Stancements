@@ -15,6 +15,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import net.neoforged.neoforge.common.conditions.NotCondition;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 
 import java.util.concurrent.CompletableFuture;
@@ -97,10 +99,10 @@ public class STRecipeProvider extends RecipeProvider {
         // Functional blocks
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, STItems.GILDED_RAIL, 6).define('#', Tags.Items.INGOTS_GOLD).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
                 .pattern("# #").pattern("#S#").pattern("#R#").unlockedBy("has_rail", has(Items.RAIL))
-                .save(output);
+                .save(output.withConditions(new NotCondition(new ModLoadedCondition("railcraft"))));
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Items.POWERED_RAIL, 6).define('#', Tags.Items.INGOTS_COPPER).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
                 .pattern("# #").pattern("#S#").pattern("#R#").unlockedBy("has_rail", has(Items.RAIL))
-                .save(output);
+                .save(output.withConditions(new NotCondition(new ModLoadedCondition("railcraft"))));
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('I', Tags.Items.GEMS_DIAMOND).define('D', Tags.Items.DYES)
                 .pattern("#R#").pattern("DID").pattern("#R#").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
                 .save(output);

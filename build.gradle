@@ -125,6 +125,9 @@ dependencies {
     // Jade
     implementation "maven.modrinth:jade:${jade_version}+neoforge"
 
+    // Female Gender Mod
+    implementation "maven.modrinth:female-gender:${femalegender_version}"
+
     // External libraries
     // Reutilities
     implementation files("build/libs/reutilities-neoforge-${reutilities_version}+${minecraft_version}.jar")
