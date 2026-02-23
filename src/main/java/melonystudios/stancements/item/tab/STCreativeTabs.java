@@ -1,8 +1,8 @@
 package melonystudios.stancements.item.tab;
 
-import melonystudios.stancements.STConfigs;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.custom.DyedWaterBucketItem;
+import melonystudios.stancements.option.STOptions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -21,7 +21,7 @@ public class STCreativeTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS.register("main", () -> CreativeModeTab.builder()
             .icon(() -> STANCEMENTS_LOGO.get().getDefaultInstance()).title(Component.translatable("tab.stancements.main").withColor(Stancements.ACCENT_COLOR)).displayItems(((parameters, output) -> {
-                if (STConfigs.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
+                if (STOptions.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
                 // Functional blocks
                 output.accept(MUSIC_RECORDER);
                 // Vinyl & recorded discs (items but should be grouped together with the recorder)
@@ -60,8 +60,26 @@ public class STCreativeTabs {
                 output.accept(MAGENTA_CRAFTING_TABLE_CLOTH);
                 output.accept(PINK_CRAFTING_TABLE_CLOTH);
 
-                // Functional blocks
+                // Rails
                 output.accept(GILDED_RAIL);
+                output.accept(WHITE_TAGGING_RAIL);
+                output.accept(LIGHT_GRAY_TAGGING_RAIL);
+                output.accept(GRAY_TAGGING_RAIL);
+                output.accept(BLACK_TAGGING_RAIL);
+                output.accept(BROWN_TAGGING_RAIL);
+                output.accept(RED_TAGGING_RAIL);
+                output.accept(ORANGE_TAGGING_RAIL);
+                output.accept(YELLOW_TAGGING_RAIL);
+                output.accept(LIME_TAGGING_RAIL);
+                output.accept(GREEN_TAGGING_RAIL);
+                output.accept(CYAN_TAGGING_RAIL);
+                output.accept(LIGHT_BLUE_TAGGING_RAIL);
+                output.accept(BLUE_TAGGING_RAIL);
+                output.accept(PURPLE_TAGGING_RAIL);
+                output.accept(MAGENTA_TAGGING_RAIL);
+                output.accept(PINK_TAGGING_RAIL);
+
+                // Functional blocks
                 output.accept(CROP_POT);
                 output.accept(hoppingCropPot(1));
 
@@ -89,7 +107,7 @@ public class STCreativeTabs {
     /// @param output The tab's item adder.
     private static void addDyedWaterBuckets(CreativeModeTab.Output output) {
         addBucket(output, DyedWaterBucketItem.DEFAULT_WATER_COLOR);
-        if (!STConfigs.POPULATE_DYED_WATER_BUCKETS.get()) return;
+        if (!STOptions.POPULATE_DYED_WATER_BUCKETS.get()) return;
 
         List<Integer> colors = List.of(16383998, 15457757, 10329495, 4673362, 1908001, 8606770, 11546150, 16351261, 16701501, 8439583, 6192150, 1481884, 3847130, 8454080, 3949738, 8991416, 13061821, 15961002);
         for (Integer color : colors) {

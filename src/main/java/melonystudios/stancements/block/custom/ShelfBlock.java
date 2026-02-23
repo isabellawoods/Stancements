@@ -70,7 +70,7 @@ public class ShelfBlock extends Block {
 
     @Override
     @NotNull
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACING)) {
             case SOUTH -> NORTH_SHAPE;
             case EAST -> EAST_SHAPE;

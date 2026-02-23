@@ -1,0 +1,20 @@
+{
+  "values": [
+    "stancements:white_tagging_rail",
+    "stancements:light_gray_tagging_rail",
+    "stancements:gray_tagging_rail",
+    "stancements:black_tagging_rail",
+    "stancements:brown_tagging_rail",
+    "stancements:red_tagging_rail",
+    "stancements:orange_tagging_rail",
+    "stancements:yellow_tagging_rail",
+    "stancements:lime_tagging_rail",
+    "stancements:green_tagging_rail",
+    "stancements:cyan_tagging_rail",
+    "stancements:light_blue_tagging_rail",
+    "stancements:blue_tagging_rail",
+    "stancements:purple_tagging_rail",
+    "stancements:magenta_tagging_rail",
+    "stancements:pink_tagging_rail"
+  ]
+}

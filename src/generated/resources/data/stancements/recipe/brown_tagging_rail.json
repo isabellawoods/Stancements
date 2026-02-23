@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "c:ingots/iron"
+    },
+    "D": {
+      "tag": "c:dyes/brown"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "S": {
+      "item": "minecraft:stone_pressure_plate"
+    }
+  },
+  "pattern": [
+    "#D#",
+    "#R#",
+    "#S#"
+  ],
+  "result": {
+    "count": 6,
+    "id": "stancements:brown_tagging_rail"
+  }
+}

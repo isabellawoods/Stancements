@@ -11,6 +11,7 @@ import melonystudios.stancements.item.tab.STCreativeTabs;
 import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
+import melonystudios.stancements.option.STOptions;
 import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.util.STCauldronInteractions;
 import melonystudios.stancements.util.STCompatibility;
@@ -49,7 +50,7 @@ public class Stancements {
         STAttachmentTypes.ATTACHMENTS.register(eventBus);
 
         NeoForgeMod.enableMilkFluid();
-        container.registerConfig(ModConfig.Type.COMMON, STConfigs.SPEC, "melonystudios/stancements-common.toml");
+        container.registerConfig(ModConfig.Type.COMMON, STOptions.SPEC, "melonystudios/stancements-common.toml");
     }
 
     /// Creates a name for a data generator using ***Stancements***' name.
@@ -73,16 +74,17 @@ public class Stancements {
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Miscellaneous
         STCompatibility.flammables();
+        STCompatibility.dispenserBehaviors();
         STCauldronInteractions.registerInteractions();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         // Item overrides
-        ItemProperties.register(STItems.RECORDED_DISC.get(), stancements("label"), (stack, world, livEntity, seed) -> {
+        ItemProperties.register(STItems.RECORDED_DISC.get(), stancements("label"), (stack, level, livEntity, seed) -> {
             Float label = stack.get(STDataComponents.LABEL);
             return label == null ? 1 : label;
         });
-        ItemProperties.register(STItems.CROP_POT.get(), stancements("hopping"), (stack, world, livEntity, seed) -> {
+        ItemProperties.register(STItems.CROP_POT.get(), stancements("hopping"), (stack, level, livEntity, seed) -> {
             BlockItemStateProperties blockState = stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
             Boolean hopping = blockState.get(STBlockStateProperties.HOPPING);
             return hopping != null && hopping ? 1 : 0;

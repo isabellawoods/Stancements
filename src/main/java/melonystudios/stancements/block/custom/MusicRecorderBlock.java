@@ -70,27 +70,27 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        super.setPlacedBy(world, pos, state, placer, stack);
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
 
         CustomData data = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
         CompoundTag tag = data.copyTag();
         if (tag.contains("ticks_until_finished_recording", Tag.TAG_ANY_NUMERIC) && tag.getInt("ticks_until_finished_recording") >= 0) {
-            world.setBlock(pos, state.setValue(RECORDING, true), 3);
+            level.setBlock(pos, state.setValue(RECORDING, true), 3);
         }
     }
 
     @Override
     @NotNull
-    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hitResult) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
-//            if (recorder.isEmpty()) world.setBlock(pos, state.setValue(RECORDING, false), 3);
+//            if (recorder.isEmpty()) level.setBlock(pos, state.setValue(RECORDING, false), 3);
             if (!recorder.isEmpty()) {
-                this.stopRecording(world, pos, true);
-                world.setBlock(pos, state.setValue(RECORDING, false), 3);
-                world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
-                return InteractionResult.sidedSuccess(world.isClientSide());
+                this.stopRecording(level, pos, true);
+                level.setBlock(pos, state.setValue(RECORDING, false), 3);
+                level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
+                return InteractionResult.sidedSuccess(level.isClientSide());
             }
         }
         return InteractionResult.PASS;
@@ -98,54 +98,54 @@ public class MusicRecorderBlock extends BaseEntityBlock {
 
     @Override
     @NotNull
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        // todo: this will likely crash if run on a dedicated server, but how will the server know about the song? ~isa 8-11-25
-        if (!state.getValue(RECORDING) && stack.is(STItemTags.RECORDABLE_DISCS) && world.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        // todo: this will likely crash if run on a dedicated server, but how will the server know about the song? ~isa 08-11-25
+        if (!state.getValue(RECORDING) && stack.is(STItemTags.RECORDABLE_DISCS) && level.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
             SoundInstance currentMusic = ((CurrentMusicAccessor) Minecraft.getInstance().getMusicManager()).stancements$getCurrentMusic();
             ItemStack handStack = player.getItemInHand(hand);
             ItemStack splitStack = handStack.consumeAndReturn(1, player);
 
             if (currentMusic != null && FMLLoader.getDist() != Dist.DEDICATED_SERVER) { // band-aid fix until I try using packets ~isa 23-12-25
                 // always record current song first
-                this.startRecording(world, state, pos, player, splitStack, currentMusic);
+                this.startRecording(level, state, pos, player, splitStack, currentMusic);
             } else {
                 // if none is playing, try recording from an adjacent jukebox
-                this.tryRecordingFromAdjacentJukebox(world, state, pos, player, splitStack);
+                this.tryRecordingFromAdjacentJukebox(level, state, pos, player, splitStack);
             }
             player.awardStat(Stats.ITEM_USED.get(splitStack.getItem()));
-            return ItemInteractionResult.sidedSuccess(world.isClientSide());
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    public void startRecording(Level world, BlockState state, BlockPos pos, @Nullable Player player, ItemStack discStack, @Nullable SoundInstance currentMusic) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public void startRecording(Level level, BlockState state, BlockPos pos, @Nullable Player player, ItemStack discStack, @Nullable SoundInstance currentMusic) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             recorder.insertDisc(discStack.copy());
             if (currentMusic != null && currentMusic.getSound() != null) {
                 recorder.startRecording(currentMusic.getSound().getPath(), false, player);
                 this.sendMessage(Component.translatable("tooltip.stancements.recording_music").withColor(Stancements.ACCENT_COLOR), player);
-                world.setBlock(pos, state.setValue(RECORDING, true), 3);
-                world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
+                level.setBlock(pos, state.setValue(RECORDING, true), 3);
+                level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
             } else {
                 this.sendMessage(NO_MUSIC_PLAYING_TEXT, player);
             }
         }
     }
 
-    public void tryRecordingFromAdjacentJukebox(Level world, BlockState state, BlockPos pos, @Nullable Player player, ItemStack discStack) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public void tryRecordingFromAdjacentJukebox(Level level, BlockState state, BlockPos pos, @Nullable Player player, ItemStack discStack) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
         Component errorMessage = NO_MUSIC_PLAYING_TEXT;
 
         recorder.insertDisc(discStack.copy());
         for (Direction direction : Direction.values()) {
             BlockPos adjacentPos = pos.relative(direction);
-            BlockState adjacentState = world.getBlockState(adjacentPos);
+            BlockState adjacentState = level.getBlockState(adjacentPos);
 
-            if (adjacentState.is(Blocks.JUKEBOX) && world.getBlockEntity(adjacentPos) instanceof JukeboxBlockEntity jukebox) {
+            if (adjacentState.is(Blocks.JUKEBOX) && level.getBlockEntity(adjacentPos) instanceof JukeboxBlockEntity jukebox) {
                 JukeboxSong song = jukebox.getSongPlayer().getSong();
-                var jukeboxSongs = world.registryAccess().registry(Registries.JUKEBOX_SONG);
+                var jukeboxSongs = level.registryAccess().registry(Registries.JUKEBOX_SONG);
 
                 // block recording if the disc is a copy
                 if (jukeboxSongs.isEmpty() || MusicData.isCopied(jukebox.getTheItem())) {
@@ -159,34 +159,34 @@ public class MusicRecorderBlock extends BaseEntityBlock {
                     int recordingDuration = (int) (song.lengthInTicks() - jukebox.getSongPlayer().getTicksSinceSongStarted()) + JUKEBOX_PADDING_TICKS; // 20 ticks for padding
                     recorder.startRecording(songLocation, true, recordingDuration, player);
                     this.sendMessage(Component.translatable("tooltip.stancements.recording_music_disc").withColor(Stancements.ACCENT_COLOR), player);
-                    world.setBlock(pos, state.setValue(RECORDING, true), 3);
-                    world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
+                    level.setBlock(pos, state.setValue(RECORDING, true), 3);
+                    level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
                     return;
                 }
             }
         }
 
-        if (errorMessage != null && !world.isClientSide()) this.sendMessage(errorMessage, player);
+        if (errorMessage != null && !level.isClientSide()) this.sendMessage(errorMessage, player);
     }
 
-    public void stopRecording(Level world, BlockPos pos, boolean fromTop) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public void stopRecording(Level level, BlockPos pos, boolean fromTop) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             ItemStack discStack = recorder.getTheItem();
             recorder.finishRecording(ItemStack.EMPTY, true);
             if (discStack.isEmpty()) return;
 
             if (fromTop) {
-                double xOffset = (double) (world.random.nextFloat() * 0.7F) + (double) 0.15F;
-                double yOffset = (double) (world.random.nextFloat() * 0.7F) + (double) 0.660000002F;
-                double zOffset = (double) (world.random.nextFloat() * 0.7F) + (double) 0.15F;
-                ItemEntity discEntity = new ItemEntity(world, (double) pos.getX() + xOffset, (double) pos.getY() + yOffset, (double) pos.getZ() + zOffset, discStack.copy());
+                double xOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.15F;
+                double yOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.660000002F;
+                double zOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.15F;
+                ItemEntity discEntity = new ItemEntity(level, (double) pos.getX() + xOffset, (double) pos.getY() + yOffset, (double) pos.getZ() + zOffset, discStack.copy());
                 discEntity.setDefaultPickUpDelay();
-                world.addFreshEntity(discEntity);
+                level.addFreshEntity(discEntity);
             } else {
-                ItemEntity discEntity = new ItemEntity(world, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, discStack);
+                ItemEntity discEntity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, discStack);
                 discEntity.setDefaultPickUpDelay();
-                world.addFreshEntity(discEntity);
+                level.addFreshEntity(discEntity);
             }
         }
     }
@@ -204,10 +204,10 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean movedByPiston) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
-            this.stopRecording(world, pos, false);
-            super.onRemove(state, world, pos, newState, movedByPiston);
+            this.stopRecording(level, pos, false);
+            super.onRemove(state, level, pos, newState, movedByPiston);
         }
     }
 
@@ -219,8 +219,8 @@ public class MusicRecorderBlock extends BaseEntityBlock {
 
     @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide() ? null : createTickerHelper(type, STBlockEntities.MUSIC_RECORDER.get(), MusicRecorderBlockEntity::tick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide() ? null : createTickerHelper(type, STBlockEntities.MUSIC_RECORDER.get(), MusicRecorderBlockEntity::tick);
     }
 
     @Override
@@ -234,8 +234,8 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             if (!state.getValue(RECORDING)) return 0;
             return ((recorder.ticksUntilFinishedRecording() * 14) / MusicRecorderBlockEntity.DEFAULT_RECORDING_DURATION) + 1;
@@ -244,7 +244,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    public int getSignal(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
+    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         return state.getValue(RECORDING) ? 15 : 0;
     }
 

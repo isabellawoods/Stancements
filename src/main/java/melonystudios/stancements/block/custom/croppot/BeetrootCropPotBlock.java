@@ -41,8 +41,8 @@ public class BeetrootCropPotBlock extends WheatCropPotBlock {
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource rand) {
-        if (rand.nextInt(3) != 0) super.randomTick(state, world, pos, rand);
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+        if (rand.nextInt(3) != 0) super.randomTick(state, level, pos, rand);
     }
 
     @Override

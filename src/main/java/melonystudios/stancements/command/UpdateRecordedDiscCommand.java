@@ -35,7 +35,7 @@ public class UpdateRecordedDiscCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("melonystudios")
-                .then(Commands.literal(Stancements.stancements("update_recorded_disc").toString())
+                .then(Commands.literal(Stancements.stancements("gameplay/update_recorded_disc").toString())
                         .executes(context -> updateRecordedDisc(context.getSource()))
                 )
         );

@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-// todo: make discs with the "music_id" component automatically resolve to the jukebox song when available ~isa 3-8-25
+// todo: make discs with the "music_id" component automatically resolve to the jukebox song when available ~isa 03-08-25
 public class RecordedDiscItem extends Item {
     public static final int DEFAULT_DISC_COLOR = 0xFFF9FFFE;
 
@@ -60,8 +60,8 @@ public class RecordedDiscItem extends Item {
                 .replace(".ogg", ""));
     }
 
-    public static boolean setJukeboxSong(ItemStack stack, Level world, ResourceLocation musicID, boolean copyingSong) {
-        var jukeboxSongs = world.registryAccess().registry(Registries.JUKEBOX_SONG);
+    public static boolean setJukeboxSong(ItemStack stack, Level level, ResourceLocation musicID, boolean copyingSong) {
+        var jukeboxSongs = level.registryAccess().registry(Registries.JUKEBOX_SONG);
         if (jukeboxSongs.isPresent()) {
             var song = jukeboxSongs.get().getHolder(copyingSong ? musicID : getJukeboxSongLocation(musicID));
             if (song.isPresent()) {
@@ -77,31 +77,31 @@ public class RecordedDiscItem extends Item {
         return false;
     }
 
-    public static ItemStack getRecordedDisc(Level world, ResourceLocation musicID, boolean copyingSong, ItemStack originalStack) {
+    public static ItemStack getRecordedDisc(Level level, ResourceLocation musicID, boolean copyingSong, ItemStack originalStack) {
         if (originalStack.isEmpty()) return ItemStack.EMPTY;
         ItemStack discStack = new ItemStack(STItems.RECORDED_DISC.get());
 
         if (copyingSong) {
-            ItemStack stack = setAppearanceFromDataMap(world, discStack, musicID);
-            return stack == null ? randomizeAppearance(world, discStack, musicID, true) : stack;
+            ItemStack stack = setAppearanceFromDataMap(level, discStack, musicID);
+            return stack == null ? randomizeAppearance(level, discStack, musicID, true) : stack;
         }
-        return randomizeAppearance(world, discStack, musicID, false);
+        return randomizeAppearance(level, discStack, musicID, false);
     }
 
-    public static ItemStack randomizeAppearance(Level world, ItemStack stack, ResourceLocation musicID, boolean copyingSong) {
-        setJukeboxSong(stack, world, musicID, copyingSong);
-        stack.set(STDataComponents.LABEL, (float) (world.getRandom().nextInt(13) + 1));
-        return getRandomLabelColor(stack, world.getRandom());
+    public static ItemStack randomizeAppearance(Level level, ItemStack stack, ResourceLocation musicID, boolean copyingSong) {
+        setJukeboxSong(stack, level, musicID, copyingSong);
+        stack.set(STDataComponents.LABEL, (float) (level.getRandom().nextInt(13) + 1));
+        return getRandomLabelColor(stack, level.getRandom());
     }
 
-    public static ItemStack setAppearanceFromDataMap(Level world, ItemStack stack, ResourceLocation musicID) {
-        var jukeboxSongs = world.registryAccess().registry(Registries.JUKEBOX_SONG);
+    public static ItemStack setAppearanceFromDataMap(Level level, ItemStack stack, ResourceLocation musicID) {
+        var jukeboxSongs = level.registryAccess().registry(Registries.JUKEBOX_SONG);
         if (jukeboxSongs.isEmpty()) return null;
         var copyStyle = jukeboxSongs.get().getDataMap(STDataMaps.RECORDED_DISC_STYLES);
 
         for (ResourceKey<JukeboxSong> song : copyStyle.keySet()) {
             if (song.location().equals(musicID)) {
-                setJukeboxSong(stack, world, musicID, true);
+                setJukeboxSong(stack, level, musicID, true);
                 stack.set(STDataComponents.LABEL, copyStyle.get(song).label());
                 stack.set(STDataComponents.MUSIC_DATA, MusicData.copiedDisc());
                 stack.set(DataComponents.DYED_COLOR, new DyedItemColor(copyStyle.get(song).color(), false));

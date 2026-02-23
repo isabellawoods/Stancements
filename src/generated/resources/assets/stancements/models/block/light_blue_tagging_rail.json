@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/rail_flat",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "rail": "stancements:block/light_blue_tagging_rail"
+  }
+}

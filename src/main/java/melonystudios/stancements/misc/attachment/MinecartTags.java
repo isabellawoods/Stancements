@@ -51,7 +51,6 @@ public class MinecartTags implements INBTSerializable<CompoundTag> {
 
     public static Item getTagForColor(DyeColor color) {
         return switch (color) {
-            case WHITE -> STItems.WHITE_TAG.get();
             case LIGHT_GRAY -> STItems.LIGHT_GRAY_TAG.get();
             case GRAY -> STItems.GRAY_TAG.get();
             case BLACK -> STItems.BLACK_TAG.get();
@@ -67,6 +66,7 @@ public class MinecartTags implements INBTSerializable<CompoundTag> {
             case PURPLE -> STItems.PURPLE_TAG.get();
             case MAGENTA -> STItems.MAGENTA_TAG.get();
             case PINK -> STItems.PINK_TAG.get();
+            default -> STItems.WHITE_TAG.get();
         };
     }
 

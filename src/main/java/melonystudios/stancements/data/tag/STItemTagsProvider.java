@@ -37,6 +37,9 @@ public class STItemTagsProvider extends ItemTagsProvider {
                 BROWN_CRAFTING_TABLE_CLOTH.get(), RED_CRAFTING_TABLE_CLOTH.get(), ORANGE_CRAFTING_TABLE_CLOTH.get(), YELLOW_CRAFTING_TABLE_CLOTH.get(), LIME_CRAFTING_TABLE_CLOTH.get(),
                 GREEN_CRAFTING_TABLE_CLOTH.get(), CYAN_CRAFTING_TABLE_CLOTH.get(), LIGHT_BLUE_CRAFTING_TABLE_CLOTH.get(), BLUE_CRAFTING_TABLE_CLOTH.get(), PURPLE_CRAFTING_TABLE_CLOTH.get(),
                 MAGENTA_CRAFTING_TABLE_CLOTH.get(), PINK_CRAFTING_TABLE_CLOTH.get());
+        this.tag(STItemTags.TAGGING_RAILS).add(WHITE_TAGGING_RAIL.get(), LIGHT_GRAY_TAGGING_RAIL.get(), GRAY_TAGGING_RAIL.get(), BLACK_TAGGING_RAIL.get(), BROWN_TAGGING_RAIL.get(), RED_TAGGING_RAIL.get(),
+                ORANGE_TAGGING_RAIL.get(), YELLOW_TAGGING_RAIL.get(), LIME_TAGGING_RAIL.get(), GREEN_TAGGING_RAIL.get(), CYAN_TAGGING_RAIL.get(), LIGHT_BLUE_TAGGING_RAIL.get(), BLUE_TAGGING_RAIL.get(),
+                PURPLE_TAGGING_RAIL.get(), MAGENTA_TAGGING_RAIL.get(), PINK_TAGGING_RAIL.get());
         this.tag(STItemTags.VINYL_DISC_DYES).addTag(Tags.Items.DYES_LIGHT_GRAY).addTag(Tags.Items.DYES_GRAY);
         this.tag(STItemTags.RECORDABLE_DISCS).add(VINYL_DISC.get());
         this.tag(STItemTags.MINECART_TAGS).add(WHITE_TAG.get(), LIGHT_GRAY_TAG.get(), GRAY_TAG.get(), BLACK_TAG.get(), BROWN_TAG.get(), RED_TAG.get(), ORANGE_TAG.get(), YELLOW_TAG.get(), LIME_TAG.get(),
@@ -48,22 +51,22 @@ public class STItemTagsProvider extends ItemTagsProvider {
         this.tag(ReItemTags.LOGOS).add(STANCEMENTS_LOGO.get());
         this.tag(STItemTags.DYED_WATER_BUCKETS).add(DYED_WATER_BUCKET.get());
 
-        this.tag(Tags.Items.DYED_WHITE).add(WHITE_CRAFTING_TABLE_CLOTH.get(), WHITE_TAG.get());
-        this.tag(Tags.Items.DYED_LIGHT_GRAY).add(LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get(), LIGHT_GRAY_TAG.get());
-        this.tag(Tags.Items.DYED_GRAY).add(GRAY_CRAFTING_TABLE_CLOTH.get(), GRAY_TAG.get());
-        this.tag(Tags.Items.DYED_BLACK).add(BLACK_CRAFTING_TABLE_CLOTH.get(), BLACK_TAG.get());
-        this.tag(Tags.Items.DYED_BROWN).add(BROWN_CRAFTING_TABLE_CLOTH.get(), BROWN_TAG.get());
-        this.tag(Tags.Items.DYED_RED).add(RED_CRAFTING_TABLE_CLOTH.get(), RED_TAG.get());
-        this.tag(Tags.Items.DYED_ORANGE).add(ORANGE_CRAFTING_TABLE_CLOTH.get(), ORANGE_TAG.get());
-        this.tag(Tags.Items.DYED_YELLOW).add(YELLOW_CRAFTING_TABLE_CLOTH.get(), YELLOW_TAG.get());
-        this.tag(Tags.Items.DYED_LIME).add(LIME_CRAFTING_TABLE_CLOTH.get(), LIME_TAG.get());
-        this.tag(Tags.Items.DYED_GREEN).add(GREEN_CRAFTING_TABLE_CLOTH.get(), GREEN_TAG.get());
-        this.tag(Tags.Items.DYED_CYAN).add(CYAN_CRAFTING_TABLE_CLOTH.get(), CYAN_TAG.get());
-        this.tag(Tags.Items.DYED_LIGHT_BLUE).add(LIGHT_BLUE_CRAFTING_TABLE_CLOTH.get(), LIGHT_BLUE_TAG.get());
-        this.tag(Tags.Items.DYED_BLUE).add(BLUE_CRAFTING_TABLE_CLOTH.get(), BLUE_TAG.get());
-        this.tag(Tags.Items.DYED_PURPLE).add(PURPLE_CRAFTING_TABLE_CLOTH.get(), PURPLE_TAG.get());
-        this.tag(Tags.Items.DYED_MAGENTA).add(MAGENTA_CRAFTING_TABLE_CLOTH.get(), MAGENTA_TAG.get());
-        this.tag(Tags.Items.DYED_PINK).add(PINK_CRAFTING_TABLE_CLOTH.get(), PINK_TAG.get());
+        this.tag(Tags.Items.DYED_WHITE).add(WHITE_CRAFTING_TABLE_CLOTH.get(), WHITE_TAGGING_RAIL.get(), WHITE_TAG.get());
+        this.tag(Tags.Items.DYED_LIGHT_GRAY).add(LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get(), LIGHT_GRAY_TAGGING_RAIL.get(), LIGHT_GRAY_TAG.get());
+        this.tag(Tags.Items.DYED_GRAY).add(GRAY_CRAFTING_TABLE_CLOTH.get(), GRAY_TAGGING_RAIL.get(), GRAY_TAG.get());
+        this.tag(Tags.Items.DYED_BLACK).add(BLACK_CRAFTING_TABLE_CLOTH.get(), BLACK_TAGGING_RAIL.get(), BLACK_TAG.get());
+        this.tag(Tags.Items.DYED_BROWN).add(BROWN_CRAFTING_TABLE_CLOTH.get(), BROWN_TAGGING_RAIL.get(), BROWN_TAG.get());
+        this.tag(Tags.Items.DYED_RED).add(RED_CRAFTING_TABLE_CLOTH.get(), RED_TAGGING_RAIL.get(), RED_TAG.get());
+        this.tag(Tags.Items.DYED_ORANGE).add(ORANGE_CRAFTING_TABLE_CLOTH.get(), ORANGE_TAGGING_RAIL.get(), ORANGE_TAG.get());
+        this.tag(Tags.Items.DYED_YELLOW).add(YELLOW_CRAFTING_TABLE_CLOTH.get(), YELLOW_TAGGING_RAIL.get(), YELLOW_TAG.get());
+        this.tag(Tags.Items.DYED_LIME).add(LIME_CRAFTING_TABLE_CLOTH.get(), LIME_TAGGING_RAIL.get(), LIME_TAG.get());
+        this.tag(Tags.Items.DYED_GREEN).add(GREEN_CRAFTING_TABLE_CLOTH.get(), GREEN_TAGGING_RAIL.get(), GREEN_TAG.get());
+        this.tag(Tags.Items.DYED_CYAN).add(CYAN_CRAFTING_TABLE_CLOTH.get(), CYAN_TAGGING_RAIL.get(), CYAN_TAG.get());
+        this.tag(Tags.Items.DYED_LIGHT_BLUE).add(LIGHT_BLUE_CRAFTING_TABLE_CLOTH.get(), LIGHT_BLUE_TAGGING_RAIL.get(), LIGHT_BLUE_TAG.get());
+        this.tag(Tags.Items.DYED_BLUE).add(BLUE_CRAFTING_TABLE_CLOTH.get(), BLUE_TAGGING_RAIL.get(), BLUE_TAG.get());
+        this.tag(Tags.Items.DYED_PURPLE).add(PURPLE_CRAFTING_TABLE_CLOTH.get(), PURPLE_TAGGING_RAIL.get(), PURPLE_TAG.get());
+        this.tag(Tags.Items.DYED_MAGENTA).add(MAGENTA_CRAFTING_TABLE_CLOTH.get(), MAGENTA_TAGGING_RAIL.get(), MAGENTA_TAG.get());
+        this.tag(Tags.Items.DYED_PINK).add(PINK_CRAFTING_TABLE_CLOTH.get(), PINK_TAGGING_RAIL.get(), PINK_TAG.get());
 
         // Minecraft tags
         this.tag(ItemTags.NON_FLAMMABLE_WOOD).add(CRIMSON_SHELF.get(), WARPED_SHELF.get());

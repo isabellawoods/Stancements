@@ -1,20 +1,20 @@
-// 1.21.1	2025-12-15T21:28:10.1642056	Stancements — Block Tags
-912254d5172ab57a149071d7c31594070ab64b92 data/c/tags/block/dyed/black.json
-290da4b37bb09e60b01f49bbfd6e8b3694eeef3a data/c/tags/block/dyed/blue.json
-63cf1641ef9e4cbf066418c7b0df9723aebaa29b data/c/tags/block/dyed/brown.json
-3a144b89de8396acac83ce570e9537e25c2e343c data/c/tags/block/dyed/cyan.json
-de73a319b65975be894c1ef14c366d0f79a5418d data/c/tags/block/dyed/gray.json
-59c435d5ce99f6db34d4bf799c5ce2926992525e data/c/tags/block/dyed/green.json
-953b4d7fadb22eaaeac3a094327d2d796d5ba28f data/c/tags/block/dyed/light_blue.json
-cccd10b2af7287825a5845e84958b40308ed3be9 data/c/tags/block/dyed/light_gray.json
-61c41c7b7ba8599aea7c614611013740d1865d8c data/c/tags/block/dyed/lime.json
-329c1469da4d748df59f6a9ead2ad5e1766a9eef data/c/tags/block/dyed/magenta.json
-593d58d15ab7f2b1b0fb24b033b0316342c56364 data/c/tags/block/dyed/orange.json
-b4f451d18f53c4dcb4e29c54b4f57c2cf72b0211 data/c/tags/block/dyed/pink.json
-e6d64827688a5a01461b169ee2017c6f2950c221 data/c/tags/block/dyed/purple.json
-e7f81e6b1d5440a0619381b6c9eede9dbd979c70 data/c/tags/block/dyed/red.json
-929bd32151b772874d8e71ba13a2bce4b7791f73 data/c/tags/block/dyed/white.json
-f2ca3b3039d209652d0d593bbf3bded586a3fde4 data/c/tags/block/dyed/yellow.json
+// 1.21.1	2026-02-19T16:37:19.737056012	Stancements — Block Tags
+c95fadbe298c4673db451cdec520d7b75656a9a3 data/c/tags/block/dyed/black.json
+14e6539453358aae4fe1f86ffd9d15f3a5da3998 data/c/tags/block/dyed/blue.json
+cfb3dca2dabaa4757cc99d88a887da13c4aa2d58 data/c/tags/block/dyed/brown.json
+4b6e79b4fcb2f5bf416308334c49fb46c03365ac data/c/tags/block/dyed/cyan.json
+a4315b9507a311c407ace50f19c4eaa32f09beae data/c/tags/block/dyed/gray.json
+d0e5de69b5dfa4c8b5161965391c7058a091e455 data/c/tags/block/dyed/green.json
+9de0c4fa8a1baad496fc849cf9184b167e99bb6c data/c/tags/block/dyed/light_blue.json
+83d683e5efbb008785f972add69c0763c00bb4f6 data/c/tags/block/dyed/light_gray.json
+42a55bd2455d41f8618582afc32aad1c45aa44e3 data/c/tags/block/dyed/lime.json
+872990b85821c15f943db317111b0991ed0a2c1f data/c/tags/block/dyed/magenta.json
+0c3b6a8bef0bdf771577ce310500f6f27784d7f9 data/c/tags/block/dyed/orange.json
+54be35dd907da46731f33ee0bcf200e93b017d3c data/c/tags/block/dyed/pink.json
+e80027e3933f9568c2dc53398456e16f552179de data/c/tags/block/dyed/purple.json
+2c14566d8714779d5d24fc5e9a743529abd51a54 data/c/tags/block/dyed/red.json
+488be22b5cf6146ddc64addf046caec549cb3260 data/c/tags/block/dyed/white.json
+2e9ae24fe9593e98b1b4d3a163b7526f1b8fd3e2 data/c/tags/block/dyed/yellow.json
 4164db15f00815de08671cd775022cba04d3dd1d data/c/tags/block/mineable/shears.json
 13f41e126ff554e36a61e97c9cdf798f0c742d5f data/c/tags/block/villager_job_sites.json
 13f41e126ff554e36a61e97c9cdf798f0c742d5f data/minecraft/tags/block/cauldrons.json
@@ -22,7 +22,8 @@ f2ca3b3039d209652d0d593bbf3bded586a3fde4 data/c/tags/block/dyed/yellow.json
 6b5166b7a4912cb49c0be28e19bcce18858ed9e1 data/minecraft/tags/block/dampens_vibrations.json
 a7a9e02f8669baa98085b4e9a05af96a305b8a25 data/minecraft/tags/block/mineable/axe.json
 d6b4a7e931db60547fc006fa3136c1eedcf917ba data/minecraft/tags/block/mineable/pickaxe.json
-8c0690e7fa17a579eeb798b0eefc255eb66a102c data/minecraft/tags/block/rails.json
+27bb8478b74b04274f99643780592eb68b89d91a data/minecraft/tags/block/rails.json
 40d8409068ef76856df6dad04690c54d8678a6c7 data/stancements/tags/block/crafting_table_cloths.json
 9954df60ce2907ce04100ad563aa1285b6c36d24 data/stancements/tags/block/crop_pots.json
 4657390613a992c24eb86291770a20c08a1d2670 data/stancements/tags/block/shelves.json
+afa21c097b596a55c4f584a8cafea00aedec4fc4 data/stancements/tags/block/tagging_rails.json

@@ -26,42 +26,42 @@ public class STCauldronInteractions {
     public static final CauldronInteraction.InteractionMap DYED_WATER = CauldronInteraction.newInteractionMap("dyed_water");
     public static final CauldronInteraction.InteractionMap MILK = CauldronInteraction.newInteractionMap("milk");
 
-    public static final CauldronInteraction FILL_DYED_WATER = (state, world, pos, player, hand, stack) -> {
+    public static final CauldronInteraction FILL_DYED_WATER = (state, level, pos, player, hand, stack) -> {
         BlockState cauldronState = STBlocks.DYED_WATER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3);
-        ItemInteractionResult result = CauldronInteraction.emptyBucket(world, pos, player, hand, stack, cauldronState, SoundEvents.BUCKET_EMPTY);
-        world.setBlockAndUpdate(pos, cauldronState);
+        ItemInteractionResult result = CauldronInteraction.emptyBucket(level, pos, player, hand, stack, cauldronState, SoundEvents.BUCKET_EMPTY);
+        level.setBlockAndUpdate(pos, cauldronState);
         DyedWaterCauldronBlockEntity cauldron = new DyedWaterCauldronBlockEntity(pos, cauldronState);
         cauldron.setWaterColor(DyedWaterBucketItem.getColor(stack));
-        world.setBlockEntity(cauldron);
+        level.setBlockEntity(cauldron);
         return result;
     };
-    public static final CauldronInteraction FILL_MILK = (state, world, pos, player, hand, stack) ->
-            CauldronInteraction.emptyBucket(world, pos, player, hand, stack, STBlocks.MILK_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3), NeoForgeMod.BUCKET_EMPTY_MILK.get());
-    public static final CauldronInteraction DYE_ITEM = (state, world, pos, player, hand, stack) -> {
+    public static final CauldronInteraction FILL_MILK = (state, level, pos, player, hand, stack) ->
+            CauldronInteraction.emptyBucket(level, pos, player, hand, stack, STBlocks.MILK_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3), NeoForgeMod.BUCKET_EMPTY_MILK.get());
+    public static final CauldronInteraction DYE_ITEM = (state, level, pos, player, hand, stack) -> {
         if (!stack.is(ItemTags.DYEABLE) || stack.has(DataComponents.DYED_COLOR)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (!world.isClientSide && blockEntity instanceof DyedWaterCauldronBlockEntity cauldron) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (!level.isClientSide() && blockEntity instanceof DyedWaterCauldronBlockEntity cauldron) {
                 stack.set(DataComponents.DYED_COLOR, new DyedItemColor(cauldron.getWaterColor(), true));
-                LayeredCauldronBlock.lowerFillLevel(state, world, pos);
+                LayeredCauldronBlock.lowerFillLevel(state, level, pos);
             }
-            world.playSound(player, pos, STSounds.ITEM_DYE.get(), SoundSource.BLOCKS);
-            return ItemInteractionResult.sidedSuccess(world.isClientSide);
+            level.playSound(player, pos, STSounds.ITEM_DYE.get(), SoundSource.BLOCKS);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
     };
 
     public static void registerInteractions() {
         Map<Item, CauldronInteraction> dyedWater = DYED_WATER.map();
-        dyedWater.put(Items.BUCKET, ((state, world, pos, player, hand, stack) -> {
+        dyedWater.put(Items.BUCKET, (state, level, pos, player, hand, stack) -> {
             ItemStack bucketStack = new ItemStack(STItems.DYED_WATER_BUCKET.get());
-            BlockEntity blockEntity = world.getBlockEntity(pos);
+            BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof DyedWaterCauldronBlockEntity cauldron) {
                 DyedWaterBucketItem.setColor(bucketStack, cauldron.getWaterColor());
             }
-            return CauldronInteraction.fillBucket(state, world, pos, player, hand, stack, bucketStack,
+            return CauldronInteraction.fillBucket(state, level, pos, player, hand, stack, bucketStack,
                     state1 -> state1.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL);
-        }));
+        });
         dyedWater.put(Items.LEATHER_HELMET, DYE_ITEM);
         dyedWater.put(Items.LEATHER_CHESTPLATE, DYE_ITEM);
         dyedWater.put(Items.LEATHER_LEGGINGS, DYE_ITEM);
@@ -73,9 +73,9 @@ public class STCauldronInteractions {
         //  add dyed water buckets for all biomes
 
         Map<Item, CauldronInteraction> milk = MILK.map();
-        milk.put(Items.BUCKET, ((state, world, pos, player, hand, stack) ->
-                CauldronInteraction.fillBucket(state, world, pos, player, hand, stack, new ItemStack(Items.MILK_BUCKET),
-                        state1 -> state1.getValue(LayeredCauldronBlock.LEVEL) == 3, NeoForgeMod.BUCKET_FILL_MILK.get())));
+        milk.put(Items.BUCKET, (state, level, pos, player, hand, stack) ->
+                CauldronInteraction.fillBucket(state, level, pos, player, hand, stack, new ItemStack(Items.MILK_BUCKET),
+                        state1 -> state1.getValue(LayeredCauldronBlock.LEVEL) == 3, NeoForgeMod.BUCKET_FILL_MILK.get()));
 
         Map<Item, CauldronInteraction> empty = CauldronInteraction.EMPTY.map();
         empty.put(STItems.DYED_WATER_BUCKET.get(), FILL_DYED_WATER);

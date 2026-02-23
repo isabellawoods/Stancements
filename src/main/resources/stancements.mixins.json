@@ -3,11 +3,13 @@
   "minVersion": "0.8.5",
   "package": "melonystudios.stancements.mixin",
   "refmap": "stancements.refmap.json",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "STBannerItemMixin",
+    "STShearsDispenseBehaviorMixin",
     "STShearsItemMixin",
     "entity.STAbstractMinecartMixin",
+    "entity.STMinecartChestMixin",
     "entity.STServerPlayerMixin"
   ],
   "client": [

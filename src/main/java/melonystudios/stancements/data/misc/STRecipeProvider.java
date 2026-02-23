@@ -22,6 +22,9 @@ import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 import java.util.concurrent.CompletableFuture;
 
 public class STRecipeProvider extends RecipeProvider {
+    /// Mod id for [*Railcraft Reborn*](https://modrinth.com/mod/railcraft-reborn).
+    public static final String RAILCRAFT_MOD_ID = "railcraft";
+
     public STRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
@@ -97,12 +100,6 @@ public class STRecipeProvider extends RecipeProvider {
         waterConcrete(output, Items.PINK_CONCRETE_POWDER, Items.PINK_CONCRETE);
 
         // Functional blocks
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, STItems.GILDED_RAIL, 6).define('#', Tags.Items.INGOTS_GOLD).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
-                .pattern("# #").pattern("#S#").pattern("#R#").unlockedBy("has_rail", has(Items.RAIL))
-                .save(output.withConditions(new NotCondition(new ModLoadedCondition("railcraft"))));
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Items.POWERED_RAIL, 6).define('#', Tags.Items.INGOTS_COPPER).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
-                .pattern("# #").pattern("#S#").pattern("#R#").unlockedBy("has_rail", has(Items.RAIL))
-                .save(output.withConditions(new NotCondition(new ModLoadedCondition("railcraft"))));
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('I', Tags.Items.GEMS_DIAMOND).define('D', Tags.Items.DYES)
                 .pattern("#R#").pattern("DID").pattern("#R#").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
                 .save(output);
@@ -115,6 +112,46 @@ public class STRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.hoppingCropPot(8)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
                 .pattern("###").pattern("#H#").pattern("###").unlockedBy("has_hopper", has(Items.HOPPER))
                 .group("hopping_crop_pot").save(output, Stancements.stancements("hopping_crop_pot_from_existing"));
+
+        // Rails
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, STItems.GILDED_RAIL, 6).define('#', Tags.Items.INGOTS_GOLD).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
+                .pattern("# #").pattern("#S#").pattern("#R#").unlockedBy("has_rail", has(Items.RAIL))
+                .save(output.withConditions(new NotCondition(new ModLoadedCondition(RAILCRAFT_MOD_ID))));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Items.POWERED_RAIL, 6).define('#', Tags.Items.INGOTS_COPPER).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
+                .pattern("# #").pattern("#S#").pattern("#R#").unlockedBy("has_rail", has(Items.RAIL))
+                .save(output.withConditions(new NotCondition(new ModLoadedCondition(RAILCRAFT_MOD_ID))));
+        addTaggingRail(output, STItems.WHITE_TAGGING_RAIL, Tags.Items.DYES_WHITE);
+        addTaggingRail(output, STItems.LIGHT_GRAY_TAGGING_RAIL, Tags.Items.DYES_LIGHT_GRAY);
+        addTaggingRail(output, STItems.GRAY_TAGGING_RAIL, Tags.Items.DYES_GRAY);
+        addTaggingRail(output, STItems.BLACK_TAGGING_RAIL, Tags.Items.DYES_BLACK);
+        addTaggingRail(output, STItems.BROWN_TAGGING_RAIL, Tags.Items.DYES_BROWN);
+        addTaggingRail(output, STItems.RED_TAGGING_RAIL, Tags.Items.DYES_RED);
+        addTaggingRail(output, STItems.ORANGE_TAGGING_RAIL, Tags.Items.DYES_ORANGE);
+        addTaggingRail(output, STItems.YELLOW_TAGGING_RAIL, Tags.Items.DYES_YELLOW);
+        addTaggingRail(output, STItems.LIME_TAGGING_RAIL, Tags.Items.DYES_LIME);
+        addTaggingRail(output, STItems.GREEN_TAGGING_RAIL, Tags.Items.DYES_GREEN);
+        addTaggingRail(output, STItems.CYAN_TAGGING_RAIL, Tags.Items.DYES_CYAN);
+        addTaggingRail(output, STItems.LIGHT_BLUE_TAGGING_RAIL, Tags.Items.DYES_LIGHT_BLUE);
+        addTaggingRail(output, STItems.BLUE_TAGGING_RAIL, Tags.Items.DYES_BLUE);
+        addTaggingRail(output, STItems.PURPLE_TAGGING_RAIL, Tags.Items.DYES_PURPLE);
+        addTaggingRail(output, STItems.MAGENTA_TAGGING_RAIL, Tags.Items.DYES_MAGENTA);
+        addTaggingRail(output, STItems.PINK_TAGGING_RAIL, Tags.Items.DYES_PINK);
+        dyeTaggingRail(output, STItems.WHITE_TAGGING_RAIL, Tags.Items.DYES_WHITE);
+        dyeTaggingRail(output, STItems.LIGHT_GRAY_TAGGING_RAIL, Tags.Items.DYES_LIGHT_GRAY);
+        dyeTaggingRail(output, STItems.GRAY_TAGGING_RAIL, Tags.Items.DYES_GRAY);
+        dyeTaggingRail(output, STItems.BLACK_TAGGING_RAIL, Tags.Items.DYES_BLACK);
+        dyeTaggingRail(output, STItems.BROWN_TAGGING_RAIL, Tags.Items.DYES_BROWN);
+        dyeTaggingRail(output, STItems.RED_TAGGING_RAIL, Tags.Items.DYES_RED);
+        dyeTaggingRail(output, STItems.ORANGE_TAGGING_RAIL, Tags.Items.DYES_ORANGE);
+        dyeTaggingRail(output, STItems.YELLOW_TAGGING_RAIL, Tags.Items.DYES_YELLOW);
+        dyeTaggingRail(output, STItems.LIME_TAGGING_RAIL, Tags.Items.DYES_LIME);
+        dyeTaggingRail(output, STItems.GREEN_TAGGING_RAIL, Tags.Items.DYES_GREEN);
+        dyeTaggingRail(output, STItems.CYAN_TAGGING_RAIL, Tags.Items.DYES_CYAN);
+        dyeTaggingRail(output, STItems.LIGHT_BLUE_TAGGING_RAIL, Tags.Items.DYES_LIGHT_BLUE);
+        dyeTaggingRail(output, STItems.BLUE_TAGGING_RAIL, Tags.Items.DYES_BLUE);
+        dyeTaggingRail(output, STItems.PURPLE_TAGGING_RAIL, Tags.Items.DYES_PURPLE);
+        dyeTaggingRail(output, STItems.MAGENTA_TAGGING_RAIL, Tags.Items.DYES_MAGENTA);
+        dyeTaggingRail(output, STItems.PINK_TAGGING_RAIL, Tags.Items.DYES_PINK);
 
         // Items
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.VINYL_DISC, 4).define('C', ItemTags.COALS).define('D', STItemTags.VINYL_DISC_DYES).define('H', Items.HONEYCOMB)
@@ -166,7 +203,7 @@ public class STRecipeProvider extends RecipeProvider {
     /// Makes a crafting table cloth coloring/dyeing recipe.
     /// @param output Used to save the recipe to a `.json` file.
     /// @param tableCloth The table cloth item.
-    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_WHITE c:dyes:white}.
+    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_LIGHT_BLUE #c:dyes/light_blue}.
     public static void dyeCraftingTableCloth(RecipeOutput output, ItemLike tableCloth, TagKey<Item> dyeTag) {
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(tableCloth.asItem());
         ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, tableCloth).requires(dyeTag).requires(DifferenceIngredient.of(Ingredient.of(STItemTags.CRAFTING_TABLE_CLOTHS), Ingredient.of(tableCloth)))
@@ -188,10 +225,33 @@ public class STRecipeProvider extends RecipeProvider {
     /// Makes a minecart tag recipe.
     /// @param output Used to save the recipe to a `.json` file.
     /// @param tag The tag item.
-    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_PINK c:dyes/pink}.
+    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_PINK #c:dyes/pink}.
     public static void addMinecartTag(RecipeOutput output, ItemLike tag, TagKey<Item> dyeTag) {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, tag).requires(Items.PAPER).requires(Tags.Items.STRINGS).requires(dyeTag)
                 .unlockedBy("has_paper", has(Items.PAPER)).group("minecart_tags")
                 .save(output);
+    }
+
+    /// Makes a tagging rail recipe.
+    /// @param output Use to save the recipe to a `.json` file.
+    /// @param rail The tagging rail item.
+    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_WHITE #c:dyes/white}.
+    public static void addTaggingRail(RecipeOutput output, ItemLike rail, TagKey<Item> dyeTag) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, rail, 6).define('#', Tags.Items.INGOTS_IRON).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Items.STONE_PRESSURE_PLATE).define('D', dyeTag)
+                .pattern("#D#").pattern("#R#").pattern("#S#").unlockedBy("has_rail", has(Items.RAIL))
+                .save(output);
+    }
+
+    /// Makes a tagging rails dyeing/coloring recipe.
+    /// @param output Used to save the recipe to a `.json` file.
+    /// @param rail The tagging rail item.
+    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_PINK #c:dyes/pink}.
+    public static void dyeTaggingRail(RecipeOutput output, ItemLike rail, TagKey<Item> dyeTag) {
+        Ingredient ingredient = DifferenceIngredient.of(Ingredient.of(STItemTags.TAGGING_RAILS), Ingredient.of(rail));
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(rail.asItem());
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, rail, 6).requires(ingredient, 6).requires(dyeTag)
+                .unlockedBy("has_tagging_rail", has(STItemTags.TAGGING_RAILS))
+                .group("dye_tagging_rail").save(output, ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "dye_" + location.getPath()));
     }
 }

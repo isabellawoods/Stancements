@@ -49,7 +49,7 @@ public class MusicRecorderProvider implements IBlockComponentProvider, StreamSer
     @Override
     @Nullable
     public RecorderData streamData(BlockAccessor accessor) {
-        MusicRecorderBlockEntity recorder = ((MusicRecorderBlockEntity) accessor.getBlockEntity());
+        MusicRecorderBlockEntity recorder = (MusicRecorderBlockEntity) accessor.getBlockEntity();
         return new RecorderData(
                 Optional.ofNullable(recorder.musicID()),
                 recorder.copyingSong(),

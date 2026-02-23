@@ -1,0 +1,68 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "dye_tagging_rail",
+  "ingredients": [
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:green_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:green_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:green_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:green_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:green_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:green_tagging_rail"
+      }
+    },
+    {
+      "tag": "c:dyes/green"
+    }
+  ],
+  "result": {
+    "count": 6,
+    "id": "stancements:green_tagging_rail"
+  }
+}

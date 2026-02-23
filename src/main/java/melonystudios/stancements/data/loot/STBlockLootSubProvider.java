@@ -62,7 +62,6 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(PINK_CRAFTING_TABLE_CLOTH.get());
 
         // Functional
-        this.dropSelf(GILDED_RAIL.get());
         this.dropSelf(MUSIC_RECORDER.get());
         this.dropOther(DYED_WATER_CAULDRON.get(), Items.CAULDRON);
         this.dropOther(MILK_CAULDRON.get(), Items.CAULDRON);
@@ -72,6 +71,25 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         this.cropPot(POTATO_CROP_POT.get(), Items.POTATO);
         this.cropPot(BEETROOT_CROP_POT.get(), Items.BEETROOT_SEEDS);
         this.cropPot(NETHER_WART_CROP_POT.get(), Items.NETHER_WART);
+
+        // Rails
+        this.dropSelf(GILDED_RAIL.get());
+        this.dropSelf(WHITE_TAGGING_RAIL.get());
+        this.dropSelf(LIGHT_GRAY_TAGGING_RAIL.get());
+        this.dropSelf(GRAY_TAGGING_RAIL.get());
+        this.dropSelf(BLACK_TAGGING_RAIL.get());
+        this.dropSelf(BROWN_TAGGING_RAIL.get());
+        this.dropSelf(RED_TAGGING_RAIL.get());
+        this.dropSelf(ORANGE_TAGGING_RAIL.get());
+        this.dropSelf(YELLOW_TAGGING_RAIL.get());
+        this.dropSelf(LIME_TAGGING_RAIL.get());
+        this.dropSelf(GREEN_TAGGING_RAIL.get());
+        this.dropSelf(CYAN_TAGGING_RAIL.get());
+        this.dropSelf(LIGHT_BLUE_TAGGING_RAIL.get());
+        this.dropSelf(BLUE_TAGGING_RAIL.get());
+        this.dropSelf(PURPLE_TAGGING_RAIL.get());
+        this.dropSelf(MAGENTA_TAGGING_RAIL.get());
+        this.dropSelf(PINK_TAGGING_RAIL.get());
     }
 
     /// Creates a loot table for an empty {@linkplain melonystudios.stancements.block.custom.croppot.CropPotBlock crop pot block}.

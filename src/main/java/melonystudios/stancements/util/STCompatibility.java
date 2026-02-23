@@ -1,7 +1,11 @@
 package melonystudios.stancements.util;
 
+import melonystudios.stancements.dispenser.TaggingDispenseBehavior;
+import melonystudios.stancements.item.STItems;
+
 import static melonystudios.reutilities.api.ReAPI.flammable;
 import static melonystudios.stancements.block.STBlocks.*;
+import static net.minecraft.world.level.block.DispenserBlock.registerBehavior;
 
 public class STCompatibility {
     /// Adds all of *Stancements*' blocks into the flammability map.
@@ -34,5 +38,25 @@ public class STCompatibility {
         flammable(PURPLE_CRAFTING_TABLE_CLOTH.get(), 60, 20);
         flammable(MAGENTA_CRAFTING_TABLE_CLOTH.get(), 60, 20);
         flammable(PINK_CRAFTING_TABLE_CLOTH.get(), 60, 20);
+    }
+
+    public static void dispenserBehaviors() {
+        // Minecart tags
+        registerBehavior(STItems.WHITE_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.LIGHT_GRAY_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.GRAY_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.BLACK_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.BROWN_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.RED_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.ORANGE_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.YELLOW_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.LIME_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.GREEN_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.CYAN_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.LIGHT_BLUE_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.BLUE_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.PURPLE_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.MAGENTA_TAG.get(), new TaggingDispenseBehavior());
+        registerBehavior(STItems.PINK_TAG.get(), new TaggingDispenseBehavior());
     }
 }

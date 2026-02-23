@@ -1,0 +1,68 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "dye_tagging_rail",
+  "ingredients": [
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:light_blue_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:light_blue_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:light_blue_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:light_blue_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:light_blue_tagging_rail"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "stancements:tagging_rails"
+      },
+      "subtracted": {
+        "item": "stancements:light_blue_tagging_rail"
+      }
+    },
+    {
+      "tag": "c:dyes/light_blue"
+    }
+  ],
+  "result": {
+    "count": 6,
+    "id": "stancements:light_blue_tagging_rail"
+  }
+}

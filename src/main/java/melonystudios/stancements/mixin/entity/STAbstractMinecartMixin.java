@@ -5,6 +5,7 @@ import melonystudios.stancements.block.custom.GildedRailBlock;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.misc.attachment.MinecartTags;
 import melonystudios.stancements.misc.attachment.STCapabilities;
+import melonystudios.stancements.option.STOptions;
 import melonystudios.stancements.sound.STSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
@@ -12,9 +13,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
@@ -32,15 +32,13 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static melonystudios.stancements.block.custom.GildedRailBlock.GILDED_RAIL_SPEED_MULTIPLIER;
-
 @Mixin(AbstractMinecart.class)
 public abstract class STAbstractMinecartMixin extends VehicleEntity implements IAbstractMinecartExtension {
     @Unique
-    private int ticksInGildedRail = 0;
+    private int gildedSpeedBuildup = 0;
 
-    public STAbstractMinecartMixin(EntityType<?> type, Level world) {
-        super(type, world);
+    public STAbstractMinecartMixin(EntityType<?> type, Level level) {
+        super(type, level);
     }
 
     @Override
@@ -49,52 +47,60 @@ public abstract class STAbstractMinecartMixin extends VehicleEntity implements I
         ItemStack handStack = player.getItemInHand(hand);
         MinecartTags tags = this.getCapability(STCapabilities.MINECART_TAGS);
         if (tags == null) return super.interact(player, hand);
-        Level world = this.level();
+        Level level = this.level();
 
         if (handStack.has(STDataComponents.MINECART_TAG_COLOR) && tags.addTag(handStack.get(STDataComponents.MINECART_TAG_COLOR).color())) {
-            world.playSound(null, this.blockPosition(), STSounds.TAG_MINECART.get(), SoundSource.NEUTRAL, 1, 1);
+            level.playSound(null, this.blockPosition(), STSounds.TAG_MINECART.get(), SoundSource.NEUTRAL, 1, 1);
             player.awardStat(Stats.ITEM_USED.get(handStack.getItem()));
             handStack.shrink(1);
             return InteractionResult.SUCCESS;
         } else if (handStack.is(Tags.Items.TOOLS_SHEAR)) {
             boolean shearedTag = false;
             for (DyeColor color : tags.tagColors()) {
-                ItemEntity item = new ItemEntity(world, this.getX(), this.getY(), this.getZ(), new ItemStack(MinecartTags.getTagForColor(color)));
-                item.setDefaultPickUpDelay();
-                if (!world.isClientSide()) {
-                    world.addFreshEntity(item);
-                    handStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-                }
+                this.spawnAtLocation(MinecartTags.getTagForColor(color));
                 this.minecart().gameEvent(GameEvent.SHEAR, player);
                 player.awardStat(Stats.ITEM_USED.get(handStack.getItem()));
-                world.playSound(null, this.minecart(), STSounds.SHEAR_MINECART.get(), SoundSource.NEUTRAL, 1, 1);
+                level.playSound(null, this.minecart(), STSounds.SHEAR_MINECART.get(), SoundSource.NEUTRAL, 1, 1);
                 shearedTag = true;
             }
             tags.clearTags();
-            if (shearedTag) return InteractionResult.sidedSuccess(world.isClientSide());
+            if (shearedTag) return InteractionResult.sidedSuccess(level.isClientSide());
         }
         return super.interact(player, hand);
+    }
+
+    @Override
+    protected void destroy(DamageSource source) {
+        MinecartTags tags = this.getCapability(STCapabilities.MINECART_TAGS);
+        if (tags != null) {
+            for (DyeColor color : tags.tagColors()) this.spawnAtLocation(MinecartTags.getTagForColor(color));
+            tags.clearTags();
+        }
+        super.destroy(source);
     }
 
     @Inject(method = "moveMinecartOnRail", at = @At("HEAD"), remap = false)
     public void updateMaxSpeedOnRail(BlockPos pos, CallbackInfo callback) {
         BlockState state = this.level().getBlockState(pos);
-        if (state.getBlock() instanceof GildedRailBlock) this.ticksInGildedRail = Mth.clamp(this.ticksInGildedRail + 5, 0, 80);
-        else this.ticksInGildedRail = Mth.clamp(this.ticksInGildedRail - 5, 0, 80);
+        float speedMultiplier = STOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue();
+        int accelerationTime = STOptions.GILDED_RAIL_ACCELERATION_TIME.get();
 
-        if (this.ticksInGildedRail > 0) this.setCurrentCartSpeedCapOnRail(this.getMaxCartSpeedOnRail() * GILDED_RAIL_SPEED_MULTIPLIER);
+        if (state.getBlock() instanceof GildedRailBlock) this.gildedSpeedBuildup = Mth.clamp(this.gildedSpeedBuildup + 5, 0, accelerationTime);
+        else this.gildedSpeedBuildup = Mth.clamp(this.gildedSpeedBuildup - 5, 0, accelerationTime);
+
+        if (this.gildedSpeedBuildup > 0) this.setCurrentCartSpeedCapOnRail(this.getMaxCartSpeedOnRail() * Math.max(speedMultiplier, speedMultiplier * ((float) this.gildedSpeedBuildup / accelerationTime)));
         else this.setCurrentCartSpeedCapOnRail(this.getMaxCartSpeedOnRail());
     }
 
     @ModifyArg(method = "getMaxSpeedWithRail", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(FF)F", ordinal = 0), index = 0)
-    public float maintainSpeedAfterLeavingGilded(float a, @Local BlockState state, @Local BlockPos pos) {
+    public float maintainSpeedAfterLeavingGilded(float railMaxSpeed, @Local BlockState state, @Local BlockPos pos) {
         BaseRailBlock rail = (BaseRailBlock) state.getBlock();
-        return this.ticksInGildedRail > 0 ? rail.getRailMaxSpeed(state, this.level(), pos, this.minecart()) * (rail.getRailDirection(state, this.level(), pos, this.minecart()).isAscending() ? 1 : GILDED_RAIL_SPEED_MULTIPLIER) : a;
+        return this.gildedSpeedBuildup > 0 ? rail.getRailMaxSpeed(state, this.level(), pos, this.minecart()) * (rail.getRailDirection(state, this.level(), pos, this.minecart()).isAscending() ? 1 : STOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue()) : railMaxSpeed;
     }
 
     @Override
     public float getMaxCartSpeedOnRail() {
-        return this.ticksInGildedRail > 0 ? GILDED_RAIL_SPEED_MULTIPLIER : IAbstractMinecartExtension.super.getMaxCartSpeedOnRail();
+        return this.gildedSpeedBuildup > 0 ? STOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue() : IAbstractMinecartExtension.super.getMaxCartSpeedOnRail();
     }
 
     @Unique

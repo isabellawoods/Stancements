@@ -35,26 +35,26 @@ public class CraftingTableClothBlock extends Block {
 
     @Override
     @NotNull
-    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
     @Nullable
-    protected MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
-        BlockState belowState = world.getBlockState(pos.below());
-        if (belowState.getBlock() instanceof CraftingTableBlock) return belowState.getMenuProvider(world, pos.below());
-        return super.getMenuProvider(state, world, pos);
+    protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+        BlockState belowState = level.getBlockState(pos.below());
+        if (belowState.getBlock() instanceof CraftingTableBlock) return belowState.getMenuProvider(level, pos.below());
+        return super.getMenuProvider(state, level, pos);
     }
 
     @Override
     @NotNull
-    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
-        return !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, world, pos, neighborPos);
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        return !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return !world.isEmptyBlock(pos.below());
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return !level.isEmptyBlock(pos.below());
     }
 }

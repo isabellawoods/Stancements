@@ -36,12 +36,19 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
     # The description text for the mod (multi line!) (#mandatory)
     description='''${mod_description}'''
 
-# The [modproperties] block is used by MrCrayfish's mods to change features about its menus
+# The [modproperties] block is used by mods to define features for each mod
 [modproperties.${mod_id}]
     # A small image displayed to the left of your mod’s name in Catalogue's mod list
     catalogueImageIcon="assets/${mod_id}/textures/item/${mod_id}_logo.png"
     # An image displayed on the background of the mod's logo. Catalogue makes the texture fade out at the bottom to blend into the description
     catalogueBackground="assets/${mod_id}/textures/gui/catalogue_background.png"
+    # A list of links to be displayed in Forged Mod Menu's mods screen
+    modMenuLinks=[
+        "modmenu.github_releases=https://github.com/isabellawoods/Stancements/releases",
+        "reutilities.link.changelogs=https://github.com/isabellawoods/Informational-Mod-Features/tree/main/Stancements/Changelogs"
+    ]
+    # A file name (in the root of the mod JAR) containing a square logo to display in Forged Mod Menu's mods screen
+    modMenuLogoFile="assets/${mod_id}/textures/item/${mod_id}_logo.png"
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]

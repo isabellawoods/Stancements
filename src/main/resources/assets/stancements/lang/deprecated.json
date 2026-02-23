@@ -1,0 +1,12 @@
+{
+  "renamed": {
+    "itemGroup.stancements.tab": "tab.stancements.main",
+    "config.stancements.populate_dyed_water_buckets": "option.stancements.populate_dyed_water_buckets",
+    "config.stancements.populate_dyed_water_buckets.tooltip": "option.stancements.populate_dyed_water_buckets.tooltip",
+    "config.stancements.crop_pot_growth_chance": "option.stancements.crop_pot_growth_chance",
+    "config.stancements.crop_pot_growth_chance.tooltip": "option.stancements.crop_pot_growth_chance.tooltip",
+    "config.stancements.add_items_to_vanilla_tabs": "option.stancements.add_items_to_vanilla_tabs",
+    "config.stancements.add_items_to_vanilla_tabs.tooltip": "option.stancements.add_items_to_vanilla_tabs.tooltip",
+    "logger.stancements.outside_bounds": "logger.reutilities.outside_bounds"
+  }
+}

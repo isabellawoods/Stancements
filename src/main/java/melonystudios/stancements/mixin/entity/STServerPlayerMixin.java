@@ -23,8 +23,8 @@ public abstract class STServerPlayerMixin extends Player {
     @Shadow
     public boolean wonGame;
 
-    public STServerPlayerMixin(Level world, BlockPos pos, float yRot, GameProfile profile) {
-        super(world, pos, yRot, profile);
+    public STServerPlayerMixin(Level level, BlockPos pos, float yRot, GameProfile profile) {
+        super(level, pos, yRot, profile);
     }
 
     @Inject(method = "showEndCredits", at = @At("HEAD"))

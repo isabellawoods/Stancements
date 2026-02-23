@@ -53,9 +53,27 @@ public class STItems {
     public static final DeferredItem<Item> PINK_CRAFTING_TABLE_CLOTH = ITEMS.register("pink_crafting_table_cloth", () -> new BlockItem(STBlocks.PINK_CRAFTING_TABLE_CLOTH.get(), new Item.Properties()));
 
     // Functional blocks
-    public static final DeferredItem<Item> GILDED_RAIL = ITEMS.register("gilded_rail", () -> new BlockItem(STBlocks.GILDED_RAIL.get(), new Item.Properties()));
     public static final DeferredItem<Item> MUSIC_RECORDER = ITEMS.register("music_recorder", () -> new BlockItem(STBlocks.MUSIC_RECORDER.get(), new Item.Properties()));
     public static final DeferredItem<Item> CROP_POT = ITEMS.register("crop_pot", () -> new CropPotBlockItem(STBlocks.CROP_POT.get(), new Item.Properties()));
+
+    // Rails
+    public static final DeferredItem<Item> GILDED_RAIL = ITEMS.register("gilded_rail", () -> new BlockItem(STBlocks.GILDED_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> WHITE_TAGGING_RAIL = ITEMS.register("white_tagging_rail", () -> new BlockItem(STBlocks.WHITE_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> LIGHT_GRAY_TAGGING_RAIL = ITEMS.register("light_gray_tagging_rail", () -> new BlockItem(STBlocks.LIGHT_GRAY_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> GRAY_TAGGING_RAIL = ITEMS.register("gray_tagging_rail", () -> new BlockItem(STBlocks.GRAY_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> BLACK_TAGGING_RAIL = ITEMS.register("black_tagging_rail", () -> new BlockItem(STBlocks.BLACK_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> BROWN_TAGGING_RAIL = ITEMS.register("brown_tagging_rail", () -> new BlockItem(STBlocks.BROWN_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> RED_TAGGING_RAIL = ITEMS.register("red_tagging_rail", () -> new BlockItem(STBlocks.RED_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> ORANGE_TAGGING_RAIL = ITEMS.register("orange_tagging_rail", () -> new BlockItem(STBlocks.ORANGE_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> YELLOW_TAGGING_RAIL = ITEMS.register("yellow_tagging_rail", () -> new BlockItem(STBlocks.YELLOW_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> LIME_TAGGING_RAIL = ITEMS.register("lime_tagging_rail", () -> new BlockItem(STBlocks.LIME_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> GREEN_TAGGING_RAIL = ITEMS.register("green_tagging_rail", () -> new BlockItem(STBlocks.GREEN_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> CYAN_TAGGING_RAIL = ITEMS.register("cyan_tagging_rail", () -> new BlockItem(STBlocks.CYAN_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> LIGHT_BLUE_TAGGING_RAIL = ITEMS.register("light_blue_tagging_rail", () -> new BlockItem(STBlocks.LIGHT_BLUE_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> BLUE_TAGGING_RAIL = ITEMS.register("blue_tagging_rail", () -> new BlockItem(STBlocks.BLUE_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> PURPLE_TAGGING_RAIL = ITEMS.register("purple_tagging_rail", () -> new BlockItem(STBlocks.PURPLE_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> MAGENTA_TAGGING_RAIL = ITEMS.register("magenta_tagging_rail", () -> new BlockItem(STBlocks.MAGENTA_TAGGING_RAIL.get(), new Item.Properties()));
+    public static final DeferredItem<Item> PINK_TAGGING_RAIL = ITEMS.register("pink_tagging_rail", () -> new BlockItem(STBlocks.PINK_TAGGING_RAIL.get(), new Item.Properties()));
 
     // Items
     public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.register("stancements_logo", () -> new LogoItem(Stancements.ACCENT_COLOR, new Item.Properties().fireResistant().rarity(Rarity.EPIC)));

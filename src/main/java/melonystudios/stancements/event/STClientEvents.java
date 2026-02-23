@@ -21,9 +21,9 @@ import static melonystudios.stancements.item.custom.DyedWaterBucketItem.DEFAULT_
 public class STClientEvents {
     @SubscribeEvent
     public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {
-        event.register((state, world, pos, tintIndex) -> {
-            if (world == null || pos == null) return DEFAULT_WATER_COLOR;
-            BlockEntity blockEntity = world.getBlockEntity(pos);
+        event.register((state, level, pos, tintIndex) -> {
+            if (level == null || pos == null) return DEFAULT_WATER_COLOR;
+            BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof DyedWaterCauldronBlockEntity cauldron) {
                 return cauldron.getWaterColor();
             } else {

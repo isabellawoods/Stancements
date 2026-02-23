@@ -45,39 +45,39 @@ public class CropPotBlock extends Block {
 
     @Override
     @NotNull
-    protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
     @NotNull
-    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (player.isShiftKeyDown()) return this.removeSeed(world, state, pos);
-        return this.harvestCrop(world, state, pos);
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (player.isShiftKeyDown()) return this.removeSeed(level, state, pos);
+        return this.harvestCrop(level, state, pos);
     }
 
-    protected InteractionResult removeSeed(Level world, BlockState state, BlockPos pos) {
-        world.setBlockAndUpdate(pos, STBlocks.CROP_POT.get().defaultBlockState().setValue(HOPPING, state.getValue(HOPPING)));
+    protected InteractionResult removeSeed(Level level, BlockState state, BlockPos pos) {
+        level.setBlockAndUpdate(pos, STBlocks.CROP_POT.get().defaultBlockState().setValue(HOPPING, state.getValue(HOPPING)));
         return InteractionResult.PASS;
     }
 
-    protected InteractionResult harvestCrop(Level world, BlockState state, BlockPos pos) {
+    protected InteractionResult harvestCrop(Level level, BlockState state, BlockPos pos) {
         return InteractionResult.PASS;
     }
 
     @Override
     @NotNull
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack handStack = player.getItemInHand(hand);
-        ItemInteractionResult defaultInteraction = super.useItemOn(stack, state, world, pos, player, hand, hitResult);
+        ItemInteractionResult defaultInteraction = super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         if (!state.is(STBlocks.CROP_POT)) return defaultInteraction;
 
-        var items = world.registryAccess().registry(Registries.ITEM);
+        var items = level.registryAccess().registry(Registries.ITEM);
         if (items.isPresent()) {
             var potPlantables = items.get().getDataMap(STDataMaps.POT_PLANTABLES);
             for (ResourceKey<Item> item : potPlantables.keySet()) {
                 if (handStack.is(items.get().get(item))) {
-                    return this.placeSeed(world, state, pos, handStack, player, potPlantables.get(item).cropPot(), potPlantables.get(item).plantingSound());
+                    return this.placeSeed(level, state, pos, handStack, player, potPlantables.get(item).cropPot(), potPlantables.get(item).plantingSound());
                 }
             }
         }
@@ -85,21 +85,21 @@ public class CropPotBlock extends Block {
         return defaultInteraction;
     }
 
-    private ItemInteractionResult placeSeed(Level world, BlockState state, BlockPos pos, ItemStack stack, Player player, Block cropPot, SoundEvent placingSound) {
+    private ItemInteractionResult placeSeed(Level level, BlockState state, BlockPos pos, ItemStack stack, Player player, Block cropPot, SoundEvent placingSound) {
         stack.consume(1, player);
         if (player instanceof ServerPlayer serverPlayer) CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
-        world.playLocalSound(pos, placingSound, SoundSource.BLOCKS, 1, 0.8F, false);
-        world.setBlockAndUpdate(pos, cropPot.defaultBlockState().setValue(HOPPING, state.getValue(HOPPING)));
-        world.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, state));
+        level.playLocalSound(pos, placingSound, SoundSource.BLOCKS, 1, 0.8F, false);
+        level.setBlockAndUpdate(pos, cropPot.defaultBlockState().setValue(HOPPING, state.getValue(HOPPING)));
+        level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, state));
         player.awardStat(STStatistics.SEEDS_PLANTED_IN_CROP_POTS.get());
         player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-        return ItemInteractionResult.sidedSuccess(world.isClientSide);
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
     @NotNull
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader world, BlockPos pos, Player player) {
-        ItemStack stack = super.getCloneItemStack(state, target, world, pos, player);
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
         if (state.getValue(HOPPING)) stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(HOPPING, true));
         return stack;
     }

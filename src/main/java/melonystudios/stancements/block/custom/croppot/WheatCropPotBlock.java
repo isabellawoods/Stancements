@@ -1,6 +1,6 @@
 package melonystudios.stancements.block.custom.croppot;
 
-import melonystudios.stancements.STConfigs;
+import melonystudios.stancements.option.STOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -64,78 +64,77 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource rand) {
-        if (state.getValue(HOPPING) && this.getAge(state) == this.getMaxAge()) this.harvestCrop(world, state, pos);
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+        if (state.getValue(HOPPING) && this.getAge(state) == this.getMaxAge()) this.harvestCrop(level, state, pos);
 
-        if (world.isAreaLoaded(pos, 1) && world.getRawBrightness(pos, 0) >= 9) {
-            int growthChance = STConfigs.CROP_POT_GROWTH_CHANCE.get();
+        if (level.isAreaLoaded(pos, 1) && level.getRawBrightness(pos, 0) >= 9) {
+            int growthChance = STOptions.CROP_POT_GROWTH_CHANCE.get();
             int age = this.getAge(state);
 
             if (age < this.getMaxAge()) {
-                if (CommonHooks.canCropGrow(world, pos, state, rand.nextInt(growthChance) == 0)) {
-                    this.growAndHarvestCrop(world, state, pos, age + 1);
-                    CommonHooks.fireCropGrowPost(world, pos, state);
+                if (CommonHooks.canCropGrow(level, pos, state, rand.nextInt(growthChance) == 0)) {
+                    this.growAndHarvestCrop(level, state, pos, age + 1);
+                    CommonHooks.fireCropGrowPost(level, pos, state);
                 }
             }
         }
     }
 
-    private void growAndHarvestCrop(ServerLevel world, BlockState state, BlockPos pos, int age) {
+    private void growAndHarvestCrop(ServerLevel level, BlockState state, BlockPos pos, int age) {
         if (state.getValue(HOPPING) && this.isMaxAge(state)) {
-            this.harvestCrop(world, state, pos);
+            this.harvestCrop(level, state, pos);
         } else {
-            world.setBlock(pos, state.setValue(this.getAgeProperty(), age).setValue(HOPPING, state.getValue(HOPPING)), 2);
+            level.setBlock(pos, state.setValue(this.getAgeProperty(), age).setValue(HOPPING, state.getValue(HOPPING)), 2);
         }
     }
 
     @Override
-    protected InteractionResult harvestCrop(Level world, BlockState state, BlockPos pos) {
+    protected InteractionResult harvestCrop(Level level, BlockState state, BlockPos pos) {
         if (!this.isMaxAge(state)) return InteractionResult.FAIL;
         BlockState equivalentCrop = this.getEquivalentCrop(state);
-        SoundType type = equivalentCrop.getSoundType(world, pos, null);
+        SoundType type = equivalentCrop.getSoundType(level, pos, null);
 
-        if (world instanceof ServerLevel serverWorld) this.getCropDrops(serverWorld, state, pos).forEach(stack -> {
-            if (world.getBlockEntity(pos.below()) instanceof Container container) {
+        if (level instanceof ServerLevel serverLevel) this.getCropDrops(serverLevel, state, pos).forEach(stack -> {
+            if (level.getBlockEntity(pos.below()) instanceof Container container) {
                 ItemStack hopperStack = HopperBlockEntity.addItem(null, container, stack, Direction.DOWN);
-                if (!hopperStack.isEmpty()) Block.popResource(world, pos, hopperStack);
-            } else Block.popResource(world, pos, stack);
+                if (!hopperStack.isEmpty()) Block.popResource(level, pos, hopperStack);
+            } else Block.popResource(level, pos, stack);
         });
-        world.playSound(null, pos, type.getBreakSound(), SoundSource.BLOCKS, (type.getVolume() + 1) / 2, type.getPitch() * 0.8F);
-//        world.playLocalSound(pos, type.getBreakSound(), SoundSource.BLOCKS, (type.getVolume() + 1) / 2, type.getPitch() * 0.8F, false);
-        world.gameEvent(GameEvent.BLOCK_DESTROY, pos, GameEvent.Context.of(state));
-        world.addDestroyBlockEffect(pos, equivalentCrop);
-        world.setBlock(pos, state.setValue(this.getAgeProperty(), 0).setValue(HOPPING, state.getValue(HOPPING)), 2);
+        level.playSound(null, pos, type.getBreakSound(), SoundSource.BLOCKS, (type.getVolume() + 1) / 2, type.getPitch() * 0.8F);
+        level.gameEvent(GameEvent.BLOCK_DESTROY, pos, GameEvent.Context.of(state));
+        level.addDestroyBlockEffect(pos, equivalentCrop);
+        level.setBlock(pos, state.setValue(this.getAgeProperty(), 0).setValue(HOPPING, state.getValue(HOPPING)), 2);
 
         return InteractionResult.SUCCESS;
     }
 
-    protected List<ItemStack> getCropDrops(ServerLevel world, BlockState state, BlockPos pos) {
+    protected List<ItemStack> getCropDrops(ServerLevel level, BlockState state, BlockPos pos) {
         BlockState equivalentCrop = this.getEquivalentCrop(state);
         ResourceKey<LootTable> lootTable = equivalentCrop.getBlock().getLootTable();
         if (lootTable == BuiltInLootTables.EMPTY) {
             return Collections.emptyList();
         } else {
-            LootParams params = new LootParams.Builder(world)
+            LootParams params = new LootParams.Builder(level)
                     .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
                     .withParameter(LootContextParams.BLOCK_STATE, equivalentCrop)
                     .withParameter(LootContextParams.TOOL, ItemStack.EMPTY)
-                    .withOptionalParameter(LootContextParams.BLOCK_ENTITY, world.getBlockEntity(pos))
+                    .withOptionalParameter(LootContextParams.BLOCK_ENTITY, level.getBlockEntity(pos))
                     .create(LootContextParamSets.BLOCK);
 
-            return world.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
+            return level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
         }
     }
 
     @Override
-    protected InteractionResult removeSeed(Level world, BlockState state, BlockPos pos) {
+    protected InteractionResult removeSeed(Level level, BlockState state, BlockPos pos) {
         BlockState equivalentCrop = this.getEquivalentCrop(state);
-        SoundType type = equivalentCrop.getSoundType(world, pos, null);
-        Block.popResource(world, pos, this.getSeedItem().asItem().getDefaultInstance());
-        world.playLocalSound(pos, type.getBreakSound(), SoundSource.BLOCKS, (type.getVolume() + 1) / 2, type.getPitch() * 0.8F, false);
-        world.gameEvent(GameEvent.BLOCK_DESTROY, pos, GameEvent.Context.of(state));
-        world.addDestroyBlockEffect(pos, equivalentCrop);
+        SoundType type = equivalentCrop.getSoundType(level, pos, null);
+        Block.popResource(level, pos, this.getSeedItem().asItem().getDefaultInstance());
+        level.playLocalSound(pos, type.getBreakSound(), SoundSource.BLOCKS, (type.getVolume() + 1) / 2, type.getPitch() * 0.8F, false);
+        level.gameEvent(GameEvent.BLOCK_DESTROY, pos, GameEvent.Context.of(state));
+        level.addDestroyBlockEffect(pos, equivalentCrop);
 
-        super.removeSeed(world, state, pos);
+        super.removeSeed(level, state, pos);
         return InteractionResult.SUCCESS;
     }
 
@@ -153,27 +152,27 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
 
     @Override
     @NotNull
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader world, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         return new ItemStack(this.getSeedItem());
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         return !this.isMaxAge(state);
     }
 
     @Override
-    public boolean isBonemealSuccess(Level world, RandomSource rand, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level level, RandomSource rand, BlockPos pos, BlockState state) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource rand, BlockPos pos, BlockState state) {
+    public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state) {
         int newAge = this.getAge(state) + this.getBonemealAgeIncrease(rand);
         int maxAge = this.getMaxAge();
         if (newAge > maxAge) newAge = maxAge;
 
-        this.growAndHarvestCrop(world, state, pos, newAge);
+        this.growAndHarvestCrop(level, state, pos, newAge);
     }
 
     @Override

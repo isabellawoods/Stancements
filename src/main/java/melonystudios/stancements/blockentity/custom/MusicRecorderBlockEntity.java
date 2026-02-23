@@ -81,20 +81,20 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
         if (recorderPlayer instanceof ServerPlayer serverPlayer) serverPlayer.sendSystemMessage(component, true);
     }
 
-    public static void tick(Level world, BlockPos pos, BlockState state, MusicRecorderBlockEntity recorder) {
+    public static void tick(Level level, BlockPos pos, BlockState state, MusicRecorderBlockEntity recorder) {
         if (recorder.ticksUntilFinishedRecording() >= 0 && state.getValue(STBlockStateProperties.RECORDING)) {
             --recorder.ticksUntilFinishedRecording;
             recorder.setChanged();
             if (recorder.ticksUntilFinishedRecording() == 0 && recorder.musicID() != null) {
-                recorder.finishRecording(RecordedDiscItem.getRecordedDisc(world, recorder.musicID(), recorder.copyingSong(), recorder.getTheItem()), false);
-                world.setBlock(pos, state.setValue(STBlockStateProperties.RECORDING, false), 3);
+                recorder.finishRecording(RecordedDiscItem.getRecordedDisc(level, recorder.musicID(), recorder.copyingSong(), recorder.getTheItem()), false);
+                level.setBlock(pos, state.setValue(STBlockStateProperties.RECORDING, false), 3);
             }
         }
 
-        if (world instanceof ServerLevel serverWorld && state.getValue(STBlockStateProperties.RECORDING) && recorder.ticksUntilFinishedRecording() % 20 == 0) {
+        if (level instanceof ServerLevel serverLevel && state.getValue(STBlockStateProperties.RECORDING) && recorder.ticksUntilFinishedRecording() % 20 == 0) {
             Vec3 notePos = Vec3.atBottomCenterOf(pos).add(0, 1.2F, 0);
-            float rand = (float) serverWorld.getRandom().nextInt(4) / 24;
-            serverWorld.sendParticles(ParticleTypes.NOTE, notePos.x(), notePos.y(), notePos.z(), 0, rand, 0, 0, 1);
+            float rand = (float) serverLevel.getRandom().nextInt(4) / 24;
+            serverLevel.sendParticles(ParticleTypes.NOTE, notePos.x(), notePos.y(), notePos.z(), 0, rand, 0, 0, 1);
         }
     }
 
@@ -152,12 +152,12 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
 
     @Override
     public void setTheItem(ItemStack stack) {
-        Level world = this.getLevel();
+        Level level = this.getLevel();
         this.insertDisc(stack);
         if (this.getTheItem().isEmpty()) {
             this.finishRecording(this.getTheItem(), true);
-        } else if (this.getBlockState().getBlock() instanceof MusicRecorderBlock recorder && world != null) {
-            recorder.tryRecordingFromAdjacentJukebox(world, this.getBlockState(), this.getBlockPos(), null, this.getTheItem());
+        } else if (this.getBlockState().getBlock() instanceof MusicRecorderBlock recorder && level != null) {
+            recorder.tryRecordingFromAdjacentJukebox(level, this.getBlockState(), this.getBlockPos(), null, this.getTheItem());
         }
     }
 

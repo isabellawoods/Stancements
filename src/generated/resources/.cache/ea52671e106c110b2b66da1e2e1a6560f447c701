@@ -1,22 +1,22 @@
-// 1.21.1	2025-12-15T18:24:57.2099842	Stancements — Item Tags
+// 1.21.1	2026-02-19T21:08:01.076897011	Stancements — Item Tags
 c7cef14d56c1521d6152095bb87be9401fcf7cad data/c/tags/item/buckets.json
 1008717c0e6c31eea7dfdc06e2baa4d5f602e052 data/c/tags/item/buckets/dyed_water.json
-98958a7461ee689e8b113f1dd98c7121db6d43a1 data/c/tags/item/dyed/black.json
-7593e2435c09c20a47302ba9eafe56185e1df959 data/c/tags/item/dyed/blue.json
-945cc776e48ccbbf1ffc6856efd2bce3d60cf536 data/c/tags/item/dyed/brown.json
-ff9cc0ca6267dc869b8ee918998e88c374b4ce64 data/c/tags/item/dyed/cyan.json
-5877893581eaa2f914ba23afb56ba9e55cdee3e9 data/c/tags/item/dyed/gray.json
-60683522ce20ae21101530b4c211c05e139998a5 data/c/tags/item/dyed/green.json
-d8232afbafe9adaea3bdb21d5e64e7249202ed0e data/c/tags/item/dyed/light_blue.json
-14cc50498733ead49a00e710a79eebda3aa566f0 data/c/tags/item/dyed/light_gray.json
-55e133cf4ff2c5fed48b14375953cd69fa510ab4 data/c/tags/item/dyed/lime.json
-ed2574361c82cab508ddcbf7040b8bd5b726407e data/c/tags/item/dyed/magenta.json
-c963af0ef0523bbddf1e5d78a7fefb8975ff745f data/c/tags/item/dyed/orange.json
-9f95aec7fc18cd445e07a0cb611c5fef476f583f data/c/tags/item/dyed/pink.json
-efb49f559c3c8c36d322448154550f2b1ed8a0c2 data/c/tags/item/dyed/purple.json
-9c652ed6d317bc9809ff83054cf68470a0ddeb96 data/c/tags/item/dyed/red.json
-99173628b8fffb8b86e1b9adb9bf02a55eea7601 data/c/tags/item/dyed/white.json
-72a16d058b548262b240304fe3ecc05637a89868 data/c/tags/item/dyed/yellow.json
+932fc1e90b002b41c8e8f709053ba1bf1aa32302 data/c/tags/item/dyed/black.json
+247442dc57325925ad4d8f4ae1da548b616f9d4b data/c/tags/item/dyed/blue.json
+0ab32f5d3760929b3036c6491869ce592d951026 data/c/tags/item/dyed/brown.json
+88312de7d77a21993b8b6c33af6b5d0c6cdb3526 data/c/tags/item/dyed/cyan.json
+93027ea8c09330f9398113da07e6aaeabb76afaf data/c/tags/item/dyed/gray.json
+cb111b91db37d79b6c59ec5e6b5efceb5155a10c data/c/tags/item/dyed/green.json
+881e643088b943347ab51718be494bc094d43934 data/c/tags/item/dyed/light_blue.json
+141232fc231423ab717a661cf6ba8e5590e318f7 data/c/tags/item/dyed/light_gray.json
+ffdb1ed0d9c49f5b891b340d5dd39f962f13d36c data/c/tags/item/dyed/lime.json
+db41fcdd476bdf10bf07a30ba9886f7762159bda data/c/tags/item/dyed/magenta.json
+a92d1530589b675de31bf38190a167309b9c05c9 data/c/tags/item/dyed/orange.json
+8adc1a41ac1d5a8ff73d053311969409a8a33189 data/c/tags/item/dyed/pink.json
+fae8810e87570d124e28a7e8318541ce251a51fe data/c/tags/item/dyed/purple.json
+e3e0ed388ff44ad97e0560033cc0e5cbc2aeb9db data/c/tags/item/dyed/red.json
+0aeacb775fc1d8890b25a0812a6fc5930993f76e data/c/tags/item/dyed/white.json
+f940a8d66e42b7513f98bc75059462e65f4ecaa2 data/c/tags/item/dyed/yellow.json
 ec211b63883b4697a67681e7cff147599768bb6a data/c/tags/item/logos.json
 a1a56cc9f79d660d5e42156a7498a6b21a888991 data/c/tags/item/music_discs.json
 78a63f05edb90a5b91f8e5a6cbdfe373d7a2fee7 data/minecraft/tags/item/dyeable.json
@@ -25,4 +25,5 @@ d0b7f8a83b1fdfda116980f4a67e093b1c7cfd8c data/minecraft/tags/item/non_flammable_
 dc72d523e09692afdff8da4fe990948e7ca933c5 data/stancements/tags/item/minecart_tags.json
 16ed0b32abae859466f1dcc9a87c05809142b3ee data/stancements/tags/item/recordable_discs.json
 a7056ffac9e145d9091b56854789cb6c2e713e0e data/stancements/tags/item/shelves.json
+afa21c097b596a55c4f584a8cafea00aedec4fc4 data/stancements/tags/item/tagging_rails.json
 9d7d3c76d6d17e0cb6014946910bcb2883a78cf9 data/stancements/tags/item/vinyl_disc_dyes.json

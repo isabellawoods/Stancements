@@ -116,19 +116,18 @@ configurations {
 }
 
 dependencies {
-    // Example optional mod dependency with JEI
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
-    // At runtime, we use the full JEI jar for NeoForge
-    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+    // Forged Mod Menu
+    implementation files("build/libs/forgedmodmenu-neoforge-${forgedmodmenu_version}+${minecraft_version}.jar")
 
     // Jade
     implementation "maven.modrinth:jade:${jade_version}+neoforge"
 
-    // Female Gender Mod
-    implementation "maven.modrinth:female-gender:${femalegender_version}"
+    // Just Enough Items
+    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime.
+    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    // At runtime, we use the full JEI jar for NeoForge.
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
-    // External libraries
     // Reutilities
     implementation files("build/libs/reutilities-neoforge-${reutilities_version}+${minecraft_version}.jar")
 

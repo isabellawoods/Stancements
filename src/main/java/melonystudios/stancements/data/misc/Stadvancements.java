@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 
 public class Stadvancements implements AdvancementProvider.AdvancementGenerator { // stancements advancements
     @Override
-    @SuppressWarnings("removal") // todo: figure out a way to make this not crash to replace deprecated .parent() call ~isa 8-11-25
+    @SuppressWarnings("removal") // todo: figure out a way to make this not crash to replace deprecated .parent() call ~isa 08-11-25
     public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper fileHelper) {
         ResourceLocation sweetDreamsLocation = ResourceLocation.withDefaultNamespace("adventure/sleep_in_bed");
         ResourceLocation aSeedyPlaceLocation = ResourceLocation.withDefaultNamespace("husbandry/plant_seed");

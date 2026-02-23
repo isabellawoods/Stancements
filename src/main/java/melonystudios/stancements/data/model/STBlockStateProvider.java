@@ -66,7 +66,6 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         craftingTableCloth(PINK_CRAFTING_TABLE_CLOTH.get());
 
         // Functional
-        straightRail((BaseRailBlock) GILDED_RAIL.get());
         simpleBlock(MUSIC_RECORDER.get(), models().cubeBottomTop("music_recorder",
                 modLoc("block/music_recorder_side"),
                 modLoc("block/music_recorder_bottom"),
@@ -79,6 +78,25 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         fullCropPot((WheatCropPotBlock) POTATO_CROP_POT.get(), age -> this.mcLoc("block/potatoes_stage" + potatoAgeIndex(age)));
         fullCropPot((WheatCropPotBlock) BEETROOT_CROP_POT.get(), age -> this.mcLoc("block/beetroots_stage" + wheatAgeIndex(age)));
         fullCropPot((WheatCropPotBlock) NETHER_WART_CROP_POT.get(), age -> this.modLoc("block/nether_wart_stage" + netherWartAgeIndex(age)));
+
+        // Rails
+        straightRail((BaseRailBlock) GILDED_RAIL.get());
+        straightRail((BaseRailBlock) WHITE_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) LIGHT_GRAY_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) GRAY_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) BLACK_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) BROWN_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) RED_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) ORANGE_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) YELLOW_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) LIME_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) GREEN_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) CYAN_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) LIGHT_BLUE_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) BLUE_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) PURPLE_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) MAGENTA_TAGGING_RAIL.get());
+        straightRail((BaseRailBlock) PINK_TAGGING_RAIL.get());
     }
 
     /// Makes the block states and models for a {@linkplain melonystudios.stancements.block.custom.ShelfBlock shelf block}.
@@ -138,8 +156,10 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         });
     }
 
-    /// Makes the block states and models for a {@linkplain net.minecraft.world.level.block.PoweredRailBlock straight rail}.
+    /// Makes the block states and models for an {@linkplain net.minecraft.world.level.block.PoweredRailBlock axis-aligned rail}
+    /// (like powered or detector rails).
     /// @param rail The rail block.
+    // if I ever make a method for making curved rails, I'll call it "gayRail" ~isa 19-02-26
     public void straightRail(BaseRailBlock rail) {
         this.getVariantBuilder(rail).forAllStatesExcept(state -> {
             ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(rail);

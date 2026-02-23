@@ -1,6 +1,6 @@
 package melonystudios.stancements.item.tab;
 
-import melonystudios.stancements.STConfigs;
+import melonystudios.stancements.option.STOptions;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.STItems;
 import net.minecraft.core.component.DataComponents;
@@ -21,7 +21,7 @@ import static net.minecraft.world.item.CreativeModeTab.TabVisibility.PARENT_AND_
 public class STVanillaTabs {
     @SubscribeEvent
     public static void addToVanillaTabs(BuildCreativeModeTabContentsEvent event) {
-        if (!STConfigs.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
+        if (!STOptions.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
 
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.insertAfter(new ItemStack(Items.OAK_BUTTON), new ItemStack(STItems.OAK_SHELF.get()), PARENT_AND_SEARCH_TABS);
@@ -38,7 +38,7 @@ public class STVanillaTabs {
         }
 
         if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS) {
-            event.insertAfter(new ItemStack(Items.PINK_CARPET), new ItemStack(STItems.WHITE_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.PINK_STAINED_GLASS_PANE), new ItemStack(STItems.WHITE_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.WHITE_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.GRAY_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.GRAY_CRAFTING_TABLE_CLOTH.get()), new ItemStack(STItems.BLACK_CRAFTING_TABLE_CLOTH.get()), PARENT_AND_SEARCH_TABS);
@@ -62,6 +62,22 @@ public class STVanillaTabs {
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS || event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.insertAfter(new ItemStack(Items.POWERED_RAIL), new ItemStack(STItems.GILDED_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.DETECTOR_RAIL), new ItemStack(STItems.WHITE_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.WHITE_TAGGING_RAIL.get()), new ItemStack(STItems.LIGHT_GRAY_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIGHT_GRAY_TAGGING_RAIL.get()), new ItemStack(STItems.GRAY_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.GRAY_TAGGING_RAIL.get()), new ItemStack(STItems.BLACK_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BLACK_TAGGING_RAIL.get()), new ItemStack(STItems.BROWN_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BROWN_TAGGING_RAIL.get()), new ItemStack(STItems.RED_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.RED_TAGGING_RAIL.get()), new ItemStack(STItems.ORANGE_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.ORANGE_TAGGING_RAIL.get()), new ItemStack(STItems.YELLOW_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.YELLOW_TAGGING_RAIL.get()), new ItemStack(STItems.LIME_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIME_TAGGING_RAIL.get()), new ItemStack(STItems.GREEN_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.GREEN_TAGGING_RAIL.get()), new ItemStack(STItems.CYAN_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.CYAN_TAGGING_RAIL.get()), new ItemStack(STItems.LIGHT_BLUE_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIGHT_BLUE_TAGGING_RAIL.get()), new ItemStack(STItems.BLUE_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BLUE_TAGGING_RAIL.get()), new ItemStack(STItems.PURPLE_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.PURPLE_TAGGING_RAIL.get()), new ItemStack(STItems.MAGENTA_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.MAGENTA_TAGGING_RAIL.get()), new ItemStack(STItems.PINK_TAGGING_RAIL.get()), PARENT_AND_SEARCH_TABS);
         }
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
@@ -73,6 +89,23 @@ public class STVanillaTabs {
             event.insertBefore(new ItemStack(Items.MUSIC_DISC_13), new ItemStack(STItems.VINYL_DISC.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.VINYL_DISC.get()), new ItemStack(STItems.RECORDED_DISC.get()), PARENT_AND_SEARCH_TABS);
             addDyedWaterBuckets(event);
+
+            event.insertAfter(new ItemStack(Items.TNT_MINECART), new ItemStack(STItems.WHITE_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.WHITE_TAG.get()), new ItemStack(STItems.LIGHT_GRAY_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIGHT_GRAY_TAG.get()), new ItemStack(STItems.GRAY_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.GRAY_TAG.get()), new ItemStack(STItems.BLACK_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BLACK_TAG.get()), new ItemStack(STItems.BROWN_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BROWN_TAG.get()), new ItemStack(STItems.RED_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.RED_TAG.get()), new ItemStack(STItems.ORANGE_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.ORANGE_TAG.get()), new ItemStack(STItems.YELLOW_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.YELLOW_TAG.get()), new ItemStack(STItems.LIME_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIME_TAG.get()), new ItemStack(STItems.GREEN_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.GREEN_TAG.get()), new ItemStack(STItems.CYAN_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.CYAN_TAG.get()), new ItemStack(STItems.LIGHT_BLUE_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.LIGHT_BLUE_TAG.get()), new ItemStack(STItems.BLUE_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.BLUE_TAG.get()), new ItemStack(STItems.PURPLE_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.PURPLE_TAG.get()), new ItemStack(STItems.MAGENTA_TAG.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.MAGENTA_TAG.get()), new ItemStack(STItems.PINK_TAG.get()), PARENT_AND_SEARCH_TABS);
         }
     }
 
@@ -80,7 +113,7 @@ public class STVanillaTabs {
     /// @param event The {@link BuildCreativeModeTabContentsEvent}, in order to add the buckets.
     private static void addDyedWaterBuckets(BuildCreativeModeTabContentsEvent event) {
         event.insertAfter(new ItemStack(Items.WATER_BUCKET), new ItemStack(STItems.DYED_WATER_BUCKET.get()), PARENT_AND_SEARCH_TABS);
-        if (!STConfigs.POPULATE_DYED_WATER_BUCKETS.get()) return;
+        if (!STOptions.POPULATE_DYED_WATER_BUCKETS.get()) return;
 
         List<Integer> colors = List.of(16383998, 15457757, 10329495, 4673362, 1908001, 8606770, 11546150, 16351261, 16701501, 8439583, 6192150, 1481884, 3847130, 8454080, 3949738, 8991416, 13061821, 15961002);
         ItemStack previousBucket = new ItemStack(STItems.DYED_WATER_BUCKET.get());

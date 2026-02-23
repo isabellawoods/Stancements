@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tagging_rail": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#stancements:tagging_rails"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "stancements:dye_gray_tagging_rail"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tagging_rail"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "stancements:dye_gray_tagging_rail"
+    ]
+  }
+}

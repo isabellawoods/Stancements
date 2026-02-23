@@ -4,11 +4,16 @@ import melonystudios.reutilities.data.model.ReItemModelProvider;
 import melonystudios.stancements.Stancements;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Consumer;
+
 public class STItemModelProvider extends ReItemModelProvider {
+    public static final DyeColor[] COLORS = DyeColor.values();
+
     public STItemModelProvider(PackOutput output, ExistingFileHelper fileHelper) {
         super(output, Stancements.MOD_ID, fileHelper);
     }
@@ -36,48 +41,21 @@ public class STItemModelProvider extends ReItemModelProvider {
         block("warped_shelf");
 
         // Crafting Table Cloths
-        block("white_crafting_table_cloth");
-        block("light_gray_crafting_table_cloth");
-        block("gray_crafting_table_cloth");
-        block("black_crafting_table_cloth");
-        block("brown_crafting_table_cloth");
-        block("red_crafting_table_cloth");
-        block("orange_crafting_table_cloth");
-        block("yellow_crafting_table_cloth");
-        block("lime_crafting_table_cloth");
-        block("green_crafting_table_cloth");
-        block("cyan_crafting_table_cloth");
-        block("light_blue_crafting_table_cloth");
-        block("blue_crafting_table_cloth");
-        block("purple_crafting_table_cloth");
-        block("magenta_crafting_table_cloth");
-        block("pink_crafting_table_cloth");
+        forAllColors(color -> block(color + "_crafting_table_cloth"));
 
         // Functional blocks
-        blockItem("gilded_rail");
         block("music_recorder");
         cropPot(this.generated, "crop_pot");
+
+        // Rails
+        blockItem("gilded_rail");
+        forAllColors(color -> blockItem(color + "_tagging_rail"));
 
         // Items
         standard("stancements_logo");
         standard("vinyl_disc");
         recordedDisc(this.generated, "recorded_disc");
-        standard("white_tag");
-        standard("light_gray_tag");
-        standard("gray_tag");
-        standard("black_tag");
-        standard("brown_tag");
-        standard("red_tag");
-        standard("orange_tag");
-        standard("yellow_tag");
-        standard("lime_tag");
-        standard("green_tag");
-        standard("cyan_tag");
-        standard("light_blue_tag");
-        standard("blue_tag");
-        standard("purple_tag");
-        standard("magenta_tag");
-        standard("pink_tag");
+        forAllColors(color -> standard(color + "_tag"));
         this.getBuilder("dyed_water_bucket").parent(this.generated).texture("layer0", this.modLoc("item/dyed_water_bucket_overlay")).texture("layer1", this.modLoc("item/dyed_water_bucket"));
     }
 
@@ -117,5 +95,11 @@ public class STItemModelProvider extends ReItemModelProvider {
                 .override().predicate(label, 11).model(getExistingFile(modLoc("item/" + name + "_label_11"))).end()
                 .override().predicate(label, 12).model(getExistingFile(modLoc("item/" + name + "_label_12"))).end()
                 .override().predicate(label, 13).model(getExistingFile(modLoc("item/" + name + "_label_13"))).end();
+    }
+
+    /// Runs the provided consumer for every registered {@link DyeColor} in the game.
+    /// @param forColor The consumer, ran for every color.
+    public void forAllColors(Consumer<String> forColor) {
+        for (DyeColor color : COLORS) forColor.accept(color.getName());
     }
 }

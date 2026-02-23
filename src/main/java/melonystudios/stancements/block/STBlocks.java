@@ -3,6 +3,7 @@ package melonystudios.stancements.block;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.custom.*;
 import melonystudios.stancements.block.custom.croppot.*;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -46,7 +47,6 @@ public class STBlocks {
     public static final DeferredBlock<Block> PINK_CRAFTING_TABLE_CLOTH = BLOCKS.register("pink_crafting_table_cloth", () -> new CraftingTableClothBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_CARPET)));
 
     // Functional
-    public static final DeferredBlock<Block> GILDED_RAIL = BLOCKS.register("gilded_rail", () -> new GildedRailBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
     public static final DeferredBlock<Block> MUSIC_RECORDER = BLOCKS.register("music_recorder", () -> new MusicRecorderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUKEBOX)));
     public static final DeferredBlock<Block> DYED_WATER_CAULDRON = BLOCKS.register("dyed_water_cauldron", () -> new DyedWaterCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
     public static final DeferredBlock<Block> MILK_CAULDRON = BLOCKS.register("milk_cauldron", () -> new MilkCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
@@ -56,4 +56,23 @@ public class STBlocks {
     public static final DeferredBlock<Block> POTATO_CROP_POT = BLOCKS.register("potato_crop_pot", () -> new PotatoCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
     public static final DeferredBlock<Block> BEETROOT_CROP_POT = BLOCKS.register("beetroot_crop_pot", () -> new BeetrootCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
     public static final DeferredBlock<Block> NETHER_WART_CROP_POT = BLOCKS.register("nether_wart_crop_pot", () -> new NetherWartCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
+
+    // Rails
+    public static final DeferredBlock<Block> GILDED_RAIL = BLOCKS.register("gilded_rail", () -> new GildedRailBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> WHITE_TAGGING_RAIL = BLOCKS.register("white_tagging_rail", () -> new TaggingRailBlock(DyeColor.WHITE, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> LIGHT_GRAY_TAGGING_RAIL = BLOCKS.register("light_gray_tagging_rail", () -> new TaggingRailBlock(DyeColor.LIGHT_GRAY, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> GRAY_TAGGING_RAIL = BLOCKS.register("gray_tagging_rail", () -> new TaggingRailBlock(DyeColor.GRAY, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> BLACK_TAGGING_RAIL = BLOCKS.register("black_tagging_rail", () -> new TaggingRailBlock(DyeColor.BLACK, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> BROWN_TAGGING_RAIL = BLOCKS.register("brown_tagging_rail", () -> new TaggingRailBlock(DyeColor.BROWN, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> RED_TAGGING_RAIL = BLOCKS.register("red_tagging_rail", () -> new TaggingRailBlock(DyeColor.RED, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> ORANGE_TAGGING_RAIL = BLOCKS.register("orange_tagging_rail", () -> new TaggingRailBlock(DyeColor.ORANGE, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> YELLOW_TAGGING_RAIL = BLOCKS.register("yellow_tagging_rail", () -> new TaggingRailBlock(DyeColor.YELLOW, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> LIME_TAGGING_RAIL = BLOCKS.register("lime_tagging_rail", () -> new TaggingRailBlock(DyeColor.LIME, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> GREEN_TAGGING_RAIL = BLOCKS.register("green_tagging_rail", () -> new TaggingRailBlock(DyeColor.GREEN, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> CYAN_TAGGING_RAIL = BLOCKS.register("cyan_tagging_rail", () -> new TaggingRailBlock(DyeColor.CYAN, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> LIGHT_BLUE_TAGGING_RAIL = BLOCKS.register("light_blue_tagging_rail", () -> new TaggingRailBlock(DyeColor.LIGHT_BLUE, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> BLUE_TAGGING_RAIL = BLOCKS.register("blue_tagging_rail", () -> new TaggingRailBlock(DyeColor.BLUE, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> PURPLE_TAGGING_RAIL = BLOCKS.register("purple_tagging_rail", () -> new TaggingRailBlock(DyeColor.PURPLE, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> MAGENTA_TAGGING_RAIL = BLOCKS.register("magenta_tagging_rail", () -> new TaggingRailBlock(DyeColor.MAGENTA, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
+    public static final DeferredBlock<Block> PINK_TAGGING_RAIL = BLOCKS.register("pink_tagging_rail", () -> new TaggingRailBlock(DyeColor.PINK, BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));
 }

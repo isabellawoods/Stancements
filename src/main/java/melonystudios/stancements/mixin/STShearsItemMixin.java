@@ -20,7 +20,7 @@ public class STShearsItemMixin extends Item {
     }
 
     @Inject(method = "mineBlock", at = @At("HEAD"), cancellable = true)
-    public void mineBlock(ItemStack stack, Level world, BlockState state, BlockPos pos, LivingEntity livEntity, CallbackInfoReturnable<Boolean> callback) {
+    public void mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity livEntity, CallbackInfoReturnable<Boolean> callback) {
         callback.setReturnValue(state.is(STBlockTags.MINEABLE_WITH_SHEARS));
     }
 }
