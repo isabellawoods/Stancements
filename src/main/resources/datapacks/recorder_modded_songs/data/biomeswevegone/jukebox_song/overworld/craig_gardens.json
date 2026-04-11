@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "biomeswevegone.music.overworld.craig_gardens"
+  },
+  "length_in_seconds": 244.0,
+  "sound_event": {
+    "sound_id": "biomeswevegone:music.overworld.craig_gardens"
+  }
+}

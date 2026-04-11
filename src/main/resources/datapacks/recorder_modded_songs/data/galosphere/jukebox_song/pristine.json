@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "galosphere.music.pristine"
+  },
+  "length_in_seconds": 342.0,
+  "sound_event": {
+    "sound_id": "galosphere:music.pristine"
+  }
+}

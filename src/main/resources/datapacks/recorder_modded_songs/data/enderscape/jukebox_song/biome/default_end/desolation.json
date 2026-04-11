@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "enderscape.music.biome.default_end.desolation"
+  },
+  "length_in_seconds": 379.0,
+  "sound_event": {
+    "sound_id": "enderscape:music.biome.default_end.desolation"
+  }
+}

@@ -8,17 +8,37 @@ import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.custom.DyedWaterBucketItem;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.network.c2s.StartRecordingAttempt;
+import melonystudios.stancements.network.c2s.ServerPayloadHandler;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 import static melonystudios.stancements.item.custom.DyedWaterBucketItem.DEFAULT_WATER_COLOR;
 
 @EventBusSubscriber(modid = Stancements.MOD_ID, value = Dist.CLIENT)
 public class STClientEvents {
+    @SubscribeEvent
+    public static void registerBuiltInResourcePacks(AddPackFindersEvent event) {
+        event.addPackFinders(
+                Stancements.stancements("resourcepacks/" + Stancements.RMS_ID),
+                PackType.CLIENT_RESOURCES,
+                Component.translatable("pack.stancements." + Stancements.RMS_ID, Component.translatable("pack.stancements.prefix").withColor(Stancements.ACCENT_COLOR)),
+                PackSource.BUILT_IN,
+                false,
+                Pack.Position.TOP
+        );
+    }
+
     @SubscribeEvent
     public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {
         event.register((state, level, pos, tintIndex) -> {
@@ -41,5 +61,11 @@ public class STClientEvents {
     @SubscribeEvent
     public static void addComponentTooltips(AddComponentTooltipsEvent event) {
         event.addComponent(0.1, STDataComponents.MINECART_TAG_COLOR.get());
+    }
+
+    @SubscribeEvent
+    public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
+        var registrar = event.registrar(Stancements.NETWORK_VERSION);
+        registrar.playToServer(StartRecordingAttempt.TYPE, StartRecordingAttempt.STREAM_CODEC, ServerPayloadHandler::startRecordingAttempt);
     }
 }

@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.infinite_amethyst"
+    "translate": "music.game.infinite_amethyst"
   },
   "length_in_seconds": 271.0,
   "sound_event": "stancements:music.game.infinite_amethyst"

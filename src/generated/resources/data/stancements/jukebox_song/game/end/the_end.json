@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.end.the_end"
+    "translate": "music.game.end.the_end"
   },
   "length_in_seconds": 904.0,
   "sound_event": "stancements:music.game.end.the_end"

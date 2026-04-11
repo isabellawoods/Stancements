@@ -1,0 +1,74 @@
+{
+  "music.biome.celestial_grove.elysium": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/celestial_grove/elysium",
+        "stream": true
+      }
+    ]
+  },
+  "music.biome.celestial_grove.finality": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/celestial_grove/finality",
+        "stream": true
+      }
+    ]
+  },
+  "music.biome.celestial_grove.otherworld": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/celestial_grove/otherworld",
+        "stream": true
+      }
+    ]
+  },
+  "music.biome.corrupt_barrens.mutagen": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/corrupt_barrens/mutagen",
+        "stream": true
+      }
+    ]
+  },
+  "music.biome.corrupt_barrens.nebula": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/corrupt_barrens/nebula",
+        "stream": true
+      }
+    ]
+  },
+  "music.biome.default_end.desolation": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/default_end/desolation",
+        "stream": true
+      }
+    ]
+  },
+  "music.biome.magnia_crags.flutters": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/magnia_crags/flutters",
+        "stream": true
+      }
+    ]
+  },
+  "music.biome.veiled_woodlands.respite": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/veiled_woodlands/respite",
+        "stream": true
+      }
+    ]
+  },
+  "music.structure.end_city.grandeur": {
+    "sounds": [
+      {
+        "name": "enderscape:music/structure/end_city/grandeur",
+        "stream": true
+      }
+    ]
+  }
+}

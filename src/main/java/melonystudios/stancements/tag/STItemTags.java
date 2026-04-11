@@ -1,4 +1,4 @@
-package melonystudios.stancements.util.tag;
+package melonystudios.stancements.tag;
 
 import melonystudios.stancements.Stancements;
 import net.minecraft.core.registries.Registries;
@@ -11,7 +11,6 @@ public class STItemTags {
     public static final TagKey<Item> CRAFTING_TABLE_CLOTHS = stancements("crafting_table_cloths");
     public static final TagKey<Item> TAGGING_RAILS = stancements("tagging_rails");
     public static final TagKey<Item> VINYL_DISC_DYES = stancements("vinyl_disc_dyes");
-    public static final TagKey<Item> RECORDABLE_DISCS = stancements("recordable_discs");
     public static final TagKey<Item> MINECART_TAGS = stancements("minecart_tags");
 
     // Common tags

@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.endless"
+    "translate": "music.game.endless"
   },
   "length_in_seconds": 402.0,
   "sound_event": "stancements:music.game.endless"

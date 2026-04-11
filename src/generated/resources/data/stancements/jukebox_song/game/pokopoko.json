@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.pokopoko"
+    "translate": "music.game.pokopoko"
   },
   "length_in_seconds": 304.0,
   "sound_event": "stancements:music.game.pokopoko"

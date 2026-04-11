@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.stand_tall"
+    "translate": "music.game.stand_tall"
   },
   "length_in_seconds": 308.0,
   "sound_event": "stancements:music.game.stand_tall"

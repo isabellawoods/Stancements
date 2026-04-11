@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.comforting_memories"
+    "translate": "music.game.comforting_memories"
   },
   "length_in_seconds": 275.0,
   "sound_event": "stancements:music.game.comforting_memories"

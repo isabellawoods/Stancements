@@ -4,10 +4,10 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.custom.MusicRecorderBlock;
 import melonystudios.stancements.blockentity.STBlockEntities;
+import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
-import melonystudios.stancements.util.tag.STItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -34,6 +34,7 @@ import java.util.UUID;
 public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, ContainerSingleItem.BlockContainerSingleItem {
     public static final int DEFAULT_RECORDING_DURATION = 600;
     public static final int DEFAULT_TICKS_UNTIL_FINISHED = -1;
+    public static final double RECORDER_MESSAGE_MAX_RANGE = 16.0;
     private ItemStack discStack = ItemStack.EMPTY;
     private ResourceLocation musicID;
     private int ticksUntilFinishedRecording = DEFAULT_TICKS_UNTIL_FINISHED;
@@ -62,9 +63,16 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
     public void finishRecording(ItemStack stack, boolean canceled) {
         if (this.getLevel() != null && !canceled && this.recorderPlayer() != null) {
             Player player = this.getLevel().getPlayerByUUID(this.recorderPlayer());
-            this.sendMessage(Component.translatable("tooltip.stancements.finished_recording").withColor(Stancements.ACCENT_COLOR), player);
+            BlockPos pos = this.getBlockPos();
+
             if (player instanceof ServerPlayer serverPlayer) {
-                serverPlayer.awardStat(STStatistics.SONGS_RECORDED.get());
+                // send "finished recording!" message if the recordee is within 16 blocks of the recorder ~isa 17-03-26
+                if (serverPlayer.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= RECORDER_MESSAGE_MAX_RANGE) {
+                    this.sendMessage(Component.translatable("tooltip.stancements.finished_recording").withColor(Stancements.ACCENT_COLOR), serverPlayer);
+                }
+
+                // award statistic
+                serverPlayer.awardStat(this.copyingSong() ? STStatistics.MUSIC_DISCS_COPIED.get() : STStatistics.SONGS_RECORDED.get());
                 STCriteriaTriggers.RECORD_SONG.trigger(RecordedDiscItem.sanitizeMusicIDLocation(this.musicID()), this.copyingSong(), serverPlayer);
             }
         }
@@ -77,8 +85,8 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
         this.setChanged();
     }
 
-    public void sendMessage(Component component, @Nullable Player recorderPlayer) {
-        if (recorderPlayer instanceof ServerPlayer serverPlayer) serverPlayer.sendSystemMessage(component, true);
+    public void sendMessage(Component component, ServerPlayer recorderPlayer) {
+        recorderPlayer.sendSystemMessage(component, true);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, MusicRecorderBlockEntity recorder) {
@@ -174,7 +182,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
 
     @Override
     public boolean canPlaceItem(int slot, ItemStack stack) {
-        return stack.is(STItemTags.RECORDABLE_DISCS) && this.getItem(slot).isEmpty();
+        return stack.has(STDataComponents.RECORDING_TURNS_INTO) && this.getItem(slot).isEmpty();
     }
 
     @Override

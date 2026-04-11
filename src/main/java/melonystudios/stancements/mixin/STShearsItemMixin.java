@@ -1,6 +1,6 @@
 package melonystudios.stancements.mixin;
 
-import melonystudios.stancements.util.tag.STBlockTags;
+import melonystudios.stancements.tag.STBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;

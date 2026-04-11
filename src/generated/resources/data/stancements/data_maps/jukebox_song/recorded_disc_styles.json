@@ -1,83 +1,83 @@
 {
   "values": {
     "minecraft:11": {
-      "color": 0,
+      "color": "#0",
       "label": 1.0
     },
     "minecraft:13": {
-      "color": 16766976,
+      "color": "#ffd800",
       "label": 9.0
     },
     "minecraft:5": {
-      "color": 2744299,
+      "color": "#29dfeb",
       "label": 11.0
     },
     "minecraft:blocks": {
-      "color": 14832699,
+      "color": "#e2543b",
       "label": 1.0
     },
     "minecraft:cat": {
-      "color": 5046016,
+      "color": "#4cff00",
       "label": 2.0
     },
     "minecraft:chirp": {
-      "color": 16711684,
+      "color": "#ff0004",
       "label": 3.0
     },
     "minecraft:creator": {
-      "color": 16768409,
+      "color": "#ffdd99",
       "label": 10.0
     },
     "minecraft:creator_music_box": {
-      "color": 16768409,
+      "color": "#ffdd99",
       "label": 10.0
     },
     "minecraft:far": {
-      "color": 11992832,
+      "color": "#b6ff00",
       "label": 4.0
     },
     "minecraft:mall": {
-      "color": 10122751,
+      "color": "#9a75ff",
       "label": 2.0
     },
     "minecraft:mellohi": {
-      "color": 11665663,
+      "color": "#b200ff",
       "label": 5.0
     },
     "minecraft:otherside": {
-      "color": 2001804,
+      "color": "#1e8b8c",
       "label": 2.0
     },
     "minecraft:pigstep": {
-      "color": 16643423,
+      "color": "#fdf55f",
       "label": 6.0
     },
     "minecraft:precipice": {
-      "color": 8042393,
+      "color": "#7ab799",
       "label": 7.0
     },
     "minecraft:relic": {
-      "color": 8972031,
+      "color": "#88e6ff",
       "label": 6.0
     },
     "minecraft:stal": {
-      "color": 0,
+      "color": "#0",
       "label": 1.0
     },
     "minecraft:strad": {
-      "color": 16777215,
+      "color": "#ffffff",
       "label": 1.0
     },
     "minecraft:wait": {
-      "color": 8497634,
+      "color": "#81a9e2",
       "label": 12.0
     },
     "minecraft:ward": {
-      "color": 9356800,
+      "color": "#8ec600",
       "label": 9.0
     },
     "stancements:game/end/alpha": {
-      "color": 10144191,
+      "color": "#9ac9bf",
       "label": 13.0
     }
   }

@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.watcher"
+    "translate": "music.game.watcher"
   },
   "length_in_seconds": 332.0,
   "sound_event": "stancements:music.game.watcher"

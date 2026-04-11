@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.water.axolotl"
+    "translate": "music.game.water.axolotl"
   },
   "length_in_seconds": 303.0,
   "sound_event": "stancements:music.game.water.axolotl"

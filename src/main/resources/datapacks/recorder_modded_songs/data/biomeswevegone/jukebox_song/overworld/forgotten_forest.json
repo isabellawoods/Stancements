@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "biomeswevegone.music.overworld.forgotten_forest"
+  },
+  "length_in_seconds": 361.0,
+  "sound_event": {
+    "sound_id": "biomeswevegone:music.overworld.forgotten_forest"
+  }
+}

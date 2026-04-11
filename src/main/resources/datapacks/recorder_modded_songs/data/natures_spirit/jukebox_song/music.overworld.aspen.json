@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "natures_spirit.music.overworld.aspen"
+  },
+  "length_in_seconds": 290.0,
+  "sound_event": {
+    "sound_id": "natures_spirit:music.overworld.aspen"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.mice_on_venus"
+    "translate": "music.game.mice_on_venus"
   },
   "length_in_seconds": 281.0,
   "sound_event": "stancements:music.game.mice_on_venus"

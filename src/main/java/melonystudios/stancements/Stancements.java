@@ -33,6 +33,8 @@ public class Stancements {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final int ACCENT_COLOR = 0xCF8EDA;
     public static final String MOD_ID = "stancements"; // Portmanteau of "stacked" and "enhancements".
+    public static final String NETWORK_VERSION = "1";
+    public static final String RMS_ID = "recorder_modded_songs";
 
     public Stancements(IEventBus eventBus, ModContainer container) {
         eventBus.addListener(this::commonSetup);

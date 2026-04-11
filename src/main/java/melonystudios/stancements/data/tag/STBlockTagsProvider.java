@@ -1,7 +1,7 @@
 package melonystudios.stancements.data.tag;
 
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.util.tag.STBlockTags;
+import melonystudios.stancements.tag.STBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;

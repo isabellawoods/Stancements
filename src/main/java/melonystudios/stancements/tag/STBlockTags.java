@@ -1,4 +1,4 @@
-package melonystudios.stancements.util.tag;
+package melonystudios.stancements.tag;
 
 import melonystudios.stancements.Stancements;
 import net.minecraft.core.registries.Registries;

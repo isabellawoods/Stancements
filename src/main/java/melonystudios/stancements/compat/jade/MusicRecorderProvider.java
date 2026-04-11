@@ -2,8 +2,8 @@ package melonystudios.stancements.compat.jade;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
+import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
-import melonystudios.stancements.util.tag.STItemTags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -53,7 +53,7 @@ public class MusicRecorderProvider implements IBlockComponentProvider, StreamSer
         return new RecorderData(
                 Optional.ofNullable(recorder.musicID()),
                 recorder.copyingSong(),
-                !recorder.getTheItem().is(STItemTags.RECORDABLE_DISCS) && !recorder.getTheItem().isEmpty(),
+                !recorder.getTheItem().has(STDataComponents.RECORDING_TURNS_INTO) && !recorder.getTheItem().isEmpty(),
                 recorder.ticksUntilFinishedRecording()
         );
     }

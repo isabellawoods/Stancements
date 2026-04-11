@@ -1,0 +1,34 @@
+{
+  "music.bee_laxing_with_the_hom_bees": {
+    "sounds": [
+      {
+        "name": "the_bumblezone:music/bee_laxing_with_the_hom_bees",
+        "stream": true
+      }
+    ]
+  },
+  "music.honey_bee_rat_faced_boy": {
+    "sounds": [
+      {
+        "name": "the_bumblezone:music/honey_bee_rat_faced_boy",
+        "stream": true
+      }
+    ]
+  },
+  "music.la_bee_da_loca": {
+    "sounds": [
+      {
+        "name": "the_bumblezone:music/la_bee_da_loca",
+        "stream": true
+      }
+    ]
+  },
+  "music.rivers_of_honey_moserao_stereo": {
+    "sounds": [
+      {
+        "name": "the_bumblezone:music/rivers_of_honey_moserao_stereo",
+        "stream": true
+      }
+    ]
+  }
+}

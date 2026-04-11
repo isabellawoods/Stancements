@@ -2,7 +2,7 @@ package melonystudios.stancements.data.tag;
 
 import melonystudios.reutilities.util.tag.ReItemTags;
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.util.tag.STItemTags;
+import melonystudios.stancements.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -41,7 +41,6 @@ public class STItemTagsProvider extends ItemTagsProvider {
                 ORANGE_TAGGING_RAIL.get(), YELLOW_TAGGING_RAIL.get(), LIME_TAGGING_RAIL.get(), GREEN_TAGGING_RAIL.get(), CYAN_TAGGING_RAIL.get(), LIGHT_BLUE_TAGGING_RAIL.get(), BLUE_TAGGING_RAIL.get(),
                 PURPLE_TAGGING_RAIL.get(), MAGENTA_TAGGING_RAIL.get(), PINK_TAGGING_RAIL.get());
         this.tag(STItemTags.VINYL_DISC_DYES).addTag(Tags.Items.DYES_LIGHT_GRAY).addTag(Tags.Items.DYES_GRAY);
-        this.tag(STItemTags.RECORDABLE_DISCS).add(VINYL_DISC.get());
         this.tag(STItemTags.MINECART_TAGS).add(WHITE_TAG.get(), LIGHT_GRAY_TAG.get(), GRAY_TAG.get(), BLACK_TAG.get(), BROWN_TAG.get(), RED_TAG.get(), ORANGE_TAG.get(), YELLOW_TAG.get(), LIME_TAG.get(),
                 GREEN_TAG.get(), CYAN_TAG.get(), LIGHT_BLUE_TAG.get(), BLUE_TAG.get(), PURPLE_TAG.get(), MAGENTA_TAG.get(), PINK_TAG.get());
 

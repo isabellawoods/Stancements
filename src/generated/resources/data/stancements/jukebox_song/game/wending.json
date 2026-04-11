@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.wending"
+    "translate": "music.game.wending"
   },
   "length_in_seconds": 314.0,
   "sound_event": "stancements:music.game.wending"

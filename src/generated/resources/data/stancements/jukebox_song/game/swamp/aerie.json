@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.swamp.aerie"
+    "translate": "music.game.swamp.aerie"
   },
   "length_in_seconds": 236.0,
   "sound_event": "stancements:music.game.swamp.aerie"

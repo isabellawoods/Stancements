@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.one_more_day"
+    "translate": "music.game.one_more_day"
   },
   "length_in_seconds": 278.0,
   "sound_event": "stancements:music.game.one_more_day"

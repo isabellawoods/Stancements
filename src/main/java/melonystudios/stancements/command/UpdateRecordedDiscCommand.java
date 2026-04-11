@@ -31,6 +31,14 @@ public class UpdateRecordedDiscCommand {
             .put("creative1", "biome_fest").put("creative2", "blind_spots").put("creative3", "haunt_muskie").put("creative4", "aria_math").put("creative5", "dreiton").put("creative6", "taswell")
             .put("nether1", "concrete_halls").put("nether2", "dead_voxel").put("nether3", "warmth").put("nether4", "ballad_of_the_cats")
             .put("end/end", "end/the_end")
+            // The Mato music pack songs
+            .put("themato", "minecraft") // correct mod id
+            .put("caves_and_cliffs/", "")
+            .put("wild_update/", "swamp/")
+            .put("trails_and_tales/", "")
+            .put("tricky_trials/", "")
+            .put("chase_the_skies/", "")
+            .put("drop_2_2025/", "") // existed at some point, don't know if discs could have this though
             .build();
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -69,7 +77,7 @@ public class UpdateRecordedDiscCommand {
             }
 
             if (tag.contains("label", Tag.TAG_ANY_NUMERIC)) {
-                handStack.set(STDataComponents.LABEL, tag.getFloat("label"));
+                handStack.set(STDataComponents.LABEL, Math.clamp(tag.getFloat("label"), RecordedDiscItem.DISC_LABEL_MIN, RecordedDiscItem.DISC_LABEL_MAX));
                 tag.remove("label");
                 handStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
                 updatedLabel = true;

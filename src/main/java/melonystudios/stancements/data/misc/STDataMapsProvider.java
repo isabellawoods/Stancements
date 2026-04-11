@@ -7,7 +7,7 @@ import melonystudios.stancements.misc.STJukeboxSongs;
 import melonystudios.stancements.misc.datamap.PotPlantables;
 import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.misc.datamap.RecordedDiscStyles;
-import melonystudios.stancements.util.tag.STItemTags;
+import melonystudios.stancements.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvents;

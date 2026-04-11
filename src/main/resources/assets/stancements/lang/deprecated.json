@@ -1,4 +1,14 @@
 {
+  "removed": [
+    "tooltip.stancements.recording_music",
+    "tooltip.stancements.recording_music_disc",
+    "tag.item.stancements.recordable_discs",
+    "music.minecraft.game.lilypad",
+    "music.minecraft.game.below_and_above",
+    "music.minecraft.game.os_piano",
+    "music.minecraft.game.broken_clocks",
+    "music.minecraft.game.fireflies"
+  ],
   "renamed": {
     "itemGroup.stancements.tab": "tab.stancements.main",
     "config.stancements.populate_dyed_water_buckets": "option.stancements.populate_dyed_water_buckets",

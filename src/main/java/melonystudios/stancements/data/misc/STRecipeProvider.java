@@ -2,7 +2,7 @@ package melonystudios.stancements.data.misc;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.STItems;
-import melonystudios.stancements.util.tag.STItemTags;
+import melonystudios.stancements.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;

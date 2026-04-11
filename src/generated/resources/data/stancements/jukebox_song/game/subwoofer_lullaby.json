@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.subwoofer_lullaby"
+    "translate": "music.game.subwoofer_lullaby"
   },
   "length_in_seconds": 208.0,
   "sound_event": "stancements:music.game.subwoofer_lullaby"

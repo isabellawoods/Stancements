@@ -1,0 +1,34 @@
+{
+  "music.game.below_and_above": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/below_and_above",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.os_piano": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/os_piano",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.broken_clocks": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/broken_clocks",
+        "stream": true
+      }
+    ]
+  },
+  "music.game.fireflies": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/fireflies",
+        "stream": true
+      }
+    ]
+  }
+}

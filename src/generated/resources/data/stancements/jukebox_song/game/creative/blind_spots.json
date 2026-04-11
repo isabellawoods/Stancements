@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.creative.blind_spots"
+    "translate": "music.game.creative.blind_spots"
   },
   "length_in_seconds": 332.0,
   "sound_event": "stancements:music.game.creative.blind_spots"

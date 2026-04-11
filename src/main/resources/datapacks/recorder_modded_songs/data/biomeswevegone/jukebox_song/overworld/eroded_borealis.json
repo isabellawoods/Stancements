@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "biomeswevegone.music.overworld.eroded_borealis"
+  },
+  "length_in_seconds": 211.0,
+  "sound_event": {
+    "sound_id": "biomeswevegone:music.overworld.eroded_borealis"
+  }
+}

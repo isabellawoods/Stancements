@@ -1,8 +1,0 @@
-{
-  "comparator_output": 0,
-  "description": {
-    "translate": "music.minecraft.game.os_piano"
-  },
-  "length_in_seconds": 275.0,
-  "sound_event": "stancements:music.game.os_piano"
-}

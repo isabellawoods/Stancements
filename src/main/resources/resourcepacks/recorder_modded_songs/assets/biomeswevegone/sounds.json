@@ -1,0 +1,38 @@
+{
+  "music.overworld.crag_gardens": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "biomeswevegone:music/overworld/crag_gardens",
+        "stream": true
+      }
+    ]
+  },
+  "music.overworld.eroded_borealis": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "biomeswevegone:music/overworld/eroded_borealis",
+        "stream": true
+      }
+    ]
+  },
+  "music.overworld.forgotten_forest": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "biomeswevegone:music/overworld/forgotten_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music.overworld.pale_bog": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "biomeswevegone:music/overworld/pale_bog",
+        "stream": true
+      }
+    ]
+  }
+}

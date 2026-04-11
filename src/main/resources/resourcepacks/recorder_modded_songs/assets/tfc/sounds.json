@@ -1,0 +1,42 @@
+{
+  "music.m0-dreams_of_the_phae": {
+    "sounds": [
+      {
+        "name": "tfc:music/m0-dreams_of_the_phae",
+        "stream": true
+      }
+    ]
+  },
+  "music.m1-firmavista": {
+    "sounds": [
+      {
+        "name": "tfc:music/m1-firmavista",
+        "stream": true
+      }
+    ]
+  },
+  "music.m2-sycamore_heights": {
+    "sounds": [
+      {
+        "name": "tfc:music/m2-sycamore_heights",
+        "stream": true
+      }
+    ]
+  },
+  "music.m3-terrafirmacraft": {
+    "sounds": [
+      {
+        "name": "tfc:music/m3-terrafirmacraft",
+        "stream": true
+      }
+    ]
+  },
+  "music.m4-through_the_willows": {
+    "sounds": [
+      {
+        "name": "tfc:music/m4-through_the_willows",
+        "stream": true
+      }
+    ]
+  }
+}

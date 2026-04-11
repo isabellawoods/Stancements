@@ -6,12 +6,13 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
+import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
-import melonystudios.stancements.mixin.CurrentMusicAccessor;
-import melonystudios.stancements.util.tag.STItemTags;
+import melonystudios.stancements.event.custom.StartRecordingAttemptEvent;
+import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.network.s2c.RequestRecordingAttempt;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -21,7 +22,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -45,12 +45,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MusicRecorderBlock extends BaseEntityBlock {
     public static final BooleanProperty RECORDING = STBlockStateProperties.RECORDING;
@@ -84,14 +83,11 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     @NotNull
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
-//            if (recorder.isEmpty()) level.setBlock(pos, state.setValue(RECORDING, false), 3);
-            if (!recorder.isEmpty()) {
-                this.stopRecording(level, pos, true);
-                level.setBlock(pos, state.setValue(RECORDING, false), 3);
-                level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
-                return InteractionResult.sidedSuccess(level.isClientSide());
-            }
+        if (blockEntity instanceof MusicRecorderBlockEntity recorder && !recorder.isEmpty()) {
+            this.stopRecording(level, pos, true);
+            level.setBlock(pos, state.setValue(RECORDING, false), 3);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
+            return InteractionResult.sidedSuccess(!level.isClientSide());
         }
         return InteractionResult.PASS;
     }
@@ -99,46 +95,49 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     @Override
     @NotNull
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        // todo: this will likely crash if run on a dedicated server, but how will the server know about the song? ~isa 08-11-25
-        if (!state.getValue(RECORDING) && stack.is(STItemTags.RECORDABLE_DISCS) && level.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
-            SoundInstance currentMusic = ((CurrentMusicAccessor) Minecraft.getInstance().getMusicManager()).stancements$getCurrentMusic();
+        if (!state.getValue(RECORDING) && stack.has(STDataComponents.RECORDING_TURNS_INTO) && level.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
             ItemStack handStack = player.getItemInHand(hand);
             ItemStack splitStack = handStack.consumeAndReturn(1, player);
 
-            if (currentMusic != null && FMLLoader.getDist() != Dist.DEDICATED_SERVER) { // band-aid fix until I try using packets ~isa 23-12-25
-                // always record current song first
-                this.startRecording(level, state, pos, player, splitStack, currentMusic);
-            } else {
-                // if none is playing, try recording from an adjacent jukebox
-                this.tryRecordingFromAdjacentJukebox(level, state, pos, player, splitStack);
+            if (player instanceof ServerPlayer serverPlayer) {
+                // tell the client to start the recording process, as it requires the current song in MusicManager ~isa 17-03-26
+                serverPlayer.connection.send(new RequestRecordingAttempt(pos, splitStack));
             }
-            player.awardStat(Stats.ITEM_USED.get(splitStack.getItem()));
+
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    public void startRecording(Level level, BlockState state, BlockPos pos, @Nullable Player player, ItemStack discStack, @Nullable SoundInstance currentMusic) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
-            recorder.insertDisc(discStack.copy());
-            if (currentMusic != null && currentMusic.getSound() != null) {
-                recorder.startRecording(currentMusic.getSound().getPath(), false, player);
-                this.sendMessage(Component.translatable("tooltip.stancements.recording_music").withColor(Stancements.ACCENT_COLOR), player);
-                level.setBlock(pos, state.setValue(RECORDING, true), 3);
-                level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
-            } else {
-                this.sendMessage(NO_MUSIC_PLAYING_TEXT, player);
-            }
+    public void tryRecordingFromPlayer(Level level, BlockState state, BlockPos recorderPosition, Player player, ItemStack recordableDisc, @Nullable ResourceLocation musicID) {
+        BlockEntity blockEntity = level.getBlockEntity(recorderPosition);
+        if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
+
+        // fire recording event ~isa 11-04-26
+        StartRecordingAttemptEvent event = StartRecordingAttemptEvent.recordClientMusic(player, recorderPosition, recordableDisc, Optional.ofNullable(musicID));
+        if (event.isCanceled()) return;
+        recorder.insertDisc(recordableDisc.copy());
+
+        if (musicID == null) {
+            this.sendMessage(NO_MUSIC_PLAYING_TEXT, player);
+        } else {
+            recorder.startRecording(musicID, false, player);
+            this.sendMessage(this.getRecordingMessage(this.getSongName(musicID)), player);
+            level.setBlock(recorderPosition, state.setValue(RECORDING, true), 3);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, recorderPosition, GameEvent.Context.of(player, state));
         }
     }
 
-    public void tryRecordingFromAdjacentJukebox(Level level, BlockState state, BlockPos pos, @Nullable Player player, ItemStack discStack) {
+    public void tryRecordingFromAdjacentJukebox(Level level, BlockState state, BlockPos pos, @Nullable Player player, ItemStack recordableDisc) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
         Component errorMessage = NO_MUSIC_PLAYING_TEXT;
 
-        recorder.insertDisc(discStack.copy());
+        // fire recording event ~isa 11-04-26
+        StartRecordingAttemptEvent event = StartRecordingAttemptEvent.recordFromAdjacentBlock(player, pos, recordableDisc);
+        if (event.isCanceled()) return;
+
+        recorder.insertDisc(recordableDisc.copy());
         for (Direction direction : Direction.values()) {
             BlockPos adjacentPos = pos.relative(direction);
             BlockState adjacentState = level.getBlockState(adjacentPos);
@@ -158,7 +157,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
                     // exact duration of the song, so it always finishes when the song ends
                     int recordingDuration = (int) (song.lengthInTicks() - jukebox.getSongPlayer().getTicksSinceSongStarted()) + JUKEBOX_PADDING_TICKS; // 20 ticks for padding
                     recorder.startRecording(songLocation, true, recordingDuration, player);
-                    this.sendMessage(Component.translatable("tooltip.stancements.recording_music_disc").withColor(Stancements.ACCENT_COLOR), player);
+                    this.sendMessage(this.getRecordingMessage(song.description().getString()), player);
                     level.setBlock(pos, state.setValue(RECORDING, true), 3);
                     level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
                     return;
@@ -192,7 +191,25 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     public void sendMessage(Component component, Player player) {
-        if (player instanceof ServerPlayer serverPlayer) serverPlayer.sendSystemMessage(component, true);
+        player.displayClientMessage(component, true);
+//        if (player instanceof ServerPlayer serverPlayer) serverPlayer.sendSystemMessage(component, true);
+    }
+
+    public Component getRecordingMessage(String songName) {
+        String[] authorAndName = songName.split(I18n.get("tooltip.stancements.author_song_separator"));
+
+        if (authorAndName.length >= 2) {
+            return Component.translatable("tooltip.stancements.recording_music.split", authorAndName[1].trim(), authorAndName[0].trim()).withColor(Stancements.ACCENT_COLOR);
+        } else {
+            return Component.translatable("tooltip.stancements.recording_music.unified", songName).withColor(Stancements.ACCENT_COLOR);
+        }
+    }
+
+    public String getSongName(ResourceLocation musicID) {
+        ResourceLocation sanitized = RecordedDiscItem.sanitizeMusicIDLocation(musicID);
+        String namespacePrefix = sanitized.getNamespace().equals("minecraft") ? "" : sanitized.getNamespace() + ".";
+
+        return I18n.get(namespacePrefix + "music." + sanitized.getPath().replace("/", "."));
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "comparator_output": 0,
   "description": {
-    "translate": "music.minecraft.game.ancestry"
+    "translate": "music.game.ancestry"
   },
   "length_in_seconds": 343.0,
   "sound_event": "stancements:music.game.ancestry"
