@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "hopping_crop_pot",
   "key": {
-    "#": {
-      "item": "minecraft:terracotta"
-    },
-    "H": {
-      "item": "minecraft:hopper"
-    }
+    "#": "minecraft:terracotta",
+    "H": "minecraft:hopper"
   },
   "pattern": [
     "#H#",

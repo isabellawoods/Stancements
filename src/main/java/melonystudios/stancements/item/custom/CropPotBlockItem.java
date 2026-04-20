@@ -4,7 +4,7 @@ import melonystudios.stancements.block.STBlockStateProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BlockItemStateProperties;
@@ -23,8 +23,8 @@ public class CropPotBlockItem extends BlockItem {
         BlockItemStateProperties blockState = stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
         Boolean hopping = blockState.get(STBlockStateProperties.HOPPING);
         if (hopping != null && hopping) {
-            ResourceLocation location = BuiltInRegistries.BLOCK.getKey(this.getBlock());
-            return Component.translatable("block." + location.getNamespace() + ".hopping_" + location.getPath());
+            Identifier identifier = BuiltInRegistries.BLOCK.getKey(this.getBlock());
+            return Component.translatable("block." + identifier.getNamespace() + ".hopping_" + identifier.getPath());
         }
         return Component.translatable(descriptionID);
     }

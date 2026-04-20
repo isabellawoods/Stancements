@@ -3,21 +3,14 @@
   "category": "misc",
   "group": "crafting_table_cloths",
   "ingredients": [
+    "#c:dyes/lime",
     {
-      "tag": "c:dyes/lime"
-    },
-    {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:crafting_table_cloths"
-      },
-      "subtracted": {
-        "item": "stancements:lime_crafting_table_cloth"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:crafting_table_cloths",
+      "subtracted": "stancements:lime_crafting_table_cloth"
     }
   ],
   "result": {
-    "count": 1,
     "id": "stancements:lime_crafting_table_cloth"
   }
 }

@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "D": {
-      "tag": "c:dyes"
-    },
-    "I": {
-      "tag": "c:gems/diamond"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    }
+    "#": "#minecraft:planks",
+    "D": "#c:dyes",
+    "I": "#c:gems/diamond",
+    "R": "#c:dusts/redstone"
   },
   "pattern": [
     "#R#",
@@ -21,7 +13,6 @@
     "#R#"
   ],
   "result": {
-    "count": 1,
     "id": "stancements:music_recorder"
   }
 }

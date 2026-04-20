@@ -1,10 +1,10 @@
 package melonystudios.stancements.misc;
 
-import melonystudios.stancements.Stancements;
 import melonystudios.stancements.sound.STSounds;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.JukeboxSong;
@@ -158,10 +158,10 @@ public class STJukeboxSongs {
 
     public static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> key, ResourceKey<SoundEvent> sound, int lengthInSeconds) {
         var soundEvents = context.lookup(Registries.SOUND_EVENT);
-        context.register(key, new JukeboxSong(soundEvents.getOrThrow(sound), Component.translatable("music." + key.location().getPath().replace('/', '.')), lengthInSeconds, 0));
+        context.register(key, new JukeboxSong(soundEvents.getOrThrow(sound), Component.translatable("music." + key.identifier().getPath().replace('/', '.')), lengthInSeconds, 0));
     }
 
     public static ResourceKey<JukeboxSong> register(String name) {
-        return ResourceKey.create(Registries.JUKEBOX_SONG, Stancements.stancements(name));
+        return ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.withDefaultNamespace(name));
     }
 }

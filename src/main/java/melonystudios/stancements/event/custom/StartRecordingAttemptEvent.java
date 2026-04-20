@@ -1,7 +1,7 @@
 package melonystudios.stancements.event.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.ICancellableEvent;
@@ -38,14 +38,14 @@ public abstract class StartRecordingAttemptEvent extends PlayerEvent implements 
         return this.recorderPosition;
     }
 
-    ///@return The item stack of the item being used to record. This item should *always* have the
+    /// @return The item stack of the item being used to record. This item should *always* have the
     /// `stancements:recording_turns_into` component.
     public ItemStack recordableDisc() {
         return this.recordableDisc;
     }
 
     @ApiStatus.Internal
-    public static ClientMusicRecording recordClientMusic(Player player, BlockPos recorderPosition, ItemStack recordableDisc, Optional<ResourceLocation> clientMusicID) {
+    public static ClientMusicRecording recordClientMusic(Player player, BlockPos recorderPosition, ItemStack recordableDisc, Optional<Identifier> clientMusicID) {
         ClientMusicRecording event = new ClientMusicRecording(player, recorderPosition, recordableDisc, clientMusicID);
         NeoForge.EVENT_BUS.post(event);
         return event;
@@ -59,19 +59,19 @@ public abstract class StartRecordingAttemptEvent extends PlayerEvent implements 
     }
 
     public static class ClientMusicRecording extends StartRecordingAttemptEvent {
-        private final Optional<ResourceLocation> clientMusicID;
+        private final Optional<Identifier> clientMusicID;
 
         /// @param player The player recording the music.
         /// @param recorderPosition The block position of the music recorder.
         /// @param recordableDisc The item stack of the item being used to record (should always have the `stancements:recording_turns_into` component).
-        /// @param clientMusicID An *optional* resource location of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
-        public ClientMusicRecording(Player player, BlockPos recorderPosition, ItemStack recordableDisc, Optional<ResourceLocation> clientMusicID) {
+        /// @param clientMusicID An *optional* identifier of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
+        public ClientMusicRecording(Player player, BlockPos recorderPosition, ItemStack recordableDisc, Optional<Identifier> clientMusicID) {
             super(player, recorderPosition, recordableDisc);
             this.clientMusicID = clientMusicID;
         }
 
-        /// @return An *optional* resource location of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
-        public Optional<ResourceLocation> clientMusicID() {
+        /// @return An *optional* identifier of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
+        public Optional<Identifier> clientMusicID() {
             return this.clientMusicID;
         }
     }

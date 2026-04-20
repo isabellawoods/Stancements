@@ -1,13 +1,5 @@
 {
   "parent": "minecraft:item/generated",
-  "overrides": [
-    {
-      "model": "stancements:item/hopping_crop_pot",
-      "predicate": {
-        "stancements:hopping": 1.0
-      }
-    }
-  ],
   "textures": {
     "layer0": "stancements:item/crop_pot"
   }

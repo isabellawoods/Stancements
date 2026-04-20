@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-10T17:13:12.470037079	Stancements — Item Tags
+// 26.1.2	2026-04-19T23:13:04.3271533	Stancements — Item Tags
 c7cef14d56c1521d6152095bb87be9401fcf7cad data/c/tags/item/buckets.json
 1008717c0e6c31eea7dfdc06e2baa4d5f602e052 data/c/tags/item/buckets/dyed_water.json
 932fc1e90b002b41c8e8f709053ba1bf1aa32302 data/c/tags/item/dyed/black.json
@@ -19,7 +19,6 @@ e3e0ed388ff44ad97e0560033cc0e5cbc2aeb9db data/c/tags/item/dyed/red.json
 f940a8d66e42b7513f98bc75059462e65f4ecaa2 data/c/tags/item/dyed/yellow.json
 ec211b63883b4697a67681e7cff147599768bb6a data/c/tags/item/logos.json
 a1a56cc9f79d660d5e42156a7498a6b21a888991 data/c/tags/item/music_discs.json
-78a63f05edb90a5b91f8e5a6cbdfe373d7a2fee7 data/minecraft/tags/item/dyeable.json
 d0b7f8a83b1fdfda116980f4a67e093b1c7cfd8c data/minecraft/tags/item/non_flammable_wood.json
 40d8409068ef76856df6dad04690c54d8678a6c7 data/stancements/tags/item/crafting_table_cloths.json
 dc72d523e09692afdff8da4fe990948e7ca933c5 data/stancements/tags/item/minecart_tags.json

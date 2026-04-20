@@ -9,7 +9,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 
 public class MilkCauldronBlock extends LayeredCauldronBlock {
@@ -19,7 +18,7 @@ public class MilkCauldronBlock extends LayeredCauldronBlock {
 
     @Override
     @NotNull
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
         return new ItemStack(Items.CAULDRON);
     }
 }

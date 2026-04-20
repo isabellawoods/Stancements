@@ -3,18 +3,11 @@
   "category": "misc",
   "group": "minecart_tags",
   "ingredients": [
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "tag": "c:strings"
-    },
-    {
-      "tag": "c:dyes/pink"
-    }
+    "minecraft:paper",
+    "#c:strings",
+    "#c:dyes/pink"
   ],
   "result": {
-    "count": 1,
     "id": "stancements:pink_tag"
   }
 }

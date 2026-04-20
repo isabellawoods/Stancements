@@ -3,18 +3,11 @@
   "category": "misc",
   "group": "minecart_tags",
   "ingredients": [
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "tag": "c:strings"
-    },
-    {
-      "tag": "c:dyes/cyan"
-    }
+    "minecraft:paper",
+    "#c:strings",
+    "#c:dyes/cyan"
   ],
   "result": {
-    "count": 1,
     "id": "stancements:cyan_tag"
   }
 }

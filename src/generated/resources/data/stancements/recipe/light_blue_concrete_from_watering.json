@@ -3,12 +3,8 @@
   "category": "building",
   "group": "dye_concrete",
   "key": {
-    "#": {
-      "item": "minecraft:light_blue_concrete_powder"
-    },
-    "W": {
-      "tag": "c:buckets/water"
-    }
+    "#": "minecraft:light_blue_concrete_powder",
+    "W": "#c:buckets/water"
   },
   "pattern": [
     "###",

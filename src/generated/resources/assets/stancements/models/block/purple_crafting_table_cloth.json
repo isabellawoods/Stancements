@@ -1,7 +1,13 @@
 {
   "parent": "stancements:block/template_crafting_table_cloth",
   "textures": {
-    "side": "stancements:block/purple_crafting_table_cloth_side",
-    "top": "stancements:block/purple_crafting_table_cloth_top"
+    "side": {
+      "force_translucent": true,
+      "sprite": "stancements:block/purple_crafting_table_cloth_side"
+    },
+    "top": {
+      "force_translucent": true,
+      "sprite": "stancements:block/purple_crafting_table_cloth_top"
+    }
   }
 }

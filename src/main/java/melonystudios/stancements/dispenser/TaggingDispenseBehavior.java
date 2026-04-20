@@ -9,7 +9,7 @@ import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -54,7 +54,7 @@ public class TaggingDispenseBehavior extends DefaultDispenseItemBehavior {
             if (tags == null) return false;
 
             for (DyeColor color : tags.tagColors()) {
-                minecart.spawnAtLocation(MinecartTags.getTagForColor(color));
+                minecart.spawnAtLocation(level, MinecartTags.getTagForColor(color));
                 minecart.gameEvent(GameEvent.SHEAR, minecart);
             }
             tags.clearTags();

@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "c:ingots/iron"
-    },
-    "D": {
-      "tag": "c:dyes/cyan"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    },
-    "S": {
-      "item": "minecraft:stone_pressure_plate"
-    }
+    "#": "#c:ingots/iron",
+    "D": "#c:dyes/cyan",
+    "R": "#c:dusts/redstone",
+    "S": "minecraft:stone_pressure_plate"
   },
   "pattern": [
     "#D#",

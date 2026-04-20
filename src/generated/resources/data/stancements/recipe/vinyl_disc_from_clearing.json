@@ -3,12 +3,9 @@
   "category": "misc",
   "group": "vinyl_disc",
   "ingredients": [
-    {
-      "item": "stancements:recorded_disc"
-    }
+    "stancements:recorded_disc"
   ],
   "result": {
-    "count": 1,
     "id": "stancements:vinyl_disc"
   }
 }

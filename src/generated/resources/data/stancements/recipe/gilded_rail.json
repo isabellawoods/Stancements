@@ -11,15 +11,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "c:ingots/gold"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "#": "#c:ingots/gold",
+    "R": "#c:dusts/redstone",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     "# #",

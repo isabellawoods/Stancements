@@ -1,6 +1,5 @@
 {
   "parent": "minecraft:block/template_rail_raised_sw",
-  "render_type": "minecraft:cutout",
   "textures": {
     "rail": "stancements:block/magenta_tagging_rail_on"
   }

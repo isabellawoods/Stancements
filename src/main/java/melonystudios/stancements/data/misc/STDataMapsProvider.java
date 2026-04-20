@@ -5,8 +5,8 @@ import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.misc.STJukeboxSongs;
 import melonystudios.stancements.misc.datamap.PotPlantables;
-import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.misc.datamap.RecordedDiscStyles;
+import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -28,12 +28,12 @@ public class STDataMapsProvider extends DataMapProvider {
     @Override
     @NotNull
     public String getName() {
-        return Stancements.generatorName("Data Maps");
+        return Stancements.generatorName("DataProvider Maps");
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    protected void gather(HolderLookup.Provider provider) {
+    protected void gather(HolderLookup.Provider registries) {
         // Stancements data maps
         this.builder(STDataMaps.POT_PLANTABLES)
                 .add(Items.WHEAT_SEEDS.builtInRegistryHolder(), PotPlantables.defaultPlantingSound(STBlocks.WHEAT_CROP_POT.get()), false)

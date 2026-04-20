@@ -1,7 +1,7 @@
 package melonystudios.stancements.tag;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.JukeboxSong;
 
@@ -19,6 +19,6 @@ public class STJukeboxSongTags {
     public static final TagKey<JukeboxSong> UPDATE_AQUATIC = minecraft("update_aquatic");
 
     public static TagKey<JukeboxSong> minecraft(String name) {
-        return TagKey.create(Registries.JUKEBOX_SONG, ResourceLocation.withDefaultNamespace(name));
+        return TagKey.create(Registries.JUKEBOX_SONG, Identifier.withDefaultNamespace(name));
     }
 }

@@ -1,7 +1,7 @@
 {
   "parent": "stancements:block/template_full_crop_pot",
   "textures": {
-    "crop": "stancements:block/nether_wart_stage1",
+    "crop": "minecraft:block/nether_wart_stage2",
     "pot": "stancements:block/hopping_crop_pot"
   }
 }

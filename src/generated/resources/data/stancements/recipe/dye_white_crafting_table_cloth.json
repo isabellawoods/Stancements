@@ -3,21 +3,14 @@
   "category": "misc",
   "group": "crafting_table_cloths",
   "ingredients": [
+    "#c:dyes/white",
     {
-      "tag": "c:dyes/white"
-    },
-    {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:crafting_table_cloths"
-      },
-      "subtracted": {
-        "item": "stancements:white_crafting_table_cloth"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:crafting_table_cloths",
+      "subtracted": "stancements:white_crafting_table_cloth"
     }
   ],
   "result": {
-    "count": 1,
     "id": "stancements:white_crafting_table_cloth"
   }
 }

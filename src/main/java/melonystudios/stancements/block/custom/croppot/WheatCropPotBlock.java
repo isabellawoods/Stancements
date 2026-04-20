@@ -26,18 +26,17 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
@@ -110,8 +109,8 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
 
     protected List<ItemStack> getCropDrops(ServerLevel level, BlockState state, BlockPos pos) {
         BlockState equivalentCrop = this.getEquivalentCrop(state);
-        ResourceKey<LootTable> lootTable = equivalentCrop.getBlock().getLootTable();
-        if (lootTable == BuiltInLootTables.EMPTY) {
+        Optional<ResourceKey<LootTable>> lootTable = equivalentCrop.getBlock().getLootTable();
+        if (lootTable.isEmpty()) {
             return Collections.emptyList();
         } else {
             LootParams params = new LootParams.Builder(level)
@@ -121,7 +120,7 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
                     .withOptionalParameter(LootContextParams.BLOCK_ENTITY, level.getBlockEntity(pos))
                     .create(LootContextParamSets.BLOCK);
 
-            return level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
+            return level.getServer().reloadableRegistries().getLootTable(lootTable.get()).getRandomItems(params);
         }
     }
 
@@ -138,7 +137,7 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
         return InteractionResult.SUCCESS;
     }
 
-    protected int getBonemealAgeIncrease(RandomSource rand) {
+    protected int getBoneMealAgeIncrease(RandomSource rand) {
         return Mth.nextInt(rand, 2, 5);
     }
 
@@ -152,7 +151,7 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
 
     @Override
     @NotNull
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
         return new ItemStack(this.getSeedItem());
     }
 
@@ -168,7 +167,7 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state) {
-        int newAge = this.getAge(state) + this.getBonemealAgeIncrease(rand);
+        int newAge = this.getAge(state) + this.getBoneMealAgeIncrease(rand);
         int maxAge = this.getMaxAge();
         if (newAge > maxAge) newAge = maxAge;
 

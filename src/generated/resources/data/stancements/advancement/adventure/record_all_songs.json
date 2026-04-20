@@ -309,13 +309,14 @@
     "frame": "goal",
     "icon": {
       "components": {
-        "minecraft:dyed_color": {
-          "rgb": 5635925,
-          "show_in_tooltip": false
+        "minecraft:dyed_color": 5635925,
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:dyed_color"
+          ]
         },
         "stancements:label": 7.0
       },
-      "count": 1,
       "id": "stancements:recorded_disc"
     },
     "title": {

@@ -3,21 +3,14 @@
   "category": "misc",
   "group": "crafting_table_cloths",
   "ingredients": [
+    "#c:dyes/green",
     {
-      "tag": "c:dyes/green"
-    },
-    {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:crafting_table_cloths"
-      },
-      "subtracted": {
-        "item": "stancements:green_crafting_table_cloth"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:crafting_table_cloths",
+      "subtracted": "stancements:green_crafting_table_cloth"
     }
   ],
   "result": {
-    "count": 1,
     "id": "stancements:green_crafting_table_cloth"
   }
 }

@@ -4,62 +4,36 @@
   "group": "dye_tagging_rail",
   "ingredients": [
     {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:tagging_rails"
-      },
-      "subtracted": {
-        "item": "stancements:cyan_tagging_rail"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:tagging_rails",
+      "subtracted": "stancements:cyan_tagging_rail"
     },
     {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:tagging_rails"
-      },
-      "subtracted": {
-        "item": "stancements:cyan_tagging_rail"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:tagging_rails",
+      "subtracted": "stancements:cyan_tagging_rail"
     },
     {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:tagging_rails"
-      },
-      "subtracted": {
-        "item": "stancements:cyan_tagging_rail"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:tagging_rails",
+      "subtracted": "stancements:cyan_tagging_rail"
     },
     {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:tagging_rails"
-      },
-      "subtracted": {
-        "item": "stancements:cyan_tagging_rail"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:tagging_rails",
+      "subtracted": "stancements:cyan_tagging_rail"
     },
     {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:tagging_rails"
-      },
-      "subtracted": {
-        "item": "stancements:cyan_tagging_rail"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:tagging_rails",
+      "subtracted": "stancements:cyan_tagging_rail"
     },
     {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:tagging_rails"
-      },
-      "subtracted": {
-        "item": "stancements:cyan_tagging_rail"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:tagging_rails",
+      "subtracted": "stancements:cyan_tagging_rail"
     },
-    {
-      "tag": "c:dyes/cyan"
-    }
+    "#c:dyes/cyan"
   ],
   "result": {
     "count": 6,

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "hopping_crop_pot",
   "key": {
-    "#": {
-      "item": "stancements:crop_pot"
-    },
-    "H": {
-      "item": "minecraft:hopper"
-    }
+    "#": "stancements:crop_pot",
+    "H": "minecraft:hopper"
   },
   "pattern": [
     "###",

@@ -46,8 +46,8 @@ public class BeetrootCropPotBlock extends WheatCropPotBlock {
     }
 
     @Override
-    protected int getBonemealAgeIncrease(RandomSource rand) {
-        return super.getBonemealAgeIncrease(rand) / 3;
+    protected int getBoneMealAgeIncrease(RandomSource rand) {
+        return super.getBoneMealAgeIncrease(rand) / 3;
     }
 
     @Override

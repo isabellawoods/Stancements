@@ -1,7 +1,6 @@
 package melonystudios.stancements.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import melonystudios.reutilities.api.ReAPI;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.blockentity.STBlockEntities;
@@ -18,24 +17,24 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.JukeboxSong;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -45,10 +44,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
 
 public class MusicRecorderBlock extends BaseEntityBlock {
@@ -72,9 +71,11 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
 
-        CustomData data = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
-        CompoundTag tag = data.copyTag();
-        if (tag.contains("ticks_until_finished_recording", Tag.TAG_ANY_NUMERIC) && tag.getInt("ticks_until_finished_recording") >= 0) {
+        TypedEntityData<BlockEntityType<?>> data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+        if (data == null) return;
+        CompoundTag tag = data.copyTagWithoutId();
+
+        if (tag.contains("ticks_until_finished_recording") && tag.getIntOr("ticks_until_finished_recording", MusicRecorderBlockEntity.DEFAULT_TICKS_UNTIL_FINISHED) >= 0) {
             level.setBlock(pos, state.setValue(RECORDING, true), 3);
         }
     }
@@ -87,29 +88,29 @@ public class MusicRecorderBlock extends BaseEntityBlock {
             this.stopRecording(level, pos, true);
             level.setBlock(pos, state.setValue(RECORDING, false), 3);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
-            return InteractionResult.sidedSuccess(!level.isClientSide());
+            return InteractionResult.SUCCESS_SERVER;
         }
         return InteractionResult.PASS;
     }
 
     @Override
     @NotNull
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!state.getValue(RECORDING) && stack.has(STDataComponents.RECORDING_TURNS_INTO) && level.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
             ItemStack handStack = player.getItemInHand(hand);
             ItemStack splitStack = handStack.consumeAndReturn(1, player);
 
             if (player instanceof ServerPlayer serverPlayer) {
                 // tell the client to start the recording process, as it requires the current song in MusicManager ~isa 17-03-26
-                serverPlayer.connection.send(new RequestRecordingAttempt(pos, splitStack));
+                PacketDistributor.sendToPlayer(serverPlayer, new RequestRecordingAttempt(pos, splitStack));
             }
 
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
-    public void tryRecordingFromPlayer(Level level, BlockState state, BlockPos recorderPosition, Player player, ItemStack recordableDisc, @Nullable ResourceLocation musicID) {
+    public void tryRecordingFromPlayer(Level level, BlockState state, BlockPos recorderPosition, Player player, ItemStack recordableDisc, @Nullable Identifier musicID) {
         BlockEntity blockEntity = level.getBlockEntity(recorderPosition);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
 
@@ -144,19 +145,19 @@ public class MusicRecorderBlock extends BaseEntityBlock {
 
             if (adjacentState.is(Blocks.JUKEBOX) && level.getBlockEntity(adjacentPos) instanceof JukeboxBlockEntity jukebox) {
                 JukeboxSong song = jukebox.getSongPlayer().getSong();
-                var jukeboxSongs = level.registryAccess().registry(Registries.JUKEBOX_SONG);
+                var jukeboxSongs = level.registryAccess().lookup(Registries.JUKEBOX_SONG);
 
                 // block recording if the disc is a copy
                 if (jukeboxSongs.isEmpty() || MusicData.isCopied(jukebox.getTheItem())) {
                     errorMessage = CANNOT_COPY_TEXT;
                     break;
                 }
-                ResourceLocation songLocation = song == null ? null : jukeboxSongs.get().getKey(song);
+                Identifier songIdentifier = song == null ? null : jukeboxSongs.get().getKey(song);
 
                 if (song != null) {
                     // exact duration of the song, so it always finishes when the song ends
                     int recordingDuration = (int) (song.lengthInTicks() - jukebox.getSongPlayer().getTicksSinceSongStarted()) + JUKEBOX_PADDING_TICKS; // 20 ticks for padding
-                    recorder.startRecording(songLocation, true, recordingDuration, player);
+                    recorder.startRecording(songIdentifier, true, recordingDuration, player);
                     this.sendMessage(this.getRecordingMessage(song.description().getString()), player);
                     level.setBlock(pos, state.setValue(RECORDING, true), 3);
                     level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
@@ -176,9 +177,9 @@ public class MusicRecorderBlock extends BaseEntityBlock {
             if (discStack.isEmpty()) return;
 
             if (fromTop) {
-                double xOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.15F;
-                double yOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.660000002F;
-                double zOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.15F;
+                double xOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.15F;
+                double yOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.660000002F;
+                double zOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.15F;
                 ItemEntity discEntity = new ItemEntity(level, (double) pos.getX() + xOffset, (double) pos.getY() + yOffset, (double) pos.getZ() + zOffset, discStack.copy());
                 discEntity.setDefaultPickUpDelay();
                 level.addFreshEntity(discEntity);
@@ -190,9 +191,8 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         }
     }
 
-    public void sendMessage(Component component, Player player) {
-        player.displayClientMessage(component, true);
-//        if (player instanceof ServerPlayer serverPlayer) serverPlayer.sendSystemMessage(component, true);
+    public void sendMessage(Component component, @Nullable Player player) {
+        if (player != null) player.sendOverlayMessage(component);
     }
 
     public Component getRecordingMessage(String songName) {
@@ -205,27 +205,17 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         }
     }
 
-    public String getSongName(ResourceLocation musicID) {
-        ResourceLocation sanitized = RecordedDiscItem.sanitizeMusicIDLocation(musicID);
+    public String getSongName(Identifier musicID) {
+        Identifier sanitized = RecordedDiscItem.sanitizeMusicIDLocation(musicID);
         String namespacePrefix = sanitized.getNamespace().equals("minecraft") ? "" : sanitized.getNamespace() + ".";
 
         return I18n.get(namespacePrefix + "music." + sanitized.getPath().replace("/", "."));
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
-        if (ReAPI.shouldDisplay(stack, Stancements.stancements("music_recorder/tooltip"))) {
-            tooltip.add(Component.translatable("tooltip.stancements.music_recorder").withStyle(ChatFormatting.GRAY));
-        }
-    }
-
-    @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            this.stopRecording(level, pos, false);
-            super.onRemove(state, level, pos, newState, movedByPiston);
-        }
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
+        this.stopRecording(level, pos, false);
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
     }
 
     @Override
@@ -251,7 +241,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             if (!state.getValue(RECORDING)) return 0;

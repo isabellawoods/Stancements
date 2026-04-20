@@ -5,7 +5,6 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -23,8 +22,8 @@ public abstract class STServerPlayerMixin extends Player {
     @Shadow
     public boolean wonGame;
 
-    public STServerPlayerMixin(Level level, BlockPos pos, float yRot, GameProfile profile) {
-        super(level, pos, yRot, profile);
+    public STServerPlayerMixin(Level level, GameProfile profile) {
+        super(level, profile);
     }
 
     @Inject(method = "showEndCredits", at = @At("HEAD"))

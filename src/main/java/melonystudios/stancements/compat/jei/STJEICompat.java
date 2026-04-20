@@ -5,14 +5,14 @@ import melonystudios.stancements.item.STItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.ISubtypeRegistration;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 @JeiPlugin
 public class STJEICompat implements IModPlugin {
     @Override
     @NotNull
-    public ResourceLocation getPluginUid() {
+    public Identifier getPluginUid() {
         return Stancements.stancements("jei_plugin");
     }
 

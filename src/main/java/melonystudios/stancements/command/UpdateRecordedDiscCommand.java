@@ -10,17 +10,18 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TooltipDisplay;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class UpdateRecordedDiscCommand {
     public static final Map<String, String> UPDATED_SONG_NAMES = new ImmutableMap.Builder<String, String>()
@@ -63,28 +64,29 @@ public class UpdateRecordedDiscCommand {
             boolean updatedID = false;
             boolean updatedLabel = false;
             CompoundTag tag = data.copyTag();
-            if (tag.contains("music_id", Tag.TAG_STRING)) {
-                String musicID = tag.getString("music_id");
+            Optional<String> musicID = tag.getString("music_id");
+            if (musicID.isPresent()) {
                 for (String oldName : UPDATED_SONG_NAMES.keySet()) {
                     String newName = UPDATED_SONG_NAMES.get(oldName);
-                    if (musicID.contains(oldName)) {
-                        musicID = musicID.replace(oldName, newName);
+                    if (musicID.get().contains(oldName)) {
+                        musicID = Optional.of(musicID.get().replace(oldName, newName));
                     }
                 }
                 tag.remove("music_id");
                 handStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-                updatedID = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), ResourceLocation.parse(musicID), false);
+                updatedID = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), Identifier.parse(musicID.get()), false);
             }
 
-            if (tag.contains("label", Tag.TAG_ANY_NUMERIC)) {
-                handStack.set(STDataComponents.LABEL, Math.clamp(tag.getFloat("label"), RecordedDiscItem.DISC_LABEL_MIN, RecordedDiscItem.DISC_LABEL_MAX));
+            if (tag.getInt("label").isPresent()) {
+                handStack.set(STDataComponents.LABEL, Math.clamp(tag.getFloatOr("label", 1), RecordedDiscItem.DISC_LABEL_MIN, RecordedDiscItem.DISC_LABEL_MAX));
                 tag.remove("label");
                 handStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
                 updatedLabel = true;
             }
 
             if (handStack.has(DataComponents.DYED_COLOR)) {
-                handStack.set(DataComponents.DYED_COLOR, handStack.get(DataComponents.DYED_COLOR).withTooltip(false));
+                TooltipDisplay display = handStack.get(DataComponents.TOOLTIP_DISPLAY);
+                handStack.set(DataComponents.TOOLTIP_DISPLAY, (display == null ? TooltipDisplay.DEFAULT : display).withHidden(DataComponents.DYED_COLOR, true));
                 updatedLabel = true;
             }
 

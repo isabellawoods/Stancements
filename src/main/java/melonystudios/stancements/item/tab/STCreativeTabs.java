@@ -81,7 +81,7 @@ public class STCreativeTabs {
 
                 // Functional blocks
                 output.accept(CROP_POT);
-                output.accept(hoppingCropPot(1));
+                output.accept(hoppingCropPot(1).create());
 
                 // Items
                 output.accept(WHITE_TAG);
@@ -120,7 +120,7 @@ public class STCreativeTabs {
     /// @param color The color to apply to the bucket stack.
     private static void addBucket(CreativeModeTab.Output output, Integer color) {
         ItemStack dyedBucket = new ItemStack(DYED_WATER_BUCKET.get());
-        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color, true));
+        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color));
         output.accept(dyedBucket);
     }
 }

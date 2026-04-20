@@ -36,6 +36,10 @@
       "color": "#b6ff00",
       "label": 4.0
     },
+    "minecraft:game/end/alpha": {
+      "color": "#9ac9bf",
+      "label": 13.0
+    },
     "minecraft:mall": {
       "color": "#9a75ff",
       "label": 2.0
@@ -75,10 +79,6 @@
     "minecraft:ward": {
       "color": "#8ec600",
       "label": 9.0
-    },
-    "stancements:game/end/alpha": {
-      "color": "#9ac9bf",
-      "label": 13.0
     }
   }
 }

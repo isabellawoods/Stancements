@@ -2,24 +2,17 @@ package melonystudios.stancements.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import melonystudios.reutilities.api.ReAPI;
-import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.TagMatcherType;
 import melonystudios.stancements.misc.attachment.MinecartTags;
 import melonystudios.stancements.misc.attachment.STCapabilities;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -83,12 +76,12 @@ public class TaggingRailBlock extends BaseRailBlock {
     }
 
     @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
         if (!level.isClientSide() && !state.getValue(POWERED)) this.checkPressed(level, pos, state);
     }
 
     @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (state.getValue(POWERED)) this.checkPressed(level, pos, state);
     }
 
@@ -147,7 +140,7 @@ public class TaggingRailBlock extends BaseRailBlock {
 
         for (BlockPos connection : railState.getConnections()) {
             BlockState connectedState = level.getBlockState(connection);
-            level.neighborChanged(connectedState, connection, connectedState.getBlock(), pos, false);
+            level.neighborChanged(connectedState, connection, connectedState.getBlock(), null, false);
         }
     }
 
@@ -179,37 +172,6 @@ public class TaggingRailBlock extends BaseRailBlock {
                 (double) (pos.getY() + 1) - inflateBy,
                 (double) (pos.getZ() + 1) - inflateBy
         );
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
-        if (ReAPI.shouldDisplay(stack, Stancements.stancements("tagging_rail/tooltip")) && !this.detectsColors().isEmpty()) {
-            MutableComponent colors = prettyPrintTagColors(this.matcherType(), this.detectsColors(), true);
-            tooltip.add(Component.translatable("tooltip.stancements.tagging_rail." + (this.detectsColors().size() == 1 ? "single" : "multiple"), colors)
-                    .withStyle(ChatFormatting.GRAY));
-
-            tooltip.add(Component.translatable("tooltip.stancements.tagging_rail.tagless").withStyle(ChatFormatting.GRAY));
-        }
-    }
-
-    /// Takes a list of {@link DyeColor DyeColors} and puts them into a single text component.
-    /// @param matcher A {@linkplain TagMatcherType tag matcher} used for the list. Can be `all` for "and" and `any_of` for "or".
-    /// @param colors The list of dye colors to print.
-    /// @param italicize Whether the "and" or "or" at the end should be italicized.
-    public static MutableComponent prettyPrintTagColors(TagMatcherType matcher, List<DyeColor> colors, boolean italicize) {
-        MutableComponent component = Component.empty();
-        for (int i = 0; i < colors.size(); ++i) {
-            DyeColor color = colors.get(i);
-            component.append(Component.translatable("color.minecraft." + color).withColor(color.getTextureDiffuseColor()));
-
-            if (i == colors.size() - 2) {
-                component.append(Component.translatable("tooltip.stancements.delimiter." + matcher.getSerializedName()).withStyle(style -> style.withItalic(italicize)));
-            } else if (i != colors.size() - 1) {
-                component.append(Component.translatable("tooltip.stancements.delimiter"));
-            }
-        }
-        return component;
     }
 
     @Override

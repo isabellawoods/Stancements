@@ -3,21 +3,14 @@
   "category": "misc",
   "group": "crafting_table_cloths",
   "ingredients": [
+    "#c:dyes/brown",
     {
-      "tag": "c:dyes/brown"
-    },
-    {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:crafting_table_cloths"
-      },
-      "subtracted": {
-        "item": "stancements:brown_crafting_table_cloth"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:crafting_table_cloths",
+      "subtracted": "stancements:brown_crafting_table_cloth"
     }
   ],
   "result": {
-    "count": 1,
     "id": "stancements:brown_crafting_table_cloth"
   }
 }

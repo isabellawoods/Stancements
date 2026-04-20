@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "crafting_table_cloths",
   "key": {
-    "#": {
-      "item": "minecraft:orange_carpet"
-    }
+    "#": "minecraft:orange_carpet"
   },
   "pattern": [
     "##"

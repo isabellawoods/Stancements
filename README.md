@@ -2,7 +2,7 @@
   <img src="assets/banner_1170x500.png" alt="A banner with Stancements' logo (wide version). (Mellomedley 1.21.1)"/>
 </div>
 
-<sup>*For NeoForge 1.21.1*</sup>
+<sup>*For NeoForge 26.1.X*</sup>
 
 ***Stancements*** is a mod that adds many miscellaneous but relatively useful features for *Minecraft*.
 

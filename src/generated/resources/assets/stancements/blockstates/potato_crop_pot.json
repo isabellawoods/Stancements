@@ -7,46 +7,46 @@
       "model": "stancements:block/hopping_potato_crop_pot_stage0"
     },
     "age=1,hopping=false": {
-      "model": "stancements:block/potato_crop_pot_stage1"
+      "model": "stancements:block/potato_crop_pot_stage0"
     },
     "age=1,hopping=true": {
-      "model": "stancements:block/hopping_potato_crop_pot_stage1"
+      "model": "stancements:block/hopping_potato_crop_pot_stage0"
     },
     "age=2,hopping=false": {
-      "model": "stancements:block/potato_crop_pot_stage2"
+      "model": "stancements:block/potato_crop_pot_stage1"
     },
     "age=2,hopping=true": {
-      "model": "stancements:block/hopping_potato_crop_pot_stage2"
+      "model": "stancements:block/hopping_potato_crop_pot_stage1"
     },
     "age=3,hopping=false": {
-      "model": "stancements:block/potato_crop_pot_stage3"
+      "model": "stancements:block/potato_crop_pot_stage1"
     },
     "age=3,hopping=true": {
-      "model": "stancements:block/hopping_potato_crop_pot_stage3"
+      "model": "stancements:block/hopping_potato_crop_pot_stage1"
     },
     "age=4,hopping=false": {
-      "model": "stancements:block/potato_crop_pot_stage4"
+      "model": "stancements:block/potato_crop_pot_stage2"
     },
     "age=4,hopping=true": {
-      "model": "stancements:block/hopping_potato_crop_pot_stage4"
+      "model": "stancements:block/hopping_potato_crop_pot_stage2"
     },
     "age=5,hopping=false": {
-      "model": "stancements:block/potato_crop_pot_stage5"
+      "model": "stancements:block/potato_crop_pot_stage2"
     },
     "age=5,hopping=true": {
-      "model": "stancements:block/hopping_potato_crop_pot_stage5"
+      "model": "stancements:block/hopping_potato_crop_pot_stage2"
     },
     "age=6,hopping=false": {
-      "model": "stancements:block/potato_crop_pot_stage6"
+      "model": "stancements:block/potato_crop_pot_stage2"
     },
     "age=6,hopping=true": {
-      "model": "stancements:block/hopping_potato_crop_pot_stage6"
+      "model": "stancements:block/hopping_potato_crop_pot_stage2"
     },
     "age=7,hopping=false": {
-      "model": "stancements:block/potato_crop_pot_stage7"
+      "model": "stancements:block/potato_crop_pot_stage3"
     },
     "age=7,hopping=true": {
-      "model": "stancements:block/hopping_potato_crop_pot_stage7"
+      "model": "stancements:block/hopping_potato_crop_pot_stage3"
     }
   }
 }

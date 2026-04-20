@@ -15,7 +15,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +28,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -67,16 +65,16 @@ public class CropPotBlock extends Block {
 
     @Override
     @NotNull
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack handStack = player.getItemInHand(hand);
-        ItemInteractionResult defaultInteraction = super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        InteractionResult defaultInteraction = super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         if (!state.is(STBlocks.CROP_POT)) return defaultInteraction;
 
-        var items = level.registryAccess().registry(Registries.ITEM);
+        var items = level.registryAccess().lookup(Registries.ITEM);
         if (items.isPresent()) {
             var potPlantables = items.get().getDataMap(STDataMaps.POT_PLANTABLES);
             for (ResourceKey<Item> item : potPlantables.keySet()) {
-                if (handStack.is(items.get().get(item))) {
+                if (items.get().get(item).isPresent() && handStack.is(items.get().get(item).get())) {
                     return this.placeSeed(level, state, pos, handStack, player, potPlantables.get(item).cropPot(), potPlantables.get(item).plantingSound());
                 }
             }
@@ -85,7 +83,7 @@ public class CropPotBlock extends Block {
         return defaultInteraction;
     }
 
-    private ItemInteractionResult placeSeed(Level level, BlockState state, BlockPos pos, ItemStack stack, Player player, Block cropPot, SoundEvent placingSound) {
+    private InteractionResult placeSeed(Level level, BlockState state, BlockPos pos, ItemStack stack, Player player, Block cropPot, SoundEvent placingSound) {
         stack.consume(1, player);
         if (player instanceof ServerPlayer serverPlayer) CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
         level.playLocalSound(pos, placingSound, SoundSource.BLOCKS, 1, 0.8F, false);
@@ -93,13 +91,13 @@ public class CropPotBlock extends Block {
         level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, state));
         player.awardStat(STStatistics.SEEDS_PLANTED_IN_CROP_POTS.get());
         player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override
     @NotNull
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
+        ItemStack stack = super.getCloneItemStack(level, pos, state, includeData, player);
         if (state.getValue(HOPPING)) stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(HOPPING, true));
         return stack;
     }

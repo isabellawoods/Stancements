@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "stancements:item/dyed_water_bucket",
+    "tints": [
+      {
+        "type": "minecraft:dye",
+        "default": 4159204
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -1
+      }
+    ]
+  }
+}

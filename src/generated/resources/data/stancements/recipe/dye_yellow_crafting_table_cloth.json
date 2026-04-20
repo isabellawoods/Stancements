@@ -3,21 +3,14 @@
   "category": "misc",
   "group": "crafting_table_cloths",
   "ingredients": [
+    "#c:dyes/yellow",
     {
-      "tag": "c:dyes/yellow"
-    },
-    {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "stancements:crafting_table_cloths"
-      },
-      "subtracted": {
-        "item": "stancements:yellow_crafting_table_cloth"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#stancements:crafting_table_cloths",
+      "subtracted": "stancements:yellow_crafting_table_cloth"
     }
   ],
   "result": {
-    "count": 1,
     "id": "stancements:yellow_crafting_table_cloth"
   }
 }

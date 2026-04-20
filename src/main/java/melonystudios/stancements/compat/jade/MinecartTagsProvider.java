@@ -2,33 +2,29 @@ package melonystudios.stancements.compat.jade;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.TagMatcherType;
-import melonystudios.stancements.block.custom.TaggingRailBlock;
+import melonystudios.stancements.item.custom.TaggingRailItem;
 import melonystudios.stancements.misc.attachment.STCapabilities;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.DyeColor;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import snownee.jade.api.*;
+import snownee.jade.api.EntityAccessor;
+import snownee.jade.api.IEntityComponentProvider;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.StreamServerDataProvider;
 import snownee.jade.api.config.IPluginConfig;
 
 import java.util.List;
 import java.util.Optional;
 
-public class MinecartTagsProvider implements IEntityComponentProvider, StreamServerDataProvider<EntityAccessor, MinecartTagsProvider.TagData> {
+public class MinecartTagsProvider implements StreamServerDataProvider<EntityAccessor, MinecartTagsProvider.TagData> {
     public static final MinecartTagsProvider INSTANCE = new MinecartTagsProvider();
-    public static final ResourceLocation ID = Stancements.stancements("minecart_tags");
-
-    @Override
-    public void appendTooltip(ITooltip tooltip, EntityAccessor accessor, IPluginConfig config) {
-        Optional<TagData> data = this.decodeFromData(accessor);
-        if (data.isEmpty() || data.get().colors().isEmpty()) return;
-
-        tooltip.add(Component.translatable("tooltip.stancements.tags", TaggingRailBlock.prettyPrintTagColors(TagMatcherType.ALL, data.get().colors(), false)));
-    }
+    public static final Identifier ID = Stancements.stancements("minecart_tags");
 
     @Override
     public boolean shouldRequestData(EntityAccessor accessor) {
@@ -45,13 +41,33 @@ public class MinecartTagsProvider implements IEntityComponentProvider, StreamSer
     }
 
     @Override
+    @NotNull
     public StreamCodec<RegistryFriendlyByteBuf, TagData> streamCodec() {
         return TagData.STREAM_CODEC;
     }
 
     @Override
-    public ResourceLocation getUid() {
+    @NotNull
+    public Identifier getUid() {
         return ID;
+    }
+
+    public static class Client implements IEntityComponentProvider {
+        public static final Client INSTANCE = new Client();
+
+        @Override
+        public void appendTooltip(ITooltip tooltip, EntityAccessor accessor, IPluginConfig config) {
+            Optional<TagData> data = MinecartTagsProvider.INSTANCE.decodeFromData(accessor);
+            if (data.isEmpty() || data.get().colors().isEmpty()) return;
+
+            tooltip.add(Component.translatable("tooltip.stancements.tags", TaggingRailItem.prettyPrintTagColors(TagMatcherType.ALL, data.get().colors(), false)));
+        }
+
+        @Override
+        @NotNull
+        public Identifier getUid() {
+            return ID;
+        }
     }
 
     public record TagData(List<DyeColor> colors) {

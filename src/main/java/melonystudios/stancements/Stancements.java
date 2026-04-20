@@ -1,7 +1,7 @@
 package melonystudios.stancements;
 
 import com.mojang.logging.LogUtils;
-import melonystudios.stancements.block.STBlockStateProperties;
+import melonystudios.reutilities.component.ReDataComponents;
 import melonystudios.stancements.block.STBlockTypes;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.STBlockEntities;
@@ -13,12 +13,8 @@ import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
 import melonystudios.stancements.option.STOptions;
 import melonystudios.stancements.sound.STSounds;
-import melonystudios.stancements.util.STCauldronInteractions;
 import melonystudios.stancements.util.STCompatibility;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -45,6 +41,7 @@ public class Stancements {
         STBlockEntities.BLOCK_ENTITIES.register(eventBus);
         STItems.ITEMS.register(eventBus);
         STDataComponents.COMPONENTS.register(eventBus);
+        ReDataComponents.COMPONENTS.register(eventBus);
         STCreativeTabs.TABS.register(eventBus);
         STSounds.SOUNDS.register(eventBus);
         STStatistics.STATS.register(eventBus);
@@ -61,35 +58,23 @@ public class Stancements {
         return "Stancements — " + name;
     }
 
-    /// Creates a new resource location under ***Stancements***' namespace.
-    /// @param name The path of this resource location.
-    public static ResourceLocation stancements(String name) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
+    /// Creates a new identifier under ***Stancements***' namespace.
+    /// @param name The path of this identifier.
+    public static Identifier stancements(String name) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, name);
     }
 
-    /// Creates a new resource location under the **Common** (`c`) namespace.
-    /// @param name The path of this resource location.
-    public static ResourceLocation common(String name) {
-        return ResourceLocation.fromNamespaceAndPath("c", name);
+    /// Creates a new identifier under the **Common** (`c`) namespace.
+    /// @param name The path of this identifier.
+    public static Identifier common(String name) {
+        return Identifier.fromNamespaceAndPath("c", name);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Miscellaneous
         STCompatibility.flammables();
         STCompatibility.dispenserBehaviors();
-        STCauldronInteractions.registerInteractions();
     }
 
-    private void clientSetup(final FMLClientSetupEvent event) {
-        // Item overrides
-        ItemProperties.register(STItems.RECORDED_DISC.get(), stancements("label"), (stack, level, livEntity, seed) -> {
-            Float label = stack.get(STDataComponents.LABEL);
-            return label == null ? 1 : label;
-        });
-        ItemProperties.register(STItems.CROP_POT.get(), stancements("hopping"), (stack, level, livEntity, seed) -> {
-            BlockItemStateProperties blockState = stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
-            Boolean hopping = blockState.get(STBlockStateProperties.HOPPING);
-            return hopping != null && hopping ? 1 : 0;
-        });
-    }
+    private void clientSetup(final FMLClientSetupEvent event) {}
 }

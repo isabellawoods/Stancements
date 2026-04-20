@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wooden_shelves",
   "key": {
-    "#": {
-      "item": "minecraft:acacia_planks"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "#": "minecraft:acacia_planks",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     "###",

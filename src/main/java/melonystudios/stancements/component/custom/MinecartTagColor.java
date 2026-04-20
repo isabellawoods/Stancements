@@ -3,7 +3,10 @@ package melonystudios.stancements.component.custom;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import io.netty.buffer.ByteBuf;
+import melonystudios.reutilities.api.ReAPI;
+import melonystudios.stancements.Stancements;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.DyeColor;
@@ -18,8 +21,10 @@ public record MinecartTagColor(DyeColor color) implements TooltipProvider {
     public static final StreamCodec<ByteBuf, MinecartTagColor> STREAM_CODEC = DyeColor.STREAM_CODEC.map(MinecartTagColor::new, MinecartTagColor::color);
 
     @Override
-    public void addToTooltip(Item.TooltipContext context, Consumer<Component> adder, TooltipFlag flag) {
-        adder.accept(Component.translatable("tooltip.stancements.minecart_tag").withStyle(ChatFormatting.GRAY));
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> adder, TooltipFlag flag, DataComponentGetter components) {
+        if (ReAPI.shouldDisplay(components, Stancements.stancements("tag/tooltip"))) {
+            adder.accept(Component.translatable("tooltip.stancements.minecart_tag").withStyle(ChatFormatting.GRAY));
+        }
     }
 
     public static MinecartTagColor of(DyeColor color) {

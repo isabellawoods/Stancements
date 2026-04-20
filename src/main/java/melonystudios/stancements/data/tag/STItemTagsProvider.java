@@ -5,21 +5,18 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 import static melonystudios.stancements.item.STItems.*;
 
 public class STItemTagsProvider extends ItemTagsProvider {
-    public STItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper fileHelper) {
-        super(output, registries, blockTags, Stancements.MOD_ID, fileHelper);
+    public STItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, Stancements.MOD_ID);
     }
 
     @Override
@@ -29,7 +26,7 @@ public class STItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.Provider registries) {
         // Stancements' tags
         this.tag(STItemTags.SHELVES).add(OAK_SHELF.get(), SPRUCE_SHELF.get(), BIRCH_SHELF.get(), JUNGLE_SHELF.get(), ACACIA_SHELF.get(), MANGROVE_SHELF.get(), CHERRY_SHELF.get(),
                 BAMBOO_SHELF.get(), DARK_OAK_SHELF.get(), CRIMSON_SHELF.get(), WARPED_SHELF.get());
@@ -69,6 +66,5 @@ public class STItemTagsProvider extends ItemTagsProvider {
 
         // Minecraft tags
         this.tag(ItemTags.NON_FLAMMABLE_WOOD).add(CRIMSON_SHELF.get(), WARPED_SHELF.get());
-        this.tag(ItemTags.DYEABLE).add(RECORDED_DISC.get(), DYED_WATER_BUCKET.get());
     }
 }

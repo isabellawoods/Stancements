@@ -18,7 +18,7 @@ public class STDataPackRegistriesProvider extends DatapackBuiltinEntriesProvider
             .add(Registries.JUKEBOX_SONG, STJukeboxSongs::bootstrap);
 
     public STDataPackRegistriesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(Stancements.MOD_ID));
+        super(output, registries, BUILDER, Set.of(Stancements.MOD_ID, "minecraft"));
     }
 
     @Override

@@ -1,8 +1,8 @@
 package melonystudios.stancements.item.tab;
 
-import melonystudios.stancements.option.STOptions;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.STItems;
+import melonystudios.stancements.option.STOptions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +14,6 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 import java.util.List;
 
-import static melonystudios.stancements.item.STItems.DYED_WATER_BUCKET;
 import static net.minecraft.world.item.CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS;
 
 @EventBusSubscriber(modid = Stancements.MOD_ID)
@@ -82,7 +81,7 @@ public class STVanillaTabs {
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.insertAfter(new ItemStack(Items.FLOWER_POT), new ItemStack(STItems.CROP_POT.get()), PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(STItems.CROP_POT.get()), STItems.hoppingCropPot(1), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.CROP_POT.get()), STItems.hoppingCropPot(1).create(), PARENT_AND_SEARCH_TABS);
         }
 
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
@@ -127,8 +126,8 @@ public class STVanillaTabs {
     /// Makes an {@link ItemStack} of a single dyed water bucket.
     /// @param color The color to apply to the bucket stack.
     private static ItemStack addBucket(int color) {
-        ItemStack dyedBucket = new ItemStack(DYED_WATER_BUCKET.get());
-        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color, true));
+        ItemStack dyedBucket = new ItemStack(STItems.DYED_WATER_BUCKET.get());
+        dyedBucket.set(DataComponents.DYED_COLOR, new DyedItemColor(color));
         return dyedBucket;
     }
 }
