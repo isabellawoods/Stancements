@@ -39,6 +39,7 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(DARK_OAK_SHELF.get());
         this.dropSelf(MANGROVE_SHELF.get());
         this.dropSelf(CHERRY_SHELF.get());
+        this.dropSelf(PALE_OAK_SHELF.get());
         this.dropSelf(BAMBOO_SHELF.get());
         this.dropSelf(CRIMSON_SHELF.get());
         this.dropSelf(WARPED_SHELF.get());

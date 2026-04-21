@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_shelves",
+  "key": {
+    "#": "minecraft:pale_oak_planks",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "###",
+    "S S"
+  ],
+  "result": {
+    "count": 3,
+    "id": "stancements:pale_oak_shelf"
+  }
+}

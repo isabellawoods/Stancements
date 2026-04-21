@@ -82,6 +82,13 @@ public class STJukeboxSongs {
     public static final ResourceKey<JukeboxSong> ELD_UNKNOWN = register("game/eld_unknown");
     public static final ResourceKey<JukeboxSong> ENDLESS = register("game/endless");
 
+    // Chase the Skies (1.21.6)
+    public static final ResourceKey<JukeboxSong> LILYPAD = register("game/lilypad");
+    public static final ResourceKey<JukeboxSong> BELOW_AND_ABOVE = register("game/below_and_above");
+    public static final ResourceKey<JukeboxSong> OS_PIANO = register("game/os_piano");
+    public static final ResourceKey<JukeboxSong> BROKEN_CLOCKS = register("game/broken_clocks");
+    public static final ResourceKey<JukeboxSong> FIREFLIES = register("game/fireflies");
+
     public static void bootstrap(BootstrapContext<JukeboxSong> context) {
         // Volume Alpha
         register(context, MINECRAFT, STSounds.MINECRAFT_SONG.getKey(), 254);
@@ -154,6 +161,13 @@ public class STJukeboxSongs {
         register(context, DEEPER, STSounds.DEEPER_SONG.getKey(), 303);
         register(context, ELD_UNKNOWN, STSounds.ELD_UNKNOWN_SONG.getKey(), 296);
         register(context, ENDLESS, STSounds.ENDLESS_SONG.getKey(), 402);
+
+        // Chase the Skies (1.21.6)
+        register(context, LILYPAD, STSounds.LILYPAD_SONG.getKey(), 235);
+        register(context, BELOW_AND_ABOVE, STSounds.BELOW_AND_ABOVE_SONG.getKey(), 212);
+        register(context, OS_PIANO, STSounds.OS_PIANO_SONG.getKey(), 275);
+        register(context, BROKEN_CLOCKS, STSounds.BROKEN_CLOCKS_SONG.getKey(), 213);
+        register(context, FIREFLIES, STSounds.FIREFLIES_SONG.getKey(), 155);
     }
 
     public static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> key, ResourceKey<SoundEvent> sound, int lengthInSeconds) {

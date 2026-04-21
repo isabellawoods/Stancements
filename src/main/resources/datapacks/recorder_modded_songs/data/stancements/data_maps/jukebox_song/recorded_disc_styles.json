@@ -1,27 +1,5 @@
 {
   "values": {
-    "minecraft:tears": {
-      "neoforge:conditions": [
-        {
-          "type": "neoforge:registered",
-          "registry": "minecraft:jukebox_song",
-          "value": "minecraft:tears"
-        }
-      ],
-      "color": "#b5dbdb",
-      "label": 8.0
-    },
-    "minecraft:lava_chicken": {
-      "neoforge:conditions": [
-        {
-          "type": "neoforge:registered",
-          "registry": "minecraft:jukebox_song",
-          "value": "minecraft:lava_chicken"
-        }
-      ],
-      "color": "#de1d1d",
-      "label": 13.0
-    },
     "enderscape:glare": {
       "neoforge:conditions": [
         {

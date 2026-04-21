@@ -62,6 +62,7 @@ public class STModelProvider extends ModelProvider {
         this.createShelf(blockModels, STBlocks.DARK_OAK_SHELF.get());
         this.createShelf(blockModels, STBlocks.MANGROVE_SHELF.get());
         this.createShelf(blockModels, STBlocks.CHERRY_SHELF.get());
+        this.createShelf(blockModels, STBlocks.PALE_OAK_SHELF.get());
         this.createShelf(blockModels, STBlocks.BAMBOO_SHELF.get());
         this.createShelf(blockModels, STBlocks.CRIMSON_SHELF.get());
         this.createShelf(blockModels, STBlocks.WARPED_SHELF.get());
@@ -126,6 +127,7 @@ public class STModelProvider extends ModelProvider {
         blockModels.registerSimpleItemModel(STItems.DARK_OAK_SHELF.get(), Stancements.stancements("block/dark_oak_shelf"));
         blockModels.registerSimpleItemModel(STItems.MANGROVE_SHELF.get(), Stancements.stancements("block/mangrove_shelf"));
         blockModels.registerSimpleItemModel(STItems.CHERRY_SHELF.get(), Stancements.stancements("block/cherry_shelf"));
+        blockModels.registerSimpleItemModel(STItems.PALE_OAK_SHELF.get(), Stancements.stancements("block/pale_oak_shelf"));
         blockModels.registerSimpleItemModel(STItems.BAMBOO_SHELF.get(), Stancements.stancements("block/bamboo_shelf"));
         blockModels.registerSimpleItemModel(STItems.CRIMSON_SHELF.get(), Stancements.stancements("block/crimson_shelf"));
         blockModels.registerSimpleItemModel(STItems.WARPED_SHELF.get(), Stancements.stancements("block/warped_shelf"));

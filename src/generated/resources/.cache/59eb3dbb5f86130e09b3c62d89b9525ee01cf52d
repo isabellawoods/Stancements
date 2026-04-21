@@ -1,4 +1,4 @@
-// 26.1.2	2026-04-20T14:54:54.4542574	Loot Tables
+// 26.1.2	2026-04-20T20:02:33.1704198	Loot Tables
 ba1f1d526cf9bc8871d4881a91cbae820b98b5ef data/stancements/loot_table/blocks/acacia_shelf.json
 646114eb4ecbe72ab1dea880ca24a6e2d6e324a7 data/stancements/loot_table/blocks/bamboo_shelf.json
 6f25adcc6abd9130559e7d391cadbf35f73cc9bf data/stancements/loot_table/blocks/beetroot_crop_pot.json
@@ -38,6 +38,7 @@ f5a76671ab84f4e6b5846a89369f838b597df88c data/stancements/loot_table/blocks/musi
 4041c2e68020f76fcd735f034c42ec18adbd287d data/stancements/loot_table/blocks/oak_shelf.json
 11333cf5b180f8224f02738c3e5fd0bcb46544d4 data/stancements/loot_table/blocks/orange_crafting_table_cloth.json
 347679bd5b76a6b9bd094b45648231edef4590ab data/stancements/loot_table/blocks/orange_tagging_rail.json
+8ee70e787dbc4e37d1644037602f9bc5b170698c data/stancements/loot_table/blocks/pale_oak_shelf.json
 5dafe0ae29fd0d374065ddc39d027d40626dc373 data/stancements/loot_table/blocks/pink_crafting_table_cloth.json
 dc3704f8aa942013c2dc221595243f82623f8a45 data/stancements/loot_table/blocks/pink_tagging_rail.json
 f1fcdba35ec9392a62e71aff2ea73ab68bd2197a data/stancements/loot_table/blocks/potato_crop_pot.json

@@ -38,6 +38,7 @@ public class STCreativeTabs {
                 output.accept(DARK_OAK_SHELF);
                 output.accept(MANGROVE_SHELF);
                 output.accept(CHERRY_SHELF);
+                output.accept(PALE_OAK_SHELF);
                 output.accept(BAMBOO_SHELF);
                 output.accept(CRIMSON_SHELF);
                 output.accept(WARPED_SHELF);

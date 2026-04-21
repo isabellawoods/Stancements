@@ -4,7 +4,5 @@
     "translate": "music.game.lilypad"
   },
   "length_in_seconds": 235.0,
-  "sound_event": {
-    "sound_id": "stancements:music.game.lilypad"
-  }
+  "sound_event": "stancements:music.game.lilypad"
 }

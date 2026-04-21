@@ -60,6 +60,7 @@ public class STRecipeProvider extends RecipeProvider {
         this.addShelf(STItems.DARK_OAK_SHELF, Items.DARK_OAK_PLANKS);
         this.addShelf(STItems.MANGROVE_SHELF, Items.MANGROVE_PLANKS);
         this.addShelf(STItems.CHERRY_SHELF, Items.CHERRY_PLANKS);
+        this.addShelf(STItems.PALE_OAK_SHELF, Items.PALE_OAK_PLANKS);
         this.addShelf(STItems.BAMBOO_SHELF, Items.BAMBOO_PLANKS);
         this.addShelf(STItems.CRIMSON_SHELF, Items.CRIMSON_PLANKS);
         this.addShelf(STItems.WARPED_SHELF, Items.WARPED_PLANKS);

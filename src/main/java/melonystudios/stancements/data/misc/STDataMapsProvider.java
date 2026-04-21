@@ -62,6 +62,8 @@ public class STDataMapsProvider extends DataMapProvider {
                 .add(JukeboxSongs.PRECIPICE, new RecordedDiscStyles(0x7AB799, 7), false)
                 .add(JukeboxSongs.CREATOR, new RecordedDiscStyles(0xFFDD99, 10), false)
                 .add(JukeboxSongs.CREATOR_MUSIC_BOX, new RecordedDiscStyles(0xFFDD99, 10), false)
+                .add(JukeboxSongs.TEARS, new RecordedDiscStyles(0xB5DBDB, 8), false)
+                .add(JukeboxSongs.LAVA_CHICKEN, new RecordedDiscStyles(0xDE1D1D, 13), false)
                 .add(STJukeboxSongs.ALPHA, new RecordedDiscStyles(0x9AC9BF, 13), false);
 
         // NeoForge data maps

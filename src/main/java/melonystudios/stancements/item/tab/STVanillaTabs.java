@@ -31,6 +31,7 @@ public class STVanillaTabs {
             event.insertAfter(new ItemStack(Items.DARK_OAK_BUTTON), new ItemStack(STItems.DARK_OAK_SHELF.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.MANGROVE_BUTTON), new ItemStack(STItems.MANGROVE_SHELF.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.CHERRY_BUTTON), new ItemStack(STItems.CHERRY_SHELF.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.PALE_OAK_BUTTON), new ItemStack(STItems.PALE_OAK_SHELF.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.BAMBOO_BUTTON), new ItemStack(STItems.BAMBOO_SHELF.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.CRIMSON_BUTTON), new ItemStack(STItems.CRIMSON_SHELF.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.WARPED_BUTTON), new ItemStack(STItems.WARPED_SHELF.get()), PARENT_AND_SEARCH_TABS);

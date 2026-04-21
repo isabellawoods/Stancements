@@ -26,6 +26,7 @@ public class STBlocks {
     public static final DeferredBlock<Block> DARK_OAK_SHELF = BLOCKS.registerBlock("dark_oak_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.DARK_OAK_PLANKS)));
     public static final DeferredBlock<Block> MANGROVE_SHELF = BLOCKS.registerBlock("mangrove_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.MANGROVE_PLANKS)));
     public static final DeferredBlock<Block> CHERRY_SHELF = BLOCKS.registerBlock("cherry_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.CHERRY_PLANKS)));
+    public static final DeferredBlock<Block> PALE_OAK_SHELF = BLOCKS.registerBlock("pale_oak_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.PALE_OAK_PLANKS)));
     public static final DeferredBlock<Block> BAMBOO_SHELF = BLOCKS.registerBlock("bamboo_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.BAMBOO_PLANKS)));
     public static final DeferredBlock<Block> CRIMSON_SHELF = BLOCKS.registerBlock("crimson_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.CRIMSON_PLANKS)));
     public static final DeferredBlock<Block> WARPED_SHELF = BLOCKS.registerBlock("warped_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.WARPED_PLANKS)));

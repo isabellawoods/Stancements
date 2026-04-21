@@ -1,7 +1,9 @@
-// 26.1.2	2026-04-20T14:54:54.4502594	Stancements — Data Pack Registries
+// 26.1.2	2026-04-20T20:02:33.1614192	Stancements — Data Pack Registries
 bacaa8a04bedd1171a33b84d8990a423cd1c9e1b data/minecraft/jukebox_song/game/ancestry.json
 f0e6acb82e97640c9f62fb792404cc7d749038a8 data/minecraft/jukebox_song/game/an_ordinary_day.json
 09961e7b84d90b177ae331380b706a0c2bc2b455 data/minecraft/jukebox_song/game/a_familiar_room.json
+31adeafc50f8931122e93aca5a002cf127609e1a data/minecraft/jukebox_song/game/below_and_above.json
+5a38fee5bb9976bbb5b09ec61cc1d859aa3750e0 data/minecraft/jukebox_song/game/broken_clocks.json
 864cbfe48def003450493593f5add1d5e027651d data/minecraft/jukebox_song/game/bromeliad.json
 ed4c0ec0bae6b8da8d3811ba69b750666b8a30a2 data/minecraft/jukebox_song/game/clark.json
 dc7321d10b15b64eca4f9f1b227cee19a09f85d1 data/minecraft/jukebox_song/game/comforting_memories.json
@@ -22,12 +24,14 @@ f987ed45bf8a47da47a0ee55163e82bd3183093e data/minecraft/jukebox_song/game/endles
 4df6c74d249c8016c874d11ca79391388ef96025 data/minecraft/jukebox_song/game/end/boss.json
 dbda86d47c6c25fe6acf2adeab6c572130bfa645 data/minecraft/jukebox_song/game/end/the_end.json
 37658176ea68e7431c04b487c43953d74d160db0 data/minecraft/jukebox_song/game/featherfall.json
+594f89b232ae8ca142bae7a0cebc15e3a6fdb4e5 data/minecraft/jukebox_song/game/fireflies.json
 ae2bbbebfc75bd1671ce9241add967510ad190b1 data/minecraft/jukebox_song/game/floating_dream.json
 99cbf1f0b254e66745c9e0138f6d265179bb3c74 data/minecraft/jukebox_song/game/haggstrom.json
 6db4d85ed39b4ffdcbb090a3c5d7806ac25cff86 data/minecraft/jukebox_song/game/infinite_amethyst.json
 a00738a76f024e3bd12a0ea0c421cbfba7b62a41 data/minecraft/jukebox_song/game/key.json
 bbcde0f34172f597bfbdd0dd2f3a731329bfd155 data/minecraft/jukebox_song/game/komorebi.json
 561f8b17e9ebdc4684d3a1e5f6f9bbcbe978bbcf data/minecraft/jukebox_song/game/left_to_bloom.json
+6dda082220e0eb952167c61a64529a861e7bb008 data/minecraft/jukebox_song/game/lilypad.json
 554cf994e1de95022942561adb6558959462496c data/minecraft/jukebox_song/game/living_mice.json
 9616520455db10e8072752e7ec528d48bf34da8c data/minecraft/jukebox_song/game/mice_on_venus.json
 416a9a025797eddf1c19fc5b57a2237a53933457 data/minecraft/jukebox_song/game/minecraft.json
@@ -39,6 +43,7 @@ fc9b8d71b9089e9756415d876054ecd292d7ae37 data/minecraft/jukebox_song/game/nether
 c498a2cf254f65609ee9a4475d8fd43c22753c6a data/minecraft/jukebox_song/game/nether/soulsand_valley/so_below.json
 f91b78298d505f7e9568a3e377f9dfb95ce98d79 data/minecraft/jukebox_song/game/nether/warmth.json
 a1e487191031163d0a5dd740ec2ffab172394a35 data/minecraft/jukebox_song/game/one_more_day.json
+fe1e892443c0f84f2c56c7dd571a3df548909805 data/minecraft/jukebox_song/game/os_piano.json
 161c5ccce59fd71b496abb6db928be1bc5c43f91 data/minecraft/jukebox_song/game/oxygene.json
 8e4fd06fa068b12bede6d6c1761aa529c8c7e593 data/minecraft/jukebox_song/game/pokopoko.json
 f3a54f55e7ed0e87cbda7077b1c80ba49dedf96c data/minecraft/jukebox_song/game/puzzlebox.json
