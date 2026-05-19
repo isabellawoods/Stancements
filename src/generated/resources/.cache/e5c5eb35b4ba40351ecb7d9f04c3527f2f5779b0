@@ -1,5 +1,6 @@
-// 1.21.1	2025-12-23T21:47:22.42522	Advancements
-ecdb47fb22d5ea64be85041c9760755870645cee data/stancements/advancement/adventure/record_all_songs.json
+// 1.21.1	2026-05-19T17:49:05.125674286	Advancements
+c6cc8dcd0c9123b4b280b11471463e7b1e86ac73 data/stancements/advancement/adventure/copy_disc.json
+3245b8e767eea1bee6f20cd8104a40f1829fd132 data/stancements/advancement/adventure/record_all_songs.json
 ec3fda86c6efc743cd8750f8b9ea2ea196e0d551 data/stancements/advancement/adventure/record_song.json
 bc182c3f98c61357fbeb2052562248d348d2bfe0 data/stancements/advancement/husbandry/plant_in_crop_pot.json
 5e5dfbfd0cf95c6d775bc537985bd37815024592 data/stancements/advancement/husbandry/plant_in_hopping_pot.json

@@ -1,13 +1,10 @@
 package melonystudios.stancements.misc.attachment;
 
-import com.google.common.collect.Lists;
 import melonystudios.stancements.item.STItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.*;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -17,7 +14,6 @@ import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MinecartTags implements INBTSerializable<CompoundTag> {
@@ -74,10 +70,9 @@ public class MinecartTags implements INBTSerializable<CompoundTag> {
     @UnknownNullability
     public CompoundTag serializeNBT(HolderLookup.Provider provider) {
         CompoundTag tag = new CompoundTag();
-        if (!this.tagColors.isEmpty()) {
-            ListTag colors = new ListTag();
-            for (DyeColor color : this.tagColors) colors.add(StringTag.valueOf(color.getName()));
-            tag.put("colors", colors);
+        if (!this.tagColors().isEmpty()) {
+            DyeColor.CODEC.listOf().encodeStart(NbtOps.INSTANCE, this.tagColors())
+                    .ifSuccess(colors -> tag.put("colors", colors));
         }
         return tag;
     }
@@ -85,16 +80,8 @@ public class MinecartTags implements INBTSerializable<CompoundTag> {
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag tag) {
         if (tag.contains("colors", Tag.TAG_LIST)) {
-            ListTag colors = tag.getList("colors", Tag.TAG_STRING);
-            List<DyeColor> dyeColors = new ArrayList<>(16);
-
-            for (Tag color : colors) {
-                if (color instanceof StringTag string) {
-                    DyeColor dyeColor = DyeColor.byName(string.getAsString(), null);
-                    if (dyeColor != null) dyeColors.add(dyeColor);
-                }
-            }
-            this.tagColors = dyeColors;
+            DyeColor.CODEC.listOf().decode(NbtOps.INSTANCE, tag.getList("colors", Tag.TAG_STRING))
+                    .ifSuccess(pair -> this.tagColors = pair.getFirst());
         }
     }
 
@@ -103,17 +90,13 @@ public class MinecartTags implements INBTSerializable<CompoundTag> {
 
         @Override
         public void write(RegistryFriendlyByteBuf buffer, MinecartTags tags, boolean initialSync) {
-            buffer.writeInt(tags.tagColors().size());
-            for (DyeColor color : tags.tagColors()) buffer.writeInt(color.getId());
+            DyeColor.STREAM_CODEC.apply(ByteBufCodecs.list()).encode(buffer, tags.tagColors());
         }
 
         @Override
         @Nullable
         public MinecartTags read(IAttachmentHolder holder, RegistryFriendlyByteBuf buffer, @Nullable MinecartTags previousValue) {
-            List<DyeColor> colors = Lists.newArrayList();
-            int size = buffer.readInt();
-            for (int i = 0; i < size; ++i) colors.add(DyeColor.byId(buffer.readInt()));
-            return new MinecartTags(holder, colors);
+            return new MinecartTags(holder, DyeColor.STREAM_CODEC.apply(ByteBufCodecs.list()).decode(buffer));
         }
     }
 }

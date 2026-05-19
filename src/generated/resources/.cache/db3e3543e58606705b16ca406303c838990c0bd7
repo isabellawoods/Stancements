@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-19T16:37:19.714923576	Stancements — Item Models
+// 1.21.1	2026-05-18T17:19:35.016186146	Stancements — Item Models
 5c7c026d76aecade3d914245180f0c0b9b58b22f assets/stancements/models/item/acacia_shelf.json
 730dddd40b80312304ca6b54a3ecf9e3a4cfe0e9 assets/stancements/models/item/bamboo_shelf.json
 96c0a874ea3a254fc35cdcf08a3ef771a04b3562 assets/stancements/models/item/birch_shelf.json
@@ -46,6 +46,7 @@ b697cd6ee5388104ddd2cbf65e405220f4d1e1fa assets/stancements/models/item/music_re
 08f0596eb2721ab03a910122be6a71561e875804 assets/stancements/models/item/orange_crafting_table_cloth.json
 bd46b3d5d81ff1a5c86b9d9e24342a0ad86453fb assets/stancements/models/item/orange_tag.json
 f93e927218196833e690caff084127f6f37ad46f assets/stancements/models/item/orange_tagging_rail.json
+750b9ae08701807ea4ba9debd429f47c7073b999 assets/stancements/models/item/pale_oak_shelf.json
 b817da1499bfb506e0dbb70fe3d684554b3cb379 assets/stancements/models/item/pink_crafting_table_cloth.json
 47e2d6eda8b914712d07e132028cde25cda7d3ec assets/stancements/models/item/pink_tag.json
 d954777835988da362c5eae65563e8804358f5e1 assets/stancements/models/item/pink_tagging_rail.json

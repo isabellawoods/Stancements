@@ -225,6 +225,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/water/shuniji",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -233,6 +234,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/water/dragon_fish",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -241,6 +243,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/water/axolotl",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -249,6 +252,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/nether/nether_wastes/rubedo",
+        "volume": 0.5,
         "stream": true
       }
     ]
@@ -257,6 +261,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/nether/crimson_forest/chrysopoeia",
+        "volume": 0.5,
         "stream": true
       }
     ]
@@ -265,6 +270,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/nether/soulsand_valley/so_below",
+        "volume": 0.5,
         "stream": true
       }
     ]
@@ -273,6 +279,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/stand_tall",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -281,6 +288,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/left_to_bloom",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -297,6 +305,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/wending",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -305,6 +314,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/infinite_amethyst",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -313,6 +323,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/one_more_day",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -321,6 +332,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/floating_dream",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -329,6 +341,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/comforting_memories",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -337,6 +350,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/an_ordinary_day",
+        "volume": 0.8,
         "stream": true
       }
     ]
@@ -345,6 +359,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/swamp/firebugs",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -353,6 +368,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/swamp/aerie",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -361,6 +377,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/swamp/labyrinthine",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -369,6 +386,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/echo_in_the_wind",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -377,6 +395,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/a_familiar_room",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -385,6 +404,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/bromeliad",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -393,6 +413,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/crescent_dunes",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -401,6 +422,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/featherfall",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -409,6 +431,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/watcher",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -417,6 +440,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/puzzlebox",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -425,6 +449,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/komorebi",
+        "volume": 0.8,
         "stream": true
       }
     ]
@@ -433,6 +458,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/pokopoko",
+        "volume": 0.8,
         "stream": true
       }
     ]
@@ -441,6 +467,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/yakusoku",
+        "volume": 0.8,
         "stream": true
       }
     ]
@@ -449,6 +476,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/deeper",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -457,6 +485,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/eld_unknown",
+        "volume": 0.4,
         "stream": true
       }
     ]
@@ -465,6 +494,7 @@
     "sounds": [
       {
         "name": "minecraft:music/game/endless",
+        "volume": 0.4,
         "stream": true
       }
     ]

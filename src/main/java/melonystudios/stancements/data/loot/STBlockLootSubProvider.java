@@ -15,8 +15,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyBlockState;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,6 +39,7 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(DARK_OAK_SHELF.get());
         this.dropSelf(MANGROVE_SHELF.get());
         this.dropSelf(CHERRY_SHELF.get());
+        this.dropSelf(PALE_OAK_SHELF.get());
         this.dropSelf(BAMBOO_SHELF.get());
         this.dropSelf(CRIMSON_SHELF.get());
         this.dropSelf(WARPED_SHELF.get());
@@ -111,7 +112,7 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
     }
 
     @Override
-    @Nonnull
+    @NotNull
     protected Iterable<Block> getKnownBlocks() {
         return BuiltInRegistries.BLOCK.stream().filter(block -> Stancements.MOD_ID.equals(BuiltInRegistries.BLOCK.getKey(block).getNamespace())).collect(Collectors.toSet());
     }

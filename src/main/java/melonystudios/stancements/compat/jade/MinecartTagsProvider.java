@@ -18,17 +18,9 @@ import snownee.jade.api.config.IPluginConfig;
 import java.util.List;
 import java.util.Optional;
 
-public class MinecartTagsProvider implements IEntityComponentProvider, StreamServerDataProvider<EntityAccessor, MinecartTagsProvider.TagData> {
+public class MinecartTagsProvider implements StreamServerDataProvider<EntityAccessor, MinecartTagsProvider.TagData> {
     public static final MinecartTagsProvider INSTANCE = new MinecartTagsProvider();
     public static final ResourceLocation ID = Stancements.stancements("minecart_tags");
-
-    @Override
-    public void appendTooltip(ITooltip tooltip, EntityAccessor accessor, IPluginConfig config) {
-        Optional<TagData> data = this.decodeFromData(accessor);
-        if (data.isEmpty() || data.get().colors().isEmpty()) return;
-
-        tooltip.add(Component.translatable("tooltip.stancements.tags", TaggingRailBlock.prettyPrintTagColors(TagMatcherType.ALL, data.get().colors(), false)));
-    }
 
     @Override
     public boolean shouldRequestData(EntityAccessor accessor) {
@@ -52,6 +44,23 @@ public class MinecartTagsProvider implements IEntityComponentProvider, StreamSer
     @Override
     public ResourceLocation getUid() {
         return ID;
+    }
+
+    public static class Client implements IEntityComponentProvider {
+        public static final Client INSTANCE = new Client();
+
+        @Override
+        public void appendTooltip(ITooltip tooltip, EntityAccessor accessor, IPluginConfig config) {
+            Optional<TagData> data = MinecartTagsProvider.INSTANCE.decodeFromData(accessor);
+            if (data.isEmpty() || data.get().colors().isEmpty()) return;
+
+            tooltip.add(Component.translatable("tooltip.stancements.tags", TaggingRailBlock.prettyPrintTagColors(TagMatcherType.ALL, data.get().colors(), false)));
+        }
+
+        @Override
+        public ResourceLocation getUid() {
+            return ID;
+        }
     }
 
     public record TagData(List<DyeColor> colors) {

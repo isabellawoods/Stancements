@@ -43,6 +43,7 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         shelf(DARK_OAK_SHELF.get());
         shelf(MANGROVE_SHELF.get());
         shelf(CHERRY_SHELF.get());
+        shelf(PALE_OAK_SHELF.get());
         shelf(BAMBOO_SHELF.get());
         shelf(CRIMSON_SHELF.get());
         shelf(WARPED_SHELF.get());

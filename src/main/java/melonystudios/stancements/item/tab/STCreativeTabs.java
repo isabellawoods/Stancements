@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -38,6 +39,7 @@ public class STCreativeTabs {
                 output.accept(DARK_OAK_SHELF);
                 output.accept(MANGROVE_SHELF);
                 output.accept(CHERRY_SHELF);
+                if (ModList.get().isLoaded("vanillabackport")) output.accept(PALE_OAK_SHELF);
                 output.accept(BAMBOO_SHELF);
                 output.accept(CRIMSON_SHELF);
                 output.accept(WARPED_SHELF);

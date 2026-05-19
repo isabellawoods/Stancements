@@ -40,6 +40,12 @@ public class CraftingTableClothBlock extends Block {
     }
 
     @Override
+    @NotNull
+    protected VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
+        return Shapes.empty();
+    }
+
+    @Override
     @Nullable
     protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         BlockState belowState = level.getBlockState(pos.below());

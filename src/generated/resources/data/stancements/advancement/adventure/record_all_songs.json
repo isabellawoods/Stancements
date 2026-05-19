@@ -15,6 +15,7 @@
     },
     "recorded/alpha": {
       "conditions": {
+        "copying_song": true,
         "music_id": "minecraft:game/end/alpha"
       },
       "trigger": "stancements:record_song"
@@ -306,11 +307,11 @@
     "description": {
       "translate": "advancements.stancements.record_all_songs.description"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "icon": {
       "components": {
         "minecraft:dyed_color": {
-          "rgb": 5635925,
+          "rgb": 11141290,
           "show_in_tooltip": false
         },
         "stancements:label": 7.0
@@ -475,7 +476,7 @@
     ]
   ],
   "rewards": {
-    "experience": 150
+    "experience": 200
   },
   "sends_telemetry_event": true
 }

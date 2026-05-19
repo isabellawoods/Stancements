@@ -19,7 +19,7 @@ import java.util.Optional;
 ///
 /// This event is fired on the {@linkplain NeoForge#EVENT_BUS main *NeoForge* event bus}, and is {@linkplain ICancellableEvent cancelable}.
 /// @see melonystudios.stancements.block.custom.MusicRecorderBlock#tryRecordingFromPlayer MusicRecorderBlock.tryRecordingFromPlayer()
-/// @see melonystudios.stancements.block.custom.MusicRecorderBlock#tryRecordingFromAdjacentJukebox MusicRecorderBlock.tryRecordingFromAdjacentJukebox()
+/// @see melonystudios.stancements.block.custom.MusicRecorderBlock#tryRecordingFromAdjacentBlock MusicRecorderBlock.tryRecordingFromAdjacentJukebox()
 public abstract class StartRecordingAttemptEvent extends PlayerEvent implements ICancellableEvent {
     private final BlockPos recorderPosition;
     private final ItemStack recordableDisc;
@@ -38,7 +38,7 @@ public abstract class StartRecordingAttemptEvent extends PlayerEvent implements 
         return this.recorderPosition;
     }
 
-    ///@return The item stack of the item being used to record. This item should *always* have the
+    /// @return The item stack of the item being used to record. This item should *always* have the
     /// `stancements:recording_turns_into` component.
     public ItemStack recordableDisc() {
         return this.recordableDisc;

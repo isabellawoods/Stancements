@@ -4,7 +4,11 @@ import melonystudios.stancements.option.STOptions;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.STItems;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.DyedItemColor;
@@ -35,6 +39,11 @@ public class STVanillaTabs {
             event.insertAfter(new ItemStack(Items.BAMBOO_BUTTON), new ItemStack(STItems.BAMBOO_SHELF.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.CRIMSON_BUTTON), new ItemStack(STItems.CRIMSON_SHELF.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.WARPED_BUTTON), new ItemStack(STItems.WARPED_SHELF.get()), PARENT_AND_SEARCH_TABS);
+
+            ResourceKey<Item> paleOakButton = ResourceKey.create(Registries.ITEM, ResourceLocation.withDefaultNamespace("pale_oak_button"));
+            event.getParameters().holders().lookupOrThrow(Registries.ITEM).get(paleOakButton).ifPresent(
+                    item -> event.insertAfter(new ItemStack(item), new ItemStack(STItems.PALE_OAK_SHELF.get()), PARENT_AND_SEARCH_TABS)
+            );
         }
 
         if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS) {

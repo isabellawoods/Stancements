@@ -4,20 +4,14 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import melonystudios.stancements.component.STDataComponents;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
-public record MusicData(Optional<ResourceLocation> id, boolean copied) implements TooltipProvider {
+public record MusicData(Optional<ResourceLocation> id, boolean copied) {
     public static final Codec<MusicData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ResourceLocation.CODEC.optionalFieldOf("id").forGetter(MusicData::id),
             Codec.BOOL.optionalFieldOf("copied", false).forGetter(MusicData::copied)
@@ -42,10 +36,5 @@ public record MusicData(Optional<ResourceLocation> id, boolean copied) implement
 
     public MusicData markCopied(boolean copied) {
         return new MusicData(this.id, copied);
-    }
-
-    @Override
-    public void addToTooltip(Item.TooltipContext context, Consumer<Component> adder, TooltipFlag flag) {
-        adder.accept(Component.translatable("tooltip.stancements.recorded_disc.copied").withStyle(ChatFormatting.DARK_GRAY));
     }
 }

@@ -39,12 +39,12 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,7 +55,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public static final BooleanProperty RECORDING = STBlockStateProperties.RECORDING;
     public static final Component NO_MUSIC_PLAYING_TEXT = Component.translatable("tooltip.stancements.no_music_playing").withStyle(ChatFormatting.GRAY);
     public static final Component CANNOT_COPY_TEXT = Component.translatable("tooltip.stancements.cannot_copy").withStyle(ChatFormatting.GRAY);
-    public static final int JUKEBOX_PADDING_TICKS = 20;
+    private static final Direction[] DIRECTIONS = Direction.values();
 
     public MusicRecorderBlock(Properties properties) {
         super(properties);
@@ -101,15 +101,16 @@ public class MusicRecorderBlock extends BaseEntityBlock {
 
             if (player instanceof ServerPlayer serverPlayer) {
                 // tell the client to start the recording process, as it requires the current song in MusicManager ~isa 17-03-26
-                serverPlayer.connection.send(new RequestRecordingAttempt(pos, splitStack));
+                PacketDistributor.sendToPlayer(serverPlayer, new RequestRecordingAttempt(pos, splitStack));
             }
 
+            // known issue: taking discs out of the recorder still triggers the hand action (place blocks, use items, etc.) ~isa 18-05-26
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    public void tryRecordingFromPlayer(Level level, BlockState state, BlockPos recorderPosition, Player player, ItemStack recordableDisc, @Nullable ResourceLocation musicID) {
+    public void tryRecordingFromPlayer(Level level, BlockState state, BlockPos recorderPosition, Player player, ItemStack recordableDisc, @Nullable ResourceLocation musicID, int recordingDuration) {
         BlockEntity blockEntity = level.getBlockEntity(recorderPosition);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
 
@@ -121,14 +122,14 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         if (musicID == null) {
             this.sendMessage(NO_MUSIC_PLAYING_TEXT, player);
         } else {
-            recorder.startRecording(musicID, false, player);
+            recorder.startRecording(musicID, false, recordingDuration, player);
             this.sendMessage(this.getRecordingMessage(this.getSongName(musicID)), player);
             level.setBlock(recorderPosition, state.setValue(RECORDING, true), 3);
             level.gameEvent(GameEvent.BLOCK_CHANGE, recorderPosition, GameEvent.Context.of(player, state));
         }
     }
 
-    public void tryRecordingFromAdjacentJukebox(Level level, BlockState state, BlockPos pos, @Nullable Player player, ItemStack recordableDisc) {
+    public void tryRecordingFromAdjacentBlock(Level level, BlockState state, BlockPos pos, @Nullable Player player, ItemStack recordableDisc) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
         Component errorMessage = NO_MUSIC_PLAYING_TEXT;
@@ -138,25 +139,24 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         if (event.isCanceled()) return;
 
         recorder.insertDisc(recordableDisc.copy());
-        for (Direction direction : Direction.values()) {
+        for (Direction direction : DIRECTIONS) {
             BlockPos adjacentPos = pos.relative(direction);
             BlockState adjacentState = level.getBlockState(adjacentPos);
+            BlockEntity adjacentEntity = level.getBlockEntity(adjacentPos);
 
-            if (adjacentState.is(Blocks.JUKEBOX) && level.getBlockEntity(adjacentPos) instanceof JukeboxBlockEntity jukebox) {
-                JukeboxSong song = jukebox.getSongPlayer().getSong();
+            if (adjacentEntity instanceof BlockBasedMusicPlayer musicPlayer && adjacentEntity.isValidBlockState(adjacentState)) {
+                JukeboxSong song = musicPlayer.song();
                 var jukeboxSongs = level.registryAccess().registry(Registries.JUKEBOX_SONG);
 
                 // block recording if the disc is a copy
-                if (jukeboxSongs.isEmpty() || MusicData.isCopied(jukebox.getTheItem())) {
+                if (jukeboxSongs.isEmpty() || MusicData.isCopied(musicPlayer.musicDisc())) {
                     errorMessage = CANNOT_COPY_TEXT;
                     break;
                 }
                 ResourceLocation songLocation = song == null ? null : jukeboxSongs.get().getKey(song);
 
                 if (song != null) {
-                    // exact duration of the song, so it always finishes when the song ends
-                    int recordingDuration = (int) (song.lengthInTicks() - jukebox.getSongPlayer().getTicksSinceSongStarted()) + JUKEBOX_PADDING_TICKS; // 20 ticks for padding
-                    recorder.startRecording(songLocation, true, recordingDuration, player);
+                    recorder.startRecording(songLocation, true, musicPlayer.recordingDuration(), player);
                     this.sendMessage(this.getRecordingMessage(song.description().getString()), player);
                     level.setBlock(pos, state.setValue(RECORDING, true), 3);
                     level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
@@ -176,9 +176,9 @@ public class MusicRecorderBlock extends BaseEntityBlock {
             if (discStack.isEmpty()) return;
 
             if (fromTop) {
-                double xOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.15F;
-                double yOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.660000002F;
-                double zOffset = (double) (level.random.nextFloat() * 0.7F) + (double) 0.15F;
+                double xOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.15F;
+                double yOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.660000002F;
+                double zOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.15F;
                 ItemEntity discEntity = new ItemEntity(level, (double) pos.getX() + xOffset, (double) pos.getY() + yOffset, (double) pos.getZ() + zOffset, discStack.copy());
                 discEntity.setDefaultPickUpDelay();
                 level.addFreshEntity(discEntity);
@@ -190,9 +190,8 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         }
     }
 
-    public void sendMessage(Component component, Player player) {
-        player.displayClientMessage(component, true);
-//        if (player instanceof ServerPlayer serverPlayer) serverPlayer.sendSystemMessage(component, true);
+    public void sendMessage(Component component, @Nullable Player player) {
+        if (player != null) player.displayClientMessage(component, true);
     }
 
     public Component getRecordingMessage(String songName) {
@@ -255,7 +254,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             if (!state.getValue(RECORDING)) return 0;
-            return ((recorder.ticksUntilFinishedRecording() * 14) / MusicRecorderBlockEntity.DEFAULT_RECORDING_DURATION) + 1;
+            return ((recorder.ticksUntilFinishedRecording() * 14) / BlockBasedMusicPlayer.DEFAULT_RECORDING_DURATION) + 1;
         }
         return 0;
     }

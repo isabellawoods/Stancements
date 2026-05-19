@@ -88,7 +88,7 @@ public class TaggingRailBlock extends BaseRailBlock {
     }
 
     @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (state.getValue(POWERED)) this.checkPressed(level, pos, state);
     }
 

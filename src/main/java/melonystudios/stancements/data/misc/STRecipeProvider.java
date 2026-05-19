@@ -30,7 +30,7 @@ public class STRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output, HolderLookup.Provider provider) {
+    protected void buildRecipes(RecipeOutput output, HolderLookup.Provider registries) {
         // Decorative blocks
         // Shelves
         addShelf(output, STItems.OAK_SHELF, Items.OAK_PLANKS);

@@ -1,0 +1,42 @@
+{
+  "music.aether1": {
+    "sounds": [
+      {
+        "name": "aether:music/aether1",
+        "stream": true
+      }
+    ]
+  },
+  "music.aether2": {
+    "sounds": [
+      {
+        "name": "aether:music/aether2",
+        "stream": true
+      }
+    ]
+  },
+  "music.aether3": {
+    "sounds": [
+      {
+        "name": "aether:music/aether3",
+        "stream": true
+      }
+    ]
+  },
+  "music.aether4": {
+    "sounds": [
+      {
+        "name": "aether:music/aether4",
+        "stream": true
+      }
+    ]
+  },
+  "music.aether5": {
+    "sounds": [
+      {
+        "name": "aether:music/aether5",
+        "stream": true
+      }
+    ]
+  }
+}

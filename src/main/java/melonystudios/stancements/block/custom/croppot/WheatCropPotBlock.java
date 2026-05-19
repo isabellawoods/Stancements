@@ -64,7 +64,7 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (state.getValue(HOPPING) && this.getAge(state) == this.getMaxAge()) this.harvestCrop(level, state, pos);
 
         if (level.isAreaLoaded(pos, 1) && level.getRawBrightness(pos, 0) >= 9) {
@@ -72,7 +72,7 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
             int age = this.getAge(state);
 
             if (age < this.getMaxAge()) {
-                if (CommonHooks.canCropGrow(level, pos, state, rand.nextInt(growthChance) == 0)) {
+                if (CommonHooks.canCropGrow(level, pos, state, random.nextInt(growthChance) == 0)) {
                     this.growAndHarvestCrop(level, state, pos, age + 1);
                     CommonHooks.fireCropGrowPost(level, pos, state);
                 }
@@ -138,8 +138,8 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
         return InteractionResult.SUCCESS;
     }
 
-    protected int getBonemealAgeIncrease(RandomSource rand) {
-        return Mth.nextInt(rand, 2, 5);
+    protected int getBoneMealAgeIncrease(RandomSource random) {
+        return Mth.nextInt(random, 2, 5);
     }
 
     protected BlockState getEquivalentCrop(BlockState state) {
@@ -162,13 +162,13 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
     }
 
     @Override
-    public boolean isBonemealSuccess(Level level, RandomSource rand, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state) {
-        int newAge = this.getAge(state) + this.getBonemealAgeIncrease(rand);
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        int newAge = this.getAge(state) + this.getBoneMealAgeIncrease(random);
         int maxAge = this.getMaxAge();
         if (newAge > maxAge) newAge = maxAge;
 

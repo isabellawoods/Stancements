@@ -19,8 +19,7 @@ public class DyedWaterBucketItem extends Item {
         return DyedItemColor.getOrDefault(stack, DEFAULT_WATER_COLOR);
     }
 
-    /// Sets the "dyed color" component of the item stack to a specific color, setting the default `show_in_tooltip` field to false
-    /// to only display *Stancements*' tooltip.
+    /// Sets the "dyed color" component of the item stack to a specific color.
     /// @param stack The item stack to put the color in.
     /// @param color The color to apply.
     public static void setColor(ItemStack stack, int color) {

@@ -19,7 +19,8 @@ import java.util.Optional;
 /// @param position The in-world position of the recorder (assuming it is in the same dimension).
 /// @param recordableDisc The item stack (any item with the {@link melonystudios.stancements.component.STDataComponents#RECORDING_TURNS_INTO recording_turns_into} component) inserted into the recorder.
 /// @param clientMusicID An *optional* {@linkplain ResourceLocation resource location} indicating the song playing to the client.
-public record StartRecordingAttempt(BlockPos position, ItemStack recordableDisc, Optional<ResourceLocation> clientMusicID) implements CustomPacketPayload {
+/// @param recordingDuration The recording duration of the ambient song, in ticks. Defaults to {@linkplain melonystudios.stancements.block.custom.BlockBasedMusicPlayer#DEFAULT_RECORDING_DURATION `600` ticks}.
+public record StartRecordingAttempt(BlockPos position, ItemStack recordableDisc, Optional<ResourceLocation> clientMusicID, int recordingDuration) implements CustomPacketPayload {
     public static final StreamCodec<RegistryFriendlyByteBuf, StartRecordingAttempt> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,
             StartRecordingAttempt::position,
@@ -27,6 +28,8 @@ public record StartRecordingAttempt(BlockPos position, ItemStack recordableDisc,
             StartRecordingAttempt::recordableDisc,
             ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC),
             StartRecordingAttempt::clientMusicID,
+            ByteBufCodecs.VAR_INT,
+            StartRecordingAttempt::recordingDuration,
             StartRecordingAttempt::new
     );
     public static final CustomPacketPayload.Type<StartRecordingAttempt> TYPE = new CustomPacketPayload.Type<>(Stancements.stancements("start_recording_attempt"));

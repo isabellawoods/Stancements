@@ -31,6 +31,7 @@ public class STItems {
     public static final DeferredItem<Item> DARK_OAK_SHELF = ITEMS.register("dark_oak_shelf", () -> new BlockItem(STBlocks.DARK_OAK_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> MANGROVE_SHELF = ITEMS.register("mangrove_shelf", () -> new BlockItem(STBlocks.MANGROVE_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> CHERRY_SHELF = ITEMS.register("cherry_shelf", () -> new BlockItem(STBlocks.CHERRY_SHELF.get(), new Item.Properties()));
+    public static final DeferredItem<Item> PALE_OAK_SHELF = ITEMS.register("pale_oak_shelf", () -> new BlockItem(STBlocks.PALE_OAK_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> BAMBOO_SHELF = ITEMS.register("bamboo_shelf", () -> new BlockItem(STBlocks.BAMBOO_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> CRIMSON_SHELF = ITEMS.register("crimson_shelf", () -> new BlockItem(STBlocks.CRIMSON_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> WARPED_SHELF = ITEMS.register("warped_shelf", () -> new BlockItem(STBlocks.WARPED_SHELF.get(), new Item.Properties()));

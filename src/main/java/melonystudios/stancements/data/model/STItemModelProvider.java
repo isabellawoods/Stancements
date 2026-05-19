@@ -41,6 +41,7 @@ public class STItemModelProvider extends ReItemModelProvider {
         block("dark_oak_shelf");
         block("mangrove_shelf");
         block("cherry_shelf");
+        block("pale_oak_shelf");
         block("bamboo_shelf");
         block("crimson_shelf");
         block("warped_shelf");

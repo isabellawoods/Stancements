@@ -7,6 +7,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -24,6 +25,7 @@ public class STBlocks {
     public static final DeferredBlock<Block> DARK_OAK_SHELF = BLOCKS.register("dark_oak_shelf", () -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
     public static final DeferredBlock<Block> MANGROVE_SHELF = BLOCKS.register("mangrove_shelf", () -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
     public static final DeferredBlock<Block> CHERRY_SHELF = BLOCKS.register("cherry_shelf", () -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS)));
+    public static final DeferredBlock<Block> PALE_OAK_SHELF = BLOCKS.register("pale_oak_shelf", () -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).mapColor(MapColor.QUARTZ)));
     public static final DeferredBlock<Block> BAMBOO_SHELF = BLOCKS.register("bamboo_shelf", () -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS)));
     public static final DeferredBlock<Block> CRIMSON_SHELF = BLOCKS.register("crimson_shelf", () -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)));
     public static final DeferredBlock<Block> WARPED_SHELF = BLOCKS.register("warped_shelf", () -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)));

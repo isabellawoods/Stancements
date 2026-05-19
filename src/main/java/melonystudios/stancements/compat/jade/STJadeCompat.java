@@ -18,7 +18,7 @@ public class STJadeCompat implements IWailaPlugin {
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.registerBlockComponent(MusicRecorderProvider.INSTANCE, MusicRecorderBlock.class);
-        registration.registerEntityComponent(MinecartTagsProvider.INSTANCE, AbstractMinecart.class);
+        registration.registerBlockComponent(MusicRecorderProvider.Client.INSTANCE, MusicRecorderBlock.class);
+        registration.registerEntityComponent(MinecartTagsProvider.Client.INSTANCE, AbstractMinecart.class);
     }
 }

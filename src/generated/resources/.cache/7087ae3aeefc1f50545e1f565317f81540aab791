@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-19T16:37:19.725411899	Stancements — Block States and Models
+// 1.21.1	2026-05-18T17:14:33.283820742	Stancements — Block States and Models
 8a4fe5d8d856f7368ace66ed3bddb75b70330eea assets/stancements/blockstates/acacia_shelf.json
 639e6f230df66390ca5320275935cb3f7c606468 assets/stancements/blockstates/bamboo_shelf.json
 a8924533eed3bf18335a705848120c1a041da0f8 assets/stancements/blockstates/beetroot_crop_pot.json
@@ -38,6 +38,7 @@ f18c200487b780f9824da231db7d1284a7120faf assets/stancements/blockstates/music_re
 5bad9852c8d038e36a4d454fa463d49b9db4f3e5 assets/stancements/blockstates/oak_shelf.json
 e6aa30f81408fc77639866829e55a4ae57fb5419 assets/stancements/blockstates/orange_crafting_table_cloth.json
 cef4bfa74d8605f711ba565a070b47e600de6b50 assets/stancements/blockstates/orange_tagging_rail.json
+e7d6bc12930005ff0284a32ede3ee7a05007ba32 assets/stancements/blockstates/pale_oak_shelf.json
 f4d018a6670044ae886563dc6dc66fd003ea9658 assets/stancements/blockstates/pink_crafting_table_cloth.json
 811d4d999d7b25d747be18280300058ce1b2b4ab assets/stancements/blockstates/pink_tagging_rail.json
 29395e2af1d3ddb42b77df954c463f58081e092a assets/stancements/blockstates/potato_crop_pot.json
@@ -201,6 +202,7 @@ a8b7787701d39bb343a60796595544c88a613e8c assets/stancements/models/block/orange_
 d859862805b34f38943ac537d8e6ffe154c621b3 assets/stancements/models/block/orange_tagging_rail_on_raised_sw.json
 939d0f73e9f3ecd9743e0c5bed94e4ef75fff8da assets/stancements/models/block/orange_tagging_rail_raised_ne.json
 2e168cf0fb814270ebf525aff7a04c599c0faa19 assets/stancements/models/block/orange_tagging_rail_raised_sw.json
+662a04ba0bbbc3775fb8d95d8c538662d1e927e6 assets/stancements/models/block/pale_oak_shelf.json
 be7ba0c980b2d115cd5b71821ba5de648e6b79be assets/stancements/models/block/pink_crafting_table_cloth.json
 2f87722225d10e0e42749bcd82a9345a0f4ad0ef assets/stancements/models/block/pink_tagging_rail.json
 6ef77fc99b37d54e65f00030eb0ce81b9cf03803 assets/stancements/models/block/pink_tagging_rail_on.json

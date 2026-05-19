@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vanillabackport"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_shelves",
+  "key": {
+    "#": {
+      "item": "minecraft:pale_oak_planks"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "###",
+    "S S"
+  ],
+  "result": {
+    "count": 3,
+    "id": "stancements:pale_oak_shelf"
+  }
+}

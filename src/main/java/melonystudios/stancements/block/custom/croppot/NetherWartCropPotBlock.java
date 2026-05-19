@@ -39,8 +39,8 @@ public class NetherWartCropPotBlock extends WheatCropPotBlock {
     }
 
     @Override
-    protected int getBonemealAgeIncrease(RandomSource rand) {
-        return super.getBonemealAgeIncrease(rand) / 2;
+    protected int getBoneMealAgeIncrease(RandomSource random) {
+        return super.getBoneMealAgeIncrease(random) / 2;
     }
 
     @Override
