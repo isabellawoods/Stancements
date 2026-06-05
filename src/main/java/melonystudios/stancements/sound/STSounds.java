@@ -2,19 +2,21 @@ package melonystudios.stancements.sound;
 
 import melonystudios.stancements.Stancements;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class STSounds {
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, Stancements.MOD_ID);
+    public static final DeferredRegister<SoundEvent> STANCEMENTS = DeferredRegister.create(Registries.SOUND_EVENT, Stancements.MOD_ID);
+    public static final DeferredRegister<SoundEvent> MINECRAFT = DeferredRegister.create(Registries.SOUND_EVENT, "minecraft");
 
     // Items
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_DYE = SOUNDS.register("item.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.cauldron.dye")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> TAG_MINECART = SOUNDS.register("item.tag.latch", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.tag.latch")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_DYE = STANCEMENTS.register("item.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.cauldron.dye")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> TAG_MINECART = STANCEMENTS.register("item.tag.latch", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.tag.latch")));
 
     // Entities
-    public static final DeferredHolder<SoundEvent, SoundEvent> SHEAR_MINECART = SOUNDS.register("entity.minecart.shear", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("entity.minecart.shear")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SHEAR_MINECART = STANCEMENTS.register("entity.minecart.shear", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("entity.minecart.shear")));
 
     // Volume Alpha
     public static final DeferredHolder<SoundEvent, SoundEvent> MINECRAFT_SONG = register("music.game.minecraft");
@@ -96,6 +98,6 @@ public class STSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> FIREFLIES_SONG = register("music.game.fireflies");
 
     public static DeferredHolder<SoundEvent, SoundEvent> register(String name) {
-        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(Stancements.stancements(name)));
+        return MINECRAFT.register(name, () -> SoundEvent.createVariableRangeEvent(Identifier.withDefaultNamespace(name)));
     }
 }

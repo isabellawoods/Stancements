@@ -23,6 +23,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.item.component.TooltipDisplay;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class Stadvancements implements AdvancementSubProvider { // stancements advancements
@@ -48,23 +49,41 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
                 )
                 .addCriterion(
                         "record_song",
-                        RecordSongTrigger.TriggerInstance.recordedAnySong(false)
+                        RecordSongTrigger.TriggerInstance.recordedAnySong(false, List.of())
                 )
                 .save(saver, Stancements.stancements("adventure/record_song").toString());
 
         Advancement.Builder.advancement()
                 .parent(recordSong)
                 .display(
-                        createIconStack(),
-                        Component.translatable("advancements.stancements.record_all_songs.title"),
-                        Component.translatable("advancements.stancements.record_all_songs.description"),
+                        createCopyDiscIcon(),
+                        Component.translatable("advancements.stancements.copy_disc.title"),
+                        Component.translatable("advancements.stancements.copy_disc.description"),
                         null,
-                        AdvancementType.GOAL,
+                        AdvancementType.TASK,
                         true,
                         true,
                         false
                 )
-                .rewards(AdvancementRewards.Builder.experience(150))
+                .addCriterion(
+                        "copy_disc_except_alpha",
+                        RecordSongTrigger.TriggerInstance.recordedAnySong(true, List.of(Identifier.withDefaultNamespace("game/end/alpha")))
+                )
+                .save(saver, Stancements.stancements("adventure/copy_disc").toString());
+
+        Advancement.Builder.advancement()
+                .parent(recordSong)
+                .display(
+                        createRecordAllSongsIcon(),
+                        Component.translatable("advancements.stancements.record_all_songs.title"),
+                        Component.translatable("advancements.stancements.record_all_songs.description"),
+                        null,
+                        AdvancementType.CHALLENGE,
+                        true,
+                        true,
+                        false
+                )
+                .rewards(AdvancementRewards.Builder.experience(200))
                 // Volume Alpha
                 .addCriterion("recorded/minecraft", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/minecraft")))
                 .addCriterion("recorded/clark", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/clark")))
@@ -86,7 +105,7 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
                 .addCriterion("recorded/ballad_of_the_cats", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/nether/ballad_of_the_cats")))
                 .addCriterion("recorded/boss", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/end/boss")))
                 .addCriterion("recorded/the_end", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/end/the_end")))
-                .addCriterion("recorded/alpha", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/end/alpha")))
+                .addCriterion("recorded/alpha", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/end/alpha"), true))
 
                 // Underwater Singles (1.13)
                 .addCriterion("recorded/shuniji", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/water/shuniji")))
@@ -131,7 +150,14 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
                 .addCriterion("recorded/eld_unknown", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/eld_unknown")))
                 .addCriterion("recorded/endless", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/endless")))
 
-                // Chase the Skies (1.21.6) (whenever I update the mod)
+                // Chase the Skies (1.21.6)
+                .addCriterion("recorded/lilypad", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/lilypad")))
+                .addCriterion("recorded/below_and_above", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/below_and_above")))
+                .addCriterion("recorded/os_piano", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/os_piano")))
+                .addCriterion("recorded/broken_clocks", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/broken_clocks")))
+                .addCriterion("recorded/fireflies", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/fireflies")))
+
+                // Chaos Cubed (26.2) (when updated)
                 .save(saver, Stancements.stancements("adventure/record_all_songs").toString());
 
         AdvancementHolder plantInCropPot = Advancement.Builder.advancement()
@@ -180,14 +206,25 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
                 .save(saver, Stancements.stancements("husbandry/plant_in_hopping_pot").toString());
     }
 
-    private static ItemStackTemplate createIconStack() {
+    private static ItemStackTemplate createRecordAllSongsIcon() {
         return new ItemStackTemplate(
                 STItems.RECORDED_DISC.get(),
                 DataComponentPatch.builder()
-                .set(DataComponents.DYED_COLOR, new DyedItemColor(0x55FF55))
+                .set(DataComponents.DYED_COLOR, new DyedItemColor(0xAA00AA))
                 .set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.DYED_COLOR, true))
                 .set(STDataComponents.LABEL.get(), 7F)
                 .build()
+        );
+    }
+
+    private static ItemStackTemplate createCopyDiscIcon() {
+        return new ItemStackTemplate(
+                STItems.RECORDED_DISC.get(),
+                DataComponentPatch.builder()
+                        .set(DataComponents.DYED_COLOR, new DyedItemColor(0xFFDD99))
+                        .set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.DYED_COLOR, true))
+                        .set(STDataComponents.LABEL.get(), 10F)
+                        .build()
         );
     }
 }

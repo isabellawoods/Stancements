@@ -8,6 +8,9 @@
     "BlockBehaviourIDAccessor",
     "STItemStackMixin",
     "STShearsDispenseBehaviorMixin",
+    "block.STJukeboxBlockEntityMixin",
+    "compat.sophisticated.STBackpackBlockEntityMixin",
+    "compat.sophisticated.STStorageBlockEntityMixin",
     "entity.STAbstractMinecartMixin",
     "entity.STMinecartChestMixin",
     "entity.STServerPlayerMixin"

@@ -4,5 +4,5 @@
     "translate": "music.game.nether.warmth"
   },
   "length_in_seconds": 239.0,
-  "sound_event": "stancements:music.game.nether.warmth"
+  "sound_event": "minecraft:music.game.nether.warmth"
 }

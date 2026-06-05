@@ -4,5 +4,5 @@
     "translate": "music.game.oxygene"
   },
   "length_in_seconds": 65.0,
-  "sound_event": "stancements:music.game.oxygene"
+  "sound_event": "minecraft:music.game.oxygene"
 }

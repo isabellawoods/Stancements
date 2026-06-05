@@ -4,5 +4,5 @@
     "translate": "music.game.yakusoku"
   },
   "length_in_seconds": 271.0,
-  "sound_event": "stancements:music.game.yakusoku"
+  "sound_event": "minecraft:music.game.yakusoku"
 }

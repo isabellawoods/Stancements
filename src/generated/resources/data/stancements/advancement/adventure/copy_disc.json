@@ -1,0 +1,40 @@
+{
+  "parent": "stancements:adventure/record_song",
+  "criteria": {
+    "copy_disc_except_alpha": {
+      "conditions": {
+        "copying_song": true,
+        "excluded": [
+          "minecraft:game/end/alpha"
+        ]
+      },
+      "trigger": "stancements:record_song"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.stancements.copy_disc.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:dyed_color": 16768409,
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:dyed_color"
+          ]
+        },
+        "stancements:label": 10.0
+      },
+      "id": "stancements:recorded_disc"
+    },
+    "title": {
+      "translate": "advancements.stancements.copy_disc.title"
+    }
+  },
+  "requirements": [
+    [
+      "copy_disc_except_alpha"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

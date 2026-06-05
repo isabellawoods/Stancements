@@ -2,21 +2,89 @@
   "removed": [
     "tooltip.stancements.recording_music",
     "tooltip.stancements.recording_music_disc",
-    "tag.item.stancements.recordable_discs",
-    "music.minecraft.game.lilypad",
-    "music.minecraft.game.below_and_above",
-    "music.minecraft.game.os_piano",
-    "music.minecraft.game.broken_clocks",
-    "music.minecraft.game.fireflies"
+
+    "tag.item.stancements.recordable_discs"
   ],
   "renamed": {
     "itemGroup.stancements.tab": "tab.stancements.main",
+
     "config.stancements.populate_dyed_water_buckets": "option.stancements.populate_dyed_water_buckets",
     "config.stancements.populate_dyed_water_buckets.tooltip": "option.stancements.populate_dyed_water_buckets.tooltip",
     "config.stancements.crop_pot_growth_chance": "option.stancements.crop_pot_growth_chance",
     "config.stancements.crop_pot_growth_chance.tooltip": "option.stancements.crop_pot_growth_chance.tooltip",
     "config.stancements.add_items_to_vanilla_tabs": "option.stancements.add_items_to_vanilla_tabs",
     "config.stancements.add_items_to_vanilla_tabs.tooltip": "option.stancements.add_items_to_vanilla_tabs.tooltip",
-    "logger.stancements.outside_bounds": "logger.reutilities.outside_bounds"
+
+    "logger.stancements.outside_bounds": "logger.reutilities.outside_bounds",
+
+    "music.minecraft.game.minecraft": "music.game.minecraft",
+    "music.minecraft.game.clark": "music.game.clark",
+    "music.minecraft.game.sweden": "music.game.sweden",
+    "music.minecraft.game.subwoofer_lullaby": "music.game.subwoofer_lullaby",
+    "music.minecraft.game.living_mice": "music.game.living_mice",
+    "music.minecraft.game.haggstrom": "music.game.haggstrom",
+    "music.minecraft.game.danny": "minecraft.game.danny",
+    "music.minecraft.game.key": "music.game.key",
+    "music.minecraft.game.oxygene": "music.game.oxygene",
+    "music.minecraft.game.dry_hands": "music.game.dry_hands",
+    "music.minecraft.game.wet_hands": "music.game.wet_hands",
+    "music.minecraft.mice_on_venus": "music.game.mice_on_venus",
+
+    "music.minecraft.game.nether.concrete_halls": "music.game.nether.concrete_halls",
+    "music.minecraft.game.nether.dead_voxel": "music.game.nether.dead_voxel",
+    "music.minecraft.game.nether.warmth": "music.game.nether.warmth",
+    "music.minecraft.game.nether.ballad_of_the_cats": "music.game.nether.ballad_of_the_cats",
+    "music.minecraft.game.creative.biome_fest": "music.game.creative.biome_fest",
+    "music.minecraft.game.creative.blind_spots": "music.game.creative.blind_spots",
+    "music.minecraft.game.creative.haunt_muskie": "music.game.creative.haunt_muskie",
+    "music.minecraft.game.creative.aria_math": "music.game.creative.aria_math",
+    "music.minecraft.game.creative.dreiton": "music.game.creative.dreiton",
+    "music.minecraft.game.creative.taswell": "music.game.creative.taswell",
+    "music.minecraft.game.end.boss": "music.game.end.boss",
+    "music.minecraft.game.end.the_end": "music.game.end.the_end",
+    "music.minecraft.game.end.alpha": "music.game.end.alpha",
+
+    "music.minecraft.game.water.shuniji": "music.game.water.shuniji",
+    "music.minecraft.game.water.dragon_fish": "music.game.water.dragon_fish",
+    "music.minecraft.game.water.axolotl": "music.game.water.axolotl",
+
+    "music.minecraft.game.nether.nether_wastes.rubedo": "music.game.nether.nether_wastes.rubedo",
+    "music.minecraft.game.nether.crimson_forest.chrysopoeia": "music.game.nether.crimson_forest.chrysopoeia",
+    "music.minecraft.game.nether.soulsand_valley.so_below": "music.game.nether.soulsand_valley.so_below",
+
+    "music.minecraft.game.stand_tall": "music.game.stand_tall",
+    "music.minecraft.game.left_to_bloom": "music.game.left_to_bloom",
+    "music.minecraft.game.ancestry": "music.game.ancestry",
+    "music.minecraft.game.wending": "music.game.wending",
+    "music.minecraft.game.infinite_amethyst": "music.game.infinite_amethyst",
+    "music.minecraft.game.one_more_day": "music.game.one_more_day",
+    "music.minecraft.game.floating_dream": "music.game.floating_dream",
+    "music.minecraft.game.comforting_memories": "music.game.comforting_memories",
+    "music.minecraft.game.an_ordinary_day": "music.game.an_ordinary_day",
+
+    "music.minecraft.game.swamp.firebugs": "music.game.swamp.firebugs",
+    "music.minecraft.game.swamp.aerie": "music.game.swamp.aerie",
+    "music.minecraft.game.swamp.labyrinthine": "music.game.swamp.labyrinthine",
+
+    "music.minecraft.game.echo_in_the_wind": "music.game.echo_in_the_wind",
+    "music.minecraft.game.a_familiar_room": "music.game.a_familiar_room",
+    "music.minecraft.game.bromeliad": "music.game.bromeliad",
+    "music.minecraft.game.crescent_dunes": "music.game.crescent_dunes",
+
+    "music.minecraft.game.featherfall": "music.game.featherfall",
+    "music.minecraft.game.watcher": "music.game.watcher",
+    "music.minecraft.game.puzzlebox": "music.game.puzzlebox",
+    "music.minecraft.game.komorebi": "music.game.komorebi",
+    "music.minecraft.game.pokopoko": "music.game.pokopoko",
+    "music.minecraft.game.yakusoku": "music.game.yakusoku",
+    "music.minecraft.game.deeper": "music.game.deeper",
+    "music.minecraft.game.eld_unknown": "music.game.eld_unknown",
+    "music.minecraft.game.endless": "music.game.endless",
+
+    "music.minecraft.game.lilypad": "music.game.lilypad",
+    "music.minecraft.game.below_and_above": "music.game.below_and_above",
+    "music.minecraft.game.os_piano": "music.game.os_piano",
+    "music.minecraft.game.broken_clocks": "music.game.broken_clocks",
+    "music.minecraft.game.fireflies": "music.game.fireflies"
   }
 }

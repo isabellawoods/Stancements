@@ -4,5 +4,5 @@
     "translate": "music.game.stand_tall"
   },
   "length_in_seconds": 308.0,
-  "sound_event": "stancements:music.game.stand_tall"
+  "sound_event": "minecraft:music.game.stand_tall"
 }

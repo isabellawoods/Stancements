@@ -21,10 +21,10 @@ public class ServerPayloadHandler {
 
         if (receival.clientMusicID().isPresent()) {
             // always record current song first
-            recorder.tryRecordingFromPlayer(level, state, receival.position(), context.player(), receival.recordableDisc(), receival.clientMusicID().get());
+            recorder.tryRecordingFromPlayer(level, state, receival.position(), context.player(), receival.recordableDisc(), receival.clientMusicID().get(), receival.recordingDuration());
         } else {
             // if none is playing, try recording from an adjacent jukebox
-            recorder.tryRecordingFromAdjacentJukebox(level, state, receival.position(), context.player(), receival.recordableDisc());
+            recorder.tryRecordingFromAdjacentBlock(level, state, receival.position(), context.player(), receival.recordableDisc());
         }
 
         context.player().awardStat(Stats.ITEM_USED.get(receival.recordableDisc().getItem()));

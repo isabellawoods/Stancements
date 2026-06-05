@@ -1,9 +1,11 @@
 package melonystudios.stancements.compat.jade;
 
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import net.minecraft.client.searchtree.IdentifierSearchTree;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -60,17 +62,23 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
 
             if (data.get().hasRecorded) {
                 tooltip.add(Component.translatable("tooltip.stancements.finished_recording").withColor(Stancements.ACCENT_COLOR));
-            } else if (data.get().ticksUntilFinishedRecording() <= -1) {
+            } else if (data.get().ticksUntilFinishedRecording() <= BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED) {
                 tooltip.add(Component.translatable("tooltip.stancements.no_music_playing"));
             } else {
                 var jukeboxSongs = accessor.getLevel().registryAccess().lookup(Registries.JUKEBOX_SONG);
                 if (jukeboxSongs.isEmpty() || data.get().musicID.isEmpty()) return;
-
                 var song = jukeboxSongs.get().get(data.get().copyingSong ? data.get().musicID.get() : RecordedDiscItem.getJukeboxSongLocation(data.get().musicID.get()));
-                song.ifPresent(jukeboxSongReference -> tooltip.add(Component.translatable("tooltip.stancements.recording",
-                        IDisplayHelper.get().stripColor(jukeboxSongReference.value().description()),
+
+                Component songName;
+                if (song.isPresent()) {
+                    songName = IDisplayHelper.get().stripColor(song.get().value().description());
+                } else {
+                    songName = Component.translatable("tooltip.stancements.sound_id", data.get().musicID.get().toString());
+                }
+
+                tooltip.add(Component.translatable("tooltip.stancements.recording", songName,
                         StringUtil.formatTickDuration(data.get().ticksUntilFinishedRecording(), accessor.tickRate())
-                )));
+                ));
             }
         }
 

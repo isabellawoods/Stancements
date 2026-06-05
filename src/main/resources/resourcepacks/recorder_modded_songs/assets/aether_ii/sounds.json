@@ -1,0 +1,157 @@
+{
+  "music.aether1": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether1",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether2": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether2",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether3": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether3",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether4": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether4",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether5": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether5",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether6": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether6",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_ambience1": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_ambience1",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_night1": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_night1",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_night2": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_night2",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_sunrise": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_sunrise",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_sunset": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_sunset",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.polarity": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/polarity",
+        "stream": true
+      }
+    ]
+  },
+  "music.sunbeam": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/sunbeam",
+        "stream": true
+      }
+    ]
+  },
+  "music.thin_air": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/thin_air",
+        "stream": true
+      }
+    ]
+  },
+  "music.waking_dream": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/waking_dream",
+        "stream": true
+      }
+    ]
+  },
+  "music.eulogy_for_a_whale": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/eulogy_for_a_whale",
+        "stream": true
+      }
+    ]
+  },
+  "music.exhale": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/exhale",
+        "stream": true
+      }
+    ]
+  },
+  "music.boss.slider_fight": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/boss/slider_fight",
+        "stream": true
+      }
+    ]
+  }
+}

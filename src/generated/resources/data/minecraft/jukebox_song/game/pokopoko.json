@@ -4,5 +4,5 @@
     "translate": "music.game.pokopoko"
   },
   "length_in_seconds": 304.0,
-  "sound_event": "stancements:music.game.pokopoko"
+  "sound_event": "minecraft:music.game.pokopoko"
 }

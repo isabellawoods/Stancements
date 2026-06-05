@@ -1,0 +1,47 @@
+{
+  "music.game.memories": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/memories",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.game.ebb": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/ebb",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.game.home": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/home",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.game.shores": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/shores",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  },
+  "music.game.nightly": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/nightly",
+        "volume": 0.4,
+        "stream": true
+      }
+    ]
+  }
+}

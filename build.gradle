@@ -129,6 +129,19 @@ dependencies {
     // Reutilities
     // implementation files("build/libs/reutilities-neoforge-${reutilities_version}+${minecraft_version}.jar")
 
+    if (project.hasProperty("sophisticated_core_version")) {
+        // Sophisticated Core
+        implementation files("build/libs/sophisticatedcore-${minecraft_version}-${sophisticated_core_version}.jar")
+    }
+    if (project.hasProperty("sophisticated_backpacks_version")) {
+        // Sophisticated Backpacks
+        implementation files("build/libs/sophisticatedbackpacks-${minecraft_version}-${sophisticated_backpacks_version}.jar")
+    }
+    if (project.hasProperty("sophisticated_storage_version")) {
+        // Sophisticated Storage
+        implementation files("build/libs/sophisticatedstorage-${minecraft_version}-${sophisticated_storage_version}.jar")
+    }
+
     // Example mod dependency using a mod jar from ./libs with a flat directory repository:
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank".

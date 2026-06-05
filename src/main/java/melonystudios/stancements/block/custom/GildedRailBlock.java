@@ -12,8 +12,8 @@ public class GildedRailBlock extends PoweredRailBlock {
         super(properties, true);
     }
 
-    @Override
+    /*@Override
     public float getRailMaxSpeed(BlockState state, Level level, BlockPos pos, AbstractMinecart minecart) {
         return super.getRailMaxSpeed(state, level, pos, minecart) * (state.getValue(SHAPE).isSlope() ? 1 : STOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue());
-    }
+    }*/
 }

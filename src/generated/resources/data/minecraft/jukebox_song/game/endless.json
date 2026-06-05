@@ -4,5 +4,5 @@
     "translate": "music.game.endless"
   },
   "length_in_seconds": 402.0,
-  "sound_event": "stancements:music.game.endless"
+  "sound_event": "minecraft:music.game.endless"
 }

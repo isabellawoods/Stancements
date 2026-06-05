@@ -64,6 +64,7 @@ public class STShelfBlock extends Block {
 
     @Override
     @NotNull
+    @SuppressWarnings("deprecation")
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }

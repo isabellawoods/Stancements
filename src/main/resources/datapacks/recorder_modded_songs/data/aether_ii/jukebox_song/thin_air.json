@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "aether_ii.music.thin_air"
+  },
+  "length_in_seconds": 90.0,
+  "sound_event": {
+    "sound_id": "aether_ii:music.thin_air"
+  }
+}

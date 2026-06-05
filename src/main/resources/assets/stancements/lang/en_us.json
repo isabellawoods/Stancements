@@ -3,6 +3,8 @@
 
   "advancements.stancements.record_song.title": "Radio Recording",
   "advancements.stancements.record_song.description": "Record any song using the Music Recorder",
+  "advancements.stancements.copy_disc.title": "Streaming Services",
+  "advancements.stancements.copy_disc.description": "Copy any music disc using the Music Recorder",
   "advancements.stancements.record_all_songs.title": "Miner's Music Group",
   "advancements.stancements.record_all_songs.description": "Record all songs playable in-game using the Music Recorder",
   "advancements.stancements.plant_in_crop_pot.title": "Crop Tops",
@@ -150,6 +152,7 @@
   "tooltip.stancements.cannot_copy": "Cannot record a copied music disc.",
   "tooltip.stancements.finished_recording": "Finished recording!",
   "tooltip.stancements.recording": "Recording: %s (%s)",
+  "tooltip.stancements.sound_id": "\"%s\"",
   "tooltip.stancements.recorded_disc.blank": "Blank",
   "tooltip.stancements.recorded_disc.copied": "Copies can't be recorded",
   "tooltip.stancements.recorded_disc.sound_id": "Sound ID: \"%s\"",

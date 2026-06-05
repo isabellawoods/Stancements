@@ -4,5 +4,5 @@
     "translate": "music.game.minecraft"
   },
   "length_in_seconds": 254.0,
-  "sound_event": "stancements:music.game.minecraft"
+  "sound_event": "minecraft:music.game.minecraft"
 }

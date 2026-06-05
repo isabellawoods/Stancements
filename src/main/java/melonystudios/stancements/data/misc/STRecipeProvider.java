@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.CompletableFuture;
 
 public class STRecipeProvider extends RecipeProvider {
-    /// Mod id for [*Railcraft Reborn*](https://modrinth.com/mod/railcraft-reborn).
+    /// Mod ID for [*Railcraft Reborn*](https://modrinth.com/mod/railcraft-reborn).
     public static final String RAILCRAFT_MOD_ID = "railcraft";
 
     public STRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {

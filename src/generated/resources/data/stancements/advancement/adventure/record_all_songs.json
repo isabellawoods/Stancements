@@ -15,6 +15,7 @@
     },
     "recorded/alpha": {
       "conditions": {
+        "copying_song": true,
         "music_id": "minecraft:game/end/alpha"
       },
       "trigger": "stancements:record_song"
@@ -43,9 +44,21 @@
       },
       "trigger": "stancements:record_song"
     },
+    "recorded/below_and_above": {
+      "conditions": {
+        "music_id": "minecraft:game/below_and_above"
+      },
+      "trigger": "stancements:record_song"
+    },
     "recorded/boss": {
       "conditions": {
         "music_id": "minecraft:game/end/boss"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/broken_clocks": {
+      "conditions": {
+        "music_id": "minecraft:game/broken_clocks"
       },
       "trigger": "stancements:record_song"
     },
@@ -145,6 +158,12 @@
       },
       "trigger": "stancements:record_song"
     },
+    "recorded/fireflies": {
+      "conditions": {
+        "music_id": "minecraft:game/fireflies"
+      },
+      "trigger": "stancements:record_song"
+    },
     "recorded/floating_dream": {
       "conditions": {
         "music_id": "minecraft:game/floating_dream"
@@ -187,6 +206,12 @@
       },
       "trigger": "stancements:record_song"
     },
+    "recorded/lilypad": {
+      "conditions": {
+        "music_id": "minecraft:game/lilypad"
+      },
+      "trigger": "stancements:record_song"
+    },
     "recorded/living_mice": {
       "conditions": {
         "music_id": "minecraft:game/living_mice"
@@ -208,6 +233,12 @@
     "recorded/one_more_day": {
       "conditions": {
         "music_id": "minecraft:game/one_more_day"
+      },
+      "trigger": "stancements:record_song"
+    },
+    "recorded/os_piano": {
+      "conditions": {
+        "music_id": "minecraft:game/os_piano"
       },
       "trigger": "stancements:record_song"
     },
@@ -306,10 +337,10 @@
     "description": {
       "translate": "advancements.stancements.record_all_songs.description"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "icon": {
       "components": {
-        "minecraft:dyed_color": 5635925,
+        "minecraft:dyed_color": 11141290,
         "minecraft:tooltip_display": {
           "hidden_components": [
             "minecraft:dyed_color"
@@ -473,10 +504,25 @@
     ],
     [
       "recorded/endless"
+    ],
+    [
+      "recorded/lilypad"
+    ],
+    [
+      "recorded/below_and_above"
+    ],
+    [
+      "recorded/os_piano"
+    ],
+    [
+      "recorded/broken_clocks"
+    ],
+    [
+      "recorded/fireflies"
     ]
   ],
   "rewards": {
-    "experience": 150
+    "experience": 200
   },
   "sends_telemetry_event": true
 }

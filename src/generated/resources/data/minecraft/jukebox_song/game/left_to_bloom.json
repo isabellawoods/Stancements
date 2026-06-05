@@ -4,5 +4,5 @@
     "translate": "music.game.left_to_bloom"
   },
   "length_in_seconds": 342.0,
-  "sound_event": "stancements:music.game.left_to_bloom"
+  "sound_event": "minecraft:music.game.left_to_bloom"
 }

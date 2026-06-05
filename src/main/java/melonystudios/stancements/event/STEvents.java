@@ -12,9 +12,11 @@ import melonystudios.stancements.data.misc.Stadvancements;
 import melonystudios.stancements.data.model.STModelProvider;
 import melonystudios.stancements.data.tag.STBlockTagsProvider;
 import melonystudios.stancements.data.tag.STItemTagsProvider;
+import melonystudios.stancements.misc.STRegistries;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
 import melonystudios.stancements.misc.attachment.STCapabilities;
 import melonystudios.stancements.misc.datamap.STDataMaps;
+import melonystudios.stancements.misc.discstyle.RecordedDiscStyle;
 import melonystudios.stancements.network.s2c.ClientPayloadHandler;
 import melonystudios.stancements.network.s2c.RequestRecordingAttempt;
 import net.minecraft.core.HolderLookup;
@@ -44,6 +46,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.RegisterCauldronFluidContentEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.List;
@@ -86,9 +89,13 @@ public class STEvents {
     }
 
     @SubscribeEvent
+    public static void addDataPackRegistries(DataPackRegistryEvent.NewRegistry event) {
+        event.dataPackRegistry(STRegistries.RECORDED_DISC_STYLE, RecordedDiscStyle.CODEC, RecordedDiscStyle.CODEC);
+    }
+
+    @SubscribeEvent
     public static void registerDataMaps(RegisterDataMapTypesEvent event) {
         event.register(STDataMaps.POT_PLANTABLES);
-        event.register(STDataMaps.RECORDED_DISC_STYLES);
     }
 
     @SubscribeEvent
@@ -105,7 +112,7 @@ public class STEvents {
 
     @SubscribeEvent
     public static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {
-        event.modifyMatching((item, _) -> item instanceof BannerItem, components -> components.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.HEAD).build()));
+        event.modifyMatching((item, _) -> item instanceof BannerItem, (components, _, _) -> components.set(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.HEAD).build()));
     }
 
     @SubscribeEvent

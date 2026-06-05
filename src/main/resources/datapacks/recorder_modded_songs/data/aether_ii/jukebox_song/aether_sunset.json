@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "aether_ii.music.aether_sunset"
+  },
+  "length_in_seconds": 89.0,
+  "sound_event": {
+    "sound_id": "aether_ii:music.aether_sunset"
+  }
+}
