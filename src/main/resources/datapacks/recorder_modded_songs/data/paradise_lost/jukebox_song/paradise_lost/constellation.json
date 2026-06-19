@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "paradise_lost.music.paradise_lost.constellation"
+  },
+  "length_in_seconds": 204.0,
+  "sound_event": {
+    "sound_id": "paradise_lost:music.paradise_lost.constellation"
+  }
+}

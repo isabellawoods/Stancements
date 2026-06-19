@@ -90,8 +90,8 @@ public class STVanillaTabs {
         }
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-            event.insertAfter(new ItemStack(Items.FLOWER_POT), new ItemStack(STItems.CROP_POT.get()), PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(STItems.CROP_POT.get()), STItems.hoppingCropPot(1), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.FLOWER_POT), STItems.cropPot(1, false), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(STItems.cropPot(1, false), STItems.cropPot(1, true), PARENT_AND_SEARCH_TABS);
         }
 
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {

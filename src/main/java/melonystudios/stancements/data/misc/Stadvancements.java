@@ -173,7 +173,7 @@ public class Stadvancements implements AdvancementProvider.AdvancementGenerator 
         Advancement.Builder.advancement()
                 .parent(plantInCropPot)
                 .display(
-                        STItems.hoppingCropPot(1),
+                        STItems.cropPot(1, true),
                         Component.translatable("advancements.stancements.plant_in_hopping_pot.title"),
                         Component.translatable("advancements.stancements.plant_in_hopping_pot.description"),
                         null,

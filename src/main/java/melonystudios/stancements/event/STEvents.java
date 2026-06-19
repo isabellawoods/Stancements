@@ -4,6 +4,7 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.command.ConvertDiscToJukeboxSongCommand;
 import melonystudios.stancements.data.misc.*;
+import melonystudios.stancements.data.tag.STJukeboxSongTagsProvider;
 import melonystudios.stancements.misc.STRegistries;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
 import melonystudios.stancements.misc.attachment.STCapabilities;
@@ -73,6 +74,7 @@ public class STEvents {
             STBlockTagsProvider blockTags = new STBlockTagsProvider(output, registries, fileHelper);
             generator.addProvider(true, blockTags);
             generator.addProvider(true, new STItemTagsProvider(output, registries, blockTags.contentsGetter(), fileHelper));
+            generator.addProvider(true, new STJukeboxSongTagsProvider(output, registries, fileHelper));
         }
     }
 

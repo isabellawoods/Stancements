@@ -1,0 +1,216 @@
+{
+  "values": [
+    {
+      "id": "stancements:game/lilypad",
+      "required": false
+    },
+    {
+      "id": "stancements:game/below_and_above",
+      "required": false
+    },
+    {
+      "id": "stancements:game/os_piano",
+      "required": false
+    },
+    {
+      "id": "stancements:game/broken_clocks",
+      "required": false
+    },
+    {
+      "id": "stancements:game/fireflies",
+      "required": false
+    },
+    {
+      "id": "stancements:game/memories",
+      "required": false
+    },
+    {
+      "id": "stancements:game/ebb",
+      "required": false
+    },
+    {
+      "id": "stancements:game/home",
+      "required": false
+    },
+    {
+      "id": "stancements:game/shores",
+      "required": false
+    },
+    {
+      "id": "stancements:game/nightly",
+      "required": false
+    },
+    {
+      "id": "aeronautics:cirrus",
+      "required": false
+    },
+    {
+      "id": "aeronautics:glide",
+      "required": false
+    },
+    {
+      "id": "aeronautics:mammatus",
+      "required": false
+    },
+    {
+      "id": "aeronautics:windstream",
+      "required": false
+    },
+    {
+      "id": "aether:aether1",
+      "required": false
+    },
+    {
+      "id": "aether:aether2",
+      "required": false
+    },
+    {
+      "id": "aether:aether3",
+      "required": false
+    },
+    {
+      "id": "aether:aether4",
+      "required": false
+    },
+    {
+      "id": "aether:aether5",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:game/nether/blot",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:game/nether/cortisol",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:game/nether/mesh",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:game/nether/redhead",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:game/nether/timber",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:overworld/crag_gardens",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:overworld/eroded_borealis",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:overworld/forgotten_forest",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:overworld/pale_bog",
+      "required": false
+    },
+    {
+      "id": "enderscape:biome/celestial_grove/elysium",
+      "required": false
+    },
+    {
+      "id": "enderscape:biome/celestial_grove/finality",
+      "required": false
+    },
+    {
+      "id": "enderscape:biome/celestial_grove/otherworld",
+      "required": false
+    },
+    {
+      "id": "enderscape:biome/corrupt_barrens/mutagen",
+      "required": false
+    },
+    {
+      "id": "enderscape:biome/corrupt_barrens/nebula",
+      "required": false
+    },
+    {
+      "id": "enderscape:biome/default_end/desolation",
+      "required": false
+    },
+    {
+      "id": "enderscape:biome/magnia_crags/flutters",
+      "required": false
+    },
+    {
+      "id": "enderscape:biome/veiled_woodlands/respite",
+      "required": false
+    },
+    {
+      "id": "enderscape:structure/end_city/grandeur",
+      "required": false
+    },
+    {
+      "id": "galosphere:pristine",
+      "required": false
+    },
+    {
+      "id": "galosphere:spectral",
+      "required": false
+    },
+    {
+      "id": "galosphere:trinity",
+      "required": false
+    },
+    {
+      "id": "natures_spirit:music.overworld.aspen",
+      "required": false
+    },
+    {
+      "id": "natures_spirit:music.overworld.maple",
+      "required": false
+    },
+    {
+      "id": "natures_spirit:music.overworld.redwood",
+      "required": false
+    },
+    {
+      "id": "natures_spirit:music.overworld.wisteria",
+      "required": false
+    },
+    {
+      "id": "tfc:m0-dreams_of_the_phae",
+      "required": false
+    },
+    {
+      "id": "tfc:m1-firmavista",
+      "required": false
+    },
+    {
+      "id": "tfc:m2-sycamore_height",
+      "required": false
+    },
+    {
+      "id": "tfc:m3-terrafirmacraft",
+      "required": false
+    },
+    {
+      "id": "tfc:m4-through_the_willows",
+      "required": false
+    },
+    {
+      "id": "the_bumblezone:bee_laxing_with_the_hom_bees",
+      "required": false
+    },
+    {
+      "id": "the_bumblezone:honey_bee_rat_faced_boy",
+      "required": false
+    },
+    {
+      "id": "the_bumblezone:la_bee_da_loca",
+      "required": false
+    },
+    {
+      "id": "the_bumblezone:rivers_of_honey_moserao",
+      "required": false
+    }
+  ]
+}

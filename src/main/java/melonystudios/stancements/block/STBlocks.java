@@ -52,7 +52,7 @@ public class STBlocks {
     public static final DeferredBlock<Block> MUSIC_RECORDER = BLOCKS.register("music_recorder", () -> new MusicRecorderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUKEBOX)));
     public static final DeferredBlock<Block> DYED_WATER_CAULDRON = BLOCKS.register("dyed_water_cauldron", () -> new DyedWaterCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
     public static final DeferredBlock<Block> MILK_CAULDRON = BLOCKS.register("milk_cauldron", () -> new MilkCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
-    public static final DeferredBlock<Block> CROP_POT = BLOCKS.register("crop_pot", () -> new CropPotBlock(BlockBehaviour.Properties.of().noOcclusion().pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops().strength(1.25F, 4.2F)));
+    public static final DeferredBlock<Block> CROP_POT = BLOCKS.register("crop_pot", () -> new CropPotBlock(BlockBehaviour.Properties.of().noOcclusion().pushReaction(PushReaction.DESTROY).strength(1, 4.2F)));
     public static final DeferredBlock<Block> WHEAT_CROP_POT = BLOCKS.register("wheat_crop_pot", () -> new WheatCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
     public static final DeferredBlock<Block> CARROT_CROP_POT = BLOCKS.register("carrot_crop_pot", () -> new CarrotCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
     public static final DeferredBlock<Block> POTATO_CROP_POT = BLOCKS.register("potato_crop_pot", () -> new PotatoCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));

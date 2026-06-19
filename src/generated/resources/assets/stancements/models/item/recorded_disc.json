@@ -78,6 +78,12 @@
       "predicate": {
         "stancements:label": 13.0
       }
+    },
+    {
+      "model": "stancements:item/recorded_disc_label_14",
+      "predicate": {
+        "stancements:label": 14.0
+      }
     }
   ],
   "textures": {

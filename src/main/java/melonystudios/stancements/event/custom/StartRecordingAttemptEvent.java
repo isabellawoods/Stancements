@@ -19,7 +19,7 @@ import java.util.Optional;
 ///
 /// This event is fired on the {@linkplain NeoForge#EVENT_BUS main *NeoForge* event bus}, and is {@linkplain ICancellableEvent cancelable}.
 /// @see melonystudios.stancements.block.custom.MusicRecorderBlock#tryRecordingFromPlayer MusicRecorderBlock.tryRecordingFromPlayer()
-/// @see melonystudios.stancements.block.custom.MusicRecorderBlock#tryRecordingFromAdjacentBlock MusicRecorderBlock.tryRecordingFromAdjacentJukebox()
+/// @see melonystudios.stancements.block.custom.MusicRecorderBlock#tryRecordingFromAdjacentBlock MusicRecorderBlock.tryRecordingFromAdjacentBlock()
 public abstract class StartRecordingAttemptEvent extends PlayerEvent implements ICancellableEvent {
     private final BlockPos recorderPosition;
     private final ItemStack recordableDisc;
@@ -59,7 +59,7 @@ public abstract class StartRecordingAttemptEvent extends PlayerEvent implements 
     }
 
     public static class ClientMusicRecording extends StartRecordingAttemptEvent {
-        private final Optional<ResourceLocation> clientMusicID;
+        private Optional<ResourceLocation> clientMusicID;
 
         /// @param player The player recording the music.
         /// @param recorderPosition The block position of the music recorder.
@@ -73,6 +73,12 @@ public abstract class StartRecordingAttemptEvent extends PlayerEvent implements 
         /// @return An *optional* resource location of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
         public Optional<ResourceLocation> clientMusicID() {
             return this.clientMusicID;
+        }
+
+        /// Sets the client's music to the provided resource location.
+        /// @param clientMusicID The {@linkplain ResourceLocation music ID} to use for the recording.
+        public void withClientMusic(ResourceLocation clientMusicID) {
+            this.clientMusicID = Optional.of(clientMusicID);
         }
     }
 

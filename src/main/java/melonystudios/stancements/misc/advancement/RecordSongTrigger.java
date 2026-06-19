@@ -30,8 +30,8 @@ public class RecordSongTrigger extends SimpleCriterionTrigger<RecordSongTrigger.
 
     public record TriggerInstance(Optional<ResourceLocation> musicID, boolean copyingSong, List<ResourceLocation> excluded, Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance {
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ResourceLocation.CODEC.optionalFieldOf("music_id").forGetter(TriggerInstance::musicID),
-                Codec.BOOL.optionalFieldOf("copying_song", false).forGetter(TriggerInstance::copyingSong),
+                ResourceLocation.CODEC.optionalFieldOf("id").forGetter(TriggerInstance::musicID),
+                Codec.BOOL.optionalFieldOf("copying", false).forGetter(TriggerInstance::copyingSong),
                 ResourceLocation.CODEC.listOf().optionalFieldOf("excluded", List.of()).forGetter(TriggerInstance::excluded),
                 EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player)
         ).apply(instance, TriggerInstance::new));

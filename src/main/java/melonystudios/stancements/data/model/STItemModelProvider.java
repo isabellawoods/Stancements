@@ -76,10 +76,10 @@ public class STItemModelProvider extends ReItemModelProvider {
                 .override().predicate(hopping, 1).model(this.getExistingFile(this.modLoc("item/hopping_" + name))).end();
     }
 
-    /// Makes a {@linkplain melonystudios.stancements.item.custom.RecordedDiscItem recorded disc} model, with {@linkplain RecordedDiscItem#DISC_LABEL_MAX **13**} different
+    /// Makes a {@linkplain melonystudios.stancements.item.custom.RecordedDiscItem recorded disc} model, with {@linkplain RecordedDiscItem#DISC_LABEL_MAX **14**} different
     /// override models for each music disc {@linkplain melonystudios.stancements.component.STDataComponents#LABEL label}.
     /// @param parent The location of the parent model, usually `item/generated`.
-    /// @param name The item's registry id, used for the model name and texture locations.
+    /// @param name The item's registry ID, used for the model name and texture locations.
     public void recordedDisc(ModelFile parent, String name) {
         ResourceLocation label = Stancements.stancements("label");
 

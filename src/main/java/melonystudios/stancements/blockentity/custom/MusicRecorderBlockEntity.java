@@ -2,13 +2,14 @@ package melonystudios.stancements.blockentity.custom;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
-import melonystudios.stancements.block.custom.BlockBasedMusicPlayer;
 import melonystudios.stancements.block.custom.MusicRecorderBlock;
+import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
+import melonystudios.stancements.option.STOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -50,7 +51,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
     }
 
     public void startRecording(@Nullable ResourceLocation musicID, boolean copyingSong, @Nullable Player recorderPlayer) {
-        this.startRecording(musicID, copyingSong, musicID == null ? BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED : BlockBasedMusicPlayer.DEFAULT_RECORDING_DURATION, recorderPlayer);
+        this.startRecording(musicID, copyingSong, musicID == null ? BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED : STOptions.DEFAULT_RECORDING_DURATION.get(), recorderPlayer);
     }
 
     public void startRecording(@Nullable ResourceLocation musicID, boolean copyingSong, int recordingDuration, @Nullable Player recorderPlayer) {

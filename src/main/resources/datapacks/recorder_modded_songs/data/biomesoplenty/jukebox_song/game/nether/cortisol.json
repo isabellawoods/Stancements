@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "biomesoplenty.music.game.nether.cortisol"
+  },
+  "length_in_seconds": 367.0,
+  "sound_event": {
+    "sound_id": "biomesoplenty:music.game.nether.cortisol"
+  }
+}

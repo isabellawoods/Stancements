@@ -14,17 +14,17 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-// todo: make discs with the "music_id" component automatically resolve to the jukebox song when available ~isa 03-08-25
 public class RecordedDiscItem extends Item {
     public static final int DEFAULT_DISC_COLOR = 0xFFF9FFFE;
     public static final int DISC_LABEL_MIN = 1;
-    public static final int DISC_LABEL_MAX = 13;
+    public static final int DISC_LABEL_MAX = 14;
 
     public RecordedDiscItem(Properties properties) {
         super(properties.component(STDataComponents.LABEL, (float) DISC_LABEL_MIN).component(DataComponents.DYED_COLOR, new DyedItemColor(DEFAULT_DISC_COLOR, false)));
@@ -38,9 +38,11 @@ public class RecordedDiscItem extends Item {
             tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.copied").withStyle(ChatFormatting.DARK_GRAY));
         }
 
+        if (stack.has(DataComponents.JUKEBOX_PLAYABLE)) return;
+
         if (data != null && data.id().isPresent() && ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/sound_id"))) {
             tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.sound_id", data.id().get().toString()).withStyle(ChatFormatting.GRAY));
-        } else if (!stack.has(DataComponents.JUKEBOX_PLAYABLE) && ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/blank"))) {
+        } else if (ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/blank"))) {
             tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.blank").withStyle(ChatFormatting.GRAY));
         }
     }
@@ -49,12 +51,7 @@ public class RecordedDiscItem extends Item {
     /// @param musicID A resource location of the song's location within the game's files.
     public static ResourceLocation getJukeboxSongLocation(ResourceLocation musicID) {
         String namespace = musicID.getNamespace().equals("minecraft") ? "stancements" : musicID.getNamespace();
-        return ResourceLocation.tryBuild(namespace, musicID.getPath()
-                .replace("sounds/", "")
-                .replace("music/", "")
-                .replace("music_disc/", "") // "music_disc" for Project Alcook's dead forest biome ~isa 19-05-26
-                .replace("records/", "")
-                .replace(".ogg", ""));
+        return ResourceLocation.tryBuild(namespace, sanitizeMusicIDLocation(musicID).getPath());
     }
 
     /// Sanitizes the id the music currently being recorded for usage in advancements.
@@ -63,10 +60,12 @@ public class RecordedDiscItem extends Item {
         return ResourceLocation.parse(musicID.toString()
                 .replace("sounds/", "")
                 .replace("music/", "")
+                .replace("music_disc/", "") // "music_disc" for Project Alcook's dead forest biome ~isa 19-05-26
+                .replace("records/", "")
                 .replace(".ogg", ""));
     }
 
-    public static boolean setJukeboxSong(ItemStack stack, Level level, ResourceLocation musicID, boolean copyingSong) {
+    public static boolean setJukeboxSong(ItemStack stack, Level level, ResourceLocation musicID, boolean copyingSong, boolean reduceDataWrites) {
         var jukeboxSongs = level.registryAccess().registry(Registries.JUKEBOX_SONG);
         if (jukeboxSongs.isPresent()) {
             var song = jukeboxSongs.get().getHolder(copyingSong ? musicID : getJukeboxSongLocation(musicID));
@@ -75,8 +74,9 @@ public class RecordedDiscItem extends Item {
                     stack.set(STDataComponents.MUSIC_DATA, stack.getOrDefault(STDataComponents.MUSIC_DATA, MusicData.copiedDisc()).markCopied(true));
                 }
                 stack.set(DataComponents.JUKEBOX_PLAYABLE, new JukeboxPlayable(new EitherHolder<>(song.get()), true));
+                stack.set(STDataComponents.MUSIC_DATA, stack.getOrDefault(STDataComponents.MUSIC_DATA, MusicData.data()).withID(musicID));
                 return true;
-            } else {
+            } else if (!reduceDataWrites) {
                 stack.set(STDataComponents.MUSIC_DATA, MusicData.unknownSong(musicID, copyingSong));
                 return false;
             }
@@ -96,7 +96,7 @@ public class RecordedDiscItem extends Item {
     }
 
     public static ItemStack randomizeAppearance(Level level, ItemStack stack, ResourceLocation musicID, boolean copyingSong) {
-        setJukeboxSong(stack, level, musicID, copyingSong);
+        setJukeboxSong(stack, level, musicID, copyingSong, false);
         stack.set(STDataComponents.LABEL, (float) (level.getRandom().nextInt(DISC_LABEL_MAX) + 1));
         return getRandomLabelColor(stack, level.getRandom());
     }
@@ -107,7 +107,7 @@ public class RecordedDiscItem extends Item {
 
         RecordedDiscStyle copyStyle = discStyles.get().get(musicID);
         if (copyStyle != null) {
-            setJukeboxSong(stack, level, musicID, true);
+            setJukeboxSong(stack, level, musicID, true, false);
             stack.set(STDataComponents.LABEL, copyStyle.label());
             stack.set(STDataComponents.MUSIC_DATA, MusicData.copiedDisc());
             stack.set(DataComponents.DYED_COLOR, new DyedItemColor(copyStyle.color(), false));
@@ -131,5 +131,25 @@ public class RecordedDiscItem extends Item {
     /// @param random The random source of randomize the colors.
     private static DyeItem getRandomDye(RandomSource random) {
         return DyeItem.byColor(DyeColor.byId(random.nextInt(16)));
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+        super.inventoryTick(stack, level, entity, slot, selected);
+        if (level.isClientSide()) return;
+
+        // remove old "music_id" component from 1.16
+        ResourceLocation id = stack.get(STDataComponents.MUSIC_ID);
+        if (!stack.has(DataComponents.JUKEBOX_PLAYABLE) && id != null) {
+            setJukeboxSong(stack, level, id, false, true);
+            stack.remove(STDataComponents.MUSIC_ID);
+        }
+
+        // add the jukebox_playable component if it doesn't exist (if its source data pack gets disabled,
+        // for example)
+        MusicData data = stack.getOrDefault(STDataComponents.MUSIC_DATA, MusicData.data());
+        if (!stack.has(DataComponents.JUKEBOX_PLAYABLE) && data.id().isPresent()) {
+            setJukeboxSong(stack, level, data.id().get(), false, true);
+        }
     }
 }

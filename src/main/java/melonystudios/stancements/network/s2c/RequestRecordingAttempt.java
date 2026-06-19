@@ -1,6 +1,7 @@
 package melonystudios.stancements.network.s2c;
 
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.mixin.recorder.CurrentMusicAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -9,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /// ### This is a payload directed towards the *client*.
-/// Asks the client to start the music recording process, as it requires the {@linkplain melonystudios.stancements.mixin.CurrentMusicAccessor currently playing song in `MusicManager`}.
+/// Asks the client to start the music recording process, as it requires the {@linkplain CurrentMusicAccessor currently playing song in `MusicManager`}.
 /// @param position The in-world position of the recorder (assuming it is in the same dimension).
 /// @param recordableDisc The item stack (any item with the {@link melonystudios.stancements.component.STDataComponents#RECORDING_TURNS_INTO recording_turns_into} component) inserted into the recorder.
 public record RequestRecordingAttempt(BlockPos position, ItemStack recordableDisc) implements CustomPacketPayload {

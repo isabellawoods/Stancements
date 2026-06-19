@@ -3,6 +3,7 @@
     "sounds": [
       {
         "name": "aether:music/aether1",
+        "pitch": 0.97,
         "stream": true
       }
     ]

@@ -1,0 +1,73 @@
+{
+  "music.game.lilypad": "Amos Roddy — Lilypad",
+  "music.game.below_and_above": "Amos Roddy — Below and Above",
+  "music.game.os_piano": "Amos Roddy — O's Piano",
+  "music.game.broken_clocks": "Amos Roddy — Broken Clocks",
+  "music.game.fireflies": "Amos Roddy — Fireflies",
+  "music.game.memories": "fingerspit — Memories",
+  "music.game.ebb": "fingerspit — Ebb",
+  "music.game.home": "fingerspit — Home",
+  "music.game.shores": "fingerspit — Shores",
+  "music.game.nightly": "fingerspit — Nightly",
+
+  "enderscape.music.biome.celestial_grove.elysium": "lunarbunten — Elysium",
+  "enderscape.music.biome.celestial_grove.finality": "lunarbunten — Finality",
+  "enderscape.music.biome.celestial_grove.otherworld": "lunarbunten — Otherworld",
+  "enderscape.music.biome.corrupt_barrens.mutagen": "lunarbunten — Mutagen",
+  "enderscape.music.biome.corrupt_barrens.nebula": "lunarbunten — Nebula",
+  "enderscape.music.biome.default_end.desolation": "lunarbunten — Desolation",
+  "enderscape.music.biome.magnia_fields.flutters": "lunarbunten — Flutters",
+  "enderscape.music.biome.veiled_woodlands.respite": "lunarbunten, vye — Respite",
+  "enderscape.music.structure.end_city.grandeur": "lunarbunten — Grandeur",
+  "enderscape.music.structure.end_city.mystique": "lunarbunten — Mystique",
+  "enderscape.music.structure.stronghold.prelude": "lunarbunten — Prélude",
+
+  "galosphere.music.trinity": "lunarbunten — Trinity",
+  "galosphere.music.pristine": "lunarbunten — Pristine",
+  "galosphere.music.spectral": "lunarbunten — Spectral",
+
+  "tfc.music.m0-dreams_of_the_phae": "Menoch — Dreams of the Phae",
+  "tfc.music.m1-firmavista": "Menoch — Firmavista",
+  "tfc.music.m2-sycamore_heights": "Menoch — Sycamore Heights",
+  "tfc.music.m3-terrafirmacraft": "Menoch — TerraFirmaCraft",
+  "tfc.music.m4-through_the_willows": "Menoch — Through the Willows",
+
+  "natures_spirit.music.overworld.aspen": "LudoCrypt — Aspen",
+  "natures_spirit.music.overworld.maple": "LudoCrypt — Maple",
+  "natures_spirit.music.overworld.redwood": "LudoCrypt — Redwood",
+  "natures_spirit.music.overworld.wisteria": "LudoCrypt — Wisteria",
+
+  "biomeswevegone.music.overworld.crag_gardens": "AOCAWOL — Crag Gardens",
+  "biomeswevegone.music.overworld.eroded_borealis": "AOCAWOL — Eroded Borealis",
+  "biomeswevegone.music.overworld.forgotten_forest": "AOCAWOL — Forgotten Forest",
+  "biomeswevegone.music.overworld.pale_bog": "AOCAWOL — Pale Bog",
+
+  "aether.music.aether1": "Emile van Krieken — Welcome to Paradise",
+  "aether.music.aether2": "Emile van Krieken — Wings",
+  "aether.music.aether3": "Emile van Krieken — Meadow",
+  "aether.music.aether4": "Emile van Krieken — Moa's Song",
+  "aether.music.aether5": "Emile van Krieken — Clouds",
+
+  "the_bumblezone.music.bee_laxing_with_the_hom_bees": "LudoCrypt — Bee-laxing with the Hom-bees",
+  "the_bumblezone.music.honey_bee_rat_faced_boy": "Rat-Faced Boy — Honey Bee",
+  "the_bumblezone.music.la_bee_da_loca": "LudoCrypt — La Bee-da Loca",
+  "the_bumblezone.music.rivers_of_honey_moserao_stereo": "Moserao — Rivers of Honey",
+
+  "aeronautics.music.cirrus": "Starlotte — Cirrus",
+  "aeronautics.music.glide": "Starlotte — Glide",
+  "aeronautics.music.mammatus": "Starlotte — Mammatus",
+  "aeronautics.music.windstream": "Starlotte — Windstream",
+
+  "paradise_lost.music.paradise_lost.cloud_ocean": "sunsette — Cloud Ocean",
+  "paradise_lost.music.paradise_lost.constellation": "sunsette — Constellation",
+  "paradise_lost.music.paradise_lost.floating": "sunsette — Floating",
+  "paradise_lost.music.paradise_lost.overcast": "sunsette — Overcast",
+  "paradise_lost.music.paradise_lost.spirit_sunset": "sunsette — Spirit Sunset",
+  "paradise_lost.music.paradise_lost.sullen_lullaby": "sunsette — Sullen Lullaby",
+
+  "biomesoplenty.music.game.nether.blot": "LudoCrypt — Blot",
+  "biomesoplenty.music.game.nether.cortisol": "LudoCrypt — Cortisol",
+  "biomesoplenty.music.game.nether.mesh": "LudoCrypt — Mesh",
+  "biomesoplenty.music.game.nether.redhead": "LudoCrypt — Redhead",
+  "biomesoplenty.music.game.nether.timber": "LudoCrypt — Timber"
+}

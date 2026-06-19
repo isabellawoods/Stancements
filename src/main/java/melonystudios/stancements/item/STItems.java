@@ -101,11 +101,12 @@ public class STItems {
     public static final DeferredItem<Item> MAGENTA_TAG = ITEMS.register("magenta_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.MAGENTA))));
     public static final DeferredItem<Item> PINK_TAG = ITEMS.register("pink_tag", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.PINK))));
 
-    /// Makes an {@link ItemStack} of a hopping crop pot with a variable count.
+    /// Makes an {@link ItemStack} of a crop pot with a variable count and "hopper-ness".
     /// @param count The amount of pots in the stack.
-    public static ItemStack hoppingCropPot(int count) {
+    /// @param hopping Whether this crop pot has a built-in hopper.
+    public static ItemStack cropPot(int count, boolean hopping) {
         ItemStack stack = new ItemStack(STItems.CROP_POT.get(), count);
-        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, true));
+        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, hopping));
         return stack;
     }
 }

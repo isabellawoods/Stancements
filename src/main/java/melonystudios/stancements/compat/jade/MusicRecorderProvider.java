@@ -1,7 +1,7 @@
 package melonystudios.stancements.compat.jade;
 
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.block.custom.BlockBasedMusicPlayer;
+import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;

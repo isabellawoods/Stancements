@@ -103,13 +103,13 @@ public class STRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('I', Tags.Items.GEMS_DIAMOND).define('D', Tags.Items.DYES)
                 .pattern("#R#").pattern("DID").pattern("#R#").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
                 .save(output);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.CROP_POT, 8).define('#', Items.TERRACOTTA)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.cropPot(8, false)).define('#', Items.TERRACOTTA)
                 .pattern("# #").pattern(" # ").unlockedBy("has_terracotta", has(Items.TERRACOTTA))
                 .save(output);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.hoppingCropPot(8)).define('#', Items.TERRACOTTA).define('H', Items.HOPPER)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.cropPot(8, true)).define('#', Items.TERRACOTTA).define('H', Items.HOPPER)
                 .pattern("#H#").pattern(" # ").unlockedBy("has_terracotta", has(Items.TERRACOTTA)).unlockedBy("has_hopper", has(Items.HOPPER))
                 .group("hopping_crop_pot").save(output, Stancements.stancements("hopping_crop_pot"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.hoppingCropPot(8)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, STItems.cropPot(8, true)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
                 .pattern("###").pattern("#H#").pattern("###").unlockedBy("has_hopper", has(Items.HOPPER))
                 .group("hopping_crop_pot").save(output, Stancements.stancements("hopping_crop_pot_from_existing"));
 

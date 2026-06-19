@@ -1,0 +1,50 @@
+{
+  "music.paradise_lost.cloud_ocean": {
+    "sounds": [
+      {
+        "name": "paradise_lost:music/paradise_lost/cloud_ocean",
+        "stream": true
+      }
+    ]
+  },
+  "music.paradise_lost.constellation": {
+    "sounds": [
+      {
+        "name": "paradise_lost:music/paradise_lost/constellation",
+        "stream": true
+      }
+    ]
+  },
+  "music.paradise_lost.floating": {
+    "sounds": [
+      {
+        "name": "paradise_lost:music/paradise_lost/floating",
+        "stream": true
+      }
+    ]
+  },
+  "music.paradise_lost.overcast": {
+    "sounds": [
+      {
+        "name": "paradise_lost:music/paradise_lost/overcast",
+        "stream": true
+      }
+    ]
+  },
+  "music.paradise_lost.spirit_sunset": {
+    "sounds": [
+      {
+        "name": "paradise_lost:music/paradise_lost/spirit_sunset",
+        "stream": true
+      }
+    ]
+  },
+  "music.paradise_lost.sullen_lullaby": {
+    "sounds": [
+      {
+        "name": "paradise_lost:music/paradise_lost/sullen_lullaby",
+        "stream": true
+      }
+    ]
+  }
+}

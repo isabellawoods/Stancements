@@ -30,11 +30,19 @@ public record MusicData(Optional<ResourceLocation> id, boolean copied) {
         return new MusicData(Optional.empty(), true);
     }
 
+    public static MusicData data() {
+        return new MusicData(Optional.empty(), false);
+    }
+
     public static boolean isCopied(ItemStack stack) {
         return stack.has(STDataComponents.MUSIC_DATA) && stack.get(STDataComponents.MUSIC_DATA).copied();
     }
 
+    public MusicData withID(ResourceLocation id) {
+        return new MusicData(Optional.of(id), this.copied());
+    }
+
     public MusicData markCopied(boolean copied) {
-        return new MusicData(this.id, copied);
+        return new MusicData(this.id(), copied);
     }
 }
