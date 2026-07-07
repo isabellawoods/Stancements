@@ -1,6 +1,6 @@
 package melonystudios.stancements.item.tab;
 
-import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.option.STCommonOptions;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.STItems;
 import net.minecraft.core.component.DataComponents;
@@ -25,7 +25,7 @@ import static net.minecraft.world.item.CreativeModeTab.TabVisibility.PARENT_AND_
 public class STVanillaTabs {
     @SubscribeEvent
     public static void addToVanillaTabs(BuildCreativeModeTabContentsEvent event) {
-        if (!STOptions.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
+        if (!STCommonOptions.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
 
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.insertAfter(new ItemStack(Items.OAK_BUTTON), new ItemStack(STItems.OAK_SHELF.get()), PARENT_AND_SEARCH_TABS);
@@ -97,6 +97,10 @@ public class STVanillaTabs {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.insertBefore(new ItemStack(Items.MUSIC_DISC_13), new ItemStack(STItems.VINYL_DISC.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.VINYL_DISC.get()), new ItemStack(STItems.RECORDED_DISC.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.RECORDED_DISC.get()), new ItemStack(STItems.SHATTERED_DISC.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.SHATTERED_DISC.get()), new ItemStack(STItems.SCULK_INFESTED_VINYL_DISC.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.SCULK_INFESTED_VINYL_DISC.get()), new ItemStack(STItems.SCULK_INFESTED_RECORDED_DISC.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.SCULK_INFESTED_RECORDED_DISC.get()), new ItemStack(STItems.SCULK_INFESTED_SHATTERED_DISC.get()), PARENT_AND_SEARCH_TABS);
             addDyedWaterBuckets(event);
 
             event.insertAfter(new ItemStack(Items.TNT_MINECART), new ItemStack(STItems.WHITE_TAG.get()), PARENT_AND_SEARCH_TABS);
@@ -122,7 +126,7 @@ public class STVanillaTabs {
     /// @param event The {@link BuildCreativeModeTabContentsEvent}, in order to add the buckets.
     private static void addDyedWaterBuckets(BuildCreativeModeTabContentsEvent event) {
         event.insertAfter(new ItemStack(Items.WATER_BUCKET), new ItemStack(STItems.DYED_WATER_BUCKET.get()), PARENT_AND_SEARCH_TABS);
-        if (!STOptions.POPULATE_DYED_WATER_BUCKETS.get()) return;
+        if (!STCommonOptions.POPULATE_DYED_WATER_BUCKETS.get()) return;
 
         List<Integer> colors = List.of(16383998, 15457757, 10329495, 4673362, 1908001, 8606770, 11546150, 16351261, 16701501, 8439583, 6192150, 1481884, 3847130, 8454080, 3949738, 8991416, 13061821, 15961002);
         ItemStack previousBucket = new ItemStack(STItems.DYED_WATER_BUCKET.get());

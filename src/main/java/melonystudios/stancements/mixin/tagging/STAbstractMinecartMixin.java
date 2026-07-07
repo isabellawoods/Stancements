@@ -5,7 +5,7 @@ import melonystudios.stancements.block.custom.GildedRailBlock;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.misc.attachment.MinecartTags;
 import melonystudios.stancements.misc.attachment.STCapabilities;
-import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.option.STCommonOptions;
 import melonystudios.stancements.sound.STSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
@@ -82,8 +82,8 @@ public abstract class STAbstractMinecartMixin extends VehicleEntity implements I
     @Inject(method = "moveMinecartOnRail", at = @At("HEAD"), remap = false)
     public void updateMaxSpeedOnRail(BlockPos pos, CallbackInfo callback) {
         BlockState state = this.level().getBlockState(pos);
-        float speedMultiplier = STOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue();
-        int accelerationTime = STOptions.GILDED_RAIL_ACCELERATION_TIME.get();
+        float speedMultiplier = STCommonOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue();
+        int accelerationTime = STCommonOptions.GILDED_RAIL_ACCELERATION_TIME.get();
 
         if (state.getBlock() instanceof GildedRailBlock) this.gildedSpeedBuildup = Mth.clamp(this.gildedSpeedBuildup + 5, 0, accelerationTime);
         else this.gildedSpeedBuildup = Mth.clamp(this.gildedSpeedBuildup - 5, 0, accelerationTime);
@@ -95,12 +95,12 @@ public abstract class STAbstractMinecartMixin extends VehicleEntity implements I
     @ModifyArg(method = "getMaxSpeedWithRail", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(FF)F", ordinal = 0), index = 0)
     public float maintainSpeedAfterLeavingGilded(float railMaxSpeed, @Local BlockState state, @Local BlockPos pos) {
         BaseRailBlock rail = (BaseRailBlock) state.getBlock();
-        return this.gildedSpeedBuildup > 0 ? rail.getRailMaxSpeed(state, this.level(), pos, this.minecart()) * (rail.getRailDirection(state, this.level(), pos, this.minecart()).isAscending() ? 1 : STOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue()) : railMaxSpeed;
+        return this.gildedSpeedBuildup > 0 ? rail.getRailMaxSpeed(state, this.level(), pos, this.minecart()) * (rail.getRailDirection(state, this.level(), pos, this.minecart()).isAscending() ? 1 : STCommonOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue()) : railMaxSpeed;
     }
 
     @Override
     public float getMaxCartSpeedOnRail() {
-        return this.gildedSpeedBuildup > 0 ? STOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue() : IAbstractMinecartExtension.super.getMaxCartSpeedOnRail();
+        return this.gildedSpeedBuildup > 0 ? STCommonOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue() : IAbstractMinecartExtension.super.getMaxCartSpeedOnRail();
     }
 
     @Unique

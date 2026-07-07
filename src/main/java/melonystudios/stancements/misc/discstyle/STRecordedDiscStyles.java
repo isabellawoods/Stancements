@@ -44,7 +44,7 @@ public class STRecordedDiscStyles {
         context.register(STAL, new RecordedDiscStyle(0x000000, 1));
         context.register(STRAD, new RecordedDiscStyle(0xFFFFFF, 1));
         context.register(WARD, new RecordedDiscStyle(0x8EC600, 9));
-        context.register(ELEVEN, new RecordedDiscStyle(0x000000, 1));
+        context.register(ELEVEN, new RecordedDiscStyle(0x141414, 8));
         context.register(WAIT, new RecordedDiscStyle(0x81A9E2, 12));
         context.register(PIGSTEP, new RecordedDiscStyle(0xFDF55F, 6));
         context.register(OTHERSIDE, new RecordedDiscStyle(0x1E8B8C, 2));

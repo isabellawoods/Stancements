@@ -2,7 +2,7 @@ package melonystudios.stancements.item.tab;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.custom.DyedWaterBucketItem;
-import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.option.STCommonOptions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -22,12 +22,16 @@ public class STCreativeTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS.register("main", () -> CreativeModeTab.builder()
             .icon(() -> STANCEMENTS_LOGO.get().getDefaultInstance()).title(Component.translatable("tab.stancements.main").withColor(Stancements.ACCENT_COLOR)).displayItems(((parameters, output) -> {
-                if (STOptions.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
+                if (STCommonOptions.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
                 // Functional blocks
                 output.accept(MUSIC_RECORDER);
                 // Vinyl & recorded discs (items but should be grouped together with the recorder)
                 output.accept(VINYL_DISC);
                 output.accept(RECORDED_DISC);
+                output.accept(SHATTERED_DISC);
+                output.accept(SCULK_INFESTED_VINYL_DISC);
+                output.accept(SCULK_INFESTED_RECORDED_DISC);
+                output.accept(SCULK_INFESTED_SHATTERED_DISC);
 
                 // Decorative blocks
                 // Shelves
@@ -109,7 +113,7 @@ public class STCreativeTabs {
     /// @param output The tab's item adder.
     private static void addDyedWaterBuckets(CreativeModeTab.Output output) {
         addBucket(output, DyedWaterBucketItem.DEFAULT_WATER_COLOR);
-        if (!STOptions.POPULATE_DYED_WATER_BUCKETS.get()) return;
+        if (!STCommonOptions.POPULATE_DYED_WATER_BUCKETS.get()) return;
 
         List<Integer> colors = List.of(16383998, 15457757, 10329495, 4673362, 1908001, 8606770, 11546150, 16351261, 16701501, 8439583, 6192150, 1481884, 3847130, 8454080, 3949738, 8991416, 13061821, 15961002);
         for (Integer color : colors) {

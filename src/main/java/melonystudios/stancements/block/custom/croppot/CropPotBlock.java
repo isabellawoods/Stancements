@@ -7,8 +7,6 @@ import melonystudios.stancements.misc.datamap.STDataMaps;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -17,7 +15,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.level.BlockGetter;
@@ -32,7 +29,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 
 public class CropPotBlock extends Block {
     public static final BooleanProperty HOPPING = STBlockStateProperties.HOPPING;
@@ -44,13 +40,11 @@ public class CropPotBlock extends Block {
     }
 
     @Override
-    @NotNull
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    @NotNull
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (player.isShiftKeyDown()) return this.removeSeed(level, state, pos);
         return this.harvestCrop(level, state, pos);
@@ -66,23 +60,16 @@ public class CropPotBlock extends Block {
     }
 
     @Override
-    @NotNull
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        ItemStack handStack = player.getItemInHand(hand);
-        ItemInteractionResult defaultInteraction = super.useItemOn(stack, state, level, pos, player, hand, hitResult);
-        if (!state.is(STBlocks.CROP_POT)) return defaultInteraction;
-
-        var items = level.registryAccess().registry(Registries.ITEM);
-        if (items.isPresent()) {
-            var potPlantables = items.get().getDataMap(STDataMaps.POT_PLANTABLES);
-            for (ResourceKey<Item> item : potPlantables.keySet()) {
-                if (handStack.is(items.get().get(item))) {
-                    return this.placeSeed(level, state, pos, handStack, player, potPlantables.get(item).cropPot(), potPlantables.get(item).plantingSound());
-                }
-            }
+        if (state.getBlock() != STBlocks.CROP_POT.get()) {
+            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         }
 
-        return defaultInteraction;
+        ItemStack handStack = player.getItemInHand(hand);
+        var plantable = handStack.getItemHolder().getData(STDataMaps.POT_PLANTABLES);
+        if (plantable != null) return this.placeSeed(level, state, pos, handStack, player, plantable.cropPot(), plantable.plantingSound());
+
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     private ItemInteractionResult placeSeed(Level level, BlockState state, BlockPos pos, ItemStack stack, Player player, Block cropPot, SoundEvent placingSound) {
@@ -97,10 +84,9 @@ public class CropPotBlock extends Block {
     }
 
     @Override
-    @NotNull
     public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
-        if (state.getValue(HOPPING)) stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(HOPPING, true));
+        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(HOPPING, state.getValue(HOPPING)));
         return stack;
     }
 

@@ -16,6 +16,7 @@ import melonystudios.stancements.data.tag.STBlockTagsProvider;
 import melonystudios.stancements.data.tag.STItemTagsProvider;
 import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.misc.discstyle.RecordedDiscStyle;
+import melonystudios.stancements.misc.modifier.VinylModifier;
 import melonystudios.stancements.network.s2c.ClientPayloadHandler;
 import melonystudios.stancements.network.s2c.RequestRecordingAttempt;
 import net.minecraft.core.HolderLookup;
@@ -42,6 +43,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.RegisterCauldronFluidContentEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.List;
@@ -91,8 +93,14 @@ public class STEvents {
     }
 
     @SubscribeEvent
+    public static void addBuiltInRegistries(NewRegistryEvent event) {
+        event.register(STRegistries.VINYL_MODIFIER_COMPONENT_TYPE);
+    }
+
+    @SubscribeEvent
     public static void addDataPackRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(STRegistries.RECORDED_DISC_STYLE, RecordedDiscStyle.CODEC, RecordedDiscStyle.CODEC);
+        event.dataPackRegistry(STRegistries.VINYL_MODIFIER, VinylModifier.DIRECT_CODEC, VinylModifier.DIRECT_CODEC);
     }
 
     @SubscribeEvent

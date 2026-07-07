@@ -24,4 +24,8 @@ public record RecordingTurnsInto(Holder<Item> whenRecorded) {
     public static RecordingTurnsInto vinylDisc() {
         return new RecordingTurnsInto(STItems.RECORDED_DISC.getDelegate());
     }
+
+    public static RecordingTurnsInto sculkInfestedVinylDisc() {
+        return new RecordingTurnsInto(STItems.SCULK_INFESTED_RECORDED_DISC.getDelegate());
+    }
 }

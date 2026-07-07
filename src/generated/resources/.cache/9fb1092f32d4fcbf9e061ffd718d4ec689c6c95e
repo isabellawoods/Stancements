@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-14T18:24:45.415224887	Recipes
+// 1.21.1	2026-07-06T16:29:41.567033239	Recipes
 b12604255e3c7e8f48e59a465cf4e7e04a38726c data/minecraft/advancement/recipes/transportation/powered_rail.json
 a6d493510c33eb65722cfbd6a97fa5ca94c4ba26 data/minecraft/recipe/powered_rail.json
 e08de5fd22355879fae197dd268c3b39f2a7447a data/stancements/advancement/recipes/building_blocks/black_concrete_from_watering.json
@@ -63,6 +63,7 @@ ca3ff3ca1a59e8b1a859d065bb30a4025ab8e4f2 data/stancements/advancement/recipes/de
 a6000e67286838865f2a34bf705473f16cef5655 data/stancements/advancement/recipes/misc/crop_pot.json
 e05d97052639fe1e810cbc68dc4b366e9fade130 data/stancements/advancement/recipes/misc/hopping_crop_pot.json
 a4c3513cecb08221560821345d9155867d1832ab data/stancements/advancement/recipes/misc/hopping_crop_pot_from_existing.json
+42b3e8da14ec9404ca0395770df53e3a7d53c94f data/stancements/advancement/recipes/misc/sculk_infested_vinyl_disc_from_clearing.json
 bf050327f28cb2ccc140ee384b410e7934c9cbfe data/stancements/advancement/recipes/misc/vinyl_disc.json
 504456455c3033dd2ebd58b8cd6fcfe2bb66b7f4 data/stancements/advancement/recipes/misc/vinyl_disc_from_clearing.json
 fd50515fbf6852451f5ba818a7bc947e4bf08b64 data/stancements/advancement/recipes/redstone/music_recorder.json
@@ -217,6 +218,7 @@ b75ae9646fbe7b541d5fe3001d066fae70749c98 data/stancements/recipe/red_concrete_fr
 d7fac444bce119bac36d8f6f4d5c482ad235bd7b data/stancements/recipe/red_crafting_table_cloth.json
 ccfddbe695356d6050280ce71f0e5c67d85f1e09 data/stancements/recipe/red_tag.json
 e4c1b4da40e64bc481a07843a2ef302a868c4b30 data/stancements/recipe/red_tagging_rail.json
+82683a87c58e3780734b68d59968a383a444ae0e data/stancements/recipe/sculk_infested_vinyl_disc_from_clearing.json
 362c39005f7de1184923d6f307b1c375c32aa3fc data/stancements/recipe/spruce_shelf.json
 27c735d493c5c5cd8877c5fbb0427beee0aa07a9 data/stancements/recipe/vinyl_disc.json
 6cea17f7f21bc1fbe94fe12305fc67bde7444cf0 data/stancements/recipe/vinyl_disc_from_clearing.json

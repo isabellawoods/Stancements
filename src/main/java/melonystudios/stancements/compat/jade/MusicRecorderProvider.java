@@ -3,9 +3,7 @@ package melonystudios.stancements.compat.jade;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
-import melonystudios.stancements.component.STDataComponents;
-import melonystudios.stancements.item.custom.RecordedDiscItem;
-import net.minecraft.core.registries.Registries;
+import melonystudios.stancements.tag.STItemTags;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -33,7 +31,7 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
         return new RecorderData(
                 Optional.ofNullable(recorder.musicID()),
                 recorder.copyingSong(),
-                !recorder.getTheItem().has(STDataComponents.RECORDING_TURNS_INTO) && !recorder.getTheItem().isEmpty(),
+                !recorder.getTheItem().is(STItemTags.JADE_CONSIDERS_AS_RECORDING) && !recorder.getTheItem().isEmpty(),
                 recorder.ticksUntilFinishedRecording()
         );
     }
@@ -61,9 +59,8 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
             } else if (data.get().ticksUntilFinishedRecording() <= BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED) {
                 tooltip.add(Component.translatable("tooltip.stancements.no_music_playing"));
             } else {
-                var jukeboxSongs = accessor.getLevel().registryAccess().registry(Registries.JUKEBOX_SONG);
-                if (jukeboxSongs.isEmpty() || data.get().musicID.isEmpty()) return;
-                var song = jukeboxSongs.get().getHolder(data.get().copyingSong ? data.get().musicID.get() : RecordedDiscItem.getJukeboxSongLocation(data.get().musicID.get()));
+                if (data.get().musicID.isEmpty()) return;
+                var song = BlockBasedMusicPlayer.findJukeboxSongFromID(accessor.getLevel().registryAccess(), data.get().musicID, !data.get().copyingSong);
 
                 Component songName;
                 if (song.isPresent()) {

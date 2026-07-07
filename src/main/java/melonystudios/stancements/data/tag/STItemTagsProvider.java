@@ -43,9 +43,10 @@ public class STItemTagsProvider extends ItemTagsProvider {
         this.tag(STItemTags.VINYL_DISC_DYES).addTag(Tags.Items.DYES_LIGHT_GRAY).addTag(Tags.Items.DYES_GRAY);
         this.tag(STItemTags.MINECART_TAGS).add(WHITE_TAG.get(), LIGHT_GRAY_TAG.get(), GRAY_TAG.get(), BLACK_TAG.get(), BROWN_TAG.get(), RED_TAG.get(), ORANGE_TAG.get(), YELLOW_TAG.get(), LIME_TAG.get(),
                 GREEN_TAG.get(), CYAN_TAG.get(), LIGHT_BLUE_TAG.get(), BLUE_TAG.get(), PURPLE_TAG.get(), MAGENTA_TAG.get(), PINK_TAG.get());
+        this.tag(STItemTags.JADE_CONSIDERS_AS_RECORDING).add(VINYL_DISC.get(), SCULK_INFESTED_VINYL_DISC.get(), SHATTERED_DISC.get(), SCULK_INFESTED_SHATTERED_DISC.get());
 
         // Common tags
-        this.tag(Tags.Items.MUSIC_DISCS).add(VINYL_DISC.get(), RECORDED_DISC.get());
+        this.tag(Tags.Items.MUSIC_DISCS).add(VINYL_DISC.get(), RECORDED_DISC.get(), SCULK_INFESTED_VINYL_DISC.get(), SCULK_INFESTED_RECORDED_DISC.get());
         this.tag(Tags.Items.BUCKETS).addTag(STItemTags.DYED_WATER_BUCKETS);
         this.tag(ReItemTags.LOGOS).add(STANCEMENTS_LOGO.get());
         this.tag(STItemTags.DYED_WATER_BUCKETS).add(DYED_WATER_BUCKET.get());
@@ -69,6 +70,6 @@ public class STItemTagsProvider extends ItemTagsProvider {
 
         // Minecraft tags
         this.tag(ItemTags.NON_FLAMMABLE_WOOD).add(CRIMSON_SHELF.get(), WARPED_SHELF.get());
-        this.tag(ItemTags.DYEABLE).add(RECORDED_DISC.get(), DYED_WATER_BUCKET.get());
+        this.tag(ItemTags.DYEABLE).add(RECORDED_DISC.get(), SCULK_INFESTED_RECORDED_DISC.get(), DYED_WATER_BUCKET.get());
     }
 }

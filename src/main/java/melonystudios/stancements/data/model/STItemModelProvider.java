@@ -61,19 +61,32 @@ public class STItemModelProvider extends ReItemModelProvider {
         standard("stancements_logo");
         standard("vinyl_disc");
         recordedDisc(this.generated, "recorded_disc");
+        standard("shattered_disc");
+        standardOverlaid(this.generated, "sculk_infested_vinyl_disc", this.modLoc("item/deepslate_vinyl_disc"), this.modLoc("item/sculk_disc_overlay"));
+        recordedDiscOverlaid(this.generated, "sculk_infested_recorded_disc", this.modLoc("item/deepslate_recorded_disc"), this.modLoc("item/sculk_disc_overlay"));
+        standardOverlaid(this.generated, "sculk_infested_shattered_disc", this.modLoc("item/deepslate_shattered_disc"), this.modLoc("item/sculk_shattered_disc_overlay"));
         forAllColors(color -> standard(color + "_tag"));
         this.getBuilder("dyed_water_bucket").parent(this.generated).texture("layer0", this.modLoc("item/dyed_water_bucket_overlay")).texture("layer1", this.modLoc("item/dyed_water_bucket"));
     }
 
     /// Makes a {@linkplain melonystudios.stancements.item.custom.CropPotBlockItem crop pot} model, with a **hopping** variation using the `stancements:hopping` override.
     /// @param parent The location of the parent model, usually `item/generated`.
-    /// @param name The item's registry id, used for the model name and texture locations.
+    /// @param name The item's registry ID, used for the model name and texture locations.
     private void cropPot(ModelFile parent, String name) {
         ResourceLocation hopping = Stancements.stancements("hopping");
         this.standard(parent, "hopping_" + name);
 
         this.getBuilder(name).parent(parent).texture("layer0", this.modLoc("item/" + name))
                 .override().predicate(hopping, 1).model(this.getExistingFile(this.modLoc("item/hopping_" + name))).end();
+    }
+
+    /// Makes a model for an item with an **overlay texture** on the second layer (`layer1`).
+    /// @param parent The location of the parent model, usually `item/generated`.
+    /// @param name The item's registry ID, used for the model name.
+    /// @param baseTexture The location of the base item texture.
+    /// @param overlayTexture The location of the overlay texture, usually `stancements:item/sculk_disc_overlay`.
+    private void standardOverlaid(ModelFile parent, String name, ResourceLocation baseTexture, ResourceLocation overlayTexture) {
+        this.getBuilder(name).parent(parent).texture("layer0", baseTexture).texture("layer1", overlayTexture);
     }
 
     /// Makes a {@linkplain melonystudios.stancements.item.custom.RecordedDiscItem recorded disc} model, with {@linkplain RecordedDiscItem#DISC_LABEL_MAX **14**} different
@@ -85,7 +98,7 @@ public class STItemModelProvider extends ReItemModelProvider {
 
         // recorded disc submodels (for each label)
         for (int i = DISC_LABEL_MIN; i <= DISC_LABEL_MAX; ++i) {
-            getBuilder(name + "_label_" + i).parent(parent).texture("layer0", modLoc("item/" + name)).texture("layer1", modLoc("item/" + name + "_label_" + i));
+            getBuilder(name + "_label_" + i).parent(parent).texture("layer0", modLoc("item/" + name)).texture("layer1", modLoc("item/recorded_disc_label_" + i));
         }
 
         ResourceLocation outputLocation = this.modLoc("item/" + name);
@@ -94,7 +107,43 @@ public class STItemModelProvider extends ReItemModelProvider {
         // rewritten for easy addition of new labels ~isa 17-03-26
         this.generatedModels.computeIfAbsent(outputLocation, location -> {
             ItemModelBuilder model = new ItemModelBuilder(location, this.existingFileHelper);
-            model.parent(parent).texture("layer0", location).texture("layer1", this.modLoc("item/" + name + "_label_1"));
+            model.parent(parent).texture("layer0", location).texture("layer1", this.modLoc("item/recorded_disc_label_1"));
+
+            for (int i = DISC_LABEL_MIN; i <= DISC_LABEL_MAX; ++i) {
+                model.override().predicate(label, i).model(this.getExistingFile(this.modLoc("item/" + name + "_label_" + i))).end();
+            }
+            return model;
+        });
+        this.existingFileHelper.trackGenerated(outputLocation, MODEL);
+    }
+
+    /// Makes a {@linkplain melonystudios.stancements.item.custom.RecordedDiscItem recorded disc} model, with {@linkplain RecordedDiscItem#DISC_LABEL_MAX **14**} different
+    /// override models for each music disc {@linkplain melonystudios.stancements.component.STDataComponents#LABEL label} and an **overlay model** on the second layer (`layer1`).
+    /// @param parent The location of the parent model, usually `item/generated`.
+    /// @param name The item's registry ID, used for the model name and texture locations.
+    /// @param baseTexture The resource location of the base music disc texture.
+    /// @param overlayTexture The location of the overlay texture, usually `stancements:item/sculk_disc_overlay`.
+    public void recordedDiscOverlaid(ModelFile parent, String name, ResourceLocation baseTexture, ResourceLocation overlayTexture) {
+        ResourceLocation label = Stancements.stancements("label");
+
+        // recorded disc submodels (for each label)
+        for (int i = DISC_LABEL_MIN; i <= DISC_LABEL_MAX; ++i) {
+            getBuilder(name + "_label_" + i).parent(parent)
+                    .texture("layer0", baseTexture)
+                    .texture("layer1", overlayTexture)
+                    .texture("layer2", modLoc("item/recorded_disc_label_" + i));
+        }
+
+        ResourceLocation outputLocation = this.modLoc("item/" + name);
+
+        // main recorded disc model (with all model overrides)
+        // rewritten for easy addition of new labels ~isa 17-03-26
+        this.generatedModels.computeIfAbsent(outputLocation, location -> {
+            ItemModelBuilder model = new ItemModelBuilder(location, this.existingFileHelper);
+            model.parent(parent)
+                    .texture("layer0", baseTexture)
+                    .texture("layer1", overlayTexture)
+                    .texture("layer2", this.modLoc("item/recorded_disc_label_1"));
 
             for (int i = DISC_LABEL_MIN; i <= DISC_LABEL_MAX; ++i) {
                 model.override().predicate(label, i).model(this.getExistingFile(this.modLoc("item/" + name + "_label_" + i))).end();

@@ -10,6 +10,7 @@
     "recorder.STBackpackBlockEntityMixin",
     "recorder.STJukeboxBlockEntityMixin",
     "recorder.STServerPlayerMixin",
+    "recorder.STStorageBlockEntityMixin",
     "tagging.STAbstractMinecartMixin",
     "tagging.STMinecartChestMixin",
     "tagging.STShearsDispenseBehaviorMixin"

@@ -9,7 +9,9 @@ import melonystudios.stancements.component.custom.RecordingTurnsInto;
 import melonystudios.stancements.item.custom.CropPotBlockItem;
 import melonystudios.stancements.item.custom.DyedWaterBucketItem;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.item.custom.TooltippedItem;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DyedItemColor;
@@ -36,7 +38,7 @@ public class STItems {
     public static final DeferredItem<Item> CRIMSON_SHELF = ITEMS.register("crimson_shelf", () -> new BlockItem(STBlocks.CRIMSON_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> WARPED_SHELF = ITEMS.register("warped_shelf", () -> new BlockItem(STBlocks.WARPED_SHELF.get(), new Item.Properties()));
 
-    // Crafting Table Cloths
+    // Crafting table cloths
     public static final DeferredItem<Item> WHITE_CRAFTING_TABLE_CLOTH = ITEMS.register("white_crafting_table_cloth", () -> new BlockItem(STBlocks.WHITE_CRAFTING_TABLE_CLOTH.get(), new Item.Properties()));
     public static final DeferredItem<Item> LIGHT_GRAY_CRAFTING_TABLE_CLOTH = ITEMS.register("light_gray_crafting_table_cloth", () -> new BlockItem(STBlocks.LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get(), new Item.Properties()));
     public static final DeferredItem<Item> GRAY_CRAFTING_TABLE_CLOTH = ITEMS.register("gray_crafting_table_cloth", () -> new BlockItem(STBlocks.GRAY_CRAFTING_TABLE_CLOTH.get(), new Item.Properties()));
@@ -81,6 +83,10 @@ public class STItems {
     public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.register("stancements_logo", () -> new LogoItem(Stancements.ACCENT_COLOR, new Item.Properties().fireResistant().rarity(Rarity.EPIC)));
     public static final DeferredItem<Item> VINYL_DISC = ITEMS.register("vinyl_disc", () -> new Item(new Item.Properties().stacksTo(16).component(STDataComponents.RECORDING_TURNS_INTO, RecordingTurnsInto.vinylDisc())));
     public static final DeferredItem<Item> RECORDED_DISC = ITEMS.register("recorded_disc", () -> new RecordedDiscItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1)));
+    public static final DeferredItem<Item> SHATTERED_DISC = ITEMS.register("shattered_disc", () -> new TooltippedItem(Component.translatable("tooltip.stancements.shattered_disc").withColor(0x808080), new Item.Properties()));
+    public static final DeferredItem<Item> SCULK_INFESTED_VINYL_DISC = ITEMS.register("sculk_infested_vinyl_disc", () -> new TooltippedItem(Component.translatable("tooltip.stancements.sculk_infested_vinyl_disc").withColor(0x05625D), new Item.Properties().rarity(Rarity.RARE).stacksTo(16).component(STDataComponents.RECORDING_TURNS_INTO, RecordingTurnsInto.sculkInfestedVinylDisc())));
+    public static final DeferredItem<Item> SCULK_INFESTED_RECORDED_DISC = ITEMS.register("sculk_infested_recorded_disc", () -> new RecordedDiscItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1)));
+    public static final DeferredItem<Item> SCULK_INFESTED_SHATTERED_DISC = ITEMS.register("sculk_infested_shattered_disc", () -> new TooltippedItem(Component.translatable("tooltip.stancements.shattered_disc").withColor(0x808080), new Item.Properties().rarity(Rarity.RARE)));
     public static final DeferredItem<Item> DYED_WATER_BUCKET = ITEMS.register("dyed_water_bucket", () -> new DyedWaterBucketItem(new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).component(DataComponents.DYED_COLOR, new DyedItemColor(DyedWaterBucketItem.DEFAULT_WATER_COLOR, true))));
 
     // Minecart tags

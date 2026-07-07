@@ -46,7 +46,7 @@ public class STCauldronInteractions {
                 stack.set(DataComponents.DYED_COLOR, new DyedItemColor(cauldron.getWaterColor(), true));
                 LayeredCauldronBlock.lowerFillLevel(state, level, pos);
             }
-            level.playSound(player, pos, STSounds.ITEM_DYE.get(), SoundSource.BLOCKS);
+            level.playSound(player, pos, STSounds.DYE_ITEM.get(), SoundSource.BLOCKS);
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
     };

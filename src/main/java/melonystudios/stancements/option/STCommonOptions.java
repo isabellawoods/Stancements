@@ -2,7 +2,7 @@ package melonystudios.stancements.option;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public class STOptions {
+public class STCommonOptions {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     // Crop pots
@@ -14,6 +14,7 @@ public class STOptions {
 
     // Music recorder
     public static final ModConfigSpec.IntValue DEFAULT_RECORDING_DURATION = BUILDER.comment("How long ambient song recordings should be. Defaults to 600 ticks (30 seconds).").translation("option.stancements.default_recording_duration").defineInRange("block.defaultRecordingDuration", 600, 1, 72000);
+    public static final ModConfigSpec.BooleanValue RECORDER_FREE_WILL = BUILDER.comment("Whether the music recorder has the right to eject discs out by itself after a certain amount of time.").translation("option.stancements.recorder_free_will").define("block.recorderFreeWill", true);
 
     // Miscellaneous
     public static final ModConfigSpec.BooleanValue POPULATE_DYED_WATER_BUCKETS = BUILDER.comment("Whether to populate all dyed water buckets in Stancements' creative tab.").worldRestart().translation("option.stancements.populate_dyed_water_buckets").define("item.populateDyedWaterBuckets", true);

@@ -1,0 +1,38 @@
+{
+  "effects": {
+    "stancements:eject_after_ticks": [
+      {
+        "effect": {
+          "ejection_chance": 1.0,
+          "ticks_until_ejection": {
+            "type": "minecraft:uniform",
+            "max_inclusive": 300,
+            "min_inclusive": 200
+          }
+        }
+      }
+    ],
+    "stancements:replace_recorded_disc": [
+      {
+        "effect": {
+          "replacement": {
+            "id": "stancements:sculk_infested_vinyl_disc"
+          }
+        },
+        "requirements": {
+          "condition": "stancements:recorder_state/item",
+          "targets": "stancements:vinyl_disc"
+        }
+      }
+    ]
+  },
+  "modifies_when_copying": true,
+  "recording_text": {
+    "color": "#05625D",
+    "translate": "vinyl_modifier.stancements.music_disc_5"
+  },
+  "strategies": [
+    "start"
+  ],
+  "targets": "minecraft:5"
+}

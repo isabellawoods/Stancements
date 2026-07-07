@@ -16,7 +16,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CraftingTableClothBlock extends Block {
@@ -24,7 +23,6 @@ public class CraftingTableClothBlock extends Block {
     public static final VoxelShape SHAPE = Shapes.join(Shapes.empty(), Shapes.box(-0.000625, -0.188125, -0.000625, 1.000625, 0.000625, 1.000625), BooleanOp.OR);
 
     @Override
-    @NotNull
     public MapCodec<? extends CraftingTableClothBlock> codec() {
         return CODEC;
     }
@@ -34,13 +32,11 @@ public class CraftingTableClothBlock extends Block {
     }
 
     @Override
-    @NotNull
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    @NotNull
     protected VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
         return Shapes.empty();
     }
@@ -54,7 +50,6 @@ public class CraftingTableClothBlock extends Block {
     }
 
     @Override
-    @NotNull
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         return !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }

@@ -45,7 +45,7 @@ public class STClientEvents {
 
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(new RecordedDiscClientExtension(), STItems.RECORDED_DISC);
+        event.registerItem(new RecordedDiscClientExtension(), STItems.RECORDED_DISC, STItems.SCULK_INFESTED_RECORDED_DISC);
     }
 
     @SubscribeEvent
@@ -64,6 +64,7 @@ public class STClientEvents {
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register((stack, tintIndex) -> tintIndex == 0 ? -1 : DyedItemColor.getOrDefault(stack, RecordedDiscItem.DEFAULT_DISC_COLOR), STItems.RECORDED_DISC.get());
+        event.register((stack, tintIndex) -> tintIndex <= 1 ? -1 : DyedItemColor.getOrDefault(stack, RecordedDiscItem.DEFAULT_DISC_COLOR), STItems.SCULK_INFESTED_RECORDED_DISC.get());
         event.register((stack, tintIndex) -> tintIndex > 0 ? -1 : DyedWaterBucketItem.getColor(stack), STItems.DYED_WATER_BUCKET.get());
     }
 

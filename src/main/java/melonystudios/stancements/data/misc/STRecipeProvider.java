@@ -160,6 +160,9 @@ public class STRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, STItems.VINYL_DISC).requires(STItems.RECORDED_DISC)
                 .unlockedBy("has_recorded_disc", has(STItems.RECORDED_DISC))
                 .group("vinyl_disc").save(output, Stancements.stancements("vinyl_disc_from_clearing"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, STItems.SCULK_INFESTED_VINYL_DISC).requires(STItems.SCULK_INFESTED_RECORDED_DISC)
+                .unlockedBy("has_sculk_infested_recorded_disc", has(STItems.SCULK_INFESTED_RECORDED_DISC))
+                .save(output, Stancements.stancements("sculk_infested_vinyl_disc_from_clearing"));
 
         // Minecart tags
         addMinecartTag(output, STItems.WHITE_TAG, Tags.Items.DYES_WHITE);

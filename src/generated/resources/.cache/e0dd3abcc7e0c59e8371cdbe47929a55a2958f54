@@ -1,5 +1,5 @@
-// 1.21.1	2026-05-19T17:12:22.774677425	Stancements — Data Pack Registries
-1660fc638a8bda29749f5cf0d6e18ebbcf9b9a52 data/minecraft/stancements/recorded_disc_style/11.json
+// 1.21.1	2026-07-07T00:15:02.155577275	Stancements — Data Pack Registries
+938e2422519c3a9ecce545f902e0dcf6adcf9ddc data/minecraft/stancements/recorded_disc_style/11.json
 29ce2840fb1336bd500541558f06fb3fc02a9a2d data/minecraft/stancements/recorded_disc_style/13.json
 ff19a11c1a7e3ddafb9ec939da9ebd68b7e97fb3 data/minecraft/stancements/recorded_disc_style/5.json
 1023ec692add02df7baa65255128726f87069e70 data/minecraft/stancements/recorded_disc_style/blocks.json
@@ -75,3 +75,7 @@ f659c954ccfe79226fef1a79d91788a3c87d736b data/stancements/jukebox_song/game/wate
 621dd240223b9a377284c21fcba0143e861f7bc1 data/stancements/jukebox_song/game/wet_hands.json
 eb32c702eea54d037864c0355f8bd4a2cc6c5c60 data/stancements/jukebox_song/game/yakusoku.json
 14c825f86c5bdebfa9b1ca3b30515d985a3608ab data/stancements/stancements/recorded_disc_style/game/end/alpha.json
+36a0d29391c635572697c38c3eb9034cd517af12 data/stancements/stancements/vinyl_modifier/music_disc_11.json
+ea6a7f5a9030b8eb218581ad806578b48b39bb50 data/stancements/stancements/vinyl_modifier/music_disc_13.json
+109a79da852fd2fe86b56f014ece41c2685cb5e8 data/stancements/stancements/vinyl_modifier/music_disc_5.json
+19cd3b31e2a410bfc8d8763d7f19f340cc731709 data/stancements/stancements/vinyl_modifier/pipeline/finish_recording.json

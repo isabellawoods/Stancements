@@ -1,6 +1,6 @@
 package melonystudios.stancements.block.custom.croppot;
 
-import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.option.STCommonOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -34,7 +34,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.CommonHooks;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -68,7 +67,7 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
         if (state.getValue(HOPPING) && this.getAge(state) == this.getMaxAge()) this.harvestCrop(level, state, pos);
 
         if (level.isAreaLoaded(pos, 1) && level.getRawBrightness(pos, 0) >= 9) {
-            int growthChance = STOptions.CROP_POT_GROWTH_CHANCE.get();
+            int growthChance = STCommonOptions.CROP_POT_GROWTH_CHANCE.get();
             int age = this.getAge(state);
 
             if (age < this.getMaxAge()) {
@@ -151,7 +150,6 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
     }
 
     @Override
-    @NotNull
     public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         return new ItemStack(this.getSeedItem());
     }

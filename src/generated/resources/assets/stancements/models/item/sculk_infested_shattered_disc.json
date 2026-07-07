@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stancements:item/deepslate_shattered_disc",
+    "layer1": "stancements:item/sculk_shattered_disc_overlay"
+  }
+}

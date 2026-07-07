@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "stancements:sculk_infested_recorded_disc"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "stancements:sculk_infested_vinyl_disc"
+  }
+}

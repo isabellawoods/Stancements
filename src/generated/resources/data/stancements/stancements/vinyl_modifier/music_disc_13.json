@@ -1,0 +1,34 @@
+{
+  "effects": {
+    "stancements:eject_after_ticks": [
+      {
+        "effect": {
+          "ejection_chance": 1.0,
+          "ticks_until_ejection": {
+            "type": "minecraft:uniform",
+            "max_inclusive": 300,
+            "min_inclusive": 200
+          }
+        }
+      }
+    ],
+    "stancements:play_sound": [
+      {
+        "effect": {
+          "pitch": 0.2,
+          "sound": "minecraft:ambient.cave",
+          "volume": 1.0
+        }
+      }
+    ]
+  },
+  "modifies_when_copying": true,
+  "recording_text": {
+    "color": "#BFAD53",
+    "translate": "vinyl_modifier.stancements.music_disc_13"
+  },
+  "strategies": [
+    "start"
+  ],
+  "targets": "minecraft:13"
+}

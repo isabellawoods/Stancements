@@ -9,9 +9,13 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class STSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, Stancements.MOD_ID);
 
+    // Blocks
+    public static final DeferredHolder<SoundEvent, SoundEvent> DYE_ITEM = SOUNDS.register("block.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.cauldron.dye")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_RECORDER_EJECT = SOUNDS.register("block.music_recorder.eject", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.music_recorder.eject")));
+
     // Items
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_DYE = SOUNDS.register("item.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.cauldron.dye")));
     public static final DeferredHolder<SoundEvent, SoundEvent> TAG_MINECART = SOUNDS.register("item.tag.latch", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.tag.latch")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SHATTER_MUSIC_DISC = SOUNDS.register("item.vinyl_disc.shatter", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.vinyl_disc.shatter")));
 
     // Entities
     public static final DeferredHolder<SoundEvent, SoundEvent> SHEAR_MINECART = SOUNDS.register("entity.minecart.shear", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("entity.minecart.shear")));

@@ -1,7 +1,6 @@
 package melonystudios.stancements;
 
 import com.mojang.logging.LogUtils;
-import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlockTypes;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.STBlockEntities;
@@ -11,19 +10,19 @@ import melonystudios.stancements.item.tab.STCreativeTabs;
 import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
-import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.misc.loot.STLootConditions;
+import melonystudios.stancements.misc.loot.STLootFunctions;
+import melonystudios.stancements.misc.loot.STNumberProviders;
+import melonystudios.stancements.misc.modifier.STModifierComponents;
+import melonystudios.stancements.option.STCommonOptions;
 import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.util.STCauldronInteractions;
 import melonystudios.stancements.util.STCompatibility;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import org.slf4j.Logger;
@@ -39,21 +38,24 @@ public class Stancements {
 
     public Stancements(IEventBus eventBus, ModContainer container) {
         eventBus.addListener(this::commonSetup);
-        eventBus.addListener(this::clientSetup);
 
         STBlocks.BLOCKS.register(eventBus);
         STBlockTypes.TYPES.register(eventBus);
         STBlockEntities.BLOCK_ENTITIES.register(eventBus);
         STItems.ITEMS.register(eventBus);
         STDataComponents.COMPONENTS.register(eventBus);
+        STModifierComponents.COMPONENTS.register(eventBus);
         STCreativeTabs.TABS.register(eventBus);
         STSounds.SOUNDS.register(eventBus);
         STStatistics.STATS.register(eventBus);
         STCriteriaTriggers.TRIGGERS.register(eventBus);
+        STLootFunctions.FUNCTIONS.register(eventBus);
+        STLootConditions.CONDITIONS.register(eventBus);
+        STNumberProviders.PROVIDERS.register(eventBus);
         STAttachmentTypes.ATTACHMENTS.register(eventBus);
 
         NeoForgeMod.enableMilkFluid();
-        container.registerConfig(ModConfig.Type.COMMON, STOptions.SPEC, "melonystudios/stancements-common.toml");
+        container.registerConfig(ModConfig.Type.COMMON, STCommonOptions.SPEC, "melonystudios/stancements-common.toml");
     }
 
     /// Creates a name for a data generator using ***Stancements***' name.
@@ -79,18 +81,5 @@ public class Stancements {
         STCompatibility.flammables();
         STCompatibility.dispenserBehaviors();
         STCauldronInteractions.registerInteractions();
-    }
-
-    private void clientSetup(final FMLClientSetupEvent event) {
-        // Item overrides
-        ItemProperties.register(STItems.RECORDED_DISC.get(), stancements("label"), (stack, level, livEntity, seed) -> {
-            Float label = stack.get(STDataComponents.LABEL);
-            return label == null ? 1 : label;
-        });
-        ItemProperties.register(STItems.CROP_POT.get(), stancements("hopping"), (stack, level, livEntity, seed) -> {
-            BlockItemStateProperties blockState = stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
-            Boolean hopping = blockState.get(STBlockStateProperties.HOPPING);
-            return hopping != null && hopping ? 1 : 0;
-        });
     }
 }

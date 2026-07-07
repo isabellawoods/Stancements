@@ -38,14 +38,14 @@ neoForge {
     }
 
     // This line is optional. Access Transformers are automatically detected
-    // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             client()
-            // programArguments.addAll '--quickPlaySingleplayer', 'New World'
+            // programArguments.addAll '--quickPlaySingleplayer', 'New World V2'
             devLogin = true
 
             // Comma-separated list of namespaces to load game tests from. Empty = all namespaces.
