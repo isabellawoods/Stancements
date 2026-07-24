@@ -7,10 +7,10 @@ import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
+import melonystudios.stancements.client.network.RequestRecordingAttempt;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
-import melonystudios.stancements.network.s2c.RequestRecordingAttempt;
 import melonystudios.stancements.option.STCommonOptions;
 import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.tag.STJukeboxSongTags;
@@ -18,7 +18,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -143,16 +143,16 @@ public class MusicRecorderBlock extends BaseEntityBlock {
                 // block recording if the disc is a copy
                 if (jukeboxSongs.isEmpty() || MusicData.isCopied(musicPlayer.musicDisc())) {
                     errorMessage = CANNOT_COPY_TEXT;
-                    break;
+                    continue;
                 }
                 ResourceLocation songLocation = jukeboxSongs.get().getKey(song);
-                if (songLocation == null) break;
+                if (songLocation == null) continue;
 
                 // block recording if the jukebox song disallows copies (in #copying_prohibited tag)
                 var songHolder = jukeboxSongs.get().getHolder(songLocation);
                 if (songHolder.isPresent() && songHolder.get().is(STJukeboxSongTags.COPYING_PROHIBITED)) {
                     errorMessage = COPYING_PROHIBITED_TEXT;
-                    break;
+                    continue;
                 }
 
                 // finally record the disc
@@ -219,14 +219,14 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         return component;
     }
 
-    public static String getSongName(RegistryAccess registries, ResourceLocation musicID) {
-        var song = BlockBasedMusicPlayer.findJukeboxSongFromID(registries, Optional.of(musicID), true);
-        if (song.isPresent()) return song.get().value().description().getString();
+    public static MutableComponent getSongName(Registry<JukeboxSong> jukeboxSongs, ResourceLocation musicID) {
+        var song = BlockBasedMusicPlayer.findJukeboxSongFromID(jukeboxSongs, Optional.of(musicID), true);
+        if (song.isPresent()) return song.get().value().description().copy();
 
-        ResourceLocation sanitized = RecordedDiscItem.sanitizeMusicIDLocation(musicID);
+        ResourceLocation sanitized = RecordedDiscItem.getJukeboxSongLocation(musicID);
         String namespacePrefix = sanitized.getNamespace().equals("minecraft") ? "" : sanitized.getNamespace() + ".";
 
-        return I18n.get(namespacePrefix + "music." + sanitized.getPath().replace("/", "."));
+        return Component.translatable(namespacePrefix + "music." + sanitized.getPath().replace("/", "."));
     }
 
     @Override

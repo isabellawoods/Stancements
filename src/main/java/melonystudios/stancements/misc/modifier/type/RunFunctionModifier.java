@@ -43,7 +43,7 @@ public record RunFunctionModifier(ResourceLocation function) implements Modifier
 
             functionManager.execute(function.get(), sourceStack);
         } else {
-            LOGGER.error(MarkerFactory.getMarker(modifier.getRegisteredName()), "Vinyl modifier 'run_function' component failed for non-existent function '{}'", this.function);
+            LOGGER.error(MarkerFactory.getMarker(modifier.getRegisteredName()), "Vinyl modifier 'run_function' component failed due to a non-existent function '{}'", this.function);
         }
     }
 }

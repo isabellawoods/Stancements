@@ -30,7 +30,7 @@
       }
     ]
   },
-  "modifies_when_copying": true,
+  "modifies_copies": true,
   "recording_text": {
     "color": "#CF8EDA",
     "translate": "tooltip.stancements.finished_recording"

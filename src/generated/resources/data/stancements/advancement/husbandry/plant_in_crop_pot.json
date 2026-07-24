@@ -34,6 +34,11 @@
       "translate": "advancements.stancements.plant_in_crop_pot.description"
     },
     "icon": {
+      "components": {
+        "minecraft:block_state": {
+          "hopping": "false"
+        }
+      },
       "count": 1,
       "id": "stancements:crop_pot"
     },

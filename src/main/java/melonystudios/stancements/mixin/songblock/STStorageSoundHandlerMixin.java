@@ -1,8 +1,8 @@
 package melonystudios.stancements.mixin.songblock;
 
-import melonystudios.stancements.STClient;
+import melonystudios.stancements.client.STClient;
+import melonystudios.stancements.client.option.STClientOptions;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
-import melonystudios.stancements.option.STClientOptions;
 import melonystudios.stancements.tag.STJukeboxSongTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

@@ -17,7 +17,7 @@
         "effect": {
           "pitch": 0.2,
           "sound": "stancements:item.vinyl_disc.shatter",
-          "volume": 1.0
+          "volume": 0.4
         }
       }
     ],
@@ -46,7 +46,7 @@
       }
     ]
   },
-  "modifies_when_copying": true,
+  "modifies_copies": true,
   "recording_text": {
     "color": "#808080",
     "translate": "vinyl_modifier.stancements.music_disc_11"
@@ -54,5 +54,8 @@
   "strategies": [
     "start"
   ],
-  "targets": "minecraft:11"
+  "targets": {
+    "id": "minecraft:11",
+    "resolved": true
+  }
 }

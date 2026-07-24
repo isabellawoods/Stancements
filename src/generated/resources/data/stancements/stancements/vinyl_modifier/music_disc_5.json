@@ -26,7 +26,7 @@
       }
     ]
   },
-  "modifies_when_copying": true,
+  "modifies_copies": true,
   "recording_text": {
     "color": "#05625D",
     "translate": "vinyl_modifier.stancements.music_disc_5"
@@ -34,5 +34,8 @@
   "strategies": [
     "start"
   ],
-  "targets": "minecraft:5"
+  "targets": {
+    "id": "minecraft:5",
+    "resolved": true
+  }
 }

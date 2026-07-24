@@ -1,8 +1,8 @@
 package melonystudios.stancements.mixin.songblock;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import melonystudios.stancements.STClient;
-import melonystudios.stancements.option.STClientOptions;
+import melonystudios.stancements.client.STClient;
+import melonystudios.stancements.client.option.STClientOptions;
 import melonystudios.stancements.tag.STJukeboxSongTags;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.resources.sounds.SoundInstance;

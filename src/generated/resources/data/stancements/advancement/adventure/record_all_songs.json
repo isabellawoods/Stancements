@@ -3,302 +3,452 @@
   "criteria": {
     "recorded/a_familiar_room": {
       "conditions": {
-        "id": "minecraft:game/a_familiar_room"
+        "track": {
+          "id": "minecraft:game/a_familiar_room",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/aerie": {
       "conditions": {
-        "id": "minecraft:game/swamp/aerie"
+        "track": {
+          "id": "minecraft:game/swamp/aerie",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/alpha": {
       "conditions": {
         "copying": true,
-        "id": "minecraft:game/end/alpha"
+        "track": {
+          "id": "minecraft:game/end/alpha",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/an_ordinary_day": {
       "conditions": {
-        "id": "minecraft:game/an_ordinary_day"
+        "track": {
+          "id": "minecraft:game/an_ordinary_day",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/ancestry": {
       "conditions": {
-        "id": "minecraft:game/ancestry"
+        "track": {
+          "id": "minecraft:game/ancestry",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/axolotl": {
       "conditions": {
-        "id": "minecraft:game/water/axolotl"
+        "track": {
+          "id": "minecraft:game/water/axolotl",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/ballad_of_the_cats": {
       "conditions": {
-        "id": "minecraft:game/nether/ballad_of_the_cats"
+        "track": {
+          "id": "minecraft:game/nether/ballad_of_the_cats",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/boss": {
       "conditions": {
-        "id": "minecraft:game/end/boss"
+        "track": {
+          "id": "minecraft:game/end/boss",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/bromeliad": {
       "conditions": {
-        "id": "minecraft:game/bromeliad"
+        "track": {
+          "id": "minecraft:game/bromeliad",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/chrysopoeia": {
       "conditions": {
-        "id": "minecraft:game/nether/crimson_forest/chrysopoeia"
+        "track": {
+          "id": "minecraft:game/nether/crimson_forest/chrysopoeia",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/clark": {
       "conditions": {
-        "id": "minecraft:game/clark"
+        "track": {
+          "id": "minecraft:game/clark",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/comforting_memories": {
       "conditions": {
-        "id": "minecraft:game/comforting_memories"
+        "track": {
+          "id": "minecraft:game/comforting_memories",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/concrete_halls": {
       "conditions": {
-        "id": "minecraft:game/nether/concrete_halls"
+        "track": {
+          "id": "minecraft:game/nether/concrete_halls",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/crescent_dunes": {
       "conditions": {
-        "id": "minecraft:game/crescent_dunes"
+        "track": {
+          "id": "minecraft:game/crescent_dunes",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/danny": {
       "conditions": {
-        "id": "minecraft:game/danny"
+        "track": {
+          "id": "minecraft:game/danny",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/dead_voxel": {
       "conditions": {
-        "id": "minecraft:game/nether/dead_voxel"
+        "track": {
+          "id": "minecraft:game/nether/dead_voxel",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/deeper": {
       "conditions": {
-        "id": "minecraft:game/deeper"
+        "track": {
+          "id": "minecraft:game/deeper",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/dragon_fish": {
       "conditions": {
-        "id": "minecraft:game/water/dragon_fish"
+        "track": {
+          "id": "minecraft:game/water/dragon_fish",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/dry_hands": {
       "conditions": {
-        "id": "minecraft:game/dry_hands"
+        "track": {
+          "id": "minecraft:game/dry_hands",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/echo_in_the_wind": {
       "conditions": {
-        "id": "minecraft:game/echo_in_the_wind"
+        "track": {
+          "id": "minecraft:game/echo_in_the_wind",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/eld_unknown": {
       "conditions": {
-        "id": "minecraft:game/eld_unknown"
+        "track": {
+          "id": "minecraft:game/eld_unknown",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/endless": {
       "conditions": {
-        "id": "minecraft:game/endless"
+        "track": {
+          "id": "minecraft:game/endless",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/featherfall": {
       "conditions": {
-        "id": "minecraft:game/featherfall"
+        "track": {
+          "id": "minecraft:game/featherfall",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/firebugs": {
       "conditions": {
-        "id": "minecraft:game/swamp/firebugs"
+        "track": {
+          "id": "minecraft:game/swamp/firebugs",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/floating_dream": {
       "conditions": {
-        "id": "minecraft:game/floating_dream"
+        "track": {
+          "id": "minecraft:game/floating_dream",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/haggstrom": {
       "conditions": {
-        "id": "minecraft:game/haggstrom"
+        "track": {
+          "id": "minecraft:game/haggstrom",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/infinite_amethyst": {
       "conditions": {
-        "id": "minecraft:game/infinite_amethyst"
+        "track": {
+          "id": "minecraft:game/infinite_amethyst",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/key": {
       "conditions": {
-        "id": "minecraft:game/key"
+        "track": {
+          "id": "minecraft:game/key",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/komorebi": {
       "conditions": {
-        "id": "minecraft:game/komorebi"
+        "track": {
+          "id": "minecraft:game/komorebi",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/labyrinthine": {
       "conditions": {
-        "id": "minecraft:game/swamp/labyrinthine"
+        "track": {
+          "id": "minecraft:game/swamp/labyrinthine",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/left_to_bloom": {
       "conditions": {
-        "id": "minecraft:game/left_to_bloom"
+        "track": {
+          "id": "minecraft:game/left_to_bloom",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/living_mice": {
       "conditions": {
-        "id": "minecraft:game/living_mice"
+        "track": {
+          "id": "minecraft:game/living_mice",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/mice_on_venus": {
       "conditions": {
-        "id": "minecraft:game/mice_on_venus"
+        "track": {
+          "id": "minecraft:game/mice_on_venus",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/minecraft": {
       "conditions": {
-        "id": "minecraft:game/minecraft"
+        "track": {
+          "id": "minecraft:game/minecraft",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/one_more_day": {
       "conditions": {
-        "id": "minecraft:game/one_more_day"
+        "track": {
+          "id": "minecraft:game/one_more_day",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/oxygene": {
       "conditions": {
-        "id": "minecraft:game/oxygene"
+        "track": {
+          "id": "minecraft:game/oxygene",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/pokopoko": {
       "conditions": {
-        "id": "minecraft:game/pokopoko"
+        "track": {
+          "id": "minecraft:game/pokopoko",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/puzzlebox": {
       "conditions": {
-        "id": "minecraft:game/puzzlebox"
+        "track": {
+          "id": "minecraft:game/puzzlebox",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/rubedo": {
       "conditions": {
-        "id": "minecraft:game/nether/nether_wastes/rubedo"
+        "track": {
+          "id": "minecraft:game/nether/nether_wastes/rubedo",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/shuniji": {
       "conditions": {
-        "id": "minecraft:game/water/shuniji"
+        "track": {
+          "id": "minecraft:game/water/shuniji",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/so_below": {
       "conditions": {
-        "id": "minecraft:game/nether/soulsand_valley/so_below"
+        "track": {
+          "id": "minecraft:game/nether/soulsand_valley/so_below",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/stand_tall": {
       "conditions": {
-        "id": "minecraft:game/stand_tall"
+        "track": {
+          "id": "minecraft:game/stand_tall",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/subwoofer_lullaby": {
       "conditions": {
-        "id": "minecraft:game/subwoofer_lullaby"
+        "track": {
+          "id": "minecraft:game/subwoofer_lullaby",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/sweden": {
       "conditions": {
-        "id": "minecraft:game/sweden"
+        "track": {
+          "id": "minecraft:game/sweden",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/the_end": {
       "conditions": {
-        "id": "minecraft:game/end/the_end"
+        "track": {
+          "id": "minecraft:game/end/the_end",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/warmth": {
       "conditions": {
-        "id": "minecraft:game/nether/warmth"
+        "track": {
+          "id": "minecraft:game/nether/warmth",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/watcher": {
       "conditions": {
-        "id": "minecraft:game/watcher"
+        "track": {
+          "id": "minecraft:game/watcher",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/wending": {
       "conditions": {
-        "id": "minecraft:game/wending"
+        "track": {
+          "id": "minecraft:game/wending",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/wet_hands": {
       "conditions": {
-        "id": "minecraft:game/wet_hands"
+        "track": {
+          "id": "minecraft:game/wet_hands",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     },
     "recorded/yakusoku": {
       "conditions": {
-        "id": "minecraft:game/yakusoku"
+        "track": {
+          "id": "minecraft:game/yakusoku",
+          "resolved": true
+        }
       },
       "trigger": "stancements:record_song"
     }
@@ -476,7 +626,7 @@
     ]
   ],
   "rewards": {
-    "experience": 200
+    "experience": 500
   },
   "sends_telemetry_event": true
 }

@@ -3,8 +3,8 @@ package melonystudios.stancements.item.custom;
 import melonystudios.reutilities.api.ReAPI;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.component.STDataComponents;
+import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.component.custom.MusicData;
-import melonystudios.stancements.misc.STJukeboxSongs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -37,9 +37,7 @@ public class RecordedDiscItem extends Item {
         if (stack.has(DataComponents.JUKEBOX_PLAYABLE)) return;
 
         if (data != null && data.id().isPresent() && ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/sound_id"))) {
-            tooltip.add(Component.translatable("tooltip.stancements.music_id_present.warning").withStyle(ChatFormatting.RED));
-            tooltip.add(Component.translatable("tooltip.stancements.music_id_present.command").withStyle(ChatFormatting.GRAY));
-            tooltip.add(Component.translatable("tooltip.stancements.music_id_present.bug").withStyle(ChatFormatting.RED));
+            tooltip.add(Component.translatable("tooltip.stancements.music_id_present.warning").withColor(InventoryRecorder.State.PAUSED.color()));
             tooltip.add(Component.empty());
 
             tooltip.add(Component.translatable("tooltip.stancements.recorded_disc.sound_id", data.id().get().toString()).withStyle(ChatFormatting.GRAY));
@@ -48,16 +46,9 @@ public class RecordedDiscItem extends Item {
         }
     }
 
-    /// Returns the location of a {@linkplain STJukeboxSongs jukebox song} based on the recorded `music_id`.
+    /// Returns the location of a {@linkplain melonystudios.stancements.misc.STJukeboxSongs jukebox song} based on the recorded `music_id`.
     /// @param musicID A resource location of the song's location within the game's files.
     public static ResourceLocation getJukeboxSongLocation(ResourceLocation musicID) {
-        String namespace = musicID.getNamespace().equals("minecraft") ? "stancements" : musicID.getNamespace();
-        return ResourceLocation.fromNamespaceAndPath(namespace, sanitizeMusicIDLocation(musicID).getPath());
-    }
-
-    /// Sanitizes the id the music currently being recorded for usage in advancements.
-    /// @param musicID A resource location of the song's location within the game's files.
-    public static ResourceLocation sanitizeMusicIDLocation(ResourceLocation musicID) {
         return ResourceLocation.parse(musicID.toString()
                 .replace("sounds/", "")
                 .replace("music/", "")

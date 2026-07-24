@@ -18,6 +18,7 @@
   "client": [
     "logo.STCreativeModeInventoryScreenMixin",
     "recorder.CurrentMusicAccessor",
+    "recorder.inventory.STMusicManagerMixin",
     "songblock.STLevelRendererMixin",
     "songblock.STStorageSoundHandlerMixin"
   ],

@@ -1,5 +1,14 @@
 {
   "parent": "minecraft:item/generated",
+  "loader": "neoforge:item_layers",
+  "neoforge_data": {
+    "layers": {
+      "1": {
+        "block_light": 15,
+        "sky_light": 15
+      }
+    }
+  },
   "overrides": [
     {
       "model": "stancements:item/sculk_infested_recorded_disc_label_1",
@@ -86,6 +95,7 @@
       }
     }
   ],
+  "render_types": {},
   "textures": {
     "layer0": "stancements:item/deepslate_recorded_disc",
     "layer1": "stancements:item/sculk_disc_overlay",

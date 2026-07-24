@@ -1,25 +1,10 @@
 {
   "values": [
-    {
-      "id": "stancements:game/lilypad",
-      "required": false
-    },
-    {
-      "id": "stancements:game/below_and_above",
-      "required": false
-    },
-    {
-      "id": "stancements:game/os_piano",
-      "required": false
-    },
-    {
-      "id": "stancements:game/broken_clocks",
-      "required": false
-    },
-    {
-      "id": "stancements:game/fireflies",
-      "required": false
-    },
+    "minecraft:game/lilypad",
+    "minecraft:game/below_and_above",
+    "minecraft:game/os_piano",
+    "minecraft:game/broken_clocks",
+    "minecraft:game/fireflies",
     {
       "id": "minecraft:tears",
       "required": false

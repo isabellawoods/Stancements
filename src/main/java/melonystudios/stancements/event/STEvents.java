@@ -1,24 +1,29 @@
 package melonystudios.stancements.event;
 
+import melonystudios.reutilities.event.custom.AddComponentTooltipsEvent;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlocks;
+import melonystudios.stancements.client.network.ClientPayloadHandler;
+import melonystudios.stancements.client.network.RequestRecordingAttempt;
 import melonystudios.stancements.command.ConvertDiscToJukeboxSongCommand;
-import melonystudios.stancements.data.misc.*;
-import melonystudios.stancements.data.tag.STJukeboxSongTagsProvider;
-import melonystudios.stancements.misc.STRegistries;
-import melonystudios.stancements.misc.attachment.STAttachmentTypes;
-import melonystudios.stancements.misc.attachment.STCapabilities;
 import melonystudios.stancements.command.UpdateRecordedDiscCommand;
+import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.data.loot.STLootTableProvider;
+import melonystudios.stancements.data.misc.STDataMapsProvider;
+import melonystudios.stancements.data.misc.STDataPackRegistriesProvider;
+import melonystudios.stancements.data.misc.STRecipeProvider;
+import melonystudios.stancements.data.misc.Stadvancements;
 import melonystudios.stancements.data.model.STBlockStateProvider;
 import melonystudios.stancements.data.model.STItemModelProvider;
 import melonystudios.stancements.data.tag.STBlockTagsProvider;
 import melonystudios.stancements.data.tag.STItemTagsProvider;
+import melonystudios.stancements.data.tag.STJukeboxSongTagsProvider;
+import melonystudios.stancements.misc.STRegistries;
+import melonystudios.stancements.misc.attachment.STAttachmentTypes;
+import melonystudios.stancements.misc.attachment.STCapabilities;
 import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.misc.discstyle.RecordedDiscStyle;
 import melonystudios.stancements.misc.modifier.VinylModifier;
-import melonystudios.stancements.network.s2c.ClientPayloadHandler;
-import melonystudios.stancements.network.s2c.RequestRecordingAttempt;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
@@ -81,6 +86,12 @@ public class STEvents {
     }
 
     @SubscribeEvent
+    public static void addComponentTooltips(AddComponentTooltipsEvent event) {
+        event.addComponent(1, STDataComponents.INVENTORY_RECORDER.get());
+        event.addComponent(2, STDataComponents.MINECART_TAG_COLOR.get());
+    }
+
+    @SubscribeEvent
     public static void registerBuiltInDataPacks(AddPackFindersEvent event) {
         event.addPackFinders(
                 Stancements.stancements("datapacks/" + Stancements.RMS_ID),
@@ -98,7 +109,7 @@ public class STEvents {
     }
 
     @SubscribeEvent
-    public static void addDataPackRegistries(DataPackRegistryEvent.NewRegistry event) {
+    public static void addDataDrivenRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(STRegistries.RECORDED_DISC_STYLE, RecordedDiscStyle.CODEC, RecordedDiscStyle.CODEC);
         event.dataPackRegistry(STRegistries.VINYL_MODIFIER, VinylModifier.DIRECT_CODEC, VinylModifier.DIRECT_CODEC);
     }
@@ -111,7 +122,12 @@ public class STEvents {
     @SubscribeEvent
     public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         var registrar = event.registrar(Stancements.NETWORK_VERSION);
-        registrar.playToClient(RequestRecordingAttempt.TYPE, RequestRecordingAttempt.STREAM_CODEC, ClientPayloadHandler::requestRecordingAttempt);
+        registrar.playToClient(RequestRecordingAttempt.TYPE, RequestRecordingAttempt.STREAM_CODEC, (receival, context) -> context.enqueueWork(
+                () -> ClientPayloadHandler.requestRecordingAttempt(receival, context)
+        ).exceptionally(throwable -> {
+            Stancements.LOGGER.error("Exception while sending {}'s music data to the server", context.player().getDisplayName().getString(), throwable);
+            return null;
+        }));
     }
 
     @SubscribeEvent

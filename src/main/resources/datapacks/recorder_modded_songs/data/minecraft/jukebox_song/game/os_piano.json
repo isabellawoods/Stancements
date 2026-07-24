@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "music.game.os_piano"
+  },
+  "length_in_seconds": 275.0,
+  "sound_event": {
+    "sound_id": "minecraft:music.game.os_piano"
+  }
+}

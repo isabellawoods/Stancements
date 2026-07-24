@@ -1,0 +1,8 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "music.game.minecraft"
+  },
+  "length_in_seconds": 254.0,
+  "sound_event": "minecraft:music.game.minecraft"
+}

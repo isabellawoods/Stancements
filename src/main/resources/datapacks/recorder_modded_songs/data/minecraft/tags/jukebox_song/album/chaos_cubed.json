@@ -1,25 +1,10 @@
 {
   "values": [
-    {
-      "id": "stancements:game/memories",
-      "required": false
-    },
-    {
-      "id": "stancements:game/ebb",
-      "required": false
-    },
-    {
-      "id": "stancements:game/home",
-      "required": false
-    },
-    {
-      "id": "stancements:game/shores",
-      "required": false
-    },
-    {
-      "id": "stancements:game/nightly",
-      "required": false
-    },
+    "minecraft:game/memories",
+    "minecraft:game/ebb",
+    "minecraft:game/home",
+    "minecraft:game/shores",
+    "minecraft:game/nightly",
     {
       "id": "minecraft:bounce",
       "required": false

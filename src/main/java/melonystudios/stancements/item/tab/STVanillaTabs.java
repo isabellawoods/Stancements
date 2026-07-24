@@ -97,10 +97,13 @@ public class STVanillaTabs {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.insertBefore(new ItemStack(Items.MUSIC_DISC_13), new ItemStack(STItems.VINYL_DISC.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.VINYL_DISC.get()), new ItemStack(STItems.RECORDED_DISC.get()), PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(STItems.RECORDED_DISC.get()), new ItemStack(STItems.SHATTERED_DISC.get()), PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(STItems.SHATTERED_DISC.get()), new ItemStack(STItems.SCULK_INFESTED_VINYL_DISC.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.RECORDED_DISC.get()), new ItemStack(STItems.SCULK_INFESTED_VINYL_DISC.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.SCULK_INFESTED_VINYL_DISC.get()), new ItemStack(STItems.SCULK_INFESTED_RECORDED_DISC.get()), PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(STItems.SCULK_INFESTED_RECORDED_DISC.get()), new ItemStack(STItems.SCULK_INFESTED_SHATTERED_DISC.get()), PARENT_AND_SEARCH_TABS);
+
+            event.insertBefore(new ItemStack(STItems.VINYL_DISC.get()), new ItemStack(STItems.POCKET_RECORDER.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.POCKET_RECORDER.get()), new ItemStack(STItems.SHORT_CASSETTE_TAPE.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.SHORT_CASSETTE_TAPE.get()), new ItemStack(STItems.LONG_CASSETTE_TAPE.get()), PARENT_AND_SEARCH_TABS);
+
             addDyedWaterBuckets(event);
 
             event.insertAfter(new ItemStack(Items.TNT_MINECART), new ItemStack(STItems.WHITE_TAG.get()), PARENT_AND_SEARCH_TABS);
@@ -119,6 +122,11 @@ public class STVanillaTabs {
             event.insertAfter(new ItemStack(STItems.BLUE_TAG.get()), new ItemStack(STItems.PURPLE_TAG.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.PURPLE_TAG.get()), new ItemStack(STItems.MAGENTA_TAG.get()), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(STItems.MAGENTA_TAG.get()), new ItemStack(STItems.PINK_TAG.get()), PARENT_AND_SEARCH_TABS);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.insertBefore(new ItemStack(Items.DISC_FRAGMENT_5), new ItemStack(STItems.SHATTERED_DISC.get()), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(STItems.SHATTERED_DISC.get()), new ItemStack(STItems.SCULK_INFESTED_SHATTERED_DISC.get()), PARENT_AND_SEARCH_TABS);
         }
     }
 

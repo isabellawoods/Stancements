@@ -11,7 +11,7 @@ public class STJukeboxSongTags {
     public static final TagKey<JukeboxSong> AMBIENT_MUSIC = stancements("ambient_music");
     /// Jukebox songs in this tag are considered "ambient" (recorded from the client's {@link net.minecraft.client.sounds.MusicManager MusicManager}).
     /// If any song in this tag start playing, the music in `MusicManager` is stopped.
-    /// @see melonystudios.stancements.option.STClientOptions#MUSIC_DISCS_BLOCK_AMBIENT_MUSIC Block Ambient Music for Discs option
+    /// @see melonystudios.stancements.client.option.STClientOptions#MUSIC_DISCS_BLOCK_AMBIENT_MUSIC Music Discs Block Ambient Music option
     public static final TagKey<JukeboxSong> CANCELS_AMBIENT_MUSIC = stancements("cancels_ambient_music");
     /// Jukebox songs in this tag, when applied to a music disc, cannot be copied by the music recorder.
     ///

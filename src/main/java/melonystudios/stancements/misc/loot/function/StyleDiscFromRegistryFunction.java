@@ -46,15 +46,15 @@ public class StyleDiscFromRegistryFunction extends LootItemConditionalFunction i
         ItemStack copyStack = stack.copy();
         ResourceLocation musicID;
         if (this.context != null) {
-            musicID = this.context.musicID();
+            musicID = this.context.track().jukeboxSongID();
         } else if (context.getParamOrNull(LootContextParams.BLOCK_ENTITY) instanceof MusicRecorderBlockEntity recorder) {
-            musicID = recorder.musicID();
+            musicID = recorder.copyingSong() ? recorder.musicID() : RecordedDiscItem.getJukeboxSongLocation(recorder.musicID());
         } else {
             return copyStack;
         }
 
         var discStyles = context.getLevel().registryAccess().registryOrThrow(STRegistries.RECORDED_DISC_STYLE);
-        RecordedDiscStyle copyStyle = discStyles.get(RecordedDiscItem.getJukeboxSongLocation(musicID));
+        RecordedDiscStyle copyStyle = discStyles.get(musicID);
 
         if (copyStyle != null) {
             copyStack.set(STDataComponents.LABEL, copyStyle.label());

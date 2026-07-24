@@ -1,0 +1,22 @@
+{
+  "effects": {
+    "stancements:eject_after_ticks": [
+      {
+        "effect": {
+          "ejection_chance": 0.15,
+          "ticks_until_ejection": 400
+        },
+        "requirements": {
+          "condition": "stancements:recorder_state/item",
+          "targets": "stancements:sculk_infested_recorded_disc"
+        }
+      }
+    ]
+  },
+  "modifies_copies": true,
+  "recording_text": "",
+  "strategies": [
+    "start"
+  ],
+  "targets": []
+}

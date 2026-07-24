@@ -32,6 +32,9 @@ public class STCreativeTabs {
                 output.accept(SCULK_INFESTED_VINYL_DISC);
                 output.accept(SCULK_INFESTED_RECORDED_DISC);
                 output.accept(SCULK_INFESTED_SHATTERED_DISC);
+                output.accept(POCKET_RECORDER);
+                output.accept(SHORT_CASSETTE_TAPE);
+                output.accept(LONG_CASSETTE_TAPE);
 
                 // Decorative blocks
                 // Shelves

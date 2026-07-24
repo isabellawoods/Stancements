@@ -5,6 +5,10 @@
 
     "tooltip.stancements.recording_music",
     "tooltip.stancements.recording_music_disc",
+    "tooltip.stancements.music_id_present.command",
+    "tooltip.stancements.music_id_present.bug",
+
+    "logger.stancements.vinyl_modifier.not_available",
 
     "tag.item.stancements.recordable_discs",
 

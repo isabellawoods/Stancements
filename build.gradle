@@ -117,7 +117,7 @@ configurations {
 
 dependencies {
     // Forged Mod Menu
-    implementation files("build/libs/forgedmodmenu-neoforge-${forgedmodmenu_version}+${minecraft_version}.jar")
+    implementation files("build/libs/forgedmodmenu-neoforge-${forged_mod_menu_version}+${minecraft_version}.jar")
 
     // Jade
     implementation "maven.modrinth:jade:${jade_version}+neoforge"

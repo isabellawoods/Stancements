@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:ingots/copper"
+    },
+    "R": {
+      "item": "stancements:music_recorder"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "RS",
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stancements:pocket_recorder"
+  }
+}

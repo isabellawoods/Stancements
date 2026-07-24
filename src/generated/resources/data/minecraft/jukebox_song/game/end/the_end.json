@@ -1,0 +1,8 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "music.game.end.the_end"
+  },
+  "length_in_seconds": 904.0,
+  "sound_event": "minecraft:music.game.end.the_end"
+}

@@ -1,8 +1,8 @@
 package melonystudios.stancements.blockentity;
 
-import melonystudios.stancements.block.custom.MusicRecorderBlock;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
 /// Necessary data about the adjacent block for music recording.
-/// @see MusicRecorderBlock#tryRecordingFromAdjacentBlock MusicRecorderBlock.tryRecordingFromAdjacentBlock()
+/// @see melonystudios.stancements.block.custom.MusicRecorderBlock#tryRecordingFromAdjacentBlock MusicRecorderBlock.tryRecordingFromAdjacentBlock()
 public interface BlockBasedMusicPlayer {
     int DEFAULT_TICKS_UNTIL_FINISHED = -1;
     int JUKEBOX_PADDING_TICKS = 20;
@@ -39,8 +39,7 @@ public interface BlockBasedMusicPlayer {
         return Optional.empty();
     }
 
-    static Optional<? extends Holder<JukeboxSong>> findJukeboxSongFromID(RegistryAccess registries, Optional<ResourceLocation> musicID, boolean sanitizeLocation) {
-        var jukeboxSongs = registries.registryOrThrow(Registries.JUKEBOX_SONG);
+    static Optional<? extends Holder<JukeboxSong>> findJukeboxSongFromID(Registry<JukeboxSong> jukeboxSongs, Optional<ResourceLocation> musicID, boolean sanitizeLocation) {
         if (musicID.isEmpty()) return Optional.empty();
 
         return jukeboxSongs.getHolder(sanitizeLocation ? RecordedDiscItem.getJukeboxSongLocation(musicID.get()) : musicID.get());

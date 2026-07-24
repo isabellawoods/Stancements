@@ -1,0 +1,30 @@
+{
+  "parent": "stancements:adventure/record_song",
+  "criteria": {
+    "record_using_inventory_recorder": {
+      "conditions": {
+        "source": "inventory_recorder"
+      },
+      "trigger": "stancements:record_song"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.stancements.record_song_with_pocket.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "stancements:pocket_recorder"
+    },
+    "title": {
+      "translate": "advancements.stancements.record_song_with_pocket.title"
+    }
+  },
+  "requirements": [
+    [
+      "record_using_inventory_recorder"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

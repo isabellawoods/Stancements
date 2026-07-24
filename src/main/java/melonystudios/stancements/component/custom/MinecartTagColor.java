@@ -10,6 +10,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
@@ -24,5 +25,11 @@ public record MinecartTagColor(DyeColor color) implements TooltipProvider {
 
     public static MinecartTagColor of(DyeColor color) {
         return new MinecartTagColor(color);
+    }
+
+    @Override
+    @NotNull
+    public String toString() {
+        return String.format("MinecartTagColor[%s]", this.color());
     }
 }

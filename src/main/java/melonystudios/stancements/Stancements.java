@@ -46,7 +46,8 @@ public class Stancements {
         STDataComponents.COMPONENTS.register(eventBus);
         STModifierComponents.COMPONENTS.register(eventBus);
         STCreativeTabs.TABS.register(eventBus);
-        STSounds.SOUNDS.register(eventBus);
+        STSounds.STANCEMENTS.register(eventBus);
+        STSounds.MINECRAFT.register(eventBus);
         STStatistics.STATS.register(eventBus);
         STCriteriaTriggers.TRIGGERS.register(eventBus);
         STLootFunctions.FUNCTIONS.register(eventBus);

@@ -1,6 +1,5 @@
 package melonystudios.stancements.misc.discstyle;
 
-import melonystudios.stancements.Stancements;
 import melonystudios.stancements.misc.STRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -8,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Rarity;
 
 public class STRecordedDiscStyles {
-    // Minecraft
+    // Music discs
     public static final ResourceKey<RecordedDiscStyle> THIRTEEN = vanilla("13");
     public static final ResourceKey<RecordedDiscStyle> CAT = vanilla("cat");
     public static final ResourceKey<RecordedDiscStyle> BLOCKS = vanilla("blocks");
@@ -29,11 +28,11 @@ public class STRecordedDiscStyles {
     public static final ResourceKey<RecordedDiscStyle> CREATOR = vanilla("creator");
     public static final ResourceKey<RecordedDiscStyle> CREATOR_MUSIC_BOX = vanilla("creator_music_box");
 
-    // Stancements
-    public static final ResourceKey<RecordedDiscStyle> ALPHA = stancements("game/end/alpha");
+    // Ambient music discs
+    public static final ResourceKey<RecordedDiscStyle> ALPHA = vanilla("game/end/alpha");
 
     public static void bootstrap(BootstrapContext<RecordedDiscStyle> context) {
-        // Minecraft
+        // Music discs
         context.register(THIRTEEN, new RecordedDiscStyle(0xFFD800, 9));
         context.register(CAT, new RecordedDiscStyle(0x4CFF00, 2));
         context.register(BLOCKS, new RecordedDiscStyle(0xE2543B, 1));
@@ -54,15 +53,11 @@ public class STRecordedDiscStyles {
         context.register(CREATOR, new RecordedDiscStyle(0xFFDD99, 10));
         context.register(CREATOR_MUSIC_BOX, new RecordedDiscStyle(0xFFDD99, 10));
 
-        // Stancements
+        // Ambient music discs
         context.register(ALPHA, new RecordedDiscStyle(0x9AC9BF, 13, Rarity.EPIC));
     }
 
     public static ResourceKey<RecordedDiscStyle> vanilla(String name) {
         return ResourceKey.create(STRegistries.RECORDED_DISC_STYLE, ResourceLocation.withDefaultNamespace(name));
-    }
-
-    public static ResourceKey<RecordedDiscStyle> stancements(String name) {
-        return ResourceKey.create(STRegistries.RECORDED_DISC_STYLE, Stancements.stancements(name));
     }
 }

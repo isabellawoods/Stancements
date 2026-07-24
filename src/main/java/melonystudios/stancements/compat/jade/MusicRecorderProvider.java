@@ -3,7 +3,9 @@ package melonystudios.stancements.compat.jade;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
+import melonystudios.stancements.misc.recording.Track;
 import melonystudios.stancements.tag.STItemTags;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -59,14 +61,15 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
             } else if (data.get().ticksUntilFinishedRecording() <= BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED) {
                 tooltip.add(Component.translatable("tooltip.stancements.no_music_playing"));
             } else {
-                if (data.get().musicID.isEmpty()) return;
-                var song = BlockBasedMusicPlayer.findJukeboxSongFromID(accessor.getLevel().registryAccess(), data.get().musicID, !data.get().copyingSong);
+                if (data.get().musicID().isEmpty()) return;
+                Component songName = IDisplayHelper.get().stripColor(new Track(
+                        data.get().musicID().get(),
+                        data.get().copyingSong()
+                ).displayName(accessor.getLevel().registryAccess().registryOrThrow(Registries.JUKEBOX_SONG)));
 
-                Component songName;
-                if (song.isPresent()) {
-                    songName = IDisplayHelper.get().stripColor(song.get().value().description());
-                } else {
-                    songName = Component.translatable("tooltip.stancements.sound_id", data.get().musicID.get().toString());
+                // todo: not 100% accurate -- having a "music." as the start of the translation will also make this return the sound id
+                if (songName.getString().startsWith("music.")) {
+                    songName = Component.translatable("tooltip.stancements.sound_id", data.get().musicID().get());
                 }
 
                 tooltip.add(Component.translatable("tooltip.stancements.recording", songName,
