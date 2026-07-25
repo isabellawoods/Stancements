@@ -6,17 +6,19 @@
   "compatibilityLevel": "JAVA_25",
   "mixins": [
     "BlockBehaviourIDAccessor",
-    "STItemStackMixin",
-    "STShearsDispenseBehaviorMixin",
-    "block.STJukeboxBlockEntityMixin",
-    "compat.sophisticated.STBackpackBlockEntityMixin",
-    "compat.sophisticated.STStorageBlockEntityMixin",
-    "entity.STAbstractMinecartMixin",
-    "entity.STMinecartChestMixin",
-    "entity.STServerPlayerMixin"
+    "recorder.STBackpackBlockEntityMixin",
+    "recorder.STJukeboxBlockEntityMixin",
+    "recorder.STServerPlayerMixin",
+    "recorder.STStorageBlockEntityMixin",
+    "tagging.STAbstractMinecartMixin",
+    "tagging.STMinecartChestMixin",
+    "tagging.STShearsDispenseBehaviorMixin"
   ],
   "client": [
-    "CurrentMusicAccessor"
+    "logo.STCreativeModeInventoryScreenMixin",
+    "recorder.CurrentMusicAccessor",
+    "songblock.STLevelEventHandlerMixin",
+    "songblock.STStorageSoundHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

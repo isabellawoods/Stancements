@@ -8,7 +8,7 @@ import net.minecraft.world.item.Rarity;
 
 /// Style used when **recording songs**, allowing mods to register custom looks for their discs when copied using the music recorder.
 /// @param color The color used for the disc's label color. Can be either in **decimal** or **hexadecimal**.
-/// @param label The label used for the disc's label. Can be any value from {@link RecordedDiscItem#DISC_LABEL_MIN 1} to {@link RecordedDiscItem#DISC_LABEL_MAX 13} for the existing record labels.
+/// @param label The label used for the disc's label. Can be any value from {@link RecordedDiscItem#DISC_LABEL_MIN 1} to {@link RecordedDiscItem#DISC_LABEL_MAX 14} for the existing record labels.
 /// @param rarity The rarity of the recorded disc item. Defaults to {@linkplain Rarity#UNCOMMON uncommon} (yellow).
 // unfortunately had to move this to a registry as data maps don't accept conditions field within the values themselves ~isa 19-05-26
 public record RecordedDiscStyle(int color, float label, Rarity rarity) {
@@ -20,7 +20,7 @@ public record RecordedDiscStyle(int color, float label, Rarity rarity) {
 
     /// Style used when **recording songs**, allowing mods to register custom looks for their discs when copied using the music recorder.
     /// @param color The color used for the disc's label color. Can be either in **decimal** or **hexadecimal**.
-    /// @param label The label used for the disc's label. Can be any value from {@link RecordedDiscItem#DISC_LABEL_MIN 1} to {@link RecordedDiscItem#DISC_LABEL_MAX 13} for the existing record labels.
+    /// @param label The label used for the disc's label. Can be any value from {@link RecordedDiscItem#DISC_LABEL_MIN 1} to {@link RecordedDiscItem#DISC_LABEL_MAX 14} for the existing record labels.
     public RecordedDiscStyle(int color, float label) {
         this(color, label, Rarity.UNCOMMON);
     }

@@ -9,6 +9,11 @@
     " # "
   ],
   "result": {
+    "components": {
+      "minecraft:block_state": {
+        "hopping": "false"
+      }
+    },
     "count": 8,
     "id": "stancements:crop_pot"
   }

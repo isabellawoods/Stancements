@@ -2,7 +2,6 @@ package melonystudios.stancements.command;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.brigadier.CommandDispatcher;
-import melonystudios.stancements.Stancements;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import net.minecraft.ChatFormatting;
@@ -32,19 +31,20 @@ public class UpdateRecordedDiscCommand {
             .put("creative1", "biome_fest").put("creative2", "blind_spots").put("creative3", "haunt_muskie").put("creative4", "aria_math").put("creative5", "dreiton").put("creative6", "taswell")
             .put("nether1", "concrete_halls").put("nether2", "dead_voxel").put("nether3", "warmth").put("nether4", "ballad_of_the_cats")
             .put("end/end", "end/the_end")
-            // The Mato music pack songs
-            .put("themato", "minecraft") // correct mod id
+            // The Mato music pack songs from 1.16
+            .put("themato", "minecraft") // correct mod ID
             .put("caves_and_cliffs/", "")
             .put("wild_update/", "swamp/")
             .put("trails_and_tales/", "")
             .put("tricky_trials/", "")
             .put("chase_the_skies/", "")
             .put("drop_2_2025/", "") // existed at some point, don't know if discs could have this though
+            .put("chaos_cubed/", "")
             .build();
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("melonystudios")
-                .then(Commands.literal(Stancements.stancements("gameplay/update_recorded_disc").toString())
+        dispatcher.register(Commands.literal("mstudios")
+                .then(Commands.literal("gameplay/update_recorded_disc")
                         .executes(context -> updateRecordedDisc(context.getSource()))
                 )
         );
@@ -74,7 +74,7 @@ public class UpdateRecordedDiscCommand {
                 }
                 tag.remove("music_id");
                 handStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-                updatedID = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), Identifier.parse(musicID.get()), false);
+                updatedID = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), Identifier.parse(musicID.get()), false, false);
             }
 
             if (tag.getInt("label").isPresent()) {

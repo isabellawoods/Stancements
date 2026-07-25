@@ -9,6 +9,7 @@ import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
+import melonystudios.stancements.option.STOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -27,8 +28,8 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.ticks.ContainerSingleItem;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
     }
 
     public void startRecording(@Nullable Identifier musicID, boolean copyingSong, @Nullable Player recorderPlayer) {
-        this.startRecording(musicID, copyingSong, musicID == null ? BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED : BlockBasedMusicPlayer.DEFAULT_RECORDING_DURATION, recorderPlayer);
+        this.startRecording(musicID, copyingSong, musicID == null ? BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED : STOptions.DEFAULT_RECORDING_DURATION.get(), recorderPlayer);
     }
 
     public void startRecording(@Nullable Identifier musicID, boolean copyingSong, int recordingDuration, @Nullable Player recorderPlayer) {
@@ -72,7 +73,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
 
                 // award statistic
                 serverPlayer.awardStat(this.copyingSong() ? STStatistics.MUSIC_DISCS_COPIED.get() : STStatistics.SONGS_RECORDED.get());
-                Identifier sanitizedMusicID = RecordedDiscItem.sanitizeMusicIDLocation(this.musicID());
+                Identifier sanitizedMusicID = RecordedDiscItem.getJukeboxSongLocation(this.musicID());
                 STCriteriaTriggers.RECORD_SONG.trigger(sanitizedMusicID, this.copyingSong(), List.of(sanitizedMusicID), serverPlayer);
             }
         }
@@ -137,7 +138,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
     }
 
     @Override
-    @NotNull
+    @NonNull
     public ItemStack getTheItem() {
         return this.discStack;
     }
@@ -159,7 +160,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
     }
 
     @Override
-    @NotNull
+    @NonNull
     public ItemStack splitTheItem(int amount) {
         ItemStack stack = this.getTheItem();
         this.setTheItem(ItemStack.EMPTY);
@@ -183,7 +184,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
     }
 
     @Override
-    @NotNull
+    @NonNull
     public BlockEntity getContainerBlockEntity() {
         return this;
     }

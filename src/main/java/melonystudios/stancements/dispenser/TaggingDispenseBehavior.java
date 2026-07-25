@@ -15,11 +15,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class TaggingDispenseBehavior extends DefaultDispenseItemBehavior {
     @Override
-    @NotNull
+    @NonNull
     protected ItemStack execute(BlockSource source, ItemStack stack) {
         ServerLevel level = source.level();
         if (!level.isClientSide() && stack.has(STDataComponents.MINECART_TAG_COLOR)) {

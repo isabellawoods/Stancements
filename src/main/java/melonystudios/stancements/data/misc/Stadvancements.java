@@ -163,7 +163,7 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
         AdvancementHolder plantInCropPot = Advancement.Builder.advancement()
                 .parent(aSeedyPlaceIdentifier)
                 .display(
-                        STItems.CROP_POT.get(),
+                        STItems.cropPot(1, false),
                         Component.translatable("advancements.stancements.plant_in_crop_pot.title"),
                         Component.translatable("advancements.stancements.plant_in_crop_pot.description"),
                         null,
@@ -184,7 +184,7 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
         Advancement.Builder.advancement()
                 .parent(plantInCropPot)
                 .display(
-                        STItems.hoppingCropPot(1),
+                        STItems.cropPot(1, true),
                         Component.translatable("advancements.stancements.plant_in_hopping_pot.title"),
                         Component.translatable("advancements.stancements.plant_in_hopping_pot.description"),
                         null,

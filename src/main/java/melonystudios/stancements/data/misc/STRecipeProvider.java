@@ -18,7 +18,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.conditions.NotCondition;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -36,13 +36,13 @@ public class STRecipeProvider extends RecipeProvider {
         }
 
         @Override
-        @NotNull
+        @NonNull
         public String getName() {
             return Stancements.generatorName("Recipes");
         }
 
         @Override
-        @NotNull
+        @NonNull
         protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
             return new STRecipeProvider(registries, output);
         }
@@ -123,13 +123,13 @@ public class STRecipeProvider extends RecipeProvider {
         this.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('I', Tags.Items.GEMS_DIAMOND).define('D', Tags.Items.DYES)
                 .pattern("#R#").pattern("DID").pattern("#R#").unlockedBy("has_diamond", this.has(Tags.Items.GEMS_DIAMOND))
                 .save(this.output);
-        this.shaped(RecipeCategory.MISC, STItems.CROP_POT, 8).define('#', Items.TERRACOTTA)
+        this.shaped(RecipeCategory.MISC, STItems.cropPot(8, false)).define('#', Items.TERRACOTTA)
                 .pattern("# #").pattern(" # ").unlockedBy("has_terracotta", this.has(Items.TERRACOTTA))
                 .save(this.output);
-        this.shaped(RecipeCategory.MISC, STItems.hoppingCropPot(8)).define('#', Items.TERRACOTTA).define('H', Items.HOPPER)
+        this.shaped(RecipeCategory.MISC, STItems.cropPot(8, true)).define('#', Items.TERRACOTTA).define('H', Items.HOPPER)
                 .pattern("#H#").pattern(" # ").unlockedBy("has_terracotta", this.has(Items.TERRACOTTA)).unlockedBy("has_hopper", this.has(Items.HOPPER))
                 .group("hopping_crop_pot").save(this.output, Stancements.stancements("hopping_crop_pot").toString());
-        this.shaped(RecipeCategory.MISC, STItems.hoppingCropPot(8)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
+        this.shaped(RecipeCategory.MISC, STItems.cropPot(8, true)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
                 .pattern("###").pattern("#H#").pattern("###").unlockedBy("has_hopper", this.has(Items.HOPPER))
                 .group("hopping_crop_pot").save(this.output, Stancements.stancements("hopping_crop_pot_from_existing").toString());
 
@@ -226,10 +226,10 @@ public class STRecipeProvider extends RecipeProvider {
     /// @param tableCloth The table cloth item.
     /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_LIGHT_BLUE #c:dyes/light_blue}.
     public void dyeCraftingTableCloth(ItemLike tableCloth, TagKey<Item> dyeTag) {
-        Identifier location = BuiltInRegistries.ITEM.getKey(tableCloth.asItem());
+        Identifier identifier = BuiltInRegistries.ITEM.getKey(tableCloth.asItem());
         this.shapeless(RecipeCategory.DECORATIONS, tableCloth).requires(dyeTag).requires(DifferenceIngredient.of(Ingredient.of(this.items.getOrThrow(STItemTags.CRAFTING_TABLE_CLOTHS)), Ingredient.of(tableCloth)))
                 .unlockedBy("has_needed_dye", this.has(dyeTag)).group("crafting_table_cloths")
-                .save(this.output, Identifier.fromNamespaceAndPath(location.getNamespace(), "dye_" + location.getPath()).toString());
+                .save(this.output, Identifier.fromNamespaceAndPath(identifier.getNamespace(), "dye_" + identifier.getPath()).toString());
     }
 
     /// Makes a recipe for watering concrete powder into concrete using a water bucket.

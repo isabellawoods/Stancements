@@ -6,7 +6,7 @@ import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BlockItemStateProperties;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class CropPotSubtypeInterpreter implements ISubtypeInterpreter<ItemStack> {
     public static final CropPotSubtypeInterpreter INSTANCE = new CropPotSubtypeInterpreter();

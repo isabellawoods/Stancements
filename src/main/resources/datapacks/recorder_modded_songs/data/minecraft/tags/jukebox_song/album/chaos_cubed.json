@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:game/memories",
+    "minecraft:game/ebb",
+    "minecraft:game/home",
+    "minecraft:game/shores",
+    "minecraft:game/nightly",
+    {
+      "id": "minecraft:bounce",
+      "required": false
+    }
+  ]
+}

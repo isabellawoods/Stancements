@@ -222,6 +222,23 @@
           ]
         },
         "when": 13.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/recorded_disc_label_14",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 14.0
       }
     ],
     "component": "stancements:label",

@@ -5,7 +5,6 @@ import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
-import net.minecraft.client.searchtree.IdentifierSearchTree;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -13,8 +12,8 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.StringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.ITooltip;
@@ -41,13 +40,13 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
     }
 
     @Override
-    @NotNull
+    @NonNull
     public StreamCodec<RegistryFriendlyByteBuf, RecorderData> streamCodec() {
         return RecorderData.STREAM_CODEC;
     }
 
     @Override
-    @NotNull
+    @NonNull
     public Identifier getUid() {
         return ID;
     }
@@ -83,7 +82,7 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
         }
 
         @Override
-        @NotNull
+        @NonNull
         public Identifier getUid() {
             return ID;
         }

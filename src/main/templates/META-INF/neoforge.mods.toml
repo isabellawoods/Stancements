@@ -19,13 +19,13 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
     # A display name for the mod
     displayName="${mod_name}" #mandatory
     # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
-    updateJSONURL="https://raw.githubusercontent.com/isabellawoods/Informational-Mod-Features/refs/heads/main/.versioncheck/stancements.json" #optional
+    updateJSONURL="https://raw.githubusercontent.com/isabellawoods/Informational-Mod-Features/refs/heads/main/.versioncheck/${mod_id}.json" #optional
     # A URL for the "homepage" for this mod, displayed in the mod UI
-    displayURL="https://github.com/isabellawoods/Stancements/tree/neoforge-26.1" #optional
+    displayURL="https://modrinth.com/mod/${mod_id}" #optional
     # A file name (in the root of the mod JAR) containing a logo for display
     logoFile="${mod_id}.png" #optional
     # Whether the logo is blurry when viewed from up close
-    logoBlur=false
+    logoBlur=false #optional
     # A text field displayed in the mod UI
     #credits="The friends we've made along the way" #optional
     # A text field displayed in the mod UI
@@ -36,16 +36,17 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
 # The [modproperties] block is used by mods to define features for each mod
 [modproperties.${mod_id}]
     # A small image displayed to the left of your mod’s name in Catalogue's mod list
-    catalogueImageIcon="assets/${mod_id}/textures/item/${mod_id}_logo.png"
+    catalogueImageIcon="assets/${mod_id}/icon.png"
     # An image displayed on the background of the mod's logo. Catalogue makes the texture fade out at the bottom to blend into the description
     catalogueBackground="assets/${mod_id}/textures/gui/catalogue_background.png"
     # A list of links to be displayed in Forged Mod Menu's mods screen
     modMenuLinks=[
+        "modmenu.source=https://github.com/isabellawoods/Stancements/tree/neoforge-26.1",
         "modmenu.github_releases=https://github.com/isabellawoods/Stancements/releases",
         "reutilities.link.changelogs=https://github.com/isabellawoods/Informational-Mod-Features/tree/main/Stancements/Changelogs"
     ]
     # A file name (in the root of the mod JAR) containing a square logo to display in Forged Mod Menu's mods screen
-    modMenuLogoFile="assets/${mod_id}/textures/item/${mod_id}_logo.png"
+    modMenuLogoFile="assets/${mod_id}/textures/icon.png"
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]
@@ -59,7 +60,7 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
 # The coremods config file path is not configurable and is always loaded from META-INF/coremods.json
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.${mod_id}]] #optional
-    # the modid of the dependency
+    # The mod ID of the dependency
     modId="neoforge" #mandatory
     # The type of the dependency. Can be one of "required", "optional", "incompatible" or "discouraged" (case-insensitive).
     # 'required' requires the mod to exist, 'optional' does not
@@ -87,11 +88,11 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
 
 # Dependency for Reutilities
 #[[dependencies.${mod_id}]]
-#    modId = "reutilities"
-#    type = "required"
-#    versionRange = "[1.4.0,)"
-#    ordering = "NONE"
-#    side = "BOTH"
+#    modId="reutilities"
+#    type="required"
+#    versionRange="[2.5.0,),(,2.6.0)"
+#    ordering="NONE"
+#    side="BOTH"
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
 # that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't

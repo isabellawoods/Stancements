@@ -10,7 +10,9 @@ import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.event.custom.StartRecordingAttemptEvent;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
-import melonystudios.stancements.network.s2c.RequestRecordingAttempt;
+import melonystudios.stancements.client.network.RequestRecordingAttempt;
+import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.tag.STJukeboxSongTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
@@ -44,8 +46,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -53,6 +54,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public static final BooleanProperty RECORDING = STBlockStateProperties.RECORDING;
     public static final Component NO_MUSIC_PLAYING_TEXT = Component.translatable("tooltip.stancements.no_music_playing").withStyle(ChatFormatting.GRAY);
     public static final Component CANNOT_COPY_TEXT = Component.translatable("tooltip.stancements.cannot_copy").withStyle(ChatFormatting.GRAY);
+    public static final Component COPYING_PROHIBITED_TEXT = Component.translatable("tooltip.stancements.copying_prohibited").withStyle(ChatFormatting.RED);
     private static final Direction[] DIRECTIONS = Direction.values();
 
     public MusicRecorderBlock(Properties properties) {
@@ -61,7 +63,6 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    @NotNull
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return simpleCodec(MusicRecorderBlock::new);
     }
@@ -80,7 +81,6 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    @NotNull
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder && !recorder.isEmpty()) {
@@ -93,7 +93,6 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    @NotNull
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!state.getValue(RECORDING) && stack.has(STDataComponents.RECORDING_TURNS_INTO) && level.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
             ItemStack handStack = player.getItemInHand(hand);
@@ -115,8 +114,10 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
 
         // fire recording event ~isa 11-04-26
-        StartRecordingAttemptEvent event = StartRecordingAttemptEvent.recordClientMusic(player, recorderPosition, recordableDisc, Optional.ofNullable(musicID));
+        StartRecordingAttemptEvent.ClientMusicRecording event = StartRecordingAttemptEvent.recordClientMusic(player, recorderPosition, recordableDisc, Optional.ofNullable(musicID));
         if (event.isCanceled()) return;
+
+        if (event.clientMusicID().isPresent()) musicID = event.clientMusicID().get();
         recorder.insertDisc(recordableDisc.copy());
 
         if (musicID == null) {
@@ -147,21 +148,29 @@ public class MusicRecorderBlock extends BaseEntityBlock {
             if (adjacentEntity instanceof BlockBasedMusicPlayer musicPlayer && adjacentEntity.isValidBlockState(adjacentState)) {
                 JukeboxSong song = musicPlayer.song();
                 var jukeboxSongs = level.registryAccess().lookup(Registries.JUKEBOX_SONG);
+                if (song == null) continue;
 
                 // block recording if the disc is a copy
                 if (jukeboxSongs.isEmpty() || MusicData.isCopied(musicPlayer.musicDisc())) {
                     errorMessage = CANNOT_COPY_TEXT;
-                    break;
+                    continue;
                 }
-                Identifier songIdentifier = song == null ? null : jukeboxSongs.get().getKey(song);
+                Identifier songIdentifier = jukeboxSongs.get().getKey(song);
+                if (songIdentifier == null) continue;
 
-                if (song != null) {
-                    recorder.startRecording(songIdentifier, true, musicPlayer.recordingDuration(), player);
-                    this.sendMessage(this.getRecordingMessage(song.description().getString()), player);
-                    level.setBlock(pos, state.setValue(RECORDING, true), 3);
-                    level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
-                    return;
+                // block recording if the jukebox song disallows copies (in #copying_prohibited tag)
+                var songHolder = jukeboxSongs.get().get(songIdentifier);
+                if (songHolder.isPresent() && songHolder.get().is(STJukeboxSongTags.COPYING_PROHIBITED)) {
+                    errorMessage = COPYING_PROHIBITED_TEXT;
+                    continue;
                 }
+
+                // finally record the disc
+                recorder.startRecording(songIdentifier, true, musicPlayer.recordingDuration(), player);
+                this.sendMessage(this.getRecordingMessage(song.description().getString()), player);
+                level.setBlock(pos, state.setValue(RECORDING, true), 3);
+                level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
+                return;
             }
         }
 
@@ -205,7 +214,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     public String getSongName(Identifier musicID) {
-        Identifier sanitized = RecordedDiscItem.sanitizeMusicIDLocation(musicID);
+        Identifier sanitized = RecordedDiscItem.getJukeboxSongLocation(musicID);
         String namespacePrefix = sanitized.getNamespace().equals("minecraft") ? "" : sanitized.getNamespace() + ".";
 
         return I18n.get(namespacePrefix + "music." + sanitized.getPath().replace("/", "."));
@@ -244,7 +253,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             if (!state.getValue(RECORDING)) return 0;
-            return ((recorder.ticksUntilFinishedRecording() * 14) / BlockBasedMusicPlayer.DEFAULT_RECORDING_DURATION) + 1;
+            return ((recorder.ticksUntilFinishedRecording() * 14) / STOptions.DEFAULT_RECORDING_DURATION.get()) + 1;
         }
         return 0;
     }
@@ -255,7 +264,6 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     }
 
     @Override
-    @NotNull
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }

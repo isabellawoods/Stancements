@@ -1,7 +1,6 @@
 package melonystudios.stancements.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import melonystudios.stancements.Stancements;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
@@ -19,8 +18,8 @@ import java.util.Optional;
 
 public class ConvertDiscToJukeboxSongCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("melonystudios")
-                .then(Commands.literal(Stancements.stancements("gameplay/convert_disc_to_jukebox_song").toString())
+        dispatcher.register(Commands.literal("mstudios")
+                .then(Commands.literal("gameplay/convert_disc_to_jukebox_song")
                         .executes(context -> convertDiscToJukeboxSong(context.getSource()))));
     }
 
@@ -35,7 +34,7 @@ public class ConvertDiscToJukeboxSongCommand {
                 return 0;
             }
 
-            boolean converted = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), data.id().get(), false);
+            boolean converted = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), data.id().get(), false, true);
             if (converted) {
                 if (data.copied()) {
                     handStack.set(STDataComponents.MUSIC_DATA, new MusicData(Optional.empty(), true));

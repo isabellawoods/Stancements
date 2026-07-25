@@ -30,7 +30,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 
 public class CropPotBlock extends Block {
     public static final BooleanProperty HOPPING = STBlockStateProperties.HOPPING;
@@ -42,13 +41,11 @@ public class CropPotBlock extends Block {
     }
 
     @Override
-    @NotNull
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    @NotNull
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (player.isShiftKeyDown()) return this.removeSeed(level, state, pos);
         return this.harvestCrop(level, state, pos);
@@ -64,7 +61,6 @@ public class CropPotBlock extends Block {
     }
 
     @Override
-    @NotNull
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack handStack = player.getItemInHand(hand);
         InteractionResult defaultInteraction = super.useItemOn(stack, state, level, pos, player, hand, hitResult);
@@ -95,7 +91,6 @@ public class CropPotBlock extends Block {
     }
 
     @Override
-    @NotNull
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
         ItemStack stack = super.getCloneItemStack(level, pos, state, includeData, player);
         if (state.getValue(HOPPING)) stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(HOPPING, true));

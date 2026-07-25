@@ -8,14 +8,14 @@ import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.advancements.criterion.SimpleCriterionTrigger;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.Optional;
 
 public class RecordSongTrigger extends SimpleCriterionTrigger<RecordSongTrigger.TriggerInstance> {
     @Override
-    @NotNull
+    @NonNull
     public Codec<TriggerInstance> codec() {
         return TriggerInstance.CODEC;
     }
@@ -30,8 +30,8 @@ public class RecordSongTrigger extends SimpleCriterionTrigger<RecordSongTrigger.
 
     public record TriggerInstance(Optional<Identifier> musicID, boolean copyingSong, List<Identifier> excluded, Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance {
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Identifier.CODEC.optionalFieldOf("music_id").forGetter(TriggerInstance::musicID),
-                Codec.BOOL.optionalFieldOf("copying_song", false).forGetter(TriggerInstance::copyingSong),
+                Identifier.CODEC.optionalFieldOf("id").forGetter(TriggerInstance::musicID),
+                Codec.BOOL.optionalFieldOf("copying", false).forGetter(TriggerInstance::copyingSong),
                 Identifier.CODEC.listOf().optionalFieldOf("excluded", List.of()).forGetter(TriggerInstance::excluded),
                 EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player)
         ).apply(instance, TriggerInstance::new));

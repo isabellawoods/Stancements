@@ -3,7 +3,7 @@
   "criteria": {
     "copy_disc_except_alpha": {
       "conditions": {
-        "copying_song": true,
+        "copying": true,
         "excluded": [
           "minecraft:game/end/alpha"
         ]

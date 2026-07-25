@@ -59,7 +59,7 @@ public abstract class StartRecordingAttemptEvent extends PlayerEvent implements 
     }
 
     public static class ClientMusicRecording extends StartRecordingAttemptEvent {
-        private final Optional<Identifier> clientMusicID;
+        private Optional<Identifier> clientMusicID;
 
         /// @param player The player recording the music.
         /// @param recorderPosition The block position of the music recorder.
@@ -73,6 +73,12 @@ public abstract class StartRecordingAttemptEvent extends PlayerEvent implements 
         /// @return An *optional* identifier of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
         public Optional<Identifier> clientMusicID() {
             return this.clientMusicID;
+        }
+
+        /// Sets the client's music to the provided identifier.
+        /// @param clientMusicID The {@linkplain Identifier music ID} to use for the recording.
+        public void withClientMusic(Identifier clientMusicID) {
+            this.clientMusicID = Optional.of(clientMusicID);
         }
     }
 

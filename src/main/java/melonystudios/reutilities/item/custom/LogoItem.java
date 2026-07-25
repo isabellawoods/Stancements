@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class LogoItem extends Item {
     private final Style style;
@@ -19,7 +19,7 @@ public class LogoItem extends Item {
     }
 
     @Override
-    @NotNull
+    @NonNull
     public Component getName(ItemStack stack) {
         return super.getName(stack).copy().withStyle(this.style);
     }

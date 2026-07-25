@@ -1,0 +1,46 @@
+{
+  "music.game.nether.blot": {
+    "sounds": [
+      {
+        "name": "biomesoplenty:music/game/nether/blot",
+        "stream": true,
+        "volume": 0.4
+      }
+    ]
+  },
+  "music.game.nether.cortisol": {
+    "sounds": [
+      {
+        "name": "biomesoplenty:music/game/nether/cortisol",
+        "stream": true,
+        "volume": 0.6
+      }
+    ]
+  },
+  "music.game.nether.mesh": {
+    "sounds": [
+      {
+        "name": "biomesoplenty:music/game/nether/mesh",
+        "stream": true,
+        "volume": 0.8
+      }
+    ]
+  },
+  "music.game.nether.redhead": {
+    "sounds": [
+      {
+        "name": "biomesoplenty:music/game/nether/redhead",
+        "stream": true,
+        "volume": 0.9
+      }
+    ]
+  },
+  "music.game.nether.timber": {
+    "sounds": [
+      {
+        "name": "biomesoplenty:music/game/nether/timber",
+        "stream": true
+      }
+    ]
+  }
+}

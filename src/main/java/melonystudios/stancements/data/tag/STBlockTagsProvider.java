@@ -8,7 +8,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,7 +20,7 @@ public class STBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
-    @NotNull
+    @NonNull
     public String getName() {
         return Stancements.generatorName("Block Tags");
     }

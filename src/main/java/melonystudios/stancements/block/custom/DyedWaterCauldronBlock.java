@@ -12,8 +12,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class DyedWaterCauldronBlock extends LayeredCauldronBlock implements EntityBlock {
     public DyedWaterCauldronBlock(Properties properties) {
@@ -27,7 +26,6 @@ public class DyedWaterCauldronBlock extends LayeredCauldronBlock implements Enti
     }
 
     @Override
-    @NotNull
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
         return new ItemStack(Items.CAULDRON);
     }

@@ -8,7 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,7 +20,7 @@ public class STItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    @NotNull
+    @NonNull
     public String getName() {
         return Stancements.generatorName("Item Tags");
     }

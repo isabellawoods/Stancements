@@ -11,8 +11,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.DyeColor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import snownee.jade.api.EntityAccessor;
 import snownee.jade.api.IEntityComponentProvider;
 import snownee.jade.api.ITooltip;
@@ -41,13 +41,13 @@ public class MinecartTagsProvider implements StreamServerDataProvider<EntityAcce
     }
 
     @Override
-    @NotNull
+    @NonNull
     public StreamCodec<RegistryFriendlyByteBuf, TagData> streamCodec() {
         return TagData.STREAM_CODEC;
     }
 
     @Override
-    @NotNull
+    @NonNull
     public Identifier getUid() {
         return ID;
     }
@@ -64,7 +64,7 @@ public class MinecartTagsProvider implements StreamServerDataProvider<EntityAcce
         }
 
         @Override
-        @NotNull
+        @NonNull
         public Identifier getUid() {
             return ID;
         }

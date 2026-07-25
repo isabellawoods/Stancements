@@ -2,20 +2,31 @@ package melonystudios.stancements.data.loot;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
+import melonystudios.stancements.block.custom.croppot.BeetrootCropPotBlock;
+import melonystudios.stancements.block.custom.croppot.NetherWartCropPotBlock;
+import melonystudios.stancements.block.custom.croppot.WheatCropPotBlock;
 import melonystudios.stancements.item.STItems;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyBlockState;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -67,11 +78,16 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         this.dropOther(DYED_WATER_CAULDRON.get(), Items.CAULDRON);
         this.dropOther(MILK_CAULDRON.get(), Items.CAULDRON);
         this.cropPot(CROP_POT.get());
-        this.cropPot(WHEAT_CROP_POT.get(), Items.WHEAT_SEEDS);
-        this.cropPot(CARROT_CROP_POT.get(), Items.CARROT);
-        this.cropPot(POTATO_CROP_POT.get(), Items.POTATO);
-        this.cropPot(BEETROOT_CROP_POT.get(), Items.BEETROOT_SEEDS);
-        this.cropPot(NETHER_WART_CROP_POT.get(), Items.NETHER_WART);
+        this.cropPot(WHEAT_CROP_POT.get(), Items.WHEAT_SEEDS, Items.WHEAT, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
+                WHEAT_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WheatCropPotBlock.AGE, 7)));
+        this.cropPot(CARROT_CROP_POT.get(), Items.CARROT, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
+                CARROT_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WheatCropPotBlock.AGE, 7)));
+        this.cropPot(POTATO_CROP_POT.get(), Items.POTATO, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
+                POTATO_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WheatCropPotBlock.AGE, 7)));
+        this.cropPot(BEETROOT_CROP_POT.get(), Items.BEETROOT_SEEDS, Items.BEETROOT, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
+                BEETROOT_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BeetrootCropPotBlock.AGE, 3)));
+        this.netherWartCropPot(NETHER_WART_CROP_POT.get(), Items.NETHER_WART, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
+                NETHER_WART_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(NetherWartCropPotBlock.AGE, 3)));
 
         // Rails
         this.dropSelf(GILDED_RAIL.get());
@@ -104,15 +120,62 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
     /// Creates a loot table for a full {@linkplain melonystudios.stancements.block.custom.croppot.WheatCropPotBlock crop pot block}.
     /// @param cropPot The crop pot block.
     /// @param seeds The seeds item that drops when breaking this block.
-    public void cropPot(Block cropPot, ItemLike seeds) {
-        this.add(cropPot, LootTable.lootTable()
+    /// @param grownCrop The item that drops when this crop pot is fully grown.
+    /// @param grownCropDropCondition When the crop pot should drop the fully grown crop contents.
+    public void cropPot(Block cropPot, ItemLike seeds, ItemLike grownCrop, LootItemCondition.Builder grownCropDropCondition) {
+        this.add(cropPot, block -> this.createCropDrops(block, grownCrop.asItem(), seeds.asItem(), grownCropDropCondition)
+                .withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(STItems.CROP_POT))
+                        .apply(CopyBlockState.copyState(block).copy(STBlockStateProperties.HOPPING))))
+        );
+    }
+
+    /// Creates a loot table for a full {@linkplain melonystudios.stancements.block.custom.croppot.WheatCropPotBlock crop pot block}.
+    /// @param cropPot The crop pot block.
+    /// @param seeds The seeds item that drops when breaking this block.
+    /// @param grownCropDropCondition When the crop pot should drop the fully grown crop contents.
+    public void cropPot(Block cropPot, ItemLike seeds, LootItemCondition.Builder grownCropDropCondition) {
+        var enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+
+        this.add(cropPot, this.applyExplosionDecay(seeds, LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(seeds))
+                )
+                .withPool(LootPool.lootPool()
+                        .when(grownCropDropCondition)
+                        .add(LootItem.lootTableItem(seeds)
+                            .apply(ApplyBonusCount.addBonusBinomialDistributionCount(enchantments.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3))
+                        )
+                )
                 .withPool(this.applyExplosionCondition(cropPot, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(STItems.CROP_POT))
                         .apply(CopyBlockState.copyState(cropPot).copy(STBlockStateProperties.HOPPING))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(seeds))));
+        ));
+    }
+
+    /// Creates a loot table for a full {@linkplain melonystudios.stancements.block.custom.croppot.NetherWartCropPotBlock Nether wart crop pot block}.
+    /// @param cropPot The crop pot block.
+    /// @param wart The Nether warts that drop when breaking this block.
+    /// @param grownCropDropCondition When the crop pot should drop the fully grown crop contents.
+    public void netherWartCropPot(Block cropPot, ItemLike wart, LootItemCondition.Builder grownCropDropCondition) {
+        var enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+
+        this.add(cropPot, this.applyExplosionDecay(wart, LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(wart)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4))
+                                        .when(grownCropDropCondition))
+                                .apply(ApplyBonusCount.addUniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))
+                                        .when(grownCropDropCondition))
+                        )
+                )
+                .withPool(this.applyExplosionCondition(cropPot, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(STItems.CROP_POT))
+                        .apply(CopyBlockState.copyState(cropPot).copy(STBlockStateProperties.HOPPING))))
+        ));
     }
 
     @Override
-    @NotNull
+    @NonNull
     protected Iterable<Block> getKnownBlocks() {
         return BuiltInRegistries.BLOCK.stream().filter(block -> Stancements.MOD_ID.equals(BuiltInRegistries.BLOCK.getKey(block).getNamespace())).collect(Collectors.toSet());
     }

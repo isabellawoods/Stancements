@@ -81,8 +81,8 @@ public class STCreativeTabs {
                 output.accept(PINK_TAGGING_RAIL);
 
                 // Functional blocks
-                output.accept(CROP_POT);
-                output.accept(hoppingCropPot(1).create());
+                output.accept(cropPot(1, false).create());
+                output.accept(cropPot(1, true).create());
 
                 // Items
                 output.accept(WHITE_TAG);

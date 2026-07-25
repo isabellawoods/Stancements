@@ -1,5 +1,6 @@
 {
   "tab.stancements.main": "Stancements",
+  "tab.stancements.main.menu": "ꜱᴛᴀɴᴄᴇᴍᴇɴᴛꜱ",
 
   "advancements.stancements.record_song.title": "Gravando a rádio",
   "advancements.stancements.record_song.description": "Grave qualquer música usando o Gravador de Música",
@@ -15,6 +16,8 @@
   "stancements.configuration.title": "[Stancements] Opções",
   "stancements.configuration.section.melonystudios.stancements.common.toml.title": "[Stancements] Opções > Comum",
   "stancements.configuration.section.melonystudios.stancements.common.toml": "Opções comuns",
+  "stancements.configuration.section.melonystudios.stancements.client.toml.title": "[Stancements] Opções > Cliente",
+  "stancements.configuration.section.melonystudios.stancements.client.toml": "Opções do cliente",
   "stancements.configuration.item": "Itens",
   "stancements.configuration.item.button": "Editar",
   "stancements.configuration.item.tooltip": "Opções relacionadas a itens adicionados pelo Stancements.",
@@ -37,6 +40,10 @@
   "option.stancements.gilded_rail_speed_multiplier.tooltip": "A velocidade base aplicada aos carrinhos de mina em trilhos dourados.\nEssa opção é multiplicada pelo §lTempo de aceleração§r para obter a aceleração final (105% / 2,25F mais rápido com os valores padrões).",
   "option.stancements.gilded_rail_acceleration_time": "Tempo de aceleração",
   "option.stancements.gilded_rail_acceleration_time.tooltip": "Quantos tiques demoram até o carrinho chegar a velocidade máxima em um trilho dourado.",
+  "option.stancements.default_recording_duration": "Duração padrão das gravações",
+  "option.stancements.default_recording_duration.tooltip": "Qual deve ser a duração padrão ao gravar músicas ambientes. O padrão é 600 tiques (30 segundos).",
+  "option.stancements.music_discs_block_ambient_music": "Discos bloqueiam músicas ambientais",
+  "option.stancements.music_discs_block_ambient_music.tooltip": "Se discos de gravações de músicas ambientais devem bloquear a música padrão do jogo quando estiverem tocando.\n\n§7O discos que bloqueiam são controlados pela tag §o#stancements:cancels_ambient_music§r§7 de sons de toca-discos.",
 
   "commands.stancements.update_recorded_disc.both": "Converteu com sucesso o ID do som e/ou rótulo de %s.",
   "commands.stancements.update_recorded_disc.music_id": "O som de %s foi convertido com sucesso.",
@@ -149,7 +156,8 @@
   "tooltip.stancements.no_music_playing": "Nenhuma música tocando...",
   "tooltip.stancements.recording_music.unified": "Gravando \"%s\"...",
   "tooltip.stancements.recording_music.split": "Gravando \"%s\", de %s...",
-  "tooltip.stancements.cannot_copy": "Não é possível gravar um disco copiado.",
+  "tooltip.stancements.cannot_copy": "Não é possível gravar um disco copiado",
+  "tooltip.stancements.copying_prohibited": "Esse disco não pode ser copiado de propósito",
   "tooltip.stancements.finished_recording": "Gravação completa!",
   "tooltip.stancements.recording": "Gravando: %s (%s)",
   "tooltip.stancements.sound_id": "\"%s\"",
@@ -177,5 +185,17 @@
   "tag.item.stancements.crafting_table_cloths": "Panos de Mesa de Trabalho",
   "tag.item.stancements.tagging_rails": "Trilhos Etiquetados",
   "tag.item.stancements.vinyl_disc_dyes": "Corantes de Discos de Vinil",
-  "tag.item.stancements.minecart_tags": "Etiquetas para Carrinhos"
+  "tag.item.stancements.minecart_tags": "Etiquetas para Carrinhos",
+  "tag.jukebox_song.stancements.ambient_music": "Músicas Ambientais",
+  "tag.jukebox_song.stancements.cancels_ambient_music": "Cancela Músicas Ambientais",
+  "tag.jukebox_song.stancements.copying_prohibited": "Cópias Proibidas",
+  "tag.jukebox_song.minecraft.album.volume_alpha": "Minecraft — Volume Alpha",
+  "tag.jukebox_song.minecraft.album.volume_beta": "Minecraft — Volume Beta",
+  "tag.jukebox_song.minecraft.album.nether_update": "Nether Update",
+  "tag.jukebox_song.minecraft.album.caves_and_cliffs": "Caves & Cliffs",
+  "tag.jukebox_song.minecraft.album.the_wild_update": "The Wild Update",
+  "tag.jukebox_song.minecraft.album.trails_and_tales": "Trails & Tales",
+  "tag.jukebox_song.minecraft.album.tricky_trials": "Tricky Trials",
+  "tag.jukebox_song.minecraft.album.chase_the_skies": "Chase the Skies",
+  "tag.jukebox_song.minecraft.underwater_singles": "Singles dos Oceanos"
 }

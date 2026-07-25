@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class STModelProvider extends ModelProvider {
     }
 
     @Override
-    @NotNull
+    @NonNull
     public String getName() {
         return Stancements.generatorName("Block & Item Models");
     }
@@ -292,6 +292,7 @@ public class STModelProvider extends ModelProvider {
             ModelTemplates.TWO_LAYERED_ITEM.create(id, TextureMapping.layered(TextureMapping.getItemTexture(item), new Material(id)), itemModels.modelOutput);
         }
 
+        // todo: make this auto generate based on the amount of labels
         // generate the main recorded disc model
         itemModels.itemModelOutput.accept(item, ItemModelUtils.select(
                 new ComponentContents<>(STDataComponents.LABEL.get()),
@@ -308,7 +309,8 @@ public class STModelProvider extends ModelProvider {
                 ItemModelUtils.when(10F, this.recordedDiscModel(item, 10)),
                 ItemModelUtils.when(11F, this.recordedDiscModel(item, 11)),
                 ItemModelUtils.when(12F, this.recordedDiscModel(item, 12)),
-                ItemModelUtils.when(13F, this.recordedDiscModel(item, 13))
+                ItemModelUtils.when(13F, this.recordedDiscModel(item, 13)),
+                ItemModelUtils.when(14F, this.recordedDiscModel(item, 14))
         ));
     }
 

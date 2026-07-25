@@ -2,8 +2,11 @@ package melonystudios.stancements.event;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlocks;
+import melonystudios.stancements.client.network.ClientPayloadHandler;
+import melonystudios.stancements.client.network.RequestRecordingAttempt;
 import melonystudios.stancements.command.ConvertDiscToJukeboxSongCommand;
 import melonystudios.stancements.command.UpdateRecordedDiscCommand;
+import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.data.loot.STLootTableProvider;
 import melonystudios.stancements.data.misc.STDataMapsProvider;
 import melonystudios.stancements.data.misc.STDataPackRegistriesProvider;
@@ -12,13 +15,12 @@ import melonystudios.stancements.data.misc.Stadvancements;
 import melonystudios.stancements.data.model.STModelProvider;
 import melonystudios.stancements.data.tag.STBlockTagsProvider;
 import melonystudios.stancements.data.tag.STItemTagsProvider;
+import melonystudios.stancements.data.tag.STJukeboxSongTagsProvider;
 import melonystudios.stancements.misc.STRegistries;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
 import melonystudios.stancements.misc.attachment.STCapabilities;
 import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.misc.discstyle.RecordedDiscStyle;
-import melonystudios.stancements.network.s2c.ClientPayloadHandler;
-import melonystudios.stancements.network.s2c.RequestRecordingAttempt;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,6 +45,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.RegisterCauldronFluidContentEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -74,6 +77,7 @@ public class STEvents {
         STBlockTagsProvider blockTags = new STBlockTagsProvider(output, registries);
         generator.addProvider(true, blockTags);
         generator.addProvider(true, new STItemTagsProvider(output, registries));
+        generator.addProvider(true, new STJukeboxSongTagsProvider(output, registries));
     }
 
     @SubscribeEvent
@@ -108,6 +112,15 @@ public class STEvents {
     public static void registerCommands(RegisterCommandsEvent event) {
         UpdateRecordedDiscCommand.register(event.getDispatcher());
         ConvertDiscToJukeboxSongCommand.register(event.getDispatcher());
+    }
+
+    @SubscribeEvent
+    public static void registerTooltipAppenders(RegisterTooltipAppendersEvent event) {
+        event.registerComponentAppenderAfterAll(STDataComponents.MINECART_TAG_COLOR, (stack, context, display, _, flag, tooltip) -> {
+            if (display.shows(STDataComponents.MINECART_TAG_COLOR.get()) && stack.has(STDataComponents.MINECART_TAG_COLOR)) {
+                stack.get(STDataComponents.MINECART_TAG_COLOR).addToTooltip(context, tooltip, flag, stack.getComponents());
+            }
+        });
     }
 
     @SubscribeEvent

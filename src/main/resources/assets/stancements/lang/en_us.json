@@ -1,5 +1,6 @@
 {
   "tab.stancements.main": "Stancements",
+  "tab.stancements.main.menu": "ꜱᴛᴀɴᴄᴇᴍᴇɴᴛꜱ",
 
   "advancements.stancements.record_song.title": "Radio Recording",
   "advancements.stancements.record_song.description": "Record any song using the Music Recorder",
@@ -15,6 +16,8 @@
   "stancements.configuration.title": "[Stancements] Options",
   "stancements.configuration.section.melonystudios.stancements.common.toml.title": "[Stancements] Options > Common",
   "stancements.configuration.section.melonystudios.stancements.common.toml": "Common Options",
+  "stancements.configuration.section.melonystudios.stancements.client.toml.title": "[Stancements] Options > Client",
+  "stancements.configuration.section.melonystudios.stancements.client.toml": "Client Options",
   "stancements.configuration.item": "Items",
   "stancements.configuration.item.button": "Edit",
   "stancements.configuration.item.tooltip": "Options related to items added by Stancements.",
@@ -37,6 +40,10 @@
   "option.stancements.gilded_rail_speed_multiplier.tooltip": "The base speed multiplier applied to minecarts in gilded rails.\nThis is multiplied by the §lAcceleration Time§r to get the final acceleration (105% / 2.25F using the default values).",
   "option.stancements.gilded_rail_acceleration_time": "Acceleration Time",
   "option.stancements.gilded_rail_acceleration_time.tooltip": "How many ticks the minecart takes to reach maximum speed on a gilded rail.",
+  "option.stancements.default_recording_duration": "Default Recording Duration",
+  "option.stancements.default_recording_duration.tooltip": "How long ambient song recordings should be. Defaults to 600 ticks (30 seconds).",
+  "option.stancements.music_discs_block_ambient_music": "Music Discs Block Ambient Music",
+  "option.stancements.music_discs_block_ambient_music.tooltip": "Whether recorded discs of ambient music should block the game's default music when playing.\n\n§7Blocking music discs are controlled by the §o#stancements:cancels_ambient_music§r§7 jukebox song tag.",
 
   "commands.stancements.update_recorded_disc.both": "Successfully updated sound ID and label of %s.",
   "commands.stancements.update_recorded_disc.music_id": "Successfully updated sound ID of %s.",
@@ -149,7 +156,8 @@
   "tooltip.stancements.no_music_playing": "No music playing...",
   "tooltip.stancements.recording_music.unified": "Recording \"%s\"...",
   "tooltip.stancements.recording_music.split": "Recording \"%s\", by %s...",
-  "tooltip.stancements.cannot_copy": "Cannot record a copied music disc.",
+  "tooltip.stancements.cannot_copy": "Cannot record a copied music disc",
+  "tooltip.stancements.copying_prohibited": "This music disc cannot be copied by design",
   "tooltip.stancements.finished_recording": "Finished recording!",
   "tooltip.stancements.recording": "Recording: %s (%s)",
   "tooltip.stancements.sound_id": "\"%s\"",
@@ -177,5 +185,17 @@
   "tag.item.stancements.crafting_table_cloths": "Crafting Table Cloths",
   "tag.item.stancements.tagging_rails": "Tagging Rails",
   "tag.item.stancements.vinyl_disc_dyes": "Vinyl Disc Dyes",
-  "tag.item.stancements.minecart_tags": "Minecart Tags"
+  "tag.item.stancements.minecart_tags": "Minecart Tags",
+  "tag.jukebox_song.stancements.ambient_music": "Ambient Music",
+  "tag.jukebox_song.stancements.cancels_ambient_music": "Cancels Ambient Music",
+  "tag.jukebox_song.stancements.copying_prohibited": "Copying Prohibited",
+  "tag.jukebox_song.minecraft.album.volume_alpha": "Minecraft - Volume Alpha",
+  "tag.jukebox_song.minecraft.album.volume_beta": "Minecraft - Volume Beta",
+  "tag.jukebox_song.minecraft.album.nether_update": "Nether Update",
+  "tag.jukebox_song.minecraft.album.caves_and_cliffs": "Caves & Cliffs",
+  "tag.jukebox_song.minecraft.album.the_wild_update": "The Wild Update",
+  "tag.jukebox_song.minecraft.album.trails_and_tales": "Trails & Tales",
+  "tag.jukebox_song.minecraft.album.tricky_trials": "Tricky Trials",
+  "tag.jukebox_song.minecraft.album.chase_the_skies": "Chase the Skies",
+  "tag.jukebox_song.minecraft.underwater_singles": "Underwater Singles"
 }

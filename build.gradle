@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.140'
+    id 'net.neoforged.moddev' version '2.0.142'
     id 'idea'
 }
 
@@ -43,7 +43,7 @@ neoForge {
             // programArguments.addAll '--quickPlaySingleplayer', 'New World'
             devLogin = true
 
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            // Comma-separated list of namespaces to load game tests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
@@ -53,9 +53,9 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        // This run config launches GameTestServer and runs all registered gametests, then exits.
-        // By default, the server will crash when no gametests are provided.
-        // The gametest system is also enabled by default for other run configs under the /test command.
+        // This run config launches GameTestServer and runs all registered game tests, then exits.
+        // By default, the server will crash when no game tests are provided.
+        // The game test system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             type = "gameTestServer"
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
@@ -72,14 +72,14 @@ neoForge {
 
         // Applies to all the run configs above.
         configureEach {
-            // Recommended logging data for a userdev environment
+            // Recommended logging data for a user dev environment.
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
             // "REGISTRIES": For firing of registry events.
             // "REGISTRYDUMP": For getting the contents of all registries.
             systemProperty 'forge.logging.markers', 'REGISTRIES'
 
-            // Recommended logging level for the console
+            // Recommended logging level for the console.
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             logLevel = org.slf4j.event.Level.DEBUG
@@ -88,8 +88,8 @@ neoForge {
 
     mods {
         // Define mod <-> source bindings
-        // These are used to tell the game which sources are for which mod
-        // Multi mod projects should define one per mod
+        // These are used to tell the game which sources are for which mod.
+        // Multi-mod projects should define one per mod.
         "${mod_id}" {
             sourceSet(sourceSets.main)
         }
@@ -101,7 +101,6 @@ sourceSets.main.resources {
     srcDir('src/generated/resources')
 
     // Exclude common development only resources from finalized outputs.
-    exclude("**/*.bbmodel") // Blockbench project files
     exclude("src/generated/**/.cache") // Data generation cache files
 }
 
@@ -115,7 +114,7 @@ configurations {
 
 dependencies {
     // Forged Mod Menu
-    // implementation files("build/libs/forgedmodmenu-neoforge-${forgedmodmenu_version}+${minecraft_version}.jar")
+    // implementation files("build/libs/forgedmodmenu-neoforge-${forged_mod_menu_version}+${minecraft_version}.jar")
 
     // Jade
     implementation "maven.modrinth:jade:${jade_version}+neoforge"

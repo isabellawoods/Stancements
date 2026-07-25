@@ -1,18 +1,16 @@
 package melonystudios.stancements.blockentity;
 
-import melonystudios.stancements.block.custom.MusicRecorderBlock;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.JukeboxPlayable;
 import net.minecraft.world.item.JukeboxSong;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 
 /// Necessary data about the adjacent block for music recording.
-/// @see MusicRecorderBlock#tryRecordingFromAdjacentBlock MusicRecorderBlock.tryRecordingFromAdjacentBlock()
+/// @see melonystudios.stancements.block.custom.MusicRecorderBlock#tryRecordingFromAdjacentBlock MusicRecorderBlock.tryRecordingFromAdjacentBlock()
 public interface BlockBasedMusicPlayer {
-    int DEFAULT_RECORDING_DURATION = 600;
     int DEFAULT_TICKS_UNTIL_FINISHED = -1;
     int JUKEBOX_PADDING_TICKS = 20;
 
@@ -25,7 +23,7 @@ public interface BlockBasedMusicPlayer {
 
     /// The item stack of the disc playing the song.
     /// Recording is blocked if this disc is marked as a {@linkplain melonystudios.stancements.component.custom.MusicData copy}.
-    @NotNull ItemStack musicDisc();
+    @NonNull ItemStack musicDisc();
 
     static Optional<JukeboxSong> findJukeboxSongFromDisc(ItemStack stack) {
         JukeboxPlayable playable = stack.get(DataComponents.JUKEBOX_PLAYABLE);

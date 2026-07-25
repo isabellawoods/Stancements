@@ -13,7 +13,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -23,7 +23,7 @@ public class STDataMapsProvider extends DataMapProvider {
     }
 
     @Override
-    @NotNull
+    @NonNull
     public String getName() {
         return Stancements.generatorName("Data Maps");
     }

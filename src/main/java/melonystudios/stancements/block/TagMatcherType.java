@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +38,7 @@ public enum TagMatcherType implements StringRepresentable {
     }
 
     @Override
-    @NotNull
+    @NonNull
     public String getSerializedName() {
         return this.name;
     }

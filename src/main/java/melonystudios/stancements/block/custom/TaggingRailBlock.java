@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.AABB;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -38,7 +37,6 @@ public class TaggingRailBlock extends BaseRailBlock {
     private final TagMatcherType matcherType;
 
     @Override
-    @NotNull
     protected MapCodec<? extends TaggingRailBlock> codec() {
         return CODEC;
     }
@@ -153,7 +151,6 @@ public class TaggingRailBlock extends BaseRailBlock {
     }
 
     @Override
-    @NotNull
     public Property<RailShape> getShapeProperty() {
         return SHAPE;
     }
@@ -175,7 +172,6 @@ public class TaggingRailBlock extends BaseRailBlock {
     }
 
     @Override
-    @NotNull
     protected BlockState rotate(BlockState state, Rotation rotation) {
         switch (rotation) {
             case CLOCKWISE_180:
@@ -220,7 +216,6 @@ public class TaggingRailBlock extends BaseRailBlock {
     }
 
     @Override
-    @NotNull
     protected BlockState mirror(BlockState state, Mirror mirror) {
         RailShape shape = state.getValue(SHAPE);
         return switch (mirror) {
