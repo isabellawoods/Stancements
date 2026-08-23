@@ -3,8 +3,8 @@ package melonystudios.stancements.util;
 import melonystudios.stancements.dispenser.TaggingDispenseBehavior;
 import melonystudios.stancements.item.STItems;
 
-import static melonystudios.reutilities.api.ReAPI.flammable;
 import static melonystudios.stancements.block.STBlocks.*;
+import static melonystudios.stancements.util.ReAPI.flammable;
 import static net.minecraft.world.level.block.DispenserBlock.registerBehavior;
 
 public class STCompatibility {

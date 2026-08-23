@@ -184,6 +184,9 @@ public class STRecipeProvider extends RecipeProvider {
         this.shapeless(RecipeCategory.MISC, STItems.VINYL_DISC).requires(STItems.RECORDED_DISC)
                 .unlockedBy("has_recorded_disc", has(STItems.RECORDED_DISC))
                 .group("vinyl_disc").save(this.output, Stancements.stancements("vinyl_disc_from_clearing").toString());
+        this.shapeless(RecipeCategory.MISC, STItems.SCULK_INFESTED_VINYL_DISC).requires(STItems.SCULK_INFESTED_RECORDED_DISC)
+                .unlockedBy("has_sculk_infested_recorded_disc", has(STItems.SCULK_INFESTED_RECORDED_DISC))
+                .save(this.output, Stancements.stancements("sculk_infested_vinyl_disc_from_clearing").toString());
 
         // Minecart tags
         this.addMinecartTag(STItems.WHITE_TAG, Tags.Items.DYES_WHITE);

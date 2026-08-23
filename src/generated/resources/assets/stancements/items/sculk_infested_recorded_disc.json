@@ -1,0 +1,307 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_1",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 1.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_2",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 2.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_3",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 3.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_4",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 4.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_5",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 5.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_6",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 6.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_7",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 7.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_8",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 8.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_9",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 9.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_10",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 10.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_11",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 11.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_12",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 12.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_13",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 13.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:item/sculk_infested_recorded_disc_label_14",
+          "tints": [
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:constant",
+              "value": -1
+            },
+            {
+              "type": "minecraft:dye",
+              "default": 16777215
+            }
+          ]
+        },
+        "when": 14.0
+      }
+    ],
+    "component": "stancements:label",
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "stancements:item/sculk_infested_recorded_disc"
+    },
+    "property": "minecraft:component"
+  }
+}

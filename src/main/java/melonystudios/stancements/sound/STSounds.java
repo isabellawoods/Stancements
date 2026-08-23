@@ -11,9 +11,13 @@ public class STSounds {
     public static final DeferredRegister<SoundEvent> STANCEMENTS = DeferredRegister.create(Registries.SOUND_EVENT, Stancements.MOD_ID);
     public static final DeferredRegister<SoundEvent> MINECRAFT = DeferredRegister.create(Registries.SOUND_EVENT, "minecraft");
 
+    // Blocks
+    public static final DeferredHolder<SoundEvent, SoundEvent> DYE_ITEM = STANCEMENTS.register("block.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.cauldron.dye")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_RECORDER_EJECT = STANCEMENTS.register("block.music_recorder.eject", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.music_recorder.eject")));
+
     // Items
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_DYE = STANCEMENTS.register("item.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.cauldron.dye")));
     public static final DeferredHolder<SoundEvent, SoundEvent> TAG_MINECART = STANCEMENTS.register("item.tag.latch", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.tag.latch")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SHATTER_MUSIC_DISC = STANCEMENTS.register("item.vinyl_disc.shatter", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.vinyl_disc.shatter")));
 
     // Entities
     public static final DeferredHolder<SoundEvent, SoundEvent> SHEAR_MINECART = STANCEMENTS.register("entity.minecart.shear", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("entity.minecart.shear")));

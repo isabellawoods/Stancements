@@ -1,29 +1,26 @@
 package melonystudios.stancements.item.custom;
 
-import com.google.common.collect.Lists;
-import melonystudios.reutilities.api.ReAPI;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
-import melonystudios.stancements.misc.STRegistries;
-import melonystudios.stancements.misc.discstyle.RecordedDiscStyle;
+import melonystudios.stancements.util.ReAPI;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.Util;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.JukeboxPlayable;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class RecordedDiscItem extends Item {
@@ -51,6 +48,11 @@ public class RecordedDiscItem extends Item {
         if (stack.has(DataComponents.JUKEBOX_PLAYABLE)) return;
 
         if (data != null && data.id().isPresent() && ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/sound_id"))) {
+            tooltip.accept(Component.translatable("tooltip.stancements.music_id_present.warning").withStyle(ChatFormatting.RED));
+            tooltip.accept(Component.translatable("tooltip.stancements.music_id_present.command").withStyle(ChatFormatting.GRAY));
+            tooltip.accept(Component.translatable("tooltip.stancements.music_id_present.bug").withStyle(ChatFormatting.RED));
+            tooltip.accept(Component.empty());
+
             tooltip.accept(Component.translatable("tooltip.stancements.recorded_disc.sound_id", data.id().get().toString()).withStyle(ChatFormatting.GRAY));
         } else if (ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/blank"))) {
             tooltip.accept(Component.translatable("tooltip.stancements.recorded_disc.blank").withStyle(ChatFormatting.GRAY));
@@ -85,59 +87,6 @@ public class RecordedDiscItem extends Item {
             }
         }
         return false;
-    }
-
-    public static ItemStack getRecordedDisc(Level level, Identifier musicID, boolean copyingSong, ItemStack originalStack) {
-        if (originalStack.isEmpty() || !originalStack.has(STDataComponents.RECORDING_TURNS_INTO)) return ItemStack.EMPTY;
-        ItemStack discStack = new ItemStack(originalStack.get(STDataComponents.RECORDING_TURNS_INTO).whenRecorded().value());
-
-        if (copyingSong) {
-            ItemStack stack = setAppearanceFromStyleRegistry(level, discStack, musicID);
-            return stack == null ? randomizeAppearance(level, discStack, musicID, true) : stack;
-        }
-        return randomizeAppearance(level, discStack, musicID, false);
-    }
-
-    public static ItemStack randomizeAppearance(Level level, ItemStack stack, Identifier musicID, boolean copyingSong) {
-        setJukeboxSong(stack, level, musicID, copyingSong, false);
-        stack.set(STDataComponents.LABEL, (float) (level.getRandom().nextInt(DISC_LABEL_MAX) + 1));
-        return getRandomLabelColor(stack, level.getRandom());
-    }
-
-    public static ItemStack setAppearanceFromStyleRegistry(Level level, ItemStack stack, Identifier musicID) {
-        var discStyles = level.registryAccess().lookup(STRegistries.RECORDED_DISC_STYLE);
-        if (discStyles.isEmpty()) return null;
-
-        RecordedDiscStyle copyStyle = discStyles.get().getValue(musicID);
-        if (copyStyle != null) {
-            setJukeboxSong(stack, level, musicID, true, false);
-            stack.set(STDataComponents.LABEL, copyStyle.label());
-            stack.set(STDataComponents.MUSIC_DATA, MusicData.copiedDisc());
-            stack.set(DataComponents.DYED_COLOR, new DyedItemColor(copyStyle.color()));
-            TooltipDisplay display = stack.get(DataComponents.TOOLTIP_DISPLAY);
-            stack.set(DataComponents.TOOLTIP_DISPLAY, (display == null ? TooltipDisplay.DEFAULT : display).withHidden(DataComponents.DYED_COLOR, true));
-            if (copyStyle.rarity() != Rarity.UNCOMMON) stack.set(DataComponents.RARITY, copyStyle.rarity());
-            return stack;
-        }
-        return null;
-    }
-
-    public static ItemStack getRandomLabelColor(ItemStack stack, RandomSource random) {
-        List<DyeColor> dyes = Lists.newArrayList();
-        dyes.add(getRandomDye(random));
-        if (random.nextFloat() > 0.7F) dyes.add(getRandomDye(random));
-        if (random.nextFloat() > 0.8F) dyes.add(getRandomDye(random));
-        ItemStack dyedStack = DyedItemColor.applyDyes(stack.copy(), dyes);
-        dyedStack.set(DataComponents.DYED_COLOR, dyedStack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(DEFAULT_DISC_COLOR)));
-        TooltipDisplay display = dyedStack.get(DataComponents.TOOLTIP_DISPLAY);
-        dyedStack.set(DataComponents.TOOLTIP_DISPLAY, (display == null ? TooltipDisplay.DEFAULT : display).withHidden(DataComponents.DYED_COLOR, true));
-        return dyedStack.isEmpty() ? stack : dyedStack;
-    }
-
-    /// Picks a random {@link DyeColor} from the existing 16 colors.
-    /// @param random The `RandomSource` of randomize the colors.
-    private static DyeColor getRandomDye(RandomSource random) {
-        return Util.getRandom(DyeColor.VALUES, random);
     }
 
     @Override

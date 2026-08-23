@@ -62,21 +62,15 @@ public class CropPotBlock extends Block {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        ItemStack handStack = player.getItemInHand(hand);
-        InteractionResult defaultInteraction = super.useItemOn(stack, state, level, pos, player, hand, hitResult);
-        if (!state.is(STBlocks.CROP_POT)) return defaultInteraction;
-
-        var items = level.registryAccess().lookup(Registries.ITEM);
-        if (items.isPresent()) {
-            var potPlantables = items.get().getDataMap(STDataMaps.POT_PLANTABLES);
-            for (ResourceKey<Item> item : potPlantables.keySet()) {
-                if (items.get().get(item).isPresent() && handStack.is(items.get().get(item).get())) {
-                    return this.placeSeed(level, state, pos, handStack, player, potPlantables.get(item).cropPot(), potPlantables.get(item).plantingSound());
-                }
-            }
+        if (state.getBlock() != STBlocks.CROP_POT.get()) {
+            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         }
 
-        return defaultInteraction;
+        ItemStack handStack = player.getItemInHand(hand);
+        var plantable = handStack.getData(STDataMaps.POT_PLANTABLES);
+        if (plantable != null) return this.placeSeed(level, state, pos, handStack, player, plantable.cropPot(), plantable.plantingSound());
+
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     private InteractionResult placeSeed(Level level, BlockState state, BlockPos pos, ItemStack stack, Player player, Block cropPot, SoundEvent placingSound) {
@@ -93,7 +87,7 @@ public class CropPotBlock extends Block {
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
         ItemStack stack = super.getCloneItemStack(level, pos, state, includeData, player);
-        if (state.getValue(HOPPING)) stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(HOPPING, true));
+        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(HOPPING, true));
         return stack;
     }
 

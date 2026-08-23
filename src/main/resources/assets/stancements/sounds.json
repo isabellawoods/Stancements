@@ -1,10 +1,29 @@
 {
-  "item.cauldron.dye": {
+  "block.music_recorder.eject": {
     "sounds": [
-      "item/bottle/empty1",
-      "item/bottle/empty2"
+      {
+        "name": "stancements:block/music_recorder/eject",
+        "attenuation_distance": 5,
+        "pitch": 0.96
+      },
+      {
+        "name": "stancements:block/music_recorder/eject",
+        "attenuation_distance": 5
+      },
+      {
+        "name": "stancements:block/music_recorder/eject",
+        "attenuation_distance": 5,
+        "pitch": 1.04
+      }
     ],
-    "subtitle": "subtitles.item.cauldron.dye"
+    "subtitle": "subtitles.block.music_recorder.eject"
+  },
+  "block.cauldron.dye": {
+    "sounds": [
+      "stancements:block/cauldron/dye1",
+      "stancements:block/cauldron/dye2"
+    ],
+    "subtitle": "subtitles.block.cauldron.dye"
   },
   "item.tag.latch": {
     "sounds": [
@@ -14,6 +33,26 @@
       "stancements:item/tag/latch4"
     ],
     "subtitle": "subtitles.item.tag.latch"
+  },
+  "item.vinyl_disc.shatter": {
+    "sounds": [
+      "stancements:item/vinyl_disc/shatter1",
+      {
+        "name": "stancements:item/vinyl_disc/shatter1",
+        "pitch": 0.9
+      },
+      "stancements:item/vinyl_disc/shatter2",
+      {
+        "name": "stancements:item/vinyl_disc/shatter2",
+        "pitch": 0.9
+      },
+      "stancements:item/vinyl_disc/shatter3",
+      {
+        "name": "stancements:item/vinyl_disc/shatter3",
+        "pitch": 0.9
+      }
+    ],
+    "subtitle": "subtitles.item.vinyl_disc.shatter"
   },
   "entity.minecart.shear": {
     "sounds": [

@@ -158,6 +158,10 @@ public class STModelProvider extends ModelProvider {
         itemModels.generateFlatItem(STItems.STANCEMENTS_LOGO.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(STItems.VINYL_DISC.get(), ModelTemplates.FLAT_ITEM);
         this.generateRecordedDisc(itemModels, STItems.RECORDED_DISC.get());
+        itemModels.generateFlatItem(STItems.SHATTERED_DISC.get(), ModelTemplates.FLAT_ITEM);
+        this.generateOverlaidFlatItem(itemModels, STItems.SCULK_INFESTED_VINYL_DISC.get(), Stancements.stancements("item/deepslate_vinyl_disc"), Stancements.stancements("item/sculk_disc_overlay"));
+        this.generateOverlaidRecordedDisc(itemModels, STItems.SCULK_INFESTED_RECORDED_DISC.get(), Stancements.stancements("item/deepslate_recorded_disc"), Stancements.stancements("item/sculk_disc_overlay"));
+        this.generateOverlaidFlatItem(itemModels, STItems.SCULK_INFESTED_SHATTERED_DISC.get(), Stancements.stancements("item/deepslate_shattered_disc"), Stancements.stancements("item/sculk_shattered_disc_overlay"));
         itemModels.generateFlatItem(STItems.WHITE_TAG.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(STItems.LIGHT_GRAY_TAG.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(STItems.GRAY_TAG.get(), ModelTemplates.FLAT_ITEM);
@@ -279,6 +283,12 @@ public class STModelProvider extends ModelProvider {
         ));
     }
 
+    public void generateOverlaidFlatItem(ItemModelGenerators itemModels, Item item, Identifier baseTexture, Identifier overlayTexture) {
+        Identifier id = ModelLocationUtils.getModelLocation(item);
+        ModelTemplates.TWO_LAYERED_ITEM.create(id, TextureMapping.layered(new Material(baseTexture), new Material(overlayTexture)), itemModels.modelOutput);
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(id));
+    }
+
     public void generateRecordedDisc(ItemModelGenerators itemModels, Item item) {
         // generate all item models for each label (+ the fallback model)
         Identifier baseID = ModelLocationUtils.getModelLocation(item);
@@ -314,8 +324,49 @@ public class STModelProvider extends ModelProvider {
         ));
     }
 
+    public void generateOverlaidRecordedDisc(ItemModelGenerators itemModels, Item item, Identifier baseTexture, Identifier overlayTexture) {
+        // generate all item models for each label (+ the fallback model)
+        Identifier baseID = ModelLocationUtils.getModelLocation(item);
+        ModelTemplates.THREE_LAYERED_ITEM.create(baseID, TextureMapping.layered(
+                new Material(baseTexture),
+                new Material(overlayTexture),
+                new Material(ModelLocationUtils.getModelLocation(STItems.RECORDED_DISC.get(), "_label_1"))
+        ), itemModels.modelOutput);
+
+        for (int i = DISC_LABEL_MIN; i <= DISC_LABEL_MAX; ++i) {
+            Identifier layerID = ModelLocationUtils.getModelLocation(item, "_label_" + i);
+            Identifier baseLayerID = ModelLocationUtils.getModelLocation(STItems.RECORDED_DISC.get(), "_label_" + i);
+            ModelTemplates.THREE_LAYERED_ITEM.create(layerID, TextureMapping.layered(new Material(baseTexture), new Material(overlayTexture), new Material(baseLayerID)), itemModels.modelOutput);
+        }
+
+        // todo: make this auto generate based on the amount of labels
+        // generate the main recorded disc model
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.select(
+                new ComponentContents<>(STDataComponents.LABEL.get()),
+                ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item)),
+                ItemModelUtils.when(1F, this.overlaidRecordedDiscModel(item, 1)),
+                ItemModelUtils.when(2F, this.overlaidRecordedDiscModel(item, 2)),
+                ItemModelUtils.when(3F, this.overlaidRecordedDiscModel(item, 3)),
+                ItemModelUtils.when(4F, this.overlaidRecordedDiscModel(item, 4)),
+                ItemModelUtils.when(5F, this.overlaidRecordedDiscModel(item, 5)),
+                ItemModelUtils.when(6F, this.overlaidRecordedDiscModel(item, 6)),
+                ItemModelUtils.when(7F, this.overlaidRecordedDiscModel(item, 7)),
+                ItemModelUtils.when(8F, this.overlaidRecordedDiscModel(item, 8)),
+                ItemModelUtils.when(9F, this.overlaidRecordedDiscModel(item, 9)),
+                ItemModelUtils.when(10F, this.overlaidRecordedDiscModel(item, 10)),
+                ItemModelUtils.when(11F, this.overlaidRecordedDiscModel(item, 11)),
+                ItemModelUtils.when(12F, this.overlaidRecordedDiscModel(item, 12)),
+                ItemModelUtils.when(13F, this.overlaidRecordedDiscModel(item, 13)),
+                ItemModelUtils.when(14F, this.overlaidRecordedDiscModel(item, 14))
+        ));
+    }
+
     private ItemModel.Unbaked recordedDiscModel(Item item, int label) {
         return ItemModelUtils.tintedModel(ModelLocationUtils.getModelLocation(item, "_label_" + label), new Constant(-1), new Dye(0xFFFFFF));
+    }
+
+    private ItemModel.Unbaked overlaidRecordedDiscModel(Item item, int label) {
+        return ItemModelUtils.tintedModel(ModelLocationUtils.getModelLocation(item, "_label_" + label), new Constant(-1), new Constant(-1), new Dye(0xFFFFFF));
     }
 
     public void generateDyedWaterBucket(ItemModelGenerators itemModels, Item item, ModelTemplate template) {

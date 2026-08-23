@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.Unique;
 
 import java.util.Optional;
 
-// todo: this doesn't work
 @Pseudo
 @Mixin(BackpackBlockEntity.class)
 public abstract class STBackpackBlockEntityMixin extends BlockEntity implements BlockBasedMusicPlayer {
@@ -32,7 +31,7 @@ public abstract class STBackpackBlockEntityMixin extends BlockEntity implements 
 
     @Override
     public JukeboxSong song() {
-        if (this.hasLevel()) return null; // needed? don't know, but I'll keep it ~isa 04-06-26
+        if (!this.hasLevel()) return null; // oh my fucking god... ~isa 23-08-26
         return BlockBasedMusicPlayer.findJukeboxSongFromDisc(this.musicDisc()).orElse(null);
     }
 

@@ -1,7 +1,7 @@
 package melonystudios.stancements;
 
 import com.mojang.logging.LogUtils;
-import melonystudios.reutilities.component.ReDataComponents;
+import melonystudios.stancements.component.ReDataComponents;
 import melonystudios.stancements.block.STBlockTypes;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.STBlockEntities;
@@ -11,7 +11,10 @@ import melonystudios.stancements.item.tab.STCreativeTabs;
 import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
-import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.misc.loot.STLootConditions;
+import melonystudios.stancements.misc.loot.STLootFunctions;
+import melonystudios.stancements.misc.modifier.STModifierComponents;
+import melonystudios.stancements.option.STCommonOptions;
 import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.util.STCompatibility;
 import net.minecraft.resources.Identifier;
@@ -19,7 +22,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import org.slf4j.Logger;
@@ -35,7 +37,6 @@ public class Stancements {
 
     public Stancements(IEventBus eventBus, ModContainer container) {
         eventBus.addListener(this::commonSetup);
-        eventBus.addListener(this::clientSetup);
 
         STBlocks.BLOCKS.register(eventBus);
         STBlockTypes.TYPES.register(eventBus);
@@ -43,15 +44,18 @@ public class Stancements {
         STItems.ITEMS.register(eventBus);
         STDataComponents.COMPONENTS.register(eventBus);
         ReDataComponents.COMPONENTS.register(eventBus);
+        STModifierComponents.COMPONENTS.register(eventBus);
         STCreativeTabs.TABS.register(eventBus);
         STSounds.STANCEMENTS.register(eventBus);
         STSounds.MINECRAFT.register(eventBus);
         STStatistics.STATS.register(eventBus);
         STCriteriaTriggers.TRIGGERS.register(eventBus);
+        STLootFunctions.FUNCTIONS.register(eventBus);
+        STLootConditions.CONDITIONS.register(eventBus);
         STAttachmentTypes.ATTACHMENTS.register(eventBus);
 
         NeoForgeMod.enableMilkFluid();
-        container.registerConfig(ModConfig.Type.COMMON, STOptions.SPEC, "melonystudios/stancements-common.toml");
+        container.registerConfig(ModConfig.Type.COMMON, STCommonOptions.SPEC, "melonystudios/stancements-common.toml");
     }
 
     /// Creates a name for a data generator using ***Stancements***' name.
@@ -77,6 +81,4 @@ public class Stancements {
         STCompatibility.flammables();
         STCompatibility.dispenserBehaviors();
     }
-
-    private void clientSetup(final FMLClientSetupEvent event) {}
 }

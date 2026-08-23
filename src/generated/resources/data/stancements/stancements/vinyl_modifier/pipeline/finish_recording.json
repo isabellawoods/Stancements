@@ -1,0 +1,42 @@
+{
+  "effects": {
+    "stancements:modify_recordable_disc": [
+      {
+        "function": "stancements:apply_recording_turns_into"
+      },
+      {
+        "fallback_dyes_setter": {
+          "number_of_dyes": {
+            "type": "minecraft:sum",
+            "summands": [
+              1.0,
+              {
+                "type": "minecraft:binomial",
+                "n": 2.0,
+                "p": 0.75
+              }
+            ]
+          }
+        },
+        "fallback_label_setter": {
+          "range": {
+            "type": "minecraft:uniform",
+            "max": 14.0,
+            "min": 1.0
+          },
+          "round_to_nearest": true
+        },
+        "function": "stancements:style_disc_from_registry"
+      }
+    ]
+  },
+  "modifies_when_copying": true,
+  "recording_text": {
+    "color": "#CF8EDA",
+    "translate": "tooltip.stancements.finished_recording"
+  },
+  "strategies": [
+    "finish"
+  ],
+  "targets": []
+}

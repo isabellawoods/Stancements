@@ -2,8 +2,8 @@ package melonystudios.stancements.misc.discstyle;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import melonystudios.reutilities.api.ReCodecs;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Rarity;
 
 /// Style used when **recording songs**, allowing mods to register custom looks for their discs when copied using the music recorder.
@@ -13,8 +13,8 @@ import net.minecraft.world.item.Rarity;
 // unfortunately had to move this to a registry as data maps don't accept conditions field within the values themselves ~isa 19-05-26
 public record RecordedDiscStyle(int color, float label, Rarity rarity) {
     public static final Codec<RecordedDiscStyle> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ReCodecs.HEX_INT_CODEC.fieldOf("color").forGetter(RecordedDiscStyle::color),
-            ReCodecs.floatRange(RecordedDiscItem.DISC_LABEL_MIN, RecordedDiscItem.DISC_LABEL_MAX).fieldOf("label").forGetter(RecordedDiscStyle::label),
+            ExtraCodecs.STRING_RGB_COLOR.fieldOf("color").forGetter(RecordedDiscStyle::color),
+            ExtraCodecs.floatRange(RecordedDiscItem.DISC_LABEL_MIN, RecordedDiscItem.DISC_LABEL_MAX).fieldOf("label").forGetter(RecordedDiscStyle::label),
             Rarity.CODEC.optionalFieldOf("rarity", Rarity.UNCOMMON).forGetter(RecordedDiscStyle::rarity)
     ).apply(instance, RecordedDiscStyle::new));
 

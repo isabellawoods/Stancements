@@ -1,8 +1,8 @@
 package melonystudios.stancements.item.custom;
 
-import melonystudios.reutilities.api.ReAPI;
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.option.STCommonOptions;
+import melonystudios.stancements.util.ReAPI;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -26,7 +26,7 @@ public class GildedRailItem extends BlockItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, tooltip, flag);
         if (ReAPI.shouldDisplay(stack, Stancements.stancements("gilded_rail/tooltip"))) {
-            float speedMultiplier = STOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue();
+            float speedMultiplier = STCommonOptions.GILDED_RAIL_SPEED_MULTIPLIER.get().floatValue();
             tooltip.accept(Component.translatable("tooltip.stancements.gilded_rail",
                     FORMAT.format((speedMultiplier * speedMultiplier) * 100 - 100)
             ).withStyle(ChatFormatting.GRAY));

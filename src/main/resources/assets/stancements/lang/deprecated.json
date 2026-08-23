@@ -1,8 +1,12 @@
 {
   "removed": [
+    "option.stancements.music_discs_block_ambient_music",
+    "option.stancements.music_discs_block_ambient_music.tooltip",
+
     "tooltip.stancements.recording_music",
     "tooltip.stancements.recording_music_disc",
 
+    "tag.block.c.mineable.shears",
     "tag.item.stancements.recordable_discs"
   ],
   "renamed": {
@@ -14,7 +18,11 @@
     "config.stancements.crop_pot_growth_chance.tooltip": "option.stancements.crop_pot_growth_chance.tooltip",
     "config.stancements.add_items_to_vanilla_tabs": "option.stancements.add_items_to_vanilla_tabs",
     "config.stancements.add_items_to_vanilla_tabs.tooltip": "option.stancements.add_items_to_vanilla_tabs.tooltip",
+    "option.stancements.music_discs_block_ambient_music": "stancements.configuration.musicDiscsBlockAmbientMusic",
 
+    "subtitles.item.cauldron.dye": "subtitles.block.cauldron.dye",
+
+    "tooltip.stancements.author_song_separator": "tooltip.stancements.author_song_separator_regex",
     "logger.stancements.outside_bounds": "logger.reutilities.outside_bounds",
 
     "music.minecraft.game.minecraft": "music.game.minecraft",

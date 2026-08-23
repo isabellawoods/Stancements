@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stancements:item/deepslate_recorded_disc",
+    "layer1": "stancements:item/sculk_disc_overlay",
+    "layer2": "stancements:item/recorded_disc_label_8"
+  }
+}

@@ -12,14 +12,7 @@ public class STBlockTags {
     public static final TagKey<Block> CROP_POTS = stancements("crop_pots");
     public static final TagKey<Block> TAGGING_RAILS = stancements("tagging_rails");
 
-    // Common tags
-    public static final TagKey<Block> MINEABLE_WITH_SHEARS = common("mineable/shears");
-
     public static TagKey<Block> stancements(String name) {
         return TagKey.create(Registries.BLOCK, Stancements.stancements(name));
-    }
-
-    public static TagKey<Block> common(String name) {
-        return TagKey.create(Registries.BLOCK, Stancements.common(name));
     }
 }

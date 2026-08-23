@@ -16,11 +16,13 @@ import melonystudios.stancements.data.model.STModelProvider;
 import melonystudios.stancements.data.tag.STBlockTagsProvider;
 import melonystudios.stancements.data.tag.STItemTagsProvider;
 import melonystudios.stancements.data.tag.STJukeboxSongTagsProvider;
+import melonystudios.stancements.data.tag.STVinylModifierTagsProvider;
 import melonystudios.stancements.misc.STRegistries;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
 import melonystudios.stancements.misc.attachment.STCapabilities;
 import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.misc.discstyle.RecordedDiscStyle;
+import melonystudios.stancements.misc.modifier.VinylModifier;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -50,6 +52,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.RegisterCauldronFluidContentEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.List;
@@ -59,6 +62,7 @@ import java.util.concurrent.CompletableFuture;
 public class STEvents {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent.Client event) {
+        event.createDatapackRegistryObjects(STDataPackRegistriesProvider.BUILDER);
         DataGenerator generator = event.getGenerator();
         CompletableFuture<HolderLookup.Provider> registries = event.getLookupProvider();
         PackOutput output = generator.getPackOutput();
@@ -78,6 +82,7 @@ public class STEvents {
         generator.addProvider(true, blockTags);
         generator.addProvider(true, new STItemTagsProvider(output, registries));
         generator.addProvider(true, new STJukeboxSongTagsProvider(output, registries));
+        generator.addProvider(true, new STVinylModifierTagsProvider(output, registries));
     }
 
     @SubscribeEvent
@@ -93,8 +98,14 @@ public class STEvents {
     }
 
     @SubscribeEvent
+    public static void addBuiltInRegistries(NewRegistryEvent event) {
+        event.register(STRegistries.VINYL_MODIFIER_COMPONENT_TYPE);
+    }
+
+    @SubscribeEvent
     public static void addDataPackRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(STRegistries.RECORDED_DISC_STYLE, RecordedDiscStyle.CODEC, RecordedDiscStyle.CODEC);
+        event.dataPackRegistry(STRegistries.VINYL_MODIFIER, VinylModifier.DIRECT_CODEC, VinylModifier.DIRECT_CODEC);
     }
 
     @SubscribeEvent

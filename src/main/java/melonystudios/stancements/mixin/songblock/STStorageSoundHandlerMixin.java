@@ -24,7 +24,7 @@ public class STStorageSoundHandlerMixin {
     @Inject(method = "playStorageSound(Ljava/util/UUID;Lnet/minecraft/client/resources/sounds/SoundInstance;)V", at = @At("TAIL"))
     private static void saveToBlockingDiscs(UUID storageUuid, SoundInstance sound, CallbackInfo callback) {
         ClientLevel level = Minecraft.getInstance().level;
-        if (level == null || !STClientOptions.MUSIC_DISCS_BLOCK_AMBIENT_MUSIC.get()) return;
+        if (level == null || !STClientOptions.MUSIC_DISCS_BLOCK_AMBIENT_MUSIC_SC.get()) return;
 
         var jukeboxSongs = level.registryAccess().lookupOrThrow(Registries.JUKEBOX_SONG);
         Identifier songID = RecordedDiscItem.getJukeboxSongLocation(sound.getSound().getLocation());

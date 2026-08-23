@@ -9,7 +9,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.level.block.Block;
-import org.jspecify.annotations.NonNull;
 
 public class CropPotBlockItem extends BlockItem {
     public CropPotBlockItem(Block block, Properties properties) {
@@ -17,7 +16,6 @@ public class CropPotBlockItem extends BlockItem {
     }
 
     @Override
-    @NonNull
     public Component getName(ItemStack stack) {
         String descriptionID = this.getBlock().getDescriptionId();
         BlockItemStateProperties blockState = stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);

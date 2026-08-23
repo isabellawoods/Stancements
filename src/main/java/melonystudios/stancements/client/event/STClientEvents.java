@@ -39,7 +39,7 @@ public class STClientEvents {
 
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(new RecordedDiscClientExtension(), STItems.RECORDED_DISC);
+        event.registerItem(new RecordedDiscClientExtension(), STItems.RECORDED_DISC, STItems.SCULK_INFESTED_RECORDED_DISC);
     }
 
     @SubscribeEvent

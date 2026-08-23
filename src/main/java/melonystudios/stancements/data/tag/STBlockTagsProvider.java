@@ -5,7 +5,6 @@ import melonystudios.stancements.tag.STBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import org.jspecify.annotations.NonNull;
@@ -41,8 +40,6 @@ public class STBlockTagsProvider extends BlockTagsProvider {
 
         // Common tags
         this.tag(Tags.Blocks.VILLAGER_JOB_SITES).add(DYED_WATER_CAULDRON.get(), MILK_CAULDRON.get());
-        this.tag(STBlockTags.MINEABLE_WITH_SHEARS).addTag(BlockTags.LEAVES).addTag(BlockTags.WOOL).add(Blocks.COBWEB, Blocks.SHORT_GRASS, Blocks.FERN,  Blocks.DEAD_BUSH, Blocks.HANGING_ROOTS,
-                Blocks.VINE, Blocks.GLOW_LICHEN, Blocks.TRIPWIRE);
 
         this.tag(Tags.Blocks.DYED_WHITE).add(WHITE_CRAFTING_TABLE_CLOTH.get(), WHITE_TAGGING_RAIL.get());
         this.tag(Tags.Blocks.DYED_LIGHT_GRAY).add(LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get(), LIGHT_GRAY_TAGGING_RAIL.get());

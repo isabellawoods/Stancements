@@ -1,9 +1,9 @@
 package melonystudios.stancements.item.custom;
 
-import melonystudios.reutilities.api.ReAPI;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.TagMatcherType;
 import melonystudios.stancements.block.custom.TaggingRailBlock;
+import melonystudios.stancements.util.ReAPI;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

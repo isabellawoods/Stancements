@@ -8,22 +8,24 @@ import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
-import melonystudios.stancements.event.custom.StartRecordingAttemptEvent;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import melonystudios.stancements.client.network.RequestRecordingAttempt;
-import melonystudios.stancements.option.STOptions;
+import melonystudios.stancements.option.STCommonOptions;
+import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.tag.STJukeboxSongTags;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,8 +49,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jspecify.annotations.Nullable;
-
-import java.util.Optional;
 
 public class MusicRecorderBlock extends BaseEntityBlock {
     public static final BooleanProperty RECORDING = STBlockStateProperties.RECORDING;
@@ -84,7 +84,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder && !recorder.isEmpty()) {
-            this.stopRecording(level, pos, true);
+            interruptAndEject(level, pos, true);
             level.setBlock(pos, state.setValue(RECORDING, false), 3);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
             return InteractionResult.SUCCESS_SERVER;
@@ -113,18 +113,12 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(recorderPosition);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
 
-        // fire recording event ~isa 11-04-26
-        StartRecordingAttemptEvent.ClientMusicRecording event = StartRecordingAttemptEvent.recordClientMusic(player, recorderPosition, recordableDisc, Optional.ofNullable(musicID));
-        if (event.isCanceled()) return;
-
-        if (event.clientMusicID().isPresent()) musicID = event.clientMusicID().get();
         recorder.insertDisc(recordableDisc.copy());
 
         if (musicID == null) {
             this.sendMessage(NO_MUSIC_PLAYING_TEXT, player);
         } else {
             recorder.startRecording(musicID, false, recordingDuration, player);
-            this.sendMessage(this.getRecordingMessage(this.getSongName(musicID)), player);
             level.setBlock(recorderPosition, state.setValue(RECORDING, true), 3);
             level.gameEvent(GameEvent.BLOCK_CHANGE, recorderPosition, GameEvent.Context.of(player, state));
         }
@@ -134,10 +128,6 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
         Component errorMessage = NO_MUSIC_PLAYING_TEXT;
-
-        // fire recording event ~isa 11-04-26
-        StartRecordingAttemptEvent event = StartRecordingAttemptEvent.recordFromAdjacentBlock(player, pos, recordableDisc);
-        if (event.isCanceled()) return;
 
         recorder.insertDisc(recordableDisc.copy());
         for (Direction direction : DIRECTIONS) {
@@ -167,7 +157,6 @@ public class MusicRecorderBlock extends BaseEntityBlock {
 
                 // finally record the disc
                 recorder.startRecording(songIdentifier, true, musicPlayer.recordingDuration(), player);
-                this.sendMessage(this.getRecordingMessage(song.description().getString()), player);
                 level.setBlock(pos, state.setValue(RECORDING, true), 3);
                 level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
                 return;
@@ -177,20 +166,20 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         if (errorMessage != null && !level.isClientSide()) this.sendMessage(errorMessage, player);
     }
 
-    public void stopRecording(Level level, BlockPos pos, boolean fromTop) {
+    public static void interruptAndEject(Level level, BlockPos pos, boolean fromTop) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             ItemStack discStack = recorder.getTheItem();
-            recorder.finishRecording(ItemStack.EMPTY, true);
+            recorder.finishRecording(ItemStack.EMPTY, Component.empty(), true);
             if (discStack.isEmpty()) return;
 
             if (fromTop) {
-                double xOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.15F;
-                double yOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.660000002F;
-                double zOffset = (double) (level.getRandom().nextFloat() * 0.7F) + (double) 0.15F;
-                ItemEntity discEntity = new ItemEntity(level, (double) pos.getX() + xOffset, (double) pos.getY() + yOffset, (double) pos.getZ() + zOffset, discStack.copy());
+                ItemEntity discEntity = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.3, pos.getZ() + 0.5, discStack.copy(), 0, 0.2, 0);
                 discEntity.setDefaultPickUpDelay();
                 level.addFreshEntity(discEntity);
+
+                level.playSound(null, pos, STSounds.MUSIC_RECORDER_EJECT.get(), SoundSource.BLOCKS, 1, 1);
+                level.levelEvent(2010, pos, Direction.UP.get3DDataValue());
             } else {
                 ItemEntity discEntity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, discStack);
                 discEntity.setDefaultPickUpDelay();
@@ -203,26 +192,46 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         if (player != null) player.sendOverlayMessage(component);
     }
 
-    public Component getRecordingMessage(String songName) {
-        String[] authorAndName = songName.split(I18n.get("tooltip.stancements.author_song_separator"));
+    public static Component getRecordingMessage(String songName) {
+        String[] authorAndName = songName.split(Component.translatable("tooltip.stancements.author_song_separator_regex").getString());
 
         if (authorAndName.length >= 2) {
-            return Component.translatable("tooltip.stancements.recording_music.split", authorAndName[1].trim(), authorAndName[0].trim()).withColor(Stancements.ACCENT_COLOR);
+            return Component.translatable("tooltip.stancements.recording_music.split", authorAndName[1].trim(), prettyPrintAuthorNames(authorAndName[0].trim())).withColor(Stancements.ACCENT_COLOR);
         } else {
             return Component.translatable("tooltip.stancements.recording_music.unified", songName).withColor(Stancements.ACCENT_COLOR);
         }
     }
 
-    public String getSongName(Identifier musicID) {
+    private static MutableComponent prettyPrintAuthorNames(String authorsSingle) {
+        String[] authors = authorsSingle.split(Component.translatable("tooltip.stancements.authors_separator_regex").getString());
+        MutableComponent component = Component.empty();
+
+        for (int i = 0; i < authors.length; ++i) {
+            String author = authors[i].trim();
+            component.append(Component.literal(author));
+
+            if (i == authors.length - 2) {
+                component.append(Component.translatable("tooltip.stancements.delimiter.all"));
+            } else if (i != authors.length - 1) {
+                component.append(Component.translatable("tooltip.stancements.delimiter"));
+            }
+        }
+        return component;
+    }
+
+    public static String getSongName(RegistryAccess registries, Identifier musicID) {
+        var song = BlockBasedMusicPlayer.findJukeboxSongFromID(registries, musicID, true);
+        if (song.isPresent()) return song.get().value().description().getString();
+
         Identifier sanitized = RecordedDiscItem.getJukeboxSongLocation(musicID);
         String namespacePrefix = sanitized.getNamespace().equals("minecraft") ? "" : sanitized.getNamespace() + ".";
 
-        return I18n.get(namespacePrefix + "music." + sanitized.getPath().replace("/", "."));
+        return Component.translatable(namespacePrefix + "music." + sanitized.getPath().replace("/", ".")).getString();
     }
 
     @Override
     protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
-        this.stopRecording(level, pos, false);
+        interruptAndEject(level, pos, false);
         super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
     }
 
@@ -253,7 +262,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             if (!state.getValue(RECORDING)) return 0;
-            return ((recorder.ticksUntilFinishedRecording() * 14) / STOptions.DEFAULT_RECORDING_DURATION.get()) + 1;
+            return ((recorder.ticksUntilFinishedRecording() * 14) / STCommonOptions.DEFAULT_RECORDING_DURATION.get()) + 1;
         }
         return 0;
     }

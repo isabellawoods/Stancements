@@ -1,6 +1,8 @@
 {
   "values": [
     "stancements:vinyl_disc",
-    "stancements:recorded_disc"
+    "stancements:recorded_disc",
+    "stancements:sculk_infested_vinyl_disc",
+    "stancements:sculk_infested_recorded_disc"
   ]
 }

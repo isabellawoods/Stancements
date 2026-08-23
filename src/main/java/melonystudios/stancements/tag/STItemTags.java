@@ -12,9 +12,11 @@ public class STItemTags {
     public static final TagKey<Item> TAGGING_RAILS = stancements("tagging_rails");
     public static final TagKey<Item> VINYL_DISC_DYES = stancements("vinyl_disc_dyes");
     public static final TagKey<Item> MINECART_TAGS = stancements("minecart_tags");
+    public static final TagKey<Item> JADE_CONSIDERS_AS_RECORDING = stancements("jade_considers_as_recording");
 
     // Common tags
     public static final TagKey<Item> DYED_WATER_BUCKETS = common("buckets/dyed_water");
+    public static final TagKey<Item> LOGOS = common("logos");
 
     public static TagKey<Item> stancements(String name) {
         return TagKey.create(Registries.ITEM, Stancements.stancements(name));

@@ -1,6 +1,5 @@
 package melonystudios.stancements.item;
 
-import melonystudios.reutilities.item.custom.LogoItem;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
@@ -9,6 +8,7 @@ import melonystudios.stancements.component.custom.RecordingTurnsInto;
 import melonystudios.stancements.item.custom.*;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DyedItemColor;
@@ -36,7 +36,7 @@ public class STItems {
     public static final DeferredItem<Item> CRIMSON_SHELF = ITEMS.registerItem("crimson_shelf", properties -> new BlockItem(STBlocks.CRIMSON_SHELF.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> WARPED_SHELF = ITEMS.registerItem("warped_shelf", properties -> new BlockItem(STBlocks.WARPED_SHELF.get(), properties.useBlockDescriptionPrefix()));
 
-    // Crafting Table Cloths
+    // Crafting table cloths
     public static final DeferredItem<Item> WHITE_CRAFTING_TABLE_CLOTH = ITEMS.registerItem("white_crafting_table_cloth", properties -> new BlockItem(STBlocks.WHITE_CRAFTING_TABLE_CLOTH.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> LIGHT_GRAY_CRAFTING_TABLE_CLOTH = ITEMS.registerItem("light_gray_crafting_table_cloth", properties -> new BlockItem(STBlocks.LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> GRAY_CRAFTING_TABLE_CLOTH = ITEMS.registerItem("gray_crafting_table_cloth", properties -> new BlockItem(STBlocks.GRAY_CRAFTING_TABLE_CLOTH.get(), properties.useBlockDescriptionPrefix()));
@@ -78,9 +78,13 @@ public class STItems {
     public static final DeferredItem<Item> PINK_TAGGING_RAIL = ITEMS.registerItem("pink_tagging_rail", properties -> new TaggingRailItem(STBlocks.PINK_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
 
     // Items
-    public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.registerItem("stancements_logo", properties -> new LogoItem(Stancements.ACCENT_COLOR, properties.fireResistant().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.registerItem("stancements_logo", properties -> new ReLogoItem(Stancements.ACCENT_COLOR, properties.fireResistant().rarity(Rarity.EPIC)));
     public static final DeferredItem<Item> VINYL_DISC = ITEMS.registerItem("vinyl_disc", properties -> new Item(properties.stacksTo(16).component(STDataComponents.RECORDING_TURNS_INTO, RecordingTurnsInto.vinylDisc())));
     public static final DeferredItem<Item> RECORDED_DISC = ITEMS.registerItem("recorded_disc", properties -> new RecordedDiscItem(properties.rarity(Rarity.UNCOMMON).stacksTo(1)));
+    public static final DeferredItem<Item> SHATTERED_DISC = ITEMS.registerItem("shattered_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.shattered_disc").withColor(0x808080), properties));
+    public static final DeferredItem<Item> SCULK_INFESTED_VINYL_DISC = ITEMS.registerItem("sculk_infested_vinyl_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.sculk_infested_vinyl_disc").withColor(0x05625D), properties.rarity(Rarity.RARE).stacksTo(16).component(STDataComponents.RECORDING_TURNS_INTO, RecordingTurnsInto.sculkInfestedVinylDisc())));
+    public static final DeferredItem<Item> SCULK_INFESTED_RECORDED_DISC = ITEMS.registerItem("sculk_infested_recorded_disc", properties -> new RecordedDiscItem(properties.rarity(Rarity.RARE).stacksTo(1)));
+    public static final DeferredItem<Item> SCULK_INFESTED_SHATTERED_DISC = ITEMS.registerItem("sculk_infested_shattered_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.shattered_disc").withColor(0x808080), properties.rarity(Rarity.RARE)));
     public static final DeferredItem<Item> DYED_WATER_BUCKET = ITEMS.registerItem("dyed_water_bucket", properties -> new DyedWaterBucketItem(properties.stacksTo(1).craftRemainder(Items.BUCKET).component(DataComponents.DYED_COLOR, new DyedItemColor(DyedWaterBucketItem.DEFAULT_WATER_COLOR))));
 
     // Minecart tags
