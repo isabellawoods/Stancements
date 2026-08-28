@@ -1,16 +1,13 @@
 package melonystudios.stancements.blockentity;
 
-import melonystudios.stancements.item.custom.RecordedDiscItem;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.JukeboxPlayable;
 import net.minecraft.world.item.JukeboxSong;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -21,7 +18,7 @@ public interface BlockBasedMusicPlayer {
     int JUKEBOX_PADDING_TICKS = 20;
 
     /// The jukebox song being played by this block entity. May be `null`.
-    JukeboxSong song();
+    @Nullable JukeboxSong song();
 
     /// The time it takes to finish recording this song, in ticks. For jukeboxes,
     /// an extra {@linkplain #JUKEBOX_PADDING_TICKS `20` ticks} is added to the end.
@@ -31,17 +28,11 @@ public interface BlockBasedMusicPlayer {
     /// Recording is blocked if this disc is marked as a {@linkplain melonystudios.stancements.component.custom.MusicData copy}.
     @NotNull ItemStack musicDisc();
 
-    static Optional<JukeboxSong> findJukeboxSongFromDisc(RegistryAccess registries, ItemStack stack) {
+    static Optional<JukeboxSong> sourceSongFromItem(RegistryAccess registries, ItemStack stack) {
         JukeboxPlayable playable = stack.get(DataComponents.JUKEBOX_PLAYABLE);
         var jukeboxSongs = registries.registryOrThrow(Registries.JUKEBOX_SONG);
 
         if (playable != null) return playable.song().unwrap(jukeboxSongs);
         return Optional.empty();
-    }
-
-    static Optional<? extends Holder<JukeboxSong>> findJukeboxSongFromID(Registry<JukeboxSong> jukeboxSongs, Optional<ResourceLocation> musicID, boolean sanitizeLocation) {
-        if (musicID.isEmpty()) return Optional.empty();
-
-        return jukeboxSongs.getHolder(sanitizeLocation ? RecordedDiscItem.getJukeboxSongLocation(musicID.get()) : musicID.get());
     }
 }

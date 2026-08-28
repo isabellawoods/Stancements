@@ -38,20 +38,16 @@ public class STClient {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         // Item overrides
-        ItemProperties.register(STItems.RECORDED_DISC.get(), Stancements.stancements("label"), (stack, level, livEntity, seed) -> {
+        ItemProperties.registerGeneric(Stancements.stancements("label"), (stack, level, livEntity, seed) -> {
             Float label = stack.get(STDataComponents.LABEL);
             return label == null ? 1 : label;
         });
-        ItemProperties.register(STItems.SCULK_INFESTED_RECORDED_DISC.get(), Stancements.stancements("label"), (stack, level, livEntity, seed) -> {
-            Float label = stack.get(STDataComponents.LABEL);
-            return label == null ? 1 : label;
-        });
-        ItemProperties.register(STItems.POCKET_RECORDER.get(), Stancements.stancements("state"), (stack, level, livEntity, seed) -> {
+        ItemProperties.registerGeneric(Stancements.stancements("state"), (stack, level, livEntity, seed) -> {
             InventoryRecorder recorder = stack.get(STDataComponents.INVENTORY_RECORDER);
             if (recorder == null) return 0;
             return InventoryRecorder.State.get(recorder.active(), recorder.track().isPresent()).id();
         });
-        ItemProperties.register(STItems.POCKET_RECORDER.get(), Stancements.stancements("storage_inserted"), (stack, level, livEntity, seed) -> {
+        ItemProperties.registerGeneric(Stancements.stancements("storage_inserted"), (stack, level, livEntity, seed) -> {
             InventoryRecorder recorder = stack.get(STDataComponents.INVENTORY_RECORDER);
             return recorder != null && !recorder.item().isEmpty() && recorder.item().is(STItemTags.CASSETTE_TAPES) ? 1 : 0;
         });

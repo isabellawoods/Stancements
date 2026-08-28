@@ -44,26 +44,37 @@ public class StyleDiscFromRegistryFunction extends LootItemConditionalFunction i
     @NotNull
     protected ItemStack run(ItemStack stack, LootContext context) {
         ItemStack copyStack = stack.copy();
-        ResourceLocation musicID;
+        ResourceLocation stylesID;
         if (this.context != null) {
-            musicID = this.context.track().jukeboxSongID();
-        } else if (context.getParamOrNull(LootContextParams.BLOCK_ENTITY) instanceof MusicRecorderBlockEntity recorder) {
-            musicID = recorder.copyingSong() ? recorder.musicID() : RecordedDiscItem.getJukeboxSongLocation(recorder.musicID());
+            stylesID = this.context.track().jukeboxSongID();
+        } else if (context.getParamOrNull(LootContextParams.BLOCK_ENTITY) instanceof MusicRecorderBlockEntity recorder && recorder.track() != null) {
+            stylesID = recorder.track().jukeboxSongID();
         } else {
             return copyStack;
         }
 
         var discStyles = context.getLevel().registryAccess().registryOrThrow(STRegistries.RECORDED_DISC_STYLE);
-        RecordedDiscStyle copyStyle = discStyles.get(musicID);
+        RecordedDiscStyle copyStyle = discStyles.get(stylesID);
 
-        if (copyStyle != null) {
-            copyStack.set(STDataComponents.LABEL, copyStyle.label());
+        // color
+        if (copyStyle != null && copyStyle.color() > 0) {
             copyStack.set(DataComponents.DYED_COLOR, new DyedItemColor(copyStyle.color(), false));
-            if (copyStyle.rarity() != Rarity.UNCOMMON) copyStack.set(DataComponents.RARITY, copyStyle.rarity());
         } else {
             copyStack = this.dyesSetter.run(copyStack, context);
+        }
+
+        // label
+        if (copyStyle != null && copyStyle.label() <= RecordedDiscItem.DISC_LABEL_MIN) {
+            copyStack.set(STDataComponents.LABEL, copyStyle.label());
+        } else {
             copyStack = this.labelSetter.run(copyStack, context);
         }
+
+        // rarity
+        if (copyStyle != null && copyStyle.rarity() != Rarity.UNCOMMON) {
+            copyStack.set(DataComponents.RARITY, copyStyle.rarity());
+        }
+
         return copyStack;
     }
 

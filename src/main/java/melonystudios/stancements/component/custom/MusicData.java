@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import melonystudios.stancements.component.STDataComponents;
+import melonystudios.stancements.misc.recording.Track;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
@@ -23,27 +24,23 @@ public record MusicData(Optional<ResourceLocation> id, boolean copied) {
             MusicData::new
     );
 
-    public static MusicData unknownSong(ResourceLocation musicID, boolean copied) {
-        return new MusicData(Optional.of(musicID), copied);
+    public static boolean isCopied(ItemStack stack) {
+        return stack.getOrDefault(STDataComponents.MUSIC_DATA, data()).copied();
     }
 
-    public static MusicData copiedDisc() {
-        return new MusicData(Optional.empty(), true);
+    public static MusicData of(Track track, boolean copied) {
+        return new MusicData(Optional.of(track.identifier()), copied);
     }
 
     public static MusicData data() {
         return new MusicData(Optional.empty(), false);
     }
 
-    public static boolean isCopied(ItemStack stack) {
-        return stack.has(STDataComponents.MUSIC_DATA) && stack.get(STDataComponents.MUSIC_DATA).copied();
+    public MusicData withTrack(Track track) {
+        return new MusicData(Optional.of(track.identifier()), this.copied());
     }
 
-    public MusicData withID(ResourceLocation id) {
-        return new MusicData(Optional.of(id), this.copied());
-    }
-
-    public MusicData markCopied(boolean copied) {
+    public MusicData markAsCopy(boolean copied) {
         return new MusicData(this.id(), copied);
     }
 

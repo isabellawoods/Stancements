@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 /// ### This is a payload directed towards the *client*.
 /// Asks the client to start the music recording process, as it requires the {@linkplain melonystudios.stancements.mixin.recorder.CurrentMusicAccessor currently playing song in `MusicManager`}.
 /// @param position The in-world position of the recorder (assuming it is in the same dimension).
-/// @param recordableDisc The item stack (any item with the {@link melonystudios.stancements.component.STDataComponents#RECORDING_TURNS_INTO recording_turns_into} component) inserted into the recorder.
+/// @param recordableDisc The item stack (any item with the {@link melonystudios.stancements.component.STDataComponents#RECORDABLE_TRANSFORM recordable_transform} component) inserted into the recorder.
 public record RequestRecordingAttempt(BlockPos position, ItemStack recordableDisc) implements CustomPacketPayload {
     public static final StreamCodec<RegistryFriendlyByteBuf, RequestRecordingAttempt> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,

@@ -1,6 +1,7 @@
 package melonystudios.stancements.misc.modifier;
 
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.component.custom.RecordableTransform;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.misc.STRegistries;
 import melonystudios.stancements.misc.loot.condition.ItemRecorderStateCondition;
@@ -40,7 +41,7 @@ public class STVinylModifiers {
         // pipeline
         context.register(FINISH_RECORDING, VinylModifier.modifier(List.of())
                 .recordingText(Component.translatable("tooltip.stancements.finished_recording").withColor(Stancements.ACCENT_COLOR))
-                .withFunction(ApplyRecordingTurnsInto.apply().build())
+                .withFunction(TransformRecordableFunction.withTransform(RecordableTransform.Transforms.ON_RECORD).build())
                 .withFunction(StyleDiscFromRegistryFunction.styleFromRegistry(
                         recordedDiscDyes(),
                         (SetRandomLabelFunction) SetRandomLabelFunction.withDefaultLabelRange().build()

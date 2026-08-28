@@ -3,9 +3,12 @@ package melonystudios.stancements.block;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.custom.*;
 import melonystudios.stancements.block.custom.croppot.*;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -50,14 +53,15 @@ public class STBlocks {
 
     // Functional
     public static final DeferredBlock<Block> MUSIC_RECORDER = BLOCKS.register("music_recorder", () -> new MusicRecorderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUKEBOX)));
+    public static final DeferredBlock<Block> ALBUM = BLOCKS.register("album", () -> new AlbumBlock(BlockBehaviour.Properties.of().strength(1).noOcclusion().sound(SoundType.BAMBOO_WOOD)));
     public static final DeferredBlock<Block> DYED_WATER_CAULDRON = BLOCKS.register("dyed_water_cauldron", () -> new DyedWaterCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
     public static final DeferredBlock<Block> MILK_CAULDRON = BLOCKS.register("milk_cauldron", () -> new MilkCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
     public static final DeferredBlock<Block> CROP_POT = BLOCKS.register("crop_pot", () -> new CropPotBlock(BlockBehaviour.Properties.of().noOcclusion().pushReaction(PushReaction.DESTROY).strength(1, 4.2F)));
-    public static final DeferredBlock<Block> WHEAT_CROP_POT = BLOCKS.register("wheat_crop_pot", () -> new WheatCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
-    public static final DeferredBlock<Block> CARROT_CROP_POT = BLOCKS.register("carrot_crop_pot", () -> new CarrotCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
-    public static final DeferredBlock<Block> POTATO_CROP_POT = BLOCKS.register("potato_crop_pot", () -> new PotatoCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
-    public static final DeferredBlock<Block> BEETROOT_CROP_POT = BLOCKS.register("beetroot_crop_pot", () -> new BeetrootCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
-    public static final DeferredBlock<Block> NETHER_WART_CROP_POT = BLOCKS.register("nether_wart_crop_pot", () -> new NetherWartCropPotBlock(BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> WHEAT_CROP_POT = BLOCKS.register("wheat_crop_pot", () -> new WheatCropPotBlock(Items.WHEAT_SEEDS, PotPlantable::defaultPlantingSound, BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> CARROT_CROP_POT = BLOCKS.register("carrot_crop_pot", () -> new CarrotCropPotBlock(Items.CARROT, PotPlantable::defaultPlantingSound, BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> POTATO_CROP_POT = BLOCKS.register("potato_crop_pot", () -> new PotatoCropPotBlock(Items.POTATO, PotPlantable::defaultPlantingSound, BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> BEETROOT_CROP_POT = BLOCKS.register("beetroot_crop_pot", () -> new BeetrootCropPotBlock(Items.BEETROOT_SEEDS, PotPlantable::defaultPlantingSound, BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> NETHER_WART_CROP_POT = BLOCKS.register("nether_wart_crop_pot", () -> new NetherWartCropPotBlock(Items.NETHER_WART, block -> new PotPlantable(block, SoundEvents.NETHER_WART_PLANTED), BlockBehaviour.Properties.ofFullCopy(CROP_POT.get()).randomTicks()));
 
     // Rails
     public static final DeferredBlock<Block> GILDED_RAIL = BLOCKS.register("gilded_rail", () -> new GildedRailBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POWERED_RAIL)));

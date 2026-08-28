@@ -22,7 +22,7 @@ import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 import java.util.concurrent.CompletableFuture;
 
 public class STRecipeProvider extends RecipeProvider {
-    /// Mod id for [*Railcraft Reborn*](https://modrinth.com/mod/railcraft-reborn).
+    /// Mod ID for [*Railcraft Reborn*](https://modrinth.com/mod/railcraft-reborn).
     public static final String RAILCRAFT_MOD_ID = "railcraft";
 
     public STRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
@@ -197,7 +197,7 @@ public class STRecipeProvider extends RecipeProvider {
     /// @param shelf The shelf item itself.
     /// @param planks The planks used to craft this shelf.
     public static void addShelf(RecipeOutput output, ItemLike shelf, ItemLike planks) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, shelf, 3).define('#', planks).define('S', Tags.Items.RODS_WOODEN)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, shelf, 6).define('#', planks).define('S', Tags.Items.RODS_WOODEN)
                 .pattern("###").pattern("S S").unlockedBy("has_planks", has(planks))
                 .group("wooden_shelves").save(output);
     }

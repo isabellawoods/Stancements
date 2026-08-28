@@ -7,9 +7,11 @@ import melonystudios.stancements.blockentity.custom.DyedWaterCauldronBlockEntity
 import melonystudios.stancements.client.STClient;
 import melonystudios.stancements.client.item.ClientTrackStorageTooltip;
 import melonystudios.stancements.client.item.RecordedDiscClientExtension;
+import melonystudios.stancements.client.screen.AlbumScreen;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.component.custom.TrackStorage;
+import melonystudios.stancements.container.STMenuTypes;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.custom.DyedWaterBucketItem;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
@@ -27,10 +29,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.client.event.RenderTooltipEvent;
-import net.neoforged.neoforge.client.event.SelectMusicEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -59,6 +58,11 @@ public class STClientEvents {
     @SubscribeEvent
     public static void registerClientTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(TrackStorage.class, ClientTrackStorageTooltip::new);
+    }
+
+    @SubscribeEvent
+    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(STMenuTypes.ALBUM.get(), AlbumScreen::new);
     }
 
     @SubscribeEvent

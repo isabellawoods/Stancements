@@ -124,11 +124,12 @@ public record InventoryRecorder(boolean active, Optional<Track> track, long reco
     @Override
     public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag flag) {
         if (this.track().isPresent() && context.level() != null) {
+            long ticks = this.recordingFinishTick() - context.level().getGameTime();
             tooltip.accept(Component.translatable(
                     "tooltip.stancements.recording",
                     this.track().get().displayName(context.level().registryAccess().registryOrThrow(Registries.JUKEBOX_SONG)).withColor(TrackStorage.TEXT_COLOR),
-                    formatLongTickDuration(this.recordingFinishTick() - context.level().getGameTime(), context.tickRate())
-            ).withStyle(ChatFormatting.GRAY));
+                    formatLongTickDuration(ticks, context.tickRate())
+            ).withStyle(ticks < 0 ? ChatFormatting.RED : ChatFormatting.GRAY));
         }
 
         tooltip.accept(statusText(this.active(), this.track().isPresent()));

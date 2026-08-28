@@ -1,0 +1,48 @@
+{
+  "cover_art": "minecraft:textures/album/nether_update.png",
+  "description": {
+    "color": "#A0A0A0",
+    "translate": "album.minecraft.nether_update.description"
+  },
+  "genre": [
+    "ambient",
+    "dubstep"
+  ],
+  "link_tree": {
+    "link_tree.link_tree.own_website.lena_raine": "https://lena.fyi/projects/2020/4/11/minecraft-nether-update-2020"
+  },
+  "name": {
+    "italic": true,
+    "translate": "album.minecraft.nether_update.title"
+  },
+  "songwriters": [
+    "Lena Raine"
+  ],
+  "track_listing": [
+    [
+      {
+        "id": "minecraft:game/nether/crimson_forest/chrysopoeia",
+        "resolved": true
+      },
+      "minecraft:music/game/nether/crimson_forest/chrysopoeia"
+    ],
+    [
+      {
+        "id": "minecraft:game/nether/nether_wastes/rubedo",
+        "resolved": true
+      },
+      "minecraft:music/game/nether/nether_wastes/rubedo"
+    ],
+    [
+      {
+        "id": "minecraft:game/nether/soulsand_valley/so_below",
+        "resolved": true
+      },
+      "minecraft:music/game/nether/soulsand_valley/so_below"
+    ],
+    {
+      "id": "minecraft:pigstep",
+      "resolved": true
+    }
+  ]
+}

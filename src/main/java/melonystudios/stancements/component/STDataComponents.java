@@ -22,8 +22,8 @@ public class STDataComponents {
             builder -> builder.persistent(ReCodecs.floatRange(RecordedDiscItem.DISC_LABEL_MIN, RecordedDiscItem.DISC_LABEL_MAX)).networkSynchronized(ByteBufCodecs.FLOAT));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<MinecartTagColor>> MINECART_TAG_COLOR = COMPONENTS.registerComponentType("minecart_tag_color",
             builder -> builder.persistent(MinecartTagColor.CODEC).networkSynchronized(MinecartTagColor.STREAM_CODEC).cacheEncoding());
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<RecordingTurnsInto>> RECORDING_TURNS_INTO = COMPONENTS.registerComponentType("recording_turns_into",
-            builder -> builder.persistent(RecordingTurnsInto.CODEC).networkSynchronized(RecordingTurnsInto.STREAM_CODEC).cacheEncoding());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<RecordableTransform>> RECORDABLE_TRANSFORM = COMPONENTS.registerComponentType("recordable_transform",
+            builder -> builder.persistent(RecordableTransform.CODEC).networkSynchronized(RecordableTransform.STREAM_CODEC).cacheEncoding());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<TrackStorage>> TRACK_STORAGE = COMPONENTS.registerComponentType("track_storage",
             builder -> builder.persistent(TrackStorage.CODEC).networkSynchronized(TrackStorage.STREAM_CODEC).cacheEncoding());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<InventoryRecorder>> INVENTORY_RECORDER = COMPONENTS.registerComponentType("inventory_recorder",

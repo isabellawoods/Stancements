@@ -1,0 +1,121 @@
+{
+  "cover_art": "minecraft:textures/album/volume_alpha.png",
+  "description": {
+    "color": "#A0A0A0",
+    "translate": "album.minecraft.volume_alpha.description"
+  },
+  "genre": [
+    "ambient"
+  ],
+  "link_tree": {
+    "link_tree.link_tree.apple_music": "https://music.apple.com/album/minecraft-volume-alpha/1867885113",
+    "link_tree.link_tree.bandcamp": "https://c418.bandcamp.com/album/minecraft-volume-alpha",
+    "link_tree.link_tree.deezer": "https://deezer.com/album/9236757",
+    "link_tree.link_tree.own_website.c418": "https://c418.org/albums/minecraft-volume-alpha/",
+    "link_tree.link_tree.soundcloud": "https://soundcloud.com/c418/sets/minecraft-volume-alpha-4",
+    "link_tree.link_tree.spotify": "https://open.spotify.com/album/3Gt7rOjcZQoHCfnKl5AkK7",
+    "link_tree.link_tree.youtube": "https://www.youtube.com/playlist?list=OLAK5uy_lNojWuj8PKhbqVFZBpSkUpCYcrJbYt8s4",
+    "link_tree.link_tree.youtube_music": "https://music.youtube.com/playlist?list=OLAK5uy_nhQ2EVQRbH-uWJbaesYXRQGZMzinN0qqg"
+  },
+  "name": {
+    "italic": true,
+    "translate": "album.minecraft.volume_alpha.title"
+  },
+  "songwriters": [
+    "C418"
+  ],
+  "track_listing": [
+    [
+      {
+        "id": "minecraft:game/key",
+        "resolved": true
+      },
+      "minecraft:music/game/key"
+    ],
+    [
+      {
+        "id": "minecraft:game/subwoofer_lullaby",
+        "resolved": true
+      },
+      "minecraft:music/game/subwoofer_lullaby"
+    ],
+    [
+      {
+        "id": "minecraft:game/living_mice",
+        "resolved": true
+      },
+      "minecraft:music/game/living_mice"
+    ],
+    [
+      {
+        "id": "minecraft:game/haggstrom",
+        "resolved": true
+      },
+      "minecraft:music/game/haggstrom"
+    ],
+    [
+      {
+        "id": "minecraft:game/minecraft",
+        "resolved": true
+      },
+      "minecraft:music/game/minecraft"
+    ],
+    [
+      {
+        "id": "minecraft:game/oxygene",
+        "resolved": true
+      },
+      "minecraft:music/game/oxygene"
+    ],
+    [
+      {
+        "id": "minecraft:game/mice_on_venus",
+        "resolved": true
+      },
+      "minecraft:music/game/mice_on_venus"
+    ],
+    [
+      {
+        "id": "minecraft:game/dry_hands",
+        "resolved": true
+      },
+      "minecraft:music/game/dry_hands"
+    ],
+    [
+      {
+        "id": "minecraft:game/wet_hands",
+        "resolved": true
+      },
+      "minecraft:music/game/wet_hands"
+    ],
+    [
+      {
+        "id": "minecraft:game/clark",
+        "resolved": true
+      },
+      "minecraft:music/game/clark"
+    ],
+    {
+      "id": "minecraft:13",
+      "resolved": true
+    },
+    [
+      {
+        "id": "minecraft:game/sweden",
+        "resolved": true
+      },
+      "minecraft:music/game/sweden"
+    ],
+    {
+      "id": "minecraft:cat",
+      "resolved": true
+    },
+    [
+      {
+        "id": "minecraft:game/danny",
+        "resolved": true
+      },
+      "minecraft:music/game/danny"
+    ]
+  ]
+}

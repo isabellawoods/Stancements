@@ -1,5 +1,6 @@
 package melonystudios.stancements.block.custom.croppot;
 
+import melonystudios.stancements.block.PotPlantable;
 import melonystudios.stancements.option.STCommonOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -36,13 +38,18 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.CommonHooks;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock {
+    protected static final Map<Item, PotPlantable> PLANTABLE_IN_POTS = new HashMap<>();
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
 
-    public WheatCropPotBlock(Properties properties) {
+    public WheatCropPotBlock(Item seed, Function<Block, PotPlantable> plantable, Properties properties) {
         super(properties);
+        PLANTABLE_IN_POTS.put(seed, plantable.apply(this));
         this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeProperty(), 0).setValue(HOPPING, false));
     }
 

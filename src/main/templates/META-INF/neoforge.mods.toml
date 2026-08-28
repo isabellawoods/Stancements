@@ -30,7 +30,7 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
     # Whether the logo is blurry when viewed from up close
     logoBlur=false #optional
     # A text field displayed in the mod UI
-    #credits="The friends we've made along the way" #optional
+    credits="Reitrix" #optional
     # A text field displayed in the mod UI
     authors="${mod_authors}" #optional
     # The description text for the mod (multi line!) (#mandatory)

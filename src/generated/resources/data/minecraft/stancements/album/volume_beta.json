@@ -1,0 +1,153 @@
+{
+  "cover_art": "minecraft:textures/album/volume_beta.png",
+  "description": {
+    "color": "#A0A0A0",
+    "translate": "album.minecraft.volume_beta.description"
+  },
+  "genre": [
+    "ambient"
+  ],
+  "link_tree": {
+    "link_tree.link_tree.apple_music": "https://music.apple.com/album/minecraft-volume-beta/1867890087",
+    "link_tree.link_tree.bandcamp": "https://c418.bandcamp.com/album/minecraft-volume-beta",
+    "link_tree.link_tree.deezer": "https://deezer.com/album/9236763",
+    "link_tree.link_tree.own_website.c418": "https://c418.org/albums/minecraft-volume-beta/",
+    "link_tree.link_tree.soundcloud": "https://soundcloud.com/c418/sets/minecraft-volume-beta-2",
+    "link_tree.link_tree.spotify": "https://open.spotify.com/album/7CYDRyFCKtAYJBSpfovLyX",
+    "link_tree.link_tree.youtube": "https://www.youtube.com/playlist?list=OLAK5uy_mSH30PsabObEwBb9LClNBzLhjGYZDSfec",
+    "link_tree.link_tree.youtube_music": "https://music.youtube.com/playlist?list=OLAK5uy_nnY0s7ogC6wEI85M_C9NrMLLv6lWOQxqY"
+  },
+  "name": {
+    "italic": true,
+    "translate": "album.minecraft.volume_beta.title"
+  },
+  "songwriters": [
+    "C418"
+  ],
+  "track_listing": [
+    [
+      {
+        "id": "minecraft:game/end/alpha",
+        "resolved": true
+      },
+      "minecraft:music/game/end/alpha"
+    ],
+    [
+      {
+        "id": "minecraft:game/nether/dead_voxel",
+        "resolved": true
+      },
+      "minecraft:music/game/nether/dead_voxel"
+    ],
+    [
+      {
+        "id": "minecraft:game/creative/blind_spots",
+        "resolved": true
+      },
+      "minecraft:music/game/creative/blind_spots"
+    ],
+    [
+      {
+        "id": "minecraft:game/nether/concrete_halls",
+        "resolved": true
+      },
+      "minecraft:music/game/nether/concrete_halls"
+    ],
+    [
+      {
+        "id": "minecraft:game/creative/biome_fest",
+        "resolved": true
+      },
+      "minecraft:music/game/creative/biome_fest"
+    ],
+    [
+      {
+        "id": "minecraft:game/creative/haunt_muskie",
+        "resolved": true
+      },
+      "minecraft:music/game/creative/haunt_muskie"
+    ],
+    [
+      {
+        "id": "minecraft:game/nether/warmth",
+        "resolved": true
+      },
+      "minecraft:music/game/nether/warmth"
+    ],
+    [
+      {
+        "id": "minecraft:game/creative/aria_math",
+        "resolved": true
+      },
+      "minecraft:music/game/creative/aria_math"
+    ],
+    [
+      {
+        "id": "minecraft:game/nether/ballad_of_the_cats",
+        "resolved": true
+      },
+      "minecraft:music/game/nether/ballad_of_the_cats"
+    ],
+    [
+      {
+        "id": "minecraft:game/creative/taswell",
+        "resolved": true
+      },
+      "minecraft:music/game/creative/taswell"
+    ],
+    [
+      {
+        "id": "minecraft:game/creative/dreiton",
+        "resolved": true
+      },
+      "minecraft:music/game/creative/dreiton"
+    ],
+    [
+      {
+        "id": "minecraft:game/end/the_end",
+        "resolved": true
+      },
+      "minecraft:music/game/end/the_end"
+    ],
+    {
+      "id": "minecraft:chirp",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:wait",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:mellohi",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:stal",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:strad",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:eleven",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:ward",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:mall",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:blocks",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:far",
+      "resolved": true
+    }
+  ]
+}

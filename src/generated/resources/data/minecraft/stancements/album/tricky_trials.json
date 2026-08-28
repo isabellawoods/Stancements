@@ -1,0 +1,103 @@
+{
+  "cover_art": "minecraft:textures/album/tricky_trials.png",
+  "description": {
+    "color": "#A0A0A0",
+    "translate": "album.minecraft.tricky_trials.description"
+  },
+  "genre": [
+    "ambient",
+    "electronic",
+    "rock"
+  ],
+  "link_tree": {
+    "link_tree.link_tree.bandcamp": "https://cherof.bandcamp.com/music",
+    "link_tree.link_tree.own_website.lena_raine": "https://lena.fyi/",
+    "link_tree.link_tree.twitter.kumi_tanioka": "https://twitter.com/tanikumi"
+  },
+  "name": {
+    "italic": true,
+    "translate": "album.minecraft.tricky_trials.title"
+  },
+  "songwriters": [
+    "Aaron Cherof",
+    "Kumi Tanioka",
+    "Lena Raine"
+  ],
+  "track_listing": [
+    [
+      {
+        "id": "minecraft:game/featherfall",
+        "resolved": true
+      },
+      "minecraft:music/game/featherfall"
+    ],
+    [
+      {
+        "id": "minecraft:game/watcher",
+        "resolved": true
+      },
+      "minecraft:music/game/watcher"
+    ],
+    [
+      {
+        "id": "minecraft:game/puzzlebox",
+        "resolved": true
+      },
+      "minecraft:music/game/puzzlebox"
+    ],
+    [
+      {
+        "id": "minecraft:game/komorebi",
+        "resolved": true
+      },
+      "minecraft:music/game/komorebi"
+    ],
+    [
+      {
+        "id": "minecraft:game/pokopoko",
+        "resolved": true
+      },
+      "minecraft:music/game/pokopoko"
+    ],
+    [
+      {
+        "id": "minecraft:game/yakusoku",
+        "resolved": true
+      },
+      "minecraft:music/game/yakusoku"
+    ],
+    [
+      {
+        "id": "minecraft:game/deeper",
+        "resolved": true
+      },
+      "minecraft:music/game/deeper"
+    ],
+    [
+      {
+        "id": "minecraft:game/eld_unknown",
+        "resolved": true
+      },
+      "minecraft:music/game/eld_unknown"
+    ],
+    [
+      {
+        "id": "minecraft:game/endless",
+        "resolved": true
+      },
+      "minecraft:music/game/endless"
+    ],
+    {
+      "id": "minecraft:creator",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:creator_music_box",
+      "resolved": true
+    },
+    {
+      "id": "minecraft:precipice",
+      "resolved": true
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import melonystudios.stancements.block.custom.MusicRecorderBlock;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.tag.STJukeboxSongTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -21,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Optional;
 
-/// Copy of {@link net.minecraft.world.item.EitherHolder EitherHolder} specialized to handle *Stancements*' recording pipeline.
+/// An abstraction of a music ID specialized to handle *Stancements*' recording pipeline.
 /// @param identifier A {@linkplain ResourceLocation resource location} of this track, such as `minecraft:music/game/mice_on_venus` or `minecraft:precipice`.
 /// @param resolved Whether this track's ID represents an existing jukebox song. If not, it will pass through {@link RecordedDiscItem#getJukeboxSongLocation}.
 public record Track(ResourceLocation identifier, boolean resolved) {
@@ -42,7 +43,7 @@ public record Track(ResourceLocation identifier, boolean resolved) {
             Track::new
     );
 
-    /// Copy of {@link net.minecraft.world.item.EitherHolder EitherHolder} specialized to handle *Stancements*' recording pipeline.
+    /// An abstraction of a music ID specialized to handle *Stancements*' recording pipeline.
     /// @param trackID A {@linkplain ResourceLocation resource location} of this track, such as `minecraft:music/game/mice_on_venus`.
     public Track(ResourceLocation trackID) {
         this(trackID, false);
@@ -66,6 +67,10 @@ public record Track(ResourceLocation identifier, boolean resolved) {
 
     public static Track fromEither(Either<Track, ResourceLocation> either) {
         return either.map(track -> new Track(track.identifier(), track.resolved()), Track::new);
+    }
+
+    public static boolean requiredForCompletion(Holder<JukeboxSong> song) {
+        return !song.is(STJukeboxSongTags.NOT_REQUIRED_FOR_COMPLETION);
     }
 
     public ResourceLocation jukeboxSongID() {

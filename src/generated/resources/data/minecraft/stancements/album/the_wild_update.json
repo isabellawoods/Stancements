@@ -1,0 +1,49 @@
+{
+  "cover_art": "minecraft:textures/album/the_wild_update.png",
+  "description": {
+    "color": "#A0A0A0",
+    "translate": "album.minecraft.the_wild_update.description"
+  },
+  "genre": [
+    "ambient"
+  ],
+  "link_tree": {
+    "link_tree.link_tree.own_website.lena_raine": "https://lena.fyi/projects/2022/12/6/minecraft-the-wild-update-2022",
+    "link_tree.link_tree.twitter.samuel_aberg": "https://twitter.com/slamp0000"
+  },
+  "name": {
+    "italic": true,
+    "translate": "album.minecraft.the_wild_update.title"
+  },
+  "songwriters": [
+    "Lena Raine",
+    "Samuel Åberg"
+  ],
+  "track_listing": [
+    [
+      {
+        "id": "minecraft:game/swamp/firebugs",
+        "resolved": true
+      },
+      "minecraft:music/game/swamp/firebugs"
+    ],
+    [
+      {
+        "id": "minecraft:game/swamp/aerie",
+        "resolved": true
+      },
+      "minecraft:music/game/swamp/aerie"
+    ],
+    [
+      {
+        "id": "minecraft:game/swamp/labyrinthine",
+        "resolved": true
+      },
+      "minecraft:music/game/swamp/labyrinthine"
+    ],
+    {
+      "id": "minecraft:5",
+      "resolved": true
+    }
+  ]
+}

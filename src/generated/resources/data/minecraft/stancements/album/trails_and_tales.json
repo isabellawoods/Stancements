@@ -1,0 +1,55 @@
+{
+  "cover_art": "minecraft:textures/album/trails_and_tales.png",
+  "description": {
+    "color": "#A0A0A0",
+    "translate": "album.minecraft.trails_and_tales.description"
+  },
+  "genre": [
+    "ambient",
+    "electronic"
+  ],
+  "link_tree": {
+    "link_tree.link_tree.bandcamp": "https://cherof.bandcamp.com/music"
+  },
+  "name": {
+    "italic": true,
+    "translate": "album.minecraft.trails_and_tales.title"
+  },
+  "songwriters": [
+    "Aaron Cherof"
+  ],
+  "track_listing": [
+    [
+      {
+        "id": "minecraft:game/echo_in_the_wind",
+        "resolved": true
+      },
+      "minecraft:music/game/echo_in_the_wind"
+    ],
+    [
+      {
+        "id": "minecraft:game/a_familiar_room",
+        "resolved": true
+      },
+      "minecraft:music/game/a_familiar_room"
+    ],
+    [
+      {
+        "id": "minecraft:game/bromeliad",
+        "resolved": true
+      },
+      "minecraft:music/game/bromeliad"
+    ],
+    [
+      {
+        "id": "minecraft:game/crescent_dunes",
+        "resolved": true
+      },
+      "minecraft:music/game/crescent_dunes"
+    ],
+    {
+      "id": "minecraft:relic",
+      "resolved": true
+    }
+  ]
+}

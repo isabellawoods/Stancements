@@ -7,6 +7,7 @@ import melonystudios.stancements.misc.modifier.ModificationContext;
 import melonystudios.stancements.misc.modifier.ModifierComponentType;
 import melonystudios.stancements.misc.modifier.VinylModifier;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.commands.functions.CommandFunction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +34,7 @@ public record RunFunctionModifier(ResourceLocation function) implements Modifier
 
         if (function.isPresent()) {
             CommandSourceStack sourceStack = server.createCommandSourceStack()
-                    .withPermission(2)
+                    .withPermission(Commands.LEVEL_GAMEMASTERS)
                     .withSuppressedOutput()
                     .withLevel(context.level())
                     .withPosition(context.blockPosition().getCenter());
@@ -43,7 +44,7 @@ public record RunFunctionModifier(ResourceLocation function) implements Modifier
 
             functionManager.execute(function.get(), sourceStack);
         } else {
-            LOGGER.error(MarkerFactory.getMarker(modifier.getRegisteredName()), "Vinyl modifier 'run_function' component failed due to a non-existent function '{}'", this.function);
+            LOGGER.error(MarkerFactory.getMarker(modifier.getRegisteredName()), "Vinyl modifier 'run_function' component failed due to a non-existent function: {}", this.function);
         }
     }
 }

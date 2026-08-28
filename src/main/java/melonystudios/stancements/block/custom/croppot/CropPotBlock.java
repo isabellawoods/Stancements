@@ -3,7 +3,6 @@ package melonystudios.stancements.block.custom.croppot;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.misc.STStatistics;
-import melonystudios.stancements.misc.datamap.STDataMaps;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -66,7 +65,7 @@ public class CropPotBlock extends Block {
         }
 
         ItemStack handStack = player.getItemInHand(hand);
-        var plantable = handStack.getItemHolder().getData(STDataMaps.POT_PLANTABLES);
+        var plantable = WheatCropPotBlock.PLANTABLE_IN_POTS.get(handStack.getItem());
         if (plantable != null) return this.placeSeed(level, state, pos, handStack, player, plantable.cropPot(), plantable.plantingSound());
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);

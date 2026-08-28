@@ -18,21 +18,21 @@ public class ModificationContext {
     private final BlockPos blockPosition;
     private final ItemStack musicDisc;
     private final Track track;
-    private final boolean copyingSong;
+    private final boolean copying;
     private final Consumer<Integer> ejectionTicksCallback;
 
-    public ModificationContext(ServerLevel level, BlockPos blockPosition, ItemStack musicDisc, Track track, boolean copyingSong, Consumer<Integer> ejectionTicksCallback) {
+    public ModificationContext(ServerLevel level, BlockPos blockPosition, ItemStack musicDisc, Track track, boolean copying, Consumer<Integer> ejectionTicksCallback) {
         this.level = level;
         this.blockPosition = blockPosition;
         this.musicDisc = musicDisc;
         this.musicDiscImmutable = musicDisc.copy();
         this.track = track;
-        this.copyingSong = copyingSong;
+        this.copying = copying;
         this.ejectionTicksCallback = ejectionTicksCallback;
     }
 
     public static ModificationContext fromBlockEntity(MusicRecorderBlockEntity recorder) {
-        return new ModificationContext((ServerLevel) recorder.getLevel(), recorder.getBlockPos(), recorder.getTheItem(), new Track(recorder.musicID(), recorder.copyingSong()), recorder.copyingSong(), recorder::setEjectionTicks);
+        return new ModificationContext((ServerLevel) recorder.getLevel(), recorder.getBlockPos(), recorder.getTheItem(), recorder.track(), recorder.copying(), recorder::setEjectionTicks);
     }
 
     public ServerLevel level() {
@@ -57,8 +57,8 @@ public class ModificationContext {
         return this.track;
     }
 
-    public boolean copyingSong() {
-        return this.copyingSong;
+    public boolean copying() {
+        return this.copying;
     }
 
     public Consumer<Integer> ejectionTicksCallback() {

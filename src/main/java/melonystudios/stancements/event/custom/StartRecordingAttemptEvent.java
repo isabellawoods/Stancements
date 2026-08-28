@@ -1,7 +1,7 @@
 package melonystudios.stancements.event.custom;
 
+import melonystudios.stancements.misc.recording.Track;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.ICancellableEvent;
@@ -18,17 +18,17 @@ import java.util.Optional;
 public class StartRecordingAttemptEvent extends PlayerEvent implements ICancellableEvent {
     private final BlockPos recorderPosition;
     private final ItemStack recordableDisc;
-    private Optional<ResourceLocation> clientMusicID;
+    private Optional<Track> clientTrack;
 
     /// @param player The player recording the music.
     /// @param recorderPosition The block position of the music recorder.
-    /// @param recordableDisc The item stack of the item being used to record (should always have the `stancements:recording_turns_into` component).
-    /// @param clientMusicID An *optional* resource location of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
-    public StartRecordingAttemptEvent(Player player, BlockPos recorderPosition, ItemStack recordableDisc, Optional<ResourceLocation> clientMusicID) {
+    /// @param recordableDisc The item stack of the item being used to record (should always have the `stancements:recordable_transform` component).
+    /// @param clientTrack An *optional* music track of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
+    public StartRecordingAttemptEvent(Player player, BlockPos recorderPosition, ItemStack recordableDisc, Optional<Track> clientTrack) {
         super(player);
         this.recorderPosition = recorderPosition;
         this.recordableDisc = recordableDisc;
-        this.clientMusicID = clientMusicID;
+        this.clientTrack = clientTrack;
     }
 
     /// @return The block position of the music recorder.
@@ -37,24 +37,24 @@ public class StartRecordingAttemptEvent extends PlayerEvent implements ICancella
     }
 
     /// @return The item stack of the item being used to record. This item should *always* have the
-    /// `stancements:recording_turns_into` component.
+    /// `stancements:recordable_transform` component.
     public ItemStack recordableDisc() {
         return this.recordableDisc;
     }
 
-    /// @return An *optional* resource location of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
-    public Optional<ResourceLocation> clientMusicID() {
-        return this.clientMusicID;
+    /// @return An *optional* music track of the client's currently playing music from their {@link net.minecraft.client.sounds.MusicManager MusicManager}.
+    public Optional<Track> clientTrack() {
+        return this.clientTrack;
     }
 
-    /// Sets the client's music to the provided resource location.
-    /// @param clientMusicID The {@linkplain ResourceLocation music ID} to use for the recording.
-    public void withClientMusic(ResourceLocation clientMusicID) {
-        this.clientMusicID = Optional.of(clientMusicID);
+    /// Sets the client's music to the provided track.
+    /// @param track The music {@linkplain Track track} to use for the recording.
+    public void withClientTrack(Track track) {
+        this.clientTrack = Optional.of(track);
     }
 
-    public static StartRecordingAttemptEvent recordMusic(Player player, BlockPos recorderPosition, ItemStack recordableDisc, Optional<ResourceLocation> clientMusicID) {
-        StartRecordingAttemptEvent event = new StartRecordingAttemptEvent(player, recorderPosition, recordableDisc, clientMusicID);
+    public static StartRecordingAttemptEvent recordMusic(Player player, BlockPos recorderPosition, ItemStack recordableDisc, Optional<Track> clientTrack) {
+        StartRecordingAttemptEvent event = new StartRecordingAttemptEvent(player, recorderPosition, recordableDisc, clientTrack);
         NeoForge.EVENT_BUS.post(event);
         return event;
     }

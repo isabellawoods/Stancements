@@ -32,7 +32,7 @@ public abstract class STStorageBlockEntityMixin extends BlockEntity implements B
     @Override
     public JukeboxSong song() {
         if (this.getLevel() == null) return null;
-        return BlockBasedMusicPlayer.findJukeboxSongFromDisc(this.getLevel().registryAccess(), this.musicDisc()).orElse(null);
+        return BlockBasedMusicPlayer.sourceSongFromItem(this.getLevel().registryAccess(), this.musicDisc()).orElse(null);
     }
 
     @Override

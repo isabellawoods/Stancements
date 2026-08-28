@@ -1,15 +1,10 @@
 package melonystudios.stancements.data.misc;
 
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.item.STItems;
-import melonystudios.stancements.misc.datamap.PotPlantables;
-import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
@@ -29,16 +24,7 @@ public class STDataMapsProvider extends DataMapProvider {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     protected void gather(HolderLookup.Provider registries) {
-        // Stancements data maps
-        this.builder(STDataMaps.POT_PLANTABLES)
-                .add(Items.WHEAT_SEEDS.builtInRegistryHolder(), PotPlantables.defaultPlantingSound(STBlocks.WHEAT_CROP_POT.get()), false)
-                .add(Items.CARROT.builtInRegistryHolder(), PotPlantables.defaultPlantingSound(STBlocks.CARROT_CROP_POT.get()), false)
-                .add(Items.POTATO.builtInRegistryHolder(), PotPlantables.defaultPlantingSound(STBlocks.POTATO_CROP_POT.get()), false)
-                .add(Items.BEETROOT_SEEDS.builtInRegistryHolder(), PotPlantables.defaultPlantingSound(STBlocks.BEETROOT_CROP_POT.get()), false)
-                .add(Items.NETHER_WART.builtInRegistryHolder(), new PotPlantables(STBlocks.NETHER_WART_CROP_POT.get(), SoundEvents.NETHER_WART_PLANTED), false);
-
         // NeoForge data maps
         this.builder(NeoForgeDataMaps.FURNACE_FUELS)
                 .add(STItemTags.SHELVES, new FurnaceFuel(300), false)

@@ -75,6 +75,7 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
 
         // Functional
         this.dropSelf(MUSIC_RECORDER.get());
+        this.add(ALBUM.get(), block -> noDrop());
         this.dropOther(DYED_WATER_CAULDRON.get(), Items.CAULDRON);
         this.dropOther(MILK_CAULDRON.get(), Items.CAULDRON);
         this.cropPot(CROP_POT.get());

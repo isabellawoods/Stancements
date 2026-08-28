@@ -16,6 +16,6 @@ public class STLootFunctions {
             () -> new LootItemFunctionType<>(SetRandomLabelFunction.CODEC));
     public static final DeferredHolder<LootItemFunctionType<?>, LootItemFunctionType<StyleDiscFromRegistryFunction>> STYLE_DISC_FROM_REGISTRY = FUNCTIONS.register("style_disc_from_registry",
             () -> new LootItemFunctionType<>(StyleDiscFromRegistryFunction.CODEC));
-    public static final DeferredHolder<LootItemFunctionType<?>, LootItemFunctionType<ApplyRecordingTurnsInto>> APPLY_RECORDING_TURNS_INTO = FUNCTIONS.register("apply_recording_turns_into",
-            () -> new LootItemFunctionType<>(ApplyRecordingTurnsInto.CODEC));
+    public static final DeferredHolder<LootItemFunctionType<?>, LootItemFunctionType<TransformRecordableFunction>> TRANSFORM_RECORDABLE = FUNCTIONS.register("transform_recordable",
+            () -> new LootItemFunctionType<>(TransformRecordableFunction.CODEC));
 }

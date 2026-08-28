@@ -23,7 +23,7 @@ import java.util.List;
 
 public record TrackStorage(List<Track> tracklist, int capacity) implements TooltipComponent {
     public static final Codec<TrackStorage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Track.CODEC.listOf().fieldOf("tracklist").forGetter(TrackStorage::tracklist),
+            Track.LIST_CODEC.fieldOf("tracklist").forGetter(TrackStorage::tracklist),
             ExtraCodecs.NON_NEGATIVE_INT.fieldOf("capacity").forGetter(TrackStorage::capacity)
     ).apply(instance, TrackStorage::new));
     public static final StreamCodec<ByteBuf, TrackStorage> STREAM_CODEC = StreamCodec.composite(

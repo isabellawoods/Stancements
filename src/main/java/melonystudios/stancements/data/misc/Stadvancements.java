@@ -217,14 +217,14 @@ public class Stadvancements implements AdvancementProvider.AdvancementGenerator 
     }
 
     private static ItemStack createRecordAllSongsIcon() {
-        ItemStack stack = new ItemStack(STItems.RECORDED_DISC.get());
+        ItemStack stack = STItems.RECORDED_DISC.toStack();
         stack.set(DataComponents.DYED_COLOR, new DyedItemColor(0xAA00AA, false));
         stack.set(STDataComponents.LABEL, 7F);
         return stack;
     }
 
     private static ItemStack createCopyDiscIcon() {
-        ItemStack stack = new ItemStack(STItems.RECORDED_DISC.get());
+        ItemStack stack = STItems.RECORDED_DISC.toStack();
         stack.set(DataComponents.DYED_COLOR, new DyedItemColor(0xFFDD99, false));
         stack.set(STDataComponents.LABEL, 10F);
         return stack;

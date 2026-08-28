@@ -4,8 +4,8 @@ import melonystudios.stancements.block.custom.MusicRecorderBlock;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
 import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.event.custom.StartRecordingAttemptEvent;
+import melonystudios.stancements.misc.recording.Track;
 import melonystudios.stancements.option.STCommonOptions;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Inventory;
@@ -37,19 +37,19 @@ public class ServerPayloadHandler {
         }
 
         // fire recording event ~isa 26-06-26
-        StartRecordingAttemptEvent event = StartRecordingAttemptEvent.recordMusic(context.player(), receival.position(), receival.recordableDisc(), receival.clientMusicID());
+        StartRecordingAttemptEvent event = StartRecordingAttemptEvent.recordMusic(context.player(), receival.position(), receival.recordableDisc(), receival.clientTrack());
         if (event.isCanceled()) {
             // at least put the disc in the recorder if it can't be recorded
             blockEntity.insertDisc(receival.recordableDisc());
             return;
         }
 
-        Optional<ResourceLocation> clientMusicID = receival.clientMusicID();
-        if (event.clientMusicID().isPresent()) clientMusicID = event.clientMusicID();
+        Optional<Track> clientTrack = receival.clientTrack();
+        if (event.clientTrack().isPresent()) clientTrack = event.clientTrack();
 
-        if (clientMusicID.isPresent() && volumes.music()) {
+        if (clientTrack.isPresent() && volumes.music()) {
             // always record current song first
-            recorder.tryRecordingFromPlayer(level, state, receival.position(), context.player(), receival.recordableDisc(), clientMusicID.get(), STCommonOptions.DEFAULT_RECORDING_DURATION.get());
+            recorder.tryRecordingFromPlayer(level, state, receival.position(), context.player(), receival.recordableDisc(), clientTrack.get(), STCommonOptions.DEFAULT_RECORDING_DURATION.get());
         } else if (volumes.records()) {
             // if none is playing, try recording from an adjacent jukebox
             recorder.tryRecordingFromAdjacentBlock(level, state, receival.position(), context.player(), receival.recordableDisc());

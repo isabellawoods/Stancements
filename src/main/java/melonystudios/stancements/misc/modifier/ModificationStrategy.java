@@ -6,22 +6,18 @@ import org.jetbrains.annotations.NotNull;
 
 public enum ModificationStrategy implements StringRepresentable {
     /// Makes the modifier run right as the recording process starts.
-    START(0, "start"),
+    START("start"),
     /// Makes the modifier run right as the recording process ends.
-    FINISH(1, "finish");
+    FINISH("finish"),
+    /// Makes the modifier run after the recordable disc is ejected.
+    EJECT("eject");
 
     public static final ModificationStrategy[] VALUES = ModificationStrategy.values();
     public static final Codec<ModificationStrategy> CODEC = StringRepresentable.fromEnum(() -> VALUES);
-    private final int id;
     private final String name;
 
-    ModificationStrategy(int id, String name) {
-        this.id = id;
+    ModificationStrategy(String name) {
         this.name = name;
-    }
-
-    public int id() {
-        return this.id;
     }
 
     @Override
