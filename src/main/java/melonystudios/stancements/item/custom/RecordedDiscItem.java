@@ -2,6 +2,7 @@ package melonystudios.stancements.item.custom;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.component.STDataComponents;
+import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.util.ReAPI;
 import net.minecraft.ChatFormatting;
@@ -48,9 +49,7 @@ public class RecordedDiscItem extends Item {
         if (stack.has(DataComponents.JUKEBOX_PLAYABLE)) return;
 
         if (data != null && data.id().isPresent() && ReAPI.shouldDisplay(stack, Stancements.stancements("recorded_disc/sound_id"))) {
-            tooltip.accept(Component.translatable("tooltip.stancements.music_id_present.warning").withStyle(ChatFormatting.RED));
-            tooltip.accept(Component.translatable("tooltip.stancements.music_id_present.command").withStyle(ChatFormatting.GRAY));
-            tooltip.accept(Component.translatable("tooltip.stancements.music_id_present.bug").withStyle(ChatFormatting.RED));
+            tooltip.accept(Component.translatable("tooltip.stancements.music_id_present.warning").withColor(InventoryRecorder.State.PAUSED.color()));
             tooltip.accept(Component.empty());
 
             tooltip.accept(Component.translatable("tooltip.stancements.recorded_disc.sound_id", data.id().get().toString()).withStyle(ChatFormatting.GRAY));

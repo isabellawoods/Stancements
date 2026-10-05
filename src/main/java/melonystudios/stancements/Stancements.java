@@ -1,10 +1,10 @@
 package melonystudios.stancements;
 
 import com.mojang.logging.LogUtils;
-import melonystudios.stancements.component.ReDataComponents;
 import melonystudios.stancements.block.STBlockTypes;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.STBlockEntities;
+import melonystudios.stancements.component.ReDataComponents;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.tab.STCreativeTabs;

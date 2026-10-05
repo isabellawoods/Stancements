@@ -1,5 +1,6 @@
 {
   "values": [
-    "stancements:pipeline/finish_recording"
+    "stancements:pipeline/finish_recording",
+    "stancements:pipeline/sculk_ejection_chance"
   ]
 }

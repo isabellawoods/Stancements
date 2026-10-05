@@ -6,10 +6,10 @@ import melonystudios.stancements.block.custom.croppot.CropPotBlock;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.misc.advancement.RecordSongTrigger;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.AdvancementType;
+import melonystudios.stancements.misc.recording.RecordingSource;
+import melonystudios.stancements.misc.recording.Track;
+import melonystudios.stancements.misc.recording.Tracks;
+import net.minecraft.advancements.*;
 import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -38,7 +38,7 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
         AdvancementHolder recordSong = Advancement.Builder.advancement()
                 .parent(sweetDreamsIdentifier)
                 .display(
-                        STItems.MUSIC_RECORDER.get(),
+                        STItems.MUSIC_RECORDER,
                         Component.translatable("advancements.stancements.record_song.title"),
                         Component.translatable("advancements.stancements.record_song.description"),
                         null,
@@ -49,7 +49,7 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
                 )
                 .addCriterion(
                         "record_song",
-                        RecordSongTrigger.TriggerInstance.recordedAnySong(false, List.of())
+                        RecordSongTrigger.TriggerInstance.recordedAnySong(RecordingSource.MUSIC_RECORDER, false, List.of())
                 )
                 .save(saver, Stancements.stancements("adventure/record_song").toString());
 
@@ -67,7 +67,7 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
                 )
                 .addCriterion(
                         "copy_disc_except_alpha",
-                        RecordSongTrigger.TriggerInstance.recordedAnySong(true, List.of(Identifier.withDefaultNamespace("game/end/alpha")))
+                        RecordSongTrigger.TriggerInstance.recordedAnySong(RecordingSource.MUSIC_RECORDER, true, Tracks.C418_ALPHA.listOf())
                 )
                 .save(saver, Stancements.stancements("adventure/copy_disc").toString());
 
@@ -83,82 +83,100 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
                         true,
                         false
                 )
-                .rewards(AdvancementRewards.Builder.experience(200))
+                .rewards(AdvancementRewards.Builder.experience(500))
                 // Volume Alpha
-                .addCriterion("recorded/minecraft", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/minecraft")))
-                .addCriterion("recorded/clark", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/clark")))
-                .addCriterion("recorded/sweden", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/sweden")))
-                .addCriterion("recorded/subwoofer_lullaby", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/subwoofer_lullaby")))
-                .addCriterion("recorded/living_mice", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/living_mice")))
-                .addCriterion("recorded/haggstrom", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/haggstrom")))
-                .addCriterion("recorded/danny", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/danny")))
-                .addCriterion("recorded/key", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/key")))
-                .addCriterion("recorded/oxygene", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/oxygene")))
-                .addCriterion("recorded/dry_hands", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/dry_hands")))
-                .addCriterion("recorded/wet_hands", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/wet_hands")))
-                .addCriterion("recorded/mice_on_venus", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/mice_on_venus")))
+                .addCriterion("recorded/minecraft", recordVanilla("game/minecraft"))
+                .addCriterion("recorded/clark", recordVanilla("game/clark"))
+                .addCriterion("recorded/sweden", recordVanilla("game/sweden"))
+                .addCriterion("recorded/subwoofer_lullaby", recordVanilla("game/subwoofer_lullaby"))
+                .addCriterion("recorded/living_mice", recordVanilla("game/living_mice"))
+                .addCriterion("recorded/haggstrom", recordVanilla("game/haggstrom"))
+                .addCriterion("recorded/danny", recordVanilla("game/danny"))
+                .addCriterion("recorded/key", recordVanilla("game/key"))
+                .addCriterion("recorded/oxygene", recordVanilla("game/oxygene"))
+                .addCriterion("recorded/dry_hands", recordVanilla("game/dry_hands"))
+                .addCriterion("recorded/wet_hands", recordVanilla("game/wet_hands"))
+                .addCriterion("recorded/mice_on_venus", recordVanilla("game/mice_on_venus"))
 
                 // Volume Beta (creative songs not included for obvious reasons)
-                .addCriterion("recorded/concrete_halls", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/nether/concrete_halls")))
-                .addCriterion("recorded/dead_voxel", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/nether/dead_voxel")))
-                .addCriterion("recorded/warmth", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/nether/warmth")))
-                .addCriterion("recorded/ballad_of_the_cats", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/nether/ballad_of_the_cats")))
-                .addCriterion("recorded/boss", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/end/boss")))
-                .addCriterion("recorded/the_end", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/end/the_end")))
-                .addCriterion("recorded/alpha", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/end/alpha"), true))
+                .addCriterion("recorded/concrete_halls", recordVanilla("game/nether/concrete_halls"))
+                .addCriterion("recorded/dead_voxel", recordVanilla("game/nether/dead_voxel"))
+                .addCriterion("recorded/warmth", recordVanilla("game/nether/warmth"))
+                .addCriterion("recorded/ballad_of_the_cats", recordVanilla("game/nether/ballad_of_the_cats"))
+                .addCriterion("recorded/boss", recordVanilla("game/end/boss"))
+                .addCriterion("recorded/the_end", recordVanilla("game/end/the_end"))
+                .addCriterion("recorded/alpha", recordVanilla("game/end/alpha", true))
 
                 // Underwater Singles (1.13)
-                .addCriterion("recorded/shuniji", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/water/shuniji")))
-                .addCriterion("recorded/dragon_fish", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/water/dragon_fish")))
-                .addCriterion("recorded/axolotl", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/water/axolotl")))
+                .addCriterion("recorded/shuniji", recordVanilla("game/water/shuniji"))
+                .addCriterion("recorded/dragon_fish", recordVanilla("game/water/dragon_fish"))
+                .addCriterion("recorded/axolotl", recordVanilla("game/water/axolotl"))
 
                 // Nether Update (1.16)
-                .addCriterion("recorded/rubedo", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/nether/nether_wastes/rubedo")))
-                .addCriterion("recorded/chrysopoeia", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/nether/crimson_forest/chrysopoeia")))
-                .addCriterion("recorded/so_below", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/nether/soulsand_valley/so_below")))
+                .addCriterion("recorded/rubedo", recordVanilla("game/nether/nether_wastes/rubedo"))
+                .addCriterion("recorded/chrysopoeia", recordVanilla("game/nether/crimson_forest/chrysopoeia"))
+                .addCriterion("recorded/so_below", recordVanilla("game/nether/soulsand_valley/so_below"))
 
                 // Caves & Cliffs (1.17 / 1.18)
-                .addCriterion("recorded/stand_tall", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/stand_tall")))
-                .addCriterion("recorded/left_to_bloom", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/left_to_bloom")))
-                .addCriterion("recorded/ancestry", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/ancestry")))
-                .addCriterion("recorded/wending", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/wending")))
-                .addCriterion("recorded/infinite_amethyst", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/infinite_amethyst")))
-                .addCriterion("recorded/one_more_day", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/one_more_day")))
-                .addCriterion("recorded/floating_dream", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/floating_dream")))
-                .addCriterion("recorded/comforting_memories", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/comforting_memories")))
-                .addCriterion("recorded/an_ordinary_day", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/an_ordinary_day")))
+                .addCriterion("recorded/stand_tall", recordVanilla("game/stand_tall"))
+                .addCriterion("recorded/left_to_bloom", recordVanilla("game/left_to_bloom"))
+                .addCriterion("recorded/ancestry", recordVanilla("game/ancestry"))
+                .addCriterion("recorded/wending", recordVanilla("game/wending"))
+                .addCriterion("recorded/infinite_amethyst", recordVanilla("game/infinite_amethyst"))
+                .addCriterion("recorded/one_more_day", recordVanilla("game/one_more_day"))
+                .addCriterion("recorded/floating_dream", recordVanilla("game/floating_dream"))
+                .addCriterion("recorded/comforting_memories", recordVanilla("game/comforting_memories"))
+                .addCriterion("recorded/an_ordinary_day", recordVanilla("game/an_ordinary_day"))
 
                 // The Wild Update (1.19)
-                .addCriterion("recorded/firebugs", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/swamp/firebugs")))
-                .addCriterion("recorded/aerie", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/swamp/aerie")))
-                .addCriterion("recorded/labyrinthine", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/swamp/labyrinthine")))
+                .addCriterion("recorded/firebugs", recordVanilla("game/swamp/firebugs"))
+                .addCriterion("recorded/aerie", recordVanilla("game/swamp/aerie"))
+                .addCriterion("recorded/labyrinthine", recordVanilla("game/swamp/labyrinthine"))
 
                 // Trails & Tales (1.20)
-                .addCriterion("recorded/echo_in_the_wind", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/echo_in_the_wind")))
-                .addCriterion("recorded/a_familiar_room", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/a_familiar_room")))
-                .addCriterion("recorded/bromeliad", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/bromeliad")))
-                .addCriterion("recorded/crescent_dunes", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/crescent_dunes")))
+                .addCriterion("recorded/echo_in_the_wind", recordVanilla("game/echo_in_the_wind"))
+                .addCriterion("recorded/a_familiar_room", recordVanilla("game/a_familiar_room"))
+                .addCriterion("recorded/bromeliad", recordVanilla("game/bromeliad"))
+                .addCriterion("recorded/crescent_dunes", recordVanilla("game/crescent_dunes"))
 
                 // Tricky Trials (1.21)
-                .addCriterion("recorded/featherfall", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/featherfall")))
-                .addCriterion("recorded/watcher", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/watcher")))
-                .addCriterion("recorded/puzzlebox", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/puzzlebox")))
-                .addCriterion("recorded/komorebi", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/komorebi")))
-                .addCriterion("recorded/pokopoko", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/pokopoko")))
-                .addCriterion("recorded/yakusoku", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/yakusoku")))
-                .addCriterion("recorded/deeper", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/deeper")))
-                .addCriterion("recorded/eld_unknown", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/eld_unknown")))
-                .addCriterion("recorded/endless", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/endless")))
+                .addCriterion("recorded/featherfall", recordVanilla("game/featherfall"))
+                .addCriterion("recorded/watcher", recordVanilla("game/watcher"))
+                .addCriterion("recorded/puzzlebox", recordVanilla("game/puzzlebox"))
+                .addCriterion("recorded/komorebi", recordVanilla("game/komorebi"))
+                .addCriterion("recorded/pokopoko", recordVanilla("game/pokopoko"))
+                .addCriterion("recorded/yakusoku", recordVanilla("game/yakusoku"))
+                .addCriterion("recorded/deeper", recordVanilla("game/deeper"))
+                .addCriterion("recorded/eld_unknown", recordVanilla("game/eld_unknown"))
+                .addCriterion("recorded/endless", recordVanilla("game/endless"))
 
                 // Chase the Skies (1.21.6)
-                .addCriterion("recorded/lilypad", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/lilypad")))
-                .addCriterion("recorded/below_and_above", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/below_and_above")))
-                .addCriterion("recorded/os_piano", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/os_piano")))
-                .addCriterion("recorded/broken_clocks", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/broken_clocks")))
-                .addCriterion("recorded/fireflies", RecordSongTrigger.TriggerInstance.recordedSong(Identifier.withDefaultNamespace("game/fireflies")))
+                .addCriterion("recorded/lilypad", recordVanilla("game/lilypad"))
+                .addCriterion("recorded/below_and_above", recordVanilla("game/below_and_above"))
+                .addCriterion("recorded/os_piano", recordVanilla("game/os_piano"))
+                .addCriterion("recorded/broken_clocks", recordVanilla("game/broken_clocks"))
+                .addCriterion("recorded/fireflies", recordVanilla("game/fireflies"))
 
                 // Chaos Cubed (26.2) (when updated)
                 .save(saver, Stancements.stancements("adventure/record_all_songs").toString());
+
+        Advancement.Builder.advancement()
+                .parent(recordSong)
+                .display(
+                        STItems.POCKET_RECORDER,
+                        Component.translatable("advancements.stancements.record_song_with_pocket.title"),
+                        Component.translatable("advancements.stancements.record_song_with_pocket.description"),
+                        null,
+                        AdvancementType.GOAL,
+                        true,
+                        true,
+                        false
+                )
+                .addCriterion(
+                        "record_using_inventory_recorder",
+                        RecordSongTrigger.TriggerInstance.recordedAnySong(RecordingSource.INVENTORY_RECORDER, false, List.of())
+                )
+                .save(saver, Stancements.stancements("adventure/record_song_with_pocket").toString());
 
         AdvancementHolder plantInCropPot = Advancement.Builder.advancement()
                 .parent(aSeedyPlaceIdentifier)
@@ -226,5 +244,13 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
                         .set(STDataComponents.LABEL.get(), 10F)
                         .build()
         );
+    }
+
+    private static Criterion<?> recordVanilla(String id) {
+        return recordVanilla(id, false);
+    }
+
+    private static Criterion<?> recordVanilla(String id, boolean copying) {
+        return RecordSongTrigger.TriggerInstance.recordedSong(new Track(Identifier.withDefaultNamespace(id), true), copying);
     }
 }

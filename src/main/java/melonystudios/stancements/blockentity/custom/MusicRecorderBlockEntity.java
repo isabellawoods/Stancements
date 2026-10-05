@@ -10,9 +10,12 @@ import melonystudios.stancements.misc.STStatistics;
 import melonystudios.stancements.misc.advancement.STCriteriaTriggers;
 import melonystudios.stancements.misc.modifier.ModificationStrategy;
 import melonystudios.stancements.misc.modifier.VinylModifier;
+import melonystudios.stancements.misc.recording.RecordingSource;
+import melonystudios.stancements.misc.recording.Track;
 import melonystudios.stancements.option.STCommonOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -71,11 +74,13 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
             if (!result.recordingText().getString().isBlank()) {
                 this.sendMessage(result.recordingText(), serverPlayer);
             } else if (this.getLevel() != null) {
+                var jukeboxSongs = this.getLevel().registryAccess().lookupOrThrow(Registries.JUKEBOX_SONG);
+
                 if (copyingSong) {
-                    var jukeboxSong = BlockBasedMusicPlayer.findJukeboxSongFromID(this.getLevel().registryAccess(), musicID, false);
+                    var jukeboxSong = BlockBasedMusicPlayer.findJukeboxSongFromID(jukeboxSongs, musicID, false);
                     jukeboxSong.ifPresent(song -> this.sendMessage(getRecordingMessage(song.value().description().getString()), serverPlayer));
                 } else {
-                    this.sendMessage(getRecordingMessage(getSongName(this.getLevel().registryAccess(), musicID)), serverPlayer);
+                    this.sendMessage(getRecordingMessage(getSongName(jukeboxSongs, musicID).getString()), serverPlayer);
                 }
             }
         }
@@ -94,8 +99,8 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
 
                 // award statistic
                 serverPlayer.awardStat(this.copyingSong() ? STStatistics.MUSIC_DISCS_COPIED.get() : STStatistics.SONGS_RECORDED.get());
-                Identifier sanitizedMusicID = RecordedDiscItem.getJukeboxSongLocation(this.musicID());
-                STCriteriaTriggers.RECORD_SONG.trigger(sanitizedMusicID, this.copyingSong(), List.of(sanitizedMusicID), serverPlayer);
+                Track track = new Track(RecordedDiscItem.getJukeboxSongLocation(this.musicID()), true);
+                STCriteriaTriggers.RECORD_SONG.trigger(track, RecordingSource.MUSIC_RECORDER, this.copyingSong(), List.of(track), serverPlayer);
             }
         }
 
@@ -103,6 +108,7 @@ public class MusicRecorderBlockEntity extends BlockEntity implements Clearable, 
         this.musicID = null;
         if (canceled) this.recorderPlayer = null;
         this.ticksUntilFinishedRecording = BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED;
+        if (!STCommonOptions.RECORDER_FREE_WILL.get()) this.ticksUntilEjection = DEFAULT_TICKS_UNTIL_EJECTION;
         this.copyingSong = false;
         this.setChanged();
     }

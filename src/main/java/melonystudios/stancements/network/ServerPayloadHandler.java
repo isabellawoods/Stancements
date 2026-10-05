@@ -2,6 +2,7 @@ package melonystudios.stancements.network;
 
 import melonystudios.stancements.block.custom.MusicRecorderBlock;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
+import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.event.custom.StartRecordingAttemptEvent;
 import melonystudios.stancements.option.STCommonOptions;
 import net.minecraft.resources.Identifier;
@@ -15,8 +16,8 @@ import java.util.Optional;
 /// Handles all serverbound payloads registered by *Stancements*.
 /// @see StartRecordingAttempt
 public class ServerPayloadHandler {
-    /// Attempts to start a recording of music from the client's {@link melonystudios.stancements.mixin.recorder.CurrentMusicAccessor MusicManager} or from adjacent jukeboxes.
-    /// @param receival The {@link StartRecordingAttempt} payload, containing the position, inserted disc, the client's music and the volumes of the client's music-related sliders..
+    /// Attempts to start a recording of music from the client's [`MusicManager`][melonystudios.stancements.mixin.recorder.CurrentMusicAccessor] or from adjacent jukeboxes.
+    /// @param receival The [StartRecordingAttempt] payload, containing the position, inserted disc, the client's music and the volumes of the client's music-related sliders.
     /// @param context The payload context.
     @SuppressWarnings("deprecation")
     public static void startRecordingAttempt(StartRecordingAttempt receival, IPayloadContext context) {
@@ -57,5 +58,13 @@ public class ServerPayloadHandler {
         }
 
         context.player().awardStat(Stats.ITEM_USED.get(receival.recordableDisc().getItem()));
+    }
+
+    /// Starts a recording on the `inventory_recorder` located at the given slot index.
+    /// @param payload The [SendClientTrack] payload, containing the [music track][melonystudios.stancements.misc.recording.Track] to record at a given slot.
+    /// @param context The payload context.
+    public static void receiveClientTrack(SendClientTrack payload, IPayloadContext context) {
+        var slot = context.player().getSlot(payload.slotIndex());
+        if (slot != null) InventoryRecorder.startRecording(context.player().level(), slot.get(), payload.clientTrack());
     }
 }

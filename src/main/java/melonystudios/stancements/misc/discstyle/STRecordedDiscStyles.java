@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Rarity;
 
 public class STRecordedDiscStyles {
-    // Discs
+    // Music discs
     public static final ResourceKey<RecordedDiscStyle> THIRTEEN = vanilla("13");
     public static final ResourceKey<RecordedDiscStyle> CAT = vanilla("cat");
     public static final ResourceKey<RecordedDiscStyle> BLOCKS = vanilla("blocks");
@@ -30,11 +30,11 @@ public class STRecordedDiscStyles {
     public static final ResourceKey<RecordedDiscStyle> TEARS = vanilla("tears");
     public static final ResourceKey<RecordedDiscStyle> LAVA_CHICKEN = vanilla("lava_chicken");
 
-    // Ambient
+    // Ambient music discs
     public static final ResourceKey<RecordedDiscStyle> ALPHA = vanilla("game/end/alpha");
 
     public static void bootstrap(BootstrapContext<RecordedDiscStyle> context) {
-        // Discs
+        // Music discs
         context.register(THIRTEEN, new RecordedDiscStyle(0xFFD800, 9));
         context.register(CAT, new RecordedDiscStyle(0x4CFF00, 2));
         context.register(BLOCKS, new RecordedDiscStyle(0xE2543B, 1));
@@ -57,7 +57,7 @@ public class STRecordedDiscStyles {
         context.register(TEARS, new RecordedDiscStyle(0xB5DBDB, 8));
         context.register(LAVA_CHICKEN, new RecordedDiscStyle(0xDE1D1D, 13));
 
-        // Ambient
+        // Ambient music discs
         context.register(ALPHA, new RecordedDiscStyle(0x9AC9BF, 13, Rarity.EPIC));
     }
 

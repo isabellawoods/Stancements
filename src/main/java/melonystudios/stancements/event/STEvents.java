@@ -103,7 +103,7 @@ public class STEvents {
     }
 
     @SubscribeEvent
-    public static void addDataPackRegistries(DataPackRegistryEvent.NewRegistry event) {
+    public static void addDataDrivenRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(STRegistries.RECORDED_DISC_STYLE, RecordedDiscStyle.CODEC, RecordedDiscStyle.CODEC);
         event.dataPackRegistry(STRegistries.VINYL_MODIFIER, VinylModifier.DIRECT_CODEC, VinylModifier.DIRECT_CODEC);
     }
@@ -116,7 +116,12 @@ public class STEvents {
     @SubscribeEvent
     public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         var registrar = event.registrar(Stancements.NETWORK_VERSION);
-        registrar.playToClient(RequestRecordingAttempt.TYPE, RequestRecordingAttempt.STREAM_CODEC, ClientPayloadHandler::requestRecordingAttempt);
+        registrar.playToClient(RequestRecordingAttempt.TYPE, RequestRecordingAttempt.STREAM_CODEC, (payload, context) -> context.enqueueWork(() ->
+                ClientPayloadHandler.requestRecordingAttempt(payload, context)
+        ).exceptionally(throwable -> {
+            Stancements.LOGGER.error("Exception while sending {}'s music data to the server", context.player().getDisplayName().getString(), throwable);
+            return null;
+        }));
     }
 
     @SubscribeEvent
@@ -130,6 +135,11 @@ public class STEvents {
         event.registerComponentAppenderAfterAll(STDataComponents.MINECART_TAG_COLOR, (stack, context, display, _, flag, tooltip) -> {
             if (display.shows(STDataComponents.MINECART_TAG_COLOR.get()) && stack.has(STDataComponents.MINECART_TAG_COLOR)) {
                 stack.get(STDataComponents.MINECART_TAG_COLOR).addToTooltip(context, tooltip, flag, stack.getComponents());
+            }
+        });
+        event.registerComponentAppenderAfterAll(STDataComponents.INVENTORY_RECORDER, (stack, context, display, _, flag, tooltip) -> {
+            if (display.shows(STDataComponents.INVENTORY_RECORDER.get()) && stack.has(STDataComponents.INVENTORY_RECORDER)) {
+                stack.get(STDataComponents.INVENTORY_RECORDER).addToTooltip(context, tooltip, flag, stack.getComponents());
             }
         });
     }

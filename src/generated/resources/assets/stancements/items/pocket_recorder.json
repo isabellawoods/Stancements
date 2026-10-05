@@ -1,0 +1,46 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "stancements:item/pocket_recorder"
+      },
+      {
+        "type": "minecraft:select",
+        "cases": [
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stancements:item/pocket_recorder_idle"
+            },
+            "when": "idle"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stancements:item/pocket_recorder_recording"
+            },
+            "when": "recording"
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "stancements:item/pocket_recorder_paused"
+        },
+        "property": "stancements:inventory_recorder/state"
+      },
+      {
+        "type": "minecraft:condition",
+        "on_false": {
+          "type": "minecraft:empty"
+        },
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "stancements:item/pocket_recorder_cassette"
+        },
+        "property": "stancements:inventory_recorder/storage_inserted"
+      }
+    ]
+  }
+}

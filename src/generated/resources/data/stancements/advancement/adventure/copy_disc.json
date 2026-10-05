@@ -4,9 +4,11 @@
     "copy_disc_except_alpha": {
       "conditions": {
         "copying": true,
-        "excluded": [
-          "minecraft:game/end/alpha"
-        ]
+        "excluded": {
+          "id": "minecraft:game/end/alpha",
+          "resolved": true
+        },
+        "source": "music_recorder"
       },
       "trigger": "stancements:record_song"
     }

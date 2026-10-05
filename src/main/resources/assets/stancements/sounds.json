@@ -25,6 +25,69 @@
     ],
     "subtitle": "subtitles.block.cauldron.dye"
   },
+  "item.inventory_recorder.toggle": {
+    "sounds": [
+      {
+        "name": "stancements:item/inventory_recorder/toggle",
+        "volume": 0.7,
+        "pitch": 0.5,
+        "attenuation_distance": 5
+      }
+    ],
+    "subtitle": "subtitles.item.inventory_recorder.toggle"
+  },
+  "item.inventory_recorder.full": {
+    "sounds": [
+      {
+        "name": "stancements:item/inventory_recorder/full",
+        "volume": 0.7,
+        "pitch": 0.5
+      }
+    ],
+    "subtitle": "subtitles.item.inventory_recorder.full"
+  },
+  "item.inventory_recorder.insert_storage": {
+    "sounds": [
+      {
+        "name": "stancements:item/inventory_recorder/insert_storage1",
+        "attenuation_distance": 5
+      },
+      {
+        "name": "stancements:item/inventory_recorder/insert_storage2",
+        "attenuation_distance": 5
+      },
+      {
+        "name": "stancements:item/inventory_recorder/insert_storage3",
+        "attenuation_distance": 5
+      },
+      {
+        "name": "stancements:item/inventory_recorder/insert_storage4",
+        "attenuation_distance": 5
+      }
+    ],
+    "subtitle": "subtitles.item.inventory_recorder.insert_storage"
+  },
+  "item.inventory_recorder.remove_storage": {
+    "sounds": [
+      {
+        "name": "stancements:item/inventory_recorder/remove_storage1",
+        "attenuation_distance": 5
+      },
+      {
+        "name": "stancements:item/inventory_recorder/remove_storage2",
+        "attenuation_distance": 5
+      },
+      {
+        "name": "stancements:item/inventory_recorder/remove_storage3",
+        "attenuation_distance": 5
+      },
+      {
+        "name": "stancements:item/inventory_recorder/remove_storage4",
+        "attenuation_distance": 5
+      }
+    ],
+    "subtitle": "subtitles.item.inventory_recorder.remove_storage"
+  },
   "item.tag.latch": {
     "sounds": [
       "stancements:item/tag/latch1",

@@ -57,7 +57,7 @@ public class StyleDiscFromRegistryFunction extends LootItemConditionalFunction i
         ItemStack copyStack = stack.copy();
         Identifier musicID;
         if (this.context != null) {
-            musicID = this.context.musicID();
+            musicID = this.context.track().jukeboxSongID();
         } else if (context.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof MusicRecorderBlockEntity recorder) {
             // fix vanilla disc copies pointing to stancements' namespace, fixed in 5.0.0-beta.1 ~isa 21-08-26
             musicID = recorder.copyingSong() ? recorder.musicID() : RecordedDiscItem.getJukeboxSongLocation(recorder.musicID());

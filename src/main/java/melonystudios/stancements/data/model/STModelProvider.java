@@ -3,7 +3,10 @@ package melonystudios.stancements.data.model;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
+import melonystudios.stancements.client.item.properties.InventoryRecorderState;
+import melonystudios.stancements.client.item.properties.StorageInserted;
 import melonystudios.stancements.component.STDataComponents;
+import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.custom.DyedWaterBucketItem;
 import net.minecraft.client.color.item.Constant;
@@ -14,6 +17,7 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.EmptyModel;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.properties.select.ComponentContents;
 import net.minecraft.client.resources.model.sprite.Material;
@@ -25,6 +29,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.neoforged.neoforge.client.model.ExtraFaceData;
+import net.neoforged.neoforge.client.model.generators.template.ExtendedModelTemplateBuilder;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jspecify.annotations.NonNull;
 
@@ -159,9 +165,12 @@ public class STModelProvider extends ModelProvider {
         itemModels.generateFlatItem(STItems.VINYL_DISC.get(), ModelTemplates.FLAT_ITEM);
         this.generateRecordedDisc(itemModels, STItems.RECORDED_DISC.get());
         itemModels.generateFlatItem(STItems.SHATTERED_DISC.get(), ModelTemplates.FLAT_ITEM);
-        this.generateOverlaidFlatItem(itemModels, STItems.SCULK_INFESTED_VINYL_DISC.get(), Stancements.stancements("item/deepslate_vinyl_disc"), Stancements.stancements("item/sculk_disc_overlay"));
-        this.generateOverlaidRecordedDisc(itemModels, STItems.SCULK_INFESTED_RECORDED_DISC.get(), Stancements.stancements("item/deepslate_recorded_disc"), Stancements.stancements("item/sculk_disc_overlay"));
-        this.generateOverlaidFlatItem(itemModels, STItems.SCULK_INFESTED_SHATTERED_DISC.get(), Stancements.stancements("item/deepslate_shattered_disc"), Stancements.stancements("item/sculk_shattered_disc_overlay"));
+        this.generateOverlaidFlatItem(itemModels, STItems.SCULK_INFESTED_VINYL_DISC.get(), Stancements.stancements("item/deepslate_vinyl_disc"), Stancements.stancements("item/sculk_disc_overlay"), 15);
+        this.generateOverlaidRecordedDisc(itemModels, STItems.SCULK_INFESTED_RECORDED_DISC.get(), Stancements.stancements("item/deepslate_recorded_disc"), Stancements.stancements("item/sculk_disc_overlay"), 15);
+        this.generateOverlaidFlatItem(itemModels, STItems.SCULK_INFESTED_SHATTERED_DISC.get(), Stancements.stancements("item/deepslate_shattered_disc"), Stancements.stancements("item/sculk_shattered_disc_overlay"), 15);
+        this.generateInventoryRecorderItem(itemModels, STItems.POCKET_RECORDER.get(), 15);
+        itemModels.generateFlatItem(STItems.SHORT_CASSETTE_TAPE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(STItems.LONG_CASSETTE_TAPE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(STItems.WHITE_TAG.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(STItems.LIGHT_GRAY_TAG.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(STItems.GRAY_TAG.get(), ModelTemplates.FLAT_ITEM);
@@ -283,9 +292,12 @@ public class STModelProvider extends ModelProvider {
         ));
     }
 
-    public void generateOverlaidFlatItem(ItemModelGenerators itemModels, Item item, Identifier baseTexture, Identifier overlayTexture) {
+    public void generateOverlaidFlatItem(ItemModelGenerators itemModels, Item item, Identifier baseTexture, Identifier overlayTexture, int lightLevel) {
         Identifier id = ModelLocationUtils.getModelLocation(item);
-        ModelTemplates.TWO_LAYERED_ITEM.create(id, TextureMapping.layered(new Material(baseTexture), new Material(overlayTexture)), itemModels.modelOutput);
+        ExtendedModelTemplateBuilder.of(ModelTemplates.TWO_LAYERED_ITEM)
+                .itemLayerFaceData("layer1", new ExtraFaceData(0xFFFFFFFF, lightLevel, true))
+                .build()
+                .create(id, TextureMapping.layered(new Material(baseTexture), new Material(overlayTexture)), itemModels.modelOutput);
         itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(id));
     }
 
@@ -324,19 +336,25 @@ public class STModelProvider extends ModelProvider {
         ));
     }
 
-    public void generateOverlaidRecordedDisc(ItemModelGenerators itemModels, Item item, Identifier baseTexture, Identifier overlayTexture) {
+    public void generateOverlaidRecordedDisc(ItemModelGenerators itemModels, Item item, Identifier baseTexture, Identifier overlayTexture, int lightLevel) {
         // generate all item models for each label (+ the fallback model)
         Identifier baseID = ModelLocationUtils.getModelLocation(item);
-        ModelTemplates.THREE_LAYERED_ITEM.create(baseID, TextureMapping.layered(
-                new Material(baseTexture),
-                new Material(overlayTexture),
-                new Material(ModelLocationUtils.getModelLocation(STItems.RECORDED_DISC.get(), "_label_1"))
-        ), itemModels.modelOutput);
+        ExtendedModelTemplateBuilder.of(ModelTemplates.THREE_LAYERED_ITEM)
+                .itemLayerFaceData("layer1", new ExtraFaceData(0xFFFFFFFF, lightLevel, true))
+                .build()
+                .create(baseID, TextureMapping.layered(
+                        new Material(baseTexture),
+                        new Material(overlayTexture),
+                        new Material(ModelLocationUtils.getModelLocation(STItems.RECORDED_DISC.get(), "_label_1"))
+                ), itemModels.modelOutput);
 
         for (int i = DISC_LABEL_MIN; i <= DISC_LABEL_MAX; ++i) {
             Identifier layerID = ModelLocationUtils.getModelLocation(item, "_label_" + i);
             Identifier baseLayerID = ModelLocationUtils.getModelLocation(STItems.RECORDED_DISC.get(), "_label_" + i);
-            ModelTemplates.THREE_LAYERED_ITEM.create(layerID, TextureMapping.layered(new Material(baseTexture), new Material(overlayTexture), new Material(baseLayerID)), itemModels.modelOutput);
+            ExtendedModelTemplateBuilder.of(ModelTemplates.THREE_LAYERED_ITEM)
+                    .itemLayerFaceData("layer1", new ExtraFaceData(0xFFFFFFFF, lightLevel, true))
+                    .build()
+                    .create(layerID, TextureMapping.layered(new Material(baseTexture), new Material(overlayTexture), new Material(baseLayerID)), itemModels.modelOutput);
         }
 
         // todo: make this auto generate based on the amount of labels
@@ -373,5 +391,41 @@ public class STModelProvider extends ModelProvider {
         Identifier id = ModelLocationUtils.getModelLocation(item);
         template.create(id, TextureMapping.layered(TextureMapping.getItemTexture(item, "_overlay"), TextureMapping.getItemTexture(item)), itemModels.modelOutput);
         itemModels.itemModelOutput.accept(item, ItemModelUtils.tintedModel(id, new Dye(DyedWaterBucketItem.DEFAULT_WATER_COLOR), BLANK_LAYER));
+    }
+
+    public void generateInventoryRecorderItem(ItemModelGenerators itemModels, Item item, int lightLevel) {
+        Identifier baseID = ModelLocationUtils.getModelLocation(item);
+
+        for (InventoryRecorder.State recorderState : InventoryRecorder.State.VALUES) {
+            ExtendedModelTemplateBuilder.of(ModelTemplates.FLAT_ITEM)
+                    .itemLayerFaceData("layer0", new ExtraFaceData(0xFFFFFFFF, lightLevel, true))
+                    .build()
+                    .create(baseID.withPath(path -> path + "_" + recorderState), TextureMapping.layer0(
+                            new Material(ModelLocationUtils.getModelLocation(item, "/" + recorderState))
+                    ), itemModels.modelOutput);
+        }
+
+        ModelTemplates.FLAT_ITEM.create(baseID, TextureMapping.layer0(
+                new Material(ModelLocationUtils.getModelLocation(item, "/item"))
+        ), itemModels.modelOutput);
+
+        ModelTemplates.FLAT_ITEM.create(baseID.withPath(path -> path + "_cassette"), TextureMapping.layer0(
+                new Material(ModelLocationUtils.getModelLocation(item, "/cassette"))
+        ), itemModels.modelOutput);
+
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.composite(
+                ItemModelUtils.plainModel(baseID),
+                ItemModelUtils.select(
+                        new InventoryRecorderState(),
+                        ItemModelUtils.plainModel(baseID.withPath(path -> path + "_" + InventoryRecorder.State.PAUSED)),
+                        ItemModelUtils.when(InventoryRecorder.State.IDLE, ItemModelUtils.plainModel(baseID.withPath(path -> path + "_" + InventoryRecorder.State.IDLE))),
+                        ItemModelUtils.when(InventoryRecorder.State.RECORDING, ItemModelUtils.plainModel(baseID.withPath(path -> path + "_" + InventoryRecorder.State.RECORDING)))
+                ),
+                ItemModelUtils.conditional(
+                        new StorageInserted(),
+                        ItemModelUtils.plainModel(baseID.withPath(path -> path + "_cassette")),
+                        new EmptyModel.Unbaked()
+                )
+        ));
     }
 }

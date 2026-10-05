@@ -6,7 +6,9 @@ import melonystudios.stancements.tag.STItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -187,6 +189,15 @@ public class STRecipeProvider extends RecipeProvider {
         this.shapeless(RecipeCategory.MISC, STItems.SCULK_INFESTED_VINYL_DISC).requires(STItems.SCULK_INFESTED_RECORDED_DISC)
                 .unlockedBy("has_sculk_infested_recorded_disc", has(STItems.SCULK_INFESTED_RECORDED_DISC))
                 .save(this.output, Stancements.stancements("sculk_infested_vinyl_disc_from_clearing").toString());
+        this.shaped(RecipeCategory.TOOLS, STItems.POCKET_RECORDER).define('#', Tags.Items.INGOTS_COPPER).define('S', Tags.Items.STRINGS).define('R', STItems.MUSIC_RECORDER)
+                .pattern("RS").pattern("##").unlockedBy("has_music_recorder", has(STItems.MUSIC_RECORDER))
+                .save(this.output);
+        this.shaped(RecipeCategory.MISC, STItems.SHORT_CASSETTE_TAPE, 2).define('#', Tags.Items.INGOTS_COPPER).define('I', Tags.Items.INGOTS_IRON).define('R', Tags.Items.DUSTS_REDSTONE)
+                .pattern("RIR").pattern("###").unlockedBy("has_redstone_dust", has(Tags.Items.DUSTS_REDSTONE))
+                .save(this.output);
+        this.shaped(RecipeCategory.MISC, STItems.LONG_CASSETTE_TAPE, 2).define('#', Tags.Items.INGOTS_COPPER).define('G', Tags.Items.INGOTS_GOLD).define('R', Tags.Items.DUSTS_REDSTONE)
+                .pattern("RGR").pattern("###").unlockedBy("has_redstone_dust", has(Tags.Items.DUSTS_REDSTONE))
+                .save(this.output);
 
         // Minecart tags
         this.addMinecartTag(STItems.WHITE_TAG, Tags.Items.DYES_WHITE);

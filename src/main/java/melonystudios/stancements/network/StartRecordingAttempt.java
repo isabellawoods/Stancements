@@ -15,11 +15,11 @@ import java.util.Optional;
 
 /// ### This is a payload directed towards the *server*.
 /// Attempts to start a recording of:
-/// 1. The song playing on the client's {@link melonystudios.stancements.mixin.recorder.CurrentMusicAccessor MusicManager};
+/// 1. The song playing on the client's [`MusicManager`][melonystudios.stancements.mixin.recorder.CurrentMusicAccessor];
 /// 2. The music disc playing on an adjacent jukebox.
 /// @param position The in-world position of the recorder (assuming it is in the same dimension).
-/// @param recordableDisc The item stack (any item with the {@link melonystudios.stancements.component.STDataComponents#RECORDING_TURNS_INTO recording_turns_into} component) inserted into the recorder.
-/// @param clientMusicID An *optional* {@linkplain Identifier identifier} indicating the song playing to the client.
+/// @param recordableDisc The item stack (any item with the [`recording_turns_into` component][melonystudios.stancements.component.STDataComponents#RECORDING_TURNS_INTO] inserted into the recorder.
+/// @param clientMusicID An *optional* [identifier][Identifier] indicating the song playing to the client.
 /// @param volumes Whether the "Master Volume", "Music" and "Jukebox/Note Block" sound sliders allow sounds to be played.
 public record StartRecordingAttempt(BlockPos position, ItemStack recordableDisc, Optional<Identifier> clientMusicID, MusicVolumes volumes) implements CustomPacketPayload {
     public static final StreamCodec<RegistryFriendlyByteBuf, StartRecordingAttempt> STREAM_CODEC = StreamCodec.composite(

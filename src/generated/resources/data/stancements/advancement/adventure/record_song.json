@@ -2,6 +2,9 @@
   "parent": "minecraft:adventure/sleep_in_bed",
   "criteria": {
     "record_song": {
+      "conditions": {
+        "source": "music_recorder"
+      },
       "trigger": "stancements:record_song"
     }
   },

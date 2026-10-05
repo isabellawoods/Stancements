@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "#c:ingots/copper",
+    "G": "#c:ingots/gold",
+    "R": "#c:dusts/redstone"
+  },
+  "pattern": [
+    "RGR",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "id": "stancements:long_cassette_tape"
+  }
+}

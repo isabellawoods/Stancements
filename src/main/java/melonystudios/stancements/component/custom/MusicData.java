@@ -8,6 +8,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 
@@ -44,5 +45,15 @@ public record MusicData(Optional<Identifier> id, boolean copied) {
 
     public MusicData markCopied(boolean copied) {
         return new MusicData(this.id(), copied);
+    }
+
+    @Override
+    @NonNull
+    public String toString() {
+        if (this.id().isPresent()) {
+            return String.format("MusicData[id=%s, copied=%s]", this.id().get(), this.copied());
+        } else {
+            return String.format("MusicData[copied=%s]", this.copied());
+        }
     }
 }

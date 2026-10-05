@@ -9,7 +9,7 @@ import net.minecraft.world.item.JukeboxSong;
 public class STJukeboxSongTags {
     // Stancements tags
     public static final TagKey<JukeboxSong> AMBIENT_MUSIC = stancements("ambient_music");
-    /// Jukebox songs in this tag are considered "ambient" (recorded from the client's {@link net.minecraft.client.sounds.MusicManager MusicManager}).
+    /// Jukebox songs in this tag are considered "ambient" (recorded from the client's [`MusicManager`][net.minecraft.client.sounds.MusicManager]).
     /// If any song in this tag start playing, the music in `MusicManager` is stopped.
     /// @see melonystudios.stancements.client.option.STClientOptions#MUSIC_DISCS_BLOCK_AMBIENT_MUSIC Music Discs Block Ambient Music option
     public static final TagKey<JukeboxSong> CANCELS_AMBIENT_MUSIC = stancements("cancels_ambient_music");

@@ -9,6 +9,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
+import org.jspecify.annotations.NonNull;
 
 public record RecordingTurnsInto(Holder<Item> whenRecorded) {
     public static final Codec<RecordingTurnsInto> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -26,5 +27,11 @@ public record RecordingTurnsInto(Holder<Item> whenRecorded) {
 
     public static RecordingTurnsInto sculkInfestedVinylDisc() {
         return new RecordingTurnsInto(STItems.SCULK_INFESTED_RECORDED_DISC);
+    }
+
+    @Override
+    @NonNull
+    public String toString() {
+        return String.format("RecordingTurnsInto[whenRecorded=%s]", this.whenRecorded().getRegisteredName());
     }
 }

@@ -16,6 +16,10 @@ public class STSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_RECORDER_EJECT = STANCEMENTS.register("block.music_recorder.eject", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.music_recorder.eject")));
 
     // Items
+    public static final DeferredHolder<SoundEvent, SoundEvent> INVENTORY_RECORDER_TOGGLE = STANCEMENTS.register("item.inventory_recorder.toggle", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.inventory_recorder.toggle")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> INVENTORY_RECORDER_FULL = STANCEMENTS.register("item.inventory_recorder.full", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.inventory_recorder.full")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> INVENTORY_RECORDER_INSERT_STORAGE = STANCEMENTS.register("item.inventory_recorder.insert_storage", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.inventory_recorder.insert_storage")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> INVENTORY_RECORDER_REMOVE_STORAGE = STANCEMENTS.register("item.inventory_recorder.remove_storage", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.inventory_recorder.remove_storage")));
     public static final DeferredHolder<SoundEvent, SoundEvent> TAG_MINECART = STANCEMENTS.register("item.tag.latch", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.tag.latch")));
     public static final DeferredHolder<SoundEvent, SoundEvent> SHATTER_MUSIC_DISC = STANCEMENTS.register("item.vinyl_disc.shatter", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.vinyl_disc.shatter")));
 

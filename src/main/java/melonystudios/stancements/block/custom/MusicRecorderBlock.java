@@ -6,17 +6,17 @@ import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
+import melonystudios.stancements.client.network.RequestRecordingAttempt;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
-import melonystudios.stancements.client.network.RequestRecordingAttempt;
 import melonystudios.stancements.option.STCommonOptions;
 import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.tag.STJukeboxSongTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -219,14 +219,14 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         return component;
     }
 
-    public static String getSongName(RegistryAccess registries, Identifier musicID) {
-        var song = BlockBasedMusicPlayer.findJukeboxSongFromID(registries, musicID, true);
-        if (song.isPresent()) return song.get().value().description().getString();
+    public static MutableComponent getSongName(Registry<JukeboxSong> jukeboxSongs, Identifier musicID) {
+        var song = BlockBasedMusicPlayer.findJukeboxSongFromID(jukeboxSongs, musicID, true);
+        if (song.isPresent()) return song.get().value().description().copy();
 
         Identifier sanitized = RecordedDiscItem.getJukeboxSongLocation(musicID);
         String namespacePrefix = sanitized.getNamespace().equals("minecraft") ? "" : sanitized.getNamespace() + ".";
 
-        return Component.translatable(namespacePrefix + "music." + sanitized.getPath().replace("/", ".")).getString();
+        return Component.translatable(namespacePrefix + "music." + sanitized.getPath().replace("/", "."));
     }
 
     @Override

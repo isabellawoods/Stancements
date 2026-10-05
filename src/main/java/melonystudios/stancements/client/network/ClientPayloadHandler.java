@@ -19,6 +19,6 @@ public class ClientPayloadHandler {
         var options = Minecraft.getInstance().options;
         var volumes = new StartRecordingAttempt.MusicVolumes(options.getSoundSourceVolume(SoundSource.MASTER) != 0.0, options.getSoundSourceVolume(SoundSource.MUSIC) != 0.0, options.getSoundSourceVolume(SoundSource.RECORDS) != 0.0);
 
-        context.reply(new StartRecordingAttempt(request.position(), request.recordableDisc(), Optional.ofNullable(music == null ? null : music.getSound().getLocation()), volumes));
+        context.reply(new StartRecordingAttempt(request.position(), request.recordableDisc(), Optional.ofNullable(music == null || music.getSound() == null ? null : music.getSound().getLocation()), volumes));
     }
 }

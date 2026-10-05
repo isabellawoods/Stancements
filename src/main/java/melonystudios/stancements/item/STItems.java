@@ -4,7 +4,9 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.component.STDataComponents;
+import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.component.custom.RecordingTurnsInto;
+import melonystudios.stancements.component.custom.TrackStorage;
 import melonystudios.stancements.item.custom.*;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
@@ -85,6 +87,9 @@ public class STItems {
     public static final DeferredItem<Item> SCULK_INFESTED_VINYL_DISC = ITEMS.registerItem("sculk_infested_vinyl_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.sculk_infested_vinyl_disc").withColor(0x05625D), properties.rarity(Rarity.RARE).stacksTo(16).component(STDataComponents.RECORDING_TURNS_INTO, RecordingTurnsInto.sculkInfestedVinylDisc())));
     public static final DeferredItem<Item> SCULK_INFESTED_RECORDED_DISC = ITEMS.registerItem("sculk_infested_recorded_disc", properties -> new RecordedDiscItem(properties.rarity(Rarity.RARE).stacksTo(1)));
     public static final DeferredItem<Item> SCULK_INFESTED_SHATTERED_DISC = ITEMS.registerItem("sculk_infested_shattered_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.shattered_disc").withColor(0x808080), properties.rarity(Rarity.RARE)));
+    public static final DeferredItem<Item> POCKET_RECORDER = ITEMS.registerItem("pocket_recorder", properties -> new PocketRecorderItem(properties.stacksTo(1).component(STDataComponents.INVENTORY_RECORDER, InventoryRecorder.EMPTY)));
+    public static final DeferredItem<Item> SHORT_CASSETTE_TAPE = ITEMS.registerItem("short_cassette_tape", properties -> new Item(properties.stacksTo(8).component(STDataComponents.TRACK_STORAGE, TrackStorage.DEFAULT_15)));
+    public static final DeferredItem<Item> LONG_CASSETTE_TAPE = ITEMS.registerItem("long_cassette_tape", properties -> new Item(properties.stacksTo(8).component(STDataComponents.TRACK_STORAGE, TrackStorage.DEFAULT_30)));
     public static final DeferredItem<Item> DYED_WATER_BUCKET = ITEMS.registerItem("dyed_water_bucket", properties -> new DyedWaterBucketItem(properties.stacksTo(1).craftRemainder(Items.BUCKET).component(DataComponents.DYED_COLOR, new DyedItemColor(DyedWaterBucketItem.DEFAULT_WATER_COLOR))));
 
     // Minecart tags

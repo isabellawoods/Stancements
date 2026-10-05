@@ -24,8 +24,9 @@ public class STVinylModifierTagsProvider extends KeyTagProvider<VinylModifier> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void addTags(HolderLookup.Provider registries) {
         // Stancements tags
-        this.tag(STVinylModifierTags.PRIORITY_MODIFICATION).add(STVinylModifiers.FINISH_RECORDING);
+        this.tag(STVinylModifierTags.PRIORITY_MODIFICATION).add(STVinylModifiers.FINISH_RECORDING, STVinylModifiers.SCULK_EJECTION_CHANCE);
     }
 }

@@ -2,9 +2,8 @@ package melonystudios.stancements.blockentity;
 
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.JukeboxPlayable;
@@ -37,8 +36,7 @@ public interface BlockBasedMusicPlayer {
         return Optional.empty();
     }
 
-    static Optional<? extends Holder<JukeboxSong>> findJukeboxSongFromID(RegistryAccess registries, @Nullable Identifier musicID, boolean sanitizeIdentifier) {
-        var jukeboxSongs = registries.lookupOrThrow(Registries.JUKEBOX_SONG);
+    static Optional<? extends Holder<JukeboxSong>> findJukeboxSongFromID(Registry<JukeboxSong> jukeboxSongs, @Nullable Identifier musicID, boolean sanitizeIdentifier) {
         if (musicID == null) return Optional.empty();
 
         return jukeboxSongs.get(sanitizeIdentifier ? RecordedDiscItem.getJukeboxSongLocation(musicID) : musicID);

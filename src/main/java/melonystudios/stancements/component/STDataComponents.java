@@ -1,9 +1,7 @@
 package melonystudios.stancements.component;
 
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.component.custom.MinecartTagColor;
-import melonystudios.stancements.component.custom.MusicData;
-import melonystudios.stancements.component.custom.RecordingTurnsInto;
+import melonystudios.stancements.component.custom.*;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -26,4 +24,8 @@ public class STDataComponents {
             builder -> builder.persistent(MinecartTagColor.CODEC).networkSynchronized(MinecartTagColor.STREAM_CODEC));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<RecordingTurnsInto>> RECORDING_TURNS_INTO = COMPONENTS.registerComponentType("recording_turns_into",
             builder -> builder.persistent(RecordingTurnsInto.CODEC).networkSynchronized(RecordingTurnsInto.STREAM_CODEC).cacheEncoding());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<TrackStorage>> TRACK_STORAGE = COMPONENTS.registerComponentType("track_storage",
+            builder -> builder.persistent(TrackStorage.CODEC).networkSynchronized(TrackStorage.STREAM_CODEC).cacheEncoding());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<InventoryRecorder>> INVENTORY_RECORDER = COMPONENTS.registerComponentType("inventory_recorder",
+            builder -> builder.persistent(InventoryRecorder.CODEC).networkSynchronized(InventoryRecorder.STREAM_CODEC).cacheEncoding());
 }

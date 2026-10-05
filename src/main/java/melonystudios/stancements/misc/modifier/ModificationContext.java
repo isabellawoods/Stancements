@@ -1,8 +1,8 @@
 package melonystudios.stancements.misc.modifier;
 
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
+import melonystudios.stancements.misc.recording.Track;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,22 +18,22 @@ public class ModificationContext {
     private final ServerLevel level;
     private final BlockPos blockPosition;
     private final ItemStack musicDisc;
-    private final Identifier musicID;
+    private final Track track;
     private final boolean copyingSong;
     private final Consumer<Integer> ejectionTicksCallback;
 
-    public ModificationContext(ServerLevel level, BlockPos blockPosition, ItemStack musicDisc, Identifier musicID, boolean copyingSong, Consumer<Integer> ejectionTicksCallback) {
+    public ModificationContext(ServerLevel level, BlockPos blockPosition, ItemStack musicDisc, Track track, boolean copyingSong, Consumer<Integer> ejectionTicksCallback) {
         this.level = level;
         this.blockPosition = blockPosition;
         this.musicDisc = musicDisc;
         this.musicDiscImmutable = ItemStackTemplate.fromNonEmptyStack(musicDisc);
-        this.musicID = musicID;
+        this.track = track;
         this.copyingSong = copyingSong;
         this.ejectionTicksCallback = ejectionTicksCallback;
     }
 
     public static ModificationContext fromBlockEntity(MusicRecorderBlockEntity recorder) {
-        return new ModificationContext((ServerLevel) recorder.getLevel(), recorder.getBlockPos(), recorder.getTheItem(), recorder.musicID(), recorder.copyingSong(), recorder::setEjectionTicks);
+        return new ModificationContext((ServerLevel) recorder.getLevel(), recorder.getBlockPos(), recorder.getTheItem(), new Track(recorder.musicID(), recorder.copyingSong()), recorder.copyingSong(), recorder::setEjectionTicks);
     }
 
     public ServerLevel level() {
@@ -54,8 +54,8 @@ public class ModificationContext {
         return this.musicDisc;
     }
 
-    public Identifier musicID() {
-        return this.musicID;
+    public Track track() {
+        return this.track;
     }
 
     public boolean copyingSong() {

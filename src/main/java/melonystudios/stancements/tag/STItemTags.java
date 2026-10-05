@@ -13,6 +13,7 @@ public class STItemTags {
     public static final TagKey<Item> VINYL_DISC_DYES = stancements("vinyl_disc_dyes");
     public static final TagKey<Item> MINECART_TAGS = stancements("minecart_tags");
     public static final TagKey<Item> JADE_CONSIDERS_AS_RECORDING = stancements("jade_considers_as_recording");
+    public static final TagKey<Item> CASSETTE_TAPES = stancements("cassette_tapes");
 
     // Common tags
     public static final TagKey<Item> DYED_WATER_BUCKETS = common("buckets/dyed_water");
