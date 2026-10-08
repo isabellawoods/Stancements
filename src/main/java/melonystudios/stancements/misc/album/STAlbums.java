@@ -30,7 +30,7 @@ public class STAlbums {
                 .addLink(LinkTreeSources.SPOTIFY, "https://open.spotify.com/album/3Gt7rOjcZQoHCfnKl5AkK7")
                 .addLink(LinkTreeSources.DEEZER, "https://deezer.com/album/9236757")
                 .addLink(LinkTreeSources.APPLE_MUSIC, "https://music.apple.com/album/minecraft-volume-alpha/1867885113")
-                .categorizeAs("ambient")
+                .tagAs("ambient")
                 // Tracklist
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/key"))
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/subwoofer_lullaby"))
@@ -62,7 +62,7 @@ public class STAlbums {
                 .addLink(LinkTreeSources.SPOTIFY, "https://open.spotify.com/album/7CYDRyFCKtAYJBSpfovLyX")
                 .addLink(LinkTreeSources.DEEZER, "https://deezer.com/album/9236763")
                 .addLink(LinkTreeSources.APPLE_MUSIC, "https://music.apple.com/album/minecraft-volume-beta/1867890087")
-                .categorizeAs("ambient")
+                .tagAs("ambient")
                 // Tracklist
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/end/alpha"))
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/nether/dead_voxel"))
@@ -96,7 +96,7 @@ public class STAlbums {
                 .coverArt(ResourceLocation.withDefaultNamespace("album/nether_update"))
                 .addAuthors("Lena Raine")
                 .addLink(LinkTreeSources.OWN_WEBSITE, "lena_raine", "https://lena.fyi/projects/2020/4/11/minecraft-nether-update-2020")
-                .categorizeAs("ambient", "dubstep")
+                .tagAs("ambient", "dubstep")
                 // Tracklist
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/nether/crimson_forest/chrysopoeia"))
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/nether/nether_wastes/rubedo"))
@@ -112,7 +112,7 @@ public class STAlbums {
                 .addAuthors("Lena Raine", "Kumi Tanioka")
                 .addLink(LinkTreeSources.OWN_WEBSITE, "lena_raine", "https://lena.fyi/projects/2021/12/31/minecraft-caves-amp-cliffs-2021")
                 .addLink(LinkTreeSources.TWITTER, "kumi_tanioka", "https://twitter.com/tanikumi")
-                .categorizeAs("ambient", "electronic")
+                .tagAs("ambient", "electronic")
                 // Tracklist
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/stand_tall"))
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/left_to_bloom"))
@@ -134,7 +134,7 @@ public class STAlbums {
                 .addAuthors("Lena Raine", "Samuel Åberg")
                 .addLink(LinkTreeSources.OWN_WEBSITE, "lena_raine", "https://lena.fyi/projects/2022/12/6/minecraft-the-wild-update-2022")
                 .addLink(LinkTreeSources.TWITTER, "samuel_aberg", "https://twitter.com/slamp0000")
-                .categorizeAs("ambient")
+                .tagAs("ambient")
                 // Tracklist
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/swamp/firebugs"))
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/swamp/aerie"))
@@ -149,7 +149,7 @@ public class STAlbums {
                 .coverArt(ResourceLocation.withDefaultNamespace("album/trails_and_tales"))
                 .addAuthors("Aaron Cherof")
                 .addLink(LinkTreeSources.BANDCAMP, "https://cherof.bandcamp.com/music")
-                .categorizeAs("ambient", "electronic")
+                .tagAs("ambient", "electronic")
                 // Tracklist
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/echo_in_the_wind"))
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/a_familiar_room"))
@@ -167,7 +167,7 @@ public class STAlbums {
                 .addLink(LinkTreeSources.BANDCAMP, "https://cherof.bandcamp.com/music")
                 .addLink(LinkTreeSources.TWITTER, "kumi_tanioka", "https://twitter.com/tanikumi")
                 .addLink(LinkTreeSources.OWN_WEBSITE, "lena_raine", "https://lena.fyi/")
-                .categorizeAs("ambient", "electronic", "rock")
+                .tagAs("ambient", "electronic", "rock")
                 // Tracklist
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/featherfall"))
                 .resolvedListingMusicPrefix(ResourceLocation.withDefaultNamespace("game/watcher"))

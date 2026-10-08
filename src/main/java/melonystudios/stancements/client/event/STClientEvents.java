@@ -5,6 +5,9 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.custom.DyedWaterCauldronBlockEntity;
 import melonystudios.stancements.client.STClient;
+import melonystudios.stancements.client.command.MelonyStudiosHelpCommands;
+import melonystudios.stancements.client.command.SendCurrentTrackToServerCommand;
+import melonystudios.stancements.client.command.SendTrackToServerCommand;
 import melonystudios.stancements.client.item.ClientTrackStorageTooltip;
 import melonystudios.stancements.client.item.RecordedDiscClientExtension;
 import melonystudios.stancements.client.screen.AlbumScreen;
@@ -51,6 +54,11 @@ public class STClientEvents {
     }
 
     @SubscribeEvent
+    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(STMenuTypes.ALBUM.get(), AlbumScreen::new);
+    }
+
+    @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(new RecordedDiscClientExtension(), STItems.RECORDED_DISC, STItems.SCULK_INFESTED_RECORDED_DISC);
     }
@@ -58,11 +66,6 @@ public class STClientEvents {
     @SubscribeEvent
     public static void registerClientTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(TrackStorage.class, ClientTrackStorageTooltip::new);
-    }
-
-    @SubscribeEvent
-    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
-        event.register(STMenuTypes.ALBUM.get(), AlbumScreen::new);
     }
 
     @SubscribeEvent
@@ -74,6 +77,13 @@ public class STClientEvents {
             InventoryRecorder recorder = stack.getOrDefault(STDataComponents.INVENTORY_RECORDER, InventoryRecorder.EMPTY);
             if (!recorder.item().isEmpty()) event.getTooltipElements().add(1, Either.right(recorder.item().get(STDataComponents.TRACK_STORAGE)));
         }
+    }
+
+    @SubscribeEvent
+    public static void registerClientCommands(RegisterClientCommandsEvent event) {
+        MelonyStudiosHelpCommands.register(event.getDispatcher());
+        SendTrackToServerCommand.register(event.getDispatcher());
+        SendCurrentTrackToServerCommand.register(event.getDispatcher());
     }
 
     @SubscribeEvent

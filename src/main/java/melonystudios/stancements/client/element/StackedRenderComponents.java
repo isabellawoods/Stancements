@@ -4,17 +4,28 @@ import melonystudios.stancements.util.Alignment;
 import net.minecraft.Util;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FormattedText;
-import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.*;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 
 // i'll move this to renderslice later when i actually make the mod
 public class StackedRenderComponents {
+    public static FormattedCharSequence stripTextColor(Component message) {
+        MutableComponent copy = message.copy();
+        copy.getSiblings().forEach(sibling -> {
+            if (sibling instanceof MutableComponent mutable) mutable.withStyle(style -> style.withColor((TextColor) null));
+        });
+        return copy.withStyle(style -> style.withColor((TextColor) null)).getVisualOrderText();
+    }
+
     public static void drawTextWithBackdrop(GuiGraphics graphics, Font font, Component text, int x, int y, int frontTextColor, int backTextColor) {
         graphics.drawString(font, text.copy().withStyle(Style.EMPTY), x + 1, y + 1, backTextColor, false);
         graphics.drawString(font, text, x, y, frontTextColor, false);
+    }
+
+    public static void drawTextWithBackdrop(GuiGraphics graphics, Font font, FormattedCharSequence frontText, FormattedCharSequence backText, int x, int y, int frontTextColor, int backTextColor) {
+        graphics.drawString(font, backText, x + 1, y + 1, backTextColor, false);
+        graphics.drawString(font, frontText, x, y, frontTextColor, false);
     }
 
     public static void drawCenteredTextWithBackdrop(GuiGraphics graphics, Font font, Component text, int x, int y, int frontTextColor, int backTextColor) {

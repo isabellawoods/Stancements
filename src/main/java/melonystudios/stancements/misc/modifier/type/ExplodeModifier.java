@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-/// Copy of {@link net.minecraft.world.item.enchantment.effects.ExplodeEffect ExplodeEffect} that works with vinyl modifiers.
+/// Copy of [`ExplodeEffect`][net.minecraft.world.item.enchantment.effects.ExplodeEffect] that works with vinyl modifiers.
 public record ExplodeModifier(
         boolean attributeToRecordee,
         Optional<Holder<DamageType>> damageType,
@@ -55,7 +55,7 @@ public record ExplodeModifier(
 
     @Override
     public void onApplyModifiers(ModificationContext context, Holder<VinylModifier> modifier) {
-        Vec3 position = context.blockPosition().getCenter().add(this.offset);
+        Vec3 position = context.position().add(this.offset);
         Player player = context.playerOrNull();
 
         context.level().explode(

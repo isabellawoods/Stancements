@@ -4,12 +4,8 @@
     "color": "#A0A0A0",
     "translate": "album.minecraft.nether_update.description"
   },
-  "genre": [
-    "ambient",
-    "dubstep"
-  ],
   "link_tree": {
-    "link_tree.link_tree.own_website.lena_raine": "https://lena.fyi/projects/2020/4/11/minecraft-nether-update-2020"
+    "link_tree.own_website.lena_raine": "https://lena.fyi/projects/2020/4/11/minecraft-nether-update-2020"
   },
   "name": {
     "italic": true,
@@ -17,6 +13,10 @@
   },
   "songwriters": [
     "Lena Raine"
+  ],
+  "tags": [
+    "ambient",
+    "dubstep"
   ],
   "track_listing": [
     [

@@ -30,6 +30,8 @@ public class STStorageSoundHandlerMixin {
         if (level == null || !STClientOptions.MUSIC_DISCS_BLOCK_AMBIENT_MUSIC_SC.get()) return;
 
         var jukeboxSongs = level.registryAccess().registryOrThrow(Registries.JUKEBOX_SONG);
+        // noinspection ConstantValue
+        if (sound == null || sound.getSound() == null) return;
         ResourceLocation songID = RecordedDiscItem.getJukeboxSongLocation(sound.getSound().getLocation());
         var jukeboxSong = jukeboxSongs.getHolder(songID);
 

@@ -17,7 +17,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/// Checks if the transient stack of the current {@linkplain ModificationContext modification context} matches the provided list.
+/// Checks if the transient stack of the current [modification context][ModificationContext] matches the provided list.
 public class ItemRecorderStateCondition implements LootItemCondition, ModificationContextAware {
     public static final MapCodec<ItemRecorderStateCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             RegistryCodecs.homogeneousList(Registries.ITEM).fieldOf("targets").forGetter(ItemRecorderStateCondition::targets)
@@ -25,7 +25,7 @@ public class ItemRecorderStateCondition implements LootItemCondition, Modificati
     private final HolderSet<Item> targets;
     private @Nullable ModificationContext context;
 
-    /// Checks if the transient stack of the current {@linkplain ModificationContext modification context} matches the provided list.
+    /// Checks if the transient stack of the current [modification context][ModificationContext] matches the provided list.
     /// @param targets The list of items to check against.
     public ItemRecorderStateCondition(HolderSet<Item> targets) {
         this.targets = targets;

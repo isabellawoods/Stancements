@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 
 import java.util.Optional;
 
-/// Copy of {@link net.minecraft.world.item.enchantment.effects.ReplaceDisk ReplaceDisk} that works with vinyl modifiers
+/// Copy of [`ReplaceDisk`][net.minecraft.world.item.enchantment.effects.ReplaceDisk] that works with vinyl modifiers
 public record ReplaceDiskModifier(
         FloatProvider radius,
         FloatProvider height,
@@ -37,13 +37,13 @@ public record ReplaceDiskModifier(
 
     @Override
     public void onApplyModifiers(ModificationContext context, Holder<VinylModifier> modifier) {
-        BlockPos blockPos = BlockPos.containing(context.blockPosition().getCenter()).offset(this.offset);
+        BlockPos blockPos = BlockPos.containing(context.position()).offset(this.offset);
         RandomSource random = context.level().getRandom();
         int radius = Math.round(this.radius.sample(random));
         int height = Math.round(this.height.sample(random));
 
         for (BlockPos pos : BlockPos.betweenClosed(blockPos.offset(-radius, 0, -radius), blockPos.offset(radius, Math.min(height - 1, 0), radius))) {
-            if (pos.distToCenterSqr(context.blockPosition().getX(), (double) pos.getY() + 0.5, context.blockPosition().getZ()) < (double) Mth.square(radius)
+            if (pos.distToCenterSqr(context.position().x(), (double) pos.getY() + 0.5, context.position().z()) < (double) Mth.square(radius)
                     && this.predicate.map(predicate -> predicate.test(context.level(), pos)).orElse(true)
                     && context.level().setBlockAndUpdate(pos, this.blockState.getState(random, pos))) {
                 this.triggerGameEvent.ifPresent(event -> context.level().gameEvent(context.playerOrNull(), event, pos));

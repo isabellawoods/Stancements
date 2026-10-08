@@ -8,7 +8,7 @@
         },
         "requirements": {
           "condition": "stancements:recorder_state/item",
-          "targets": "stancements:sculk_infested_recorded_disc"
+          "targets": "stancements:sculk_infested_vinyl_disc"
         }
       }
     ]

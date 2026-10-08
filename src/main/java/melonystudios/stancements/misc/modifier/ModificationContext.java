@@ -1,38 +1,53 @@
 package melonystudios.stancements.misc.modifier;
 
+import melonystudios.stancements.blockentity.BlockBasedMusicPlayer;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
 import melonystudios.stancements.misc.recording.Track;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
 public class ModificationContext {
     private ItemStack transientModifierStack = ItemStack.EMPTY;
-    protected final ItemStack musicDiscImmutable;
+    protected final ItemStack recordableDiscImmutable;
     private final ServerLevel level;
-    private final BlockPos blockPosition;
-    private final ItemStack musicDisc;
+    private final Vec3 position;
+    private final ItemStack recordableDisc;
+    @Nullable
     private final Track track;
     private final boolean copying;
     private final Consumer<Integer> ejectionTicksCallback;
 
-    public ModificationContext(ServerLevel level, BlockPos blockPosition, ItemStack musicDisc, Track track, boolean copying, Consumer<Integer> ejectionTicksCallback) {
+    public ModificationContext(ServerLevel level, Vec3 position, ItemStack recordableDisc, @Nullable Track track, boolean copying, Consumer<Integer> ejectionTicksCallback) {
         this.level = level;
-        this.blockPosition = blockPosition;
-        this.musicDisc = musicDisc;
-        this.musicDiscImmutable = musicDisc.copy();
+        this.position = position;
+        this.recordableDisc = recordableDisc;
+        this.recordableDiscImmutable = recordableDisc.copy();
         this.track = track;
         this.copying = copying;
         this.ejectionTicksCallback = ejectionTicksCallback;
     }
 
-    public static ModificationContext fromBlockEntity(MusicRecorderBlockEntity recorder) {
-        return new ModificationContext((ServerLevel) recorder.getLevel(), recorder.getBlockPos(), recorder.getTheItem(), recorder.track(), recorder.copying(), recorder::setEjectionTicks);
+    public static ModificationContext fromMusicRecorder(MusicRecorderBlockEntity recorder) {
+        return new ModificationContext((ServerLevel) recorder.getLevel(), recorder.getBlockPos().getCenter(), recorder.getTheItem(), recorder.track(), recorder.copying(), recorder::setEjectionTicks);
+    }
+
+    public static ModificationContext fromBlockEntity(BlockEntity block) {
+        ItemStack musicDisc = ItemStack.EMPTY;
+        if (block instanceof Container container) musicDisc = container.getItem(0);
+
+        Track track = null;
+        if (block instanceof BlockBasedMusicPlayer player) track = Track.forJukeboxSong(block.getLevel(), player.song());
+
+        return new ModificationContext((ServerLevel) block.getLevel(), block.getBlockPos().getCenter(), musicDisc, track, false, ticks -> {});
     }
 
     public ServerLevel level() {
@@ -44,15 +59,20 @@ public class ModificationContext {
     }
 
     public BlockPos blockPosition() {
-        return this.blockPosition;
+        return BlockPos.containing(this.position());
     }
 
-    /// The recordable disc {@link ItemStack} inside the music recorder.
-    /// This stack **must NOT** be modified — use {@link #withTransientStack(ItemStack)} instead;
-    protected ItemStack musicDisc() {
-        return this.musicDisc;
+    public Vec3 position() {
+        return this.position;
     }
 
+    /// The recordable disc [ItemStack] inside the music recorder.
+    /// This stack **must NOT** be modified — use [#withTransientStack(ItemStack)] instead;
+    protected ItemStack recordableDisc() {
+        return this.recordableDisc;
+    }
+
+    @Nullable
     public Track track() {
         return this.track;
     }
@@ -65,7 +85,7 @@ public class ModificationContext {
         return this.ejectionTicksCallback;
     }
 
-    /// The {@link ItemStack} that vinyl modifiers apply their modifications on.
+    /// The [ItemStack] that vinyl modifiers apply their modifications on.
     public ItemStack transientStack() {
         return this.transientModifierStack;
     }

@@ -4,12 +4,8 @@
     "color": "#A0A0A0",
     "translate": "album.minecraft.trails_and_tales.description"
   },
-  "genre": [
-    "ambient",
-    "electronic"
-  ],
   "link_tree": {
-    "link_tree.link_tree.bandcamp": "https://cherof.bandcamp.com/music"
+    "link_tree.bandcamp": "https://cherof.bandcamp.com/music"
   },
   "name": {
     "italic": true,
@@ -17,6 +13,10 @@
   },
   "songwriters": [
     "Aaron Cherof"
+  ],
+  "tags": [
+    "ambient",
+    "electronic"
   ],
   "track_listing": [
     [

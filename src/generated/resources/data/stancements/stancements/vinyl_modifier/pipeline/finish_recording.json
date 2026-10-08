@@ -27,7 +27,7 @@
           },
           "round_to_nearest": true
         },
-        "function": "stancements:style_disc_from_registry"
+        "function": "stancements:style_recordable_disc"
       }
     ]
   },

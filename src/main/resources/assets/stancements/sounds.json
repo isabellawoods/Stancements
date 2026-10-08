@@ -122,5 +122,25 @@
       "stancements:entity/minecart/shear"
     ],
     "subtitle": "subtitles.entity.minecart.shear"
+  },
+  "vinyl_modifier.music_disc_decay": {
+    "sounds": [
+      "minecraft:ambient/nether/crimson_forest/addition1",
+      {
+        "name": "minecraft:ambient/nether/warped_forest/addition1",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:ambient/nether/warped_forest/addition2",
+        "pitch": 0.7
+      },
+      {
+        "name": "minecraft:ambient/nether/warped_forest/addition3",
+        "pitch": 0.1
+      },
+      "minecraft:ambient/nether/warped_forest/addition4",
+      "minecraft:ambient/nether/warped_forest/addition5",
+      "minecraft:ambient/nether/warped_forest/addition6"
+    ]
   }
 }

@@ -17,14 +17,16 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.JukeboxSong;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 
 /// An abstraction of a music ID specialized to handle *Stancements*' recording pipeline.
-/// @param identifier A {@linkplain ResourceLocation resource location} of this track, such as `minecraft:music/game/mice_on_venus` or `minecraft:precipice`.
-/// @param resolved Whether this track's ID represents an existing jukebox song. If not, it will pass through {@link RecordedDiscItem#getJukeboxSongLocation}.
+/// @param identifier An [identifier][ResourceLocation] of this track, such as `minecraft:music/game/mice_on_venus` or `minecraft:precipice`.
+/// @param resolved Whether this track's ID represents an existing jukebox song. If not, it will pass through [RecordedDiscItem#getJukeboxSongLocation].
 public record Track(ResourceLocation identifier, boolean resolved) {
     public static final Codec<Track> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ResourceLocation.CODEC.fieldOf("id").forGetter(Track::identifier),
@@ -44,13 +46,18 @@ public record Track(ResourceLocation identifier, boolean resolved) {
     );
 
     /// An abstraction of a music ID specialized to handle *Stancements*' recording pipeline.
-    /// @param trackID A {@linkplain ResourceLocation resource location} of this track, such as `minecraft:music/game/mice_on_venus`.
+    /// @param trackID An [identifier][ResourceLocation] of this track, such as `minecraft:music/game/mice_on_venus`.
     public Track(ResourceLocation trackID) {
         this(trackID, false);
     }
 
     public static Track forJukeboxSong(Holder<JukeboxSong> song) {
         return new Track(ResourceLocation.parse(song.getRegisteredName()), true);
+    }
+
+    public static Track forJukeboxSong(@Nullable Level level, JukeboxSong song) {
+        if (level == null) return null;
+        return forJukeboxSong(level.registryAccess().registryOrThrow(Registries.JUKEBOX_SONG).wrapAsHolder(song));
     }
 
     public Optional<Track> optionally() {

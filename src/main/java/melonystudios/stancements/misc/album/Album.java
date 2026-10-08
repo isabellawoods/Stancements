@@ -22,24 +22,19 @@ import org.slf4j.Logger;
 import java.text.NumberFormat;
 import java.util.*;
 
-// -- TRACK LISTING DEFINITION --
-// contender: List<Listing>
-// Listing :: either -> Track, List<Track>
-//
-// single track :: "minecraft:game/minecraft" -> Track
-// optional track :: "id" -> Track, "required" -> boolean
-// list of listings :: [{single, optional}] - all inside a single entry count as the same
-// |--> "minecraft:game/minecraft", "minecraft:music/game/minecraft" and "minecraft:sounds/music/game/minecraft.ogg" are all "C418 - Minecraft" in the eyes of the album definition
-
-// -- GENRE(s) -- (16 max.)
-// electronic / ambient
-// electronic / bass
-// electronic / chill-out
-// [x]: should author names be translatable?
-// [-]: "songwriters" should be a list of Person (from fabric) so i can add an in-game link tree
-// [x]: description should support a link for the source
-// todo: `stancements:person` registry to make a proper linktree for album/song songwriters
-public record Album(Component name, Component description, Optional<ResourceLocation> coverArt, TrackList trackListing, List<String> songwriters, Map<String, String> linkTree, List<String> genres) {
+/// An **album** defines a list of tracks that an [**album block**][melonystudios.stancements.blockentity.custom.AlbumBlockEntity] will store, and provides information about the album, its songwriter(s) and its description.
+///
+/// Albums can be defined using JSON files in a data pack at the path `data/<namespace>/stancements/album/`, and can have tags defined at the path `data/<namespace>/tags/stancements/album/`.
+///
+/// @author isabellawoods on [**Informational Mod Features**](https://github.com/isabellawoods/Informational-Mod-Features/blob/main/Stancements/Docs/Album.md)
+/// @param name A [text component][Component] for the name of this album.
+/// @param description A [text component][Component] for the album's description.
+/// @param coverArt *(optional)* An [identifier][ResourceLocation] — Points to a texture to use in the album block's side panel.
+/// @param trackListing A list of [track lists][Track#LIST_CODEC] — Every top-level entry represents one song within the album, and each entry within these entries are aliases for the original song.<br>For example, if the album looks for the jukebox song `minecraft:game/ebb`, but a recorded disc has `minecraft:music/game/ebb` stored within its data, that would also count for the album.<br>**One or more track aliases.**
+/// @param songwriters *(optional)* A list of strings — Each one is the name of a person that participated in the production of this album.
+/// @param linkTree *(optional)* A map of translation keys (string) to a valid URL (string) — This will be shown in the album block's interface.<br>**Example:** `"link_tree": {"link_tree.bandcamp": "https://c418.bandcamp.com"}`
+/// @param tags *(optional)* A list of strings — Each one is a tag that categorizes this album. *Stancements* provides translations for many tags by default in its [translation files](https://github.com/isabellawoods/Stancements/blob/neoforge-1.21.1/src/main/resources/assets/stancements/lang/en_us.json#L328-L359).<br>The translation key for genres is `musical_tag.<tag>`.
+public record Album(Component name, Component description, Optional<ResourceLocation> coverArt, TrackList trackListing, List<String> songwriters, Map<String, String> linkTree, List<String> tags) {
     private static final NumberFormat FORMATTER = Util.make(NumberFormat.getInstance(), formatter -> formatter.setMinimumIntegerDigits(2));
     private static final Logger LOGGER = LogUtils.getLogger();
     public static final Codec<Album> DIRECT_CODEC = RecordCodecBuilder.<Album>create(instance -> instance.group(
@@ -49,7 +44,7 @@ public record Album(Component name, Component description, Optional<ResourceLoca
             TrackList.CODEC.fieldOf("track_listing").forGetter(Album::trackListing),
             Codec.STRING.listOf().optionalFieldOf("songwriters", List.of()).forGetter(Album::songwriters),
             Codec.unboundedMap(Codec.STRING, Codec.STRING).optionalFieldOf("link_tree", Map.of()).forGetter(Album::linkTree),
-            Codec.STRING.listOf().optionalFieldOf("genre", List.of()).forGetter(Album::genres)
+            Codec.STRING.listOf().optionalFieldOf("tags", List.of()).forGetter(Album::tags)
     ).apply(instance, Album::new)).validate(album -> {
         if (album.trackListing().listings().isEmpty()) return DataResult.error(() -> "Album must have at least one listing in its tracklist");
 
@@ -58,7 +53,7 @@ public record Album(Component name, Component description, Optional<ResourceLoca
             for (int i = 0; i < album.trackListing().listings().size(); i++) {
                 List<Track> tracks = album.trackListing().listings().get(i);
                 if (!tracks.isEmpty()) builder.append("\n ").append(FORMATTER.format(i + 1)).append(" // ").append(tracks.getFirst().identifier());
-                var trackVariants = new ArrayList<>(tracks);
+                List<Track> trackVariants = new ArrayList<>(tracks);
                 trackVariants.removeFirst();
                 if (!trackVariants.isEmpty()) {
                     builder.append(" (with variant(s):");
@@ -75,11 +70,12 @@ public record Album(Component name, Component description, Optional<ResourceLoca
     public static final Codec<Holder<Album>> CODEC = RegistryFixedCodec.create(STRegistries.ALBUM);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<Album>> STREAM_CODEC = ByteBufCodecs.holderRegistry(STRegistries.ALBUM);
 
+    /// Creates an instance of the **album definition builder**.
     public static Builder album() {
         return new Builder();
     }
 
-    /// @param listings <pre>{@code
+    /// @param listings A list of [track lists][Track#LIST_CODEC] — Each top level entry (a `List<Track>`) is an entry in the [album UI][melonystudios.stancements.container.custom.AlbumMenu], and each track within one list represents the same song but in different formats.<br>This will use a matcher for both `music_data.id` and `jukebox_playable`, preferring the latter.<br><pre>{@code
     /// // simple, single
     /// "minecraft:music/game/sweden",
     /// // composed, single
@@ -104,21 +100,8 @@ public record Album(Component name, Component description, Optional<ResourceLoca
     ///   }
     /// ]
     /// }</pre>
-    /// @apiNote each top level entry (a `List<Track>`) is an entry in the album UI, each track within one list represent the same song but in different formats (will use a matcher for both `music_data.id` and `jukebox_playable`, preferring the latter)
-    public static record TrackList(List<List<Track>> listings) {
-        public static final Codec<TrackList> CODEC = Track.LIST_CODEC.listOf().xmap(
-                TrackList::new,
-                TrackList::listings
-        );
-    }
-
-    public static record SourceBackedComponent(Component text, Optional<Component> source) {
-        // this is sorta how mod menu does it: has text at the top, and a "Sources" / "Discord" / "Ko-fi" link below,
-        // but it will include links for Bandcamp, SoundCloud, own webside, YouTube, etc.
-        public static final Codec<SourceBackedComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ComponentSerialization.CODEC.fieldOf("text").forGetter(SourceBackedComponent::text),
-                ComponentSerialization.CODEC.optionalFieldOf("source").forGetter(SourceBackedComponent::source)
-        ).apply(instance, SourceBackedComponent::new));
+    public record TrackList(List<List<Track>> listings) {
+        public static final Codec<TrackList> CODEC = Track.LIST_CODEC.listOf().xmap(TrackList::new, TrackList::listings);
     }
 
     public static class Builder {
@@ -128,30 +111,42 @@ public record Album(Component name, Component description, Optional<ResourceLoca
         private final List<List<Track>> listings = new ArrayList<>();
         private final List<String> authors = new ArrayList<>();
         private final Map<String, String> linkTree = new HashMap<>();
-        private final List<String> genres = new ArrayList<>();
+        private final List<String> tags = new ArrayList<>();
 
+        /// Creates a new instance of the **album definition builder**.
         private Builder() {}
 
+        /// Sets the name of this album, displayed in the album UI and in music disc tooltips.
+        /// @param name A *text component* for the name.
         public Builder name(Component name) {
             this.name = name;
             return this;
         }
 
+        /// Sets the description of this album, displayed in the album UI.
+        /// @param description A *text component* for the description.
         public Builder description(Component description) {
             this.description = description;
             return this;
         }
 
+        /// Defines a texture to be used as the cover art for this album.
+        /// @param texturePath The path to the cover art, optionally omitting the `textures/` prefix and `.png` suffix.<br>These textures are usually located in `textures/gui/album_cover_art/`.
         public Builder coverArt(ResourceLocation texturePath) {
             this.coverArt = ReAPI.toTexturePath(texturePath);
             return this;
         }
 
+        /// Adds a [track][Track] to this album's track listing.
+        /// @param track The track to add.
         public Builder listing(Track track) {
             this.getListingWithEntry(track).add(track);
             return this;
         }
 
+        /// Adds a [track][Track] with variants to this album's track listing.
+        /// @param track The main track to add.
+        /// @param variants Variants of the main track.
         public Builder listingWithVariants(Track track, Track... variants) {
             var listing = this.getListingWithEntry(track);
             listing.add(track);
@@ -159,12 +154,17 @@ public record Album(Component name, Component description, Optional<ResourceLoca
             return this;
         }
 
+        /// Creates a resolved [track][Track] off of an [identifier][ResourceLocation] and adds it to this album's track listing.
+        /// @param trackID The identifier of this track.
         public Builder resolvedListing(ResourceLocation trackID) {
             Track track = new Track(trackID, true);
             this.getListingWithEntry(track).add(track);
             return this;
         }
 
+        /// Creates a resolved [track][Track] off of an [identifier][ResourceLocation], adds an unresolved variant prefixed with `music/` to it,
+        /// and adds it to this album's track listing.
+        /// @param trackID The main identifier of these tracks.
         public Builder resolvedListingMusicPrefix(ResourceLocation trackID) {
             Track track = new Track(trackID, true);
             Track track1 = new Track(trackID.withPrefix("music/"), false);
@@ -172,6 +172,9 @@ public record Album(Component name, Component description, Optional<ResourceLoca
             return this;
         }
 
+        /// Creates a resolved [track][Track] with variants off of an [identifier][ResourceLocation] and adds it to this album's track listing.
+        /// @param trackID The identifier of the main track.
+        /// @param trackIDs Identifiers of the variants to add to the main track.
         public Builder resolvedListing(ResourceLocation trackID, ResourceLocation... trackIDs) {
             Track track = new Track(trackID, true);
             this.getListingWithEntry(track).add(track);
@@ -183,33 +186,49 @@ public record Album(Component name, Component description, Optional<ResourceLoca
             return this;
         }
 
+        /// Adds a list of [track][Track]s to this album's track listing
+        /// @param tracks The tracks to add.
         public Builder listings(List<Track> tracks) {
             this.getListingWithEntry(tracks).addAll(tracks);
             return this;
         }
 
+        /// Marks the people listed here as the authors of this album.
+        /// @param authors A list of authors.
         public Builder addAuthors(String... authors) {
             this.authors.addAll(List.of(authors));
             return this;
         }
 
+        /// Adds an URL (with its translation key) to this album's link tree.
+        /// @param translationKey The translation key used in the album UI.
+        /// @param url The URL opened when the line on the album is clicked.
         public Builder addLink(String translationKey, String url) {
             this.linkTree.put(translationKey, url);
             return this;
         }
 
+        /// Adds an URL (with its translation key) to this album's link tree.
+        /// @param source A translation key to be used in the album UI.
+        /// @param url The URL opened when the line on the album is clicked.
         public Builder addLink(LinkTreeSources source, String url) {
-            this.linkTree.put("link_tree." + source, url);
+            this.linkTree.put(source.toString(), url);
             return this;
         }
 
+        /// Adds an author-specific URL (with its translation key) to this album's link tree.
+        /// @param source The base translation key to be used in the album UI.
+        /// @param songwriter The author that the URL refers to. This can be used, for example, to link to two authors Bandcamp pages.
+        /// @param url The URL opened when the line on the album is clicked.
         public Builder addLink(LinkTreeSources source, String songwriter, String url) {
-            this.linkTree.put("link_tree." + source + "." + songwriter, url);
+            this.linkTree.put(source + "." + songwriter, url);
             return this;
         }
 
-        public Builder categorizeAs(String... genre) {
-            this.genres.addAll(List.of(genre));
+        /// Tags this album with the provided tag(s). The translation key for a tag is `musical_tag.<tag>`.
+        /// @param tag The tag(s) to add to this album.
+        public Builder tagAs(String... tag) {
+            this.tags.addAll(List.of(tag));
             return this;
         }
 
@@ -233,11 +252,12 @@ public record Album(Component name, Component description, Optional<ResourceLoca
             return list;
         }
 
+        /// Builds this builder into an album definition.
         public Album build() {
-            if (this.name == null) throw new IllegalStateException("Album must have a defined 'name' component");
+            if (this.name == null) throw new IllegalStateException("Album must have a defined 'name' field, even if its empty");
             if (this.listings.isEmpty()) throw new IllegalStateException("Album must have at least one listing in its tracklist");
 
-            return new Album(this.name, this.description, Optional.ofNullable(this.coverArt), new TrackList(List.copyOf(this.listings)), List.copyOf(this.authors), Map.copyOf(this.linkTree), List.copyOf(this.genres));
+            return new Album(this.name, this.description, Optional.ofNullable(this.coverArt), new TrackList(List.copyOf(this.listings)), List.copyOf(this.authors), Map.copyOf(this.linkTree), List.copyOf(this.tags));
         }
     }
 }

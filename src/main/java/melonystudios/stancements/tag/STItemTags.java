@@ -12,8 +12,9 @@ public class STItemTags {
     public static final TagKey<Item> TAGGING_RAILS = stancements("tagging_rails");
     public static final TagKey<Item> VINYL_DISC_DYES = stancements("vinyl_disc_dyes");
     public static final TagKey<Item> MINECART_TAGS = stancements("minecart_tags");
-    public static final TagKey<Item> JADE_CONSIDERS_AS_RECORDING = stancements("jade_considers_as_recording");
+    public static final TagKey<Item> DISPLAYS_AS_RECORDING = stancements("displays_as_recording");
     public static final TagKey<Item> CASSETTE_TAPES = stancements("cassette_tapes");
+    public static final TagKey<Item> INSERTED_STORAGE_DISPLAYS = stancements("inserted_storage_displays");
 
     // Common tags
     public static final TagKey<Item> DYED_WATER_BUCKETS = common("buckets/dyed_water");

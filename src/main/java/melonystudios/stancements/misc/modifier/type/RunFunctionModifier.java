@@ -19,7 +19,7 @@ import org.slf4j.MarkerFactory;
 
 import java.util.Optional;
 
-/// Copy of {@link net.minecraft.world.item.enchantment.effects.RunFunction RunFunction} that works with vinyl modifiers.
+/// Copy of [`RunFunction`][net.minecraft.world.item.enchantment.effects.RunFunction] that works with vinyl modifiers.
 public record RunFunctionModifier(ResourceLocation function) implements ModifierComponentType {
     private static final Logger LOGGER = LogUtils.getLogger();
     public static final Codec<RunFunctionModifier> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -37,7 +37,7 @@ public record RunFunctionModifier(ResourceLocation function) implements Modifier
                     .withPermission(Commands.LEVEL_GAMEMASTERS)
                     .withSuppressedOutput()
                     .withLevel(context.level())
-                    .withPosition(context.blockPosition().getCenter());
+                    .withPosition(context.position());
 
             Player player = context.playerOrNull();
             if (player != null) sourceStack.withEntity(player).withRotation(player.getRotationVector());

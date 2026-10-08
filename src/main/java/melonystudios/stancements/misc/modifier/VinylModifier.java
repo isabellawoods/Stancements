@@ -36,17 +36,17 @@ import org.slf4j.MarkerFactory;
 
 import java.util.*;
 
-/// A **vinyl modifier** is a set of *modifier components* that are applied to recordable discs when starting and finishing a recording in the {@linkplain MusicRecorderBlockEntity music recorder}.
+/// A **vinyl modifier** is a set of *modifier components* that are applied to recordable discs when starting and finishing a recording in the [music recorder][MusicRecorderBlockEntity].
 ///
-/// Vinyl modifiers can be defined using JSON files in a data pack at the path `data/<namespace>/stancemets/vinyl_modifier/`.
+/// Vinyl modifiers can be defined using JSON files in a data pack at the path `data/<namespace>/stancemets/vinyl_modifier/`, and can have tags defined at the path `data/<namespace>/tags/stancements/vinyl_modifier/`.
 ///
-/// Modifiers in the {@linkplain STVinylModifierTags#PRIORITY_MODIFICATION `#stancements:priority_modification` tag} run before other modifiers.
+/// Modifiers in the [`#stancements:priority_modification` tag][STVinylModifierTags#PRIORITY_MODIFICATION] run before other modifiers.
 /// @see ModifierComponentType
-/// @author isabellawoods
-/// @param recordingText A **text component** shown when starting and/or finishing a recording, such as *"Finished recording!"*.
+/// @author isabellawoods on [**Informational Mod Features**](https://github.com/isabellawoods/Informational-Mod-Features/blob/main/Stancements/Docs/Vinyl%20Modifier.md)
+/// @param recordingText A [text component][Component] shown when starting and/or finishing a recording, such as *"Finished recording!"*.
 /// @param strategies Whether this modifier runs when starting or finishing a recording (or both). Can be `[before]`, `[after]` or `[before, after]`, but not none of them.
-/// @param targets A {@linkplain Track track}, or list of tracks, of which music discs this modifier acts on. Making this an empty list makes it run for **all** tracks.
-/// @param effects A list of {@linkplain ModifierComponentType modifier components} that are applied by this modifier.
+/// @param targets A [track][Track], or list of tracks, of which songs this modifier acts on. Making this an empty list makes it run for **all** tracks.
+/// @param effects A list of [modifier components][ModifierComponentType] that are applied by this modifier.
 /// @param modifiesCopies Whether this modifier applies when copying a music track, instead of only when recording.
 public record VinylModifier(Component recordingText, List<ModificationStrategy> strategies, List<Track> targets, DataComponentMap effects, boolean modifiesCopies) {
     public static final Codec<VinylModifier> DIRECT_CODEC = RecordCodecBuilder.<VinylModifier>create(instance -> instance.group(
@@ -74,9 +74,9 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
 
     /// Whether this modifier acts on the provided jukebox song.
     /// @param track A music track.
-    /// @return `true` if {@link #targets} is empty or if `targets` contains the provided song.
+    /// @return `true` if [#targets] is empty or if `targets` contains the provided song.
     public boolean actsOn(Track track) {
-        return this.targets().isEmpty() || this.targets().contains(track);
+        return (this.targets().isEmpty() || this.targets().contains(track)) && track != null;
     }
 
     /// Whether this modifier can be applied to copies.
@@ -88,23 +88,23 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
     /// Runs the **music recording pipeline** (runs all available vinyl modifiers).
     /// @param recorder The music recorder to grab the *modification context*.
     /// @param strategy Which stage of the recording this is. Only modifiers that run in this stage will be applied.
-    /// @return The {@link ModificationResult} containing the modified recordable disc.
+    /// @return The [ModificationResult] containing the modified recordable disc.
     public static ModificationResult recordingPipeline(MusicRecorderBlockEntity recorder, ModificationStrategy strategy) {
-        return recordingPipeline(ModificationContext.fromBlockEntity(recorder), strategy);
+        return recordingPipeline(ModificationContext.fromMusicRecorder(recorder), strategy);
     }
 
     /// Runs the **music recording pipeline** (runs all available vinyl modifiers).
     /// @param context The *modification context* for the pipeline. This provides all the information necessary for the modifiers to run.
     /// @param strategy Which stage of the recording this is. Only modifiers that run in this stage will be applied.
-    /// @return The {@link ModificationResult} containing the modified recordable disc.
+    /// @return The [ModificationResult] containing the modified recordable disc.
     public static ModificationResult recordingPipeline(ModificationContext context, ModificationStrategy strategy) {
-        if (context.level().isClientSide()) return new ModificationResult(context.musicDisc(), Component.empty());
+        if (context.level().isClientSide()) return new ModificationResult(context.recordableDisc(), Component.empty());
         Level level = context.level();
         Component recordingText = Component.empty();
 
         var allModifiers = level.registryAccess().registryOrThrow(STRegistries.VINYL_MODIFIER);
         var pipelineModifiers = allModifiers.getTagOrEmpty(STVinylModifierTags.PRIORITY_MODIFICATION);
-        context.withTransientStack(context.musicDisc().copy());
+        context.withTransientStack(context.recordableDisc().copy());
 
         // first run all modifiers that are part of the recording pipeline
         for (Holder<VinylModifier> modifier : pipelineModifiers) {
@@ -122,19 +122,19 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         }
 
         // if the recorder's stack was modified in this process, throw an exception
-        if (!ItemStack.matches(context.musicDisc(), context.musicDiscImmutable)) {
+        if (!ItemStack.matches(context.recordableDisc(), context.recordableDiscImmutable)) {
             throw new IllegalStateException("Recorder's disc stack was modified in the recording pipeline. Use 'ModificationContext.withTransientStack()' for this instead!");
         }
 
-        return new ModificationResult(context.transientStack().isEmpty() ? context.musicDisc() : context.transientStack(), recordingText);
+        return new ModificationResult(context.transientStack().isEmpty() ? context.recordableDisc() : context.transientStack(), recordingText);
     }
 
     private static Component checkAndRun(ModificationContext context, ModificationStrategy strategy, Holder<VinylModifier> modifierHolder, Component recordingText, boolean copying) {
         VinylModifier modifier = modifierHolder.value();
         if (STDebuggingFlags.LOGGING) {
             Marker marker = MarkerFactory.getMarker(modifierHolder.getRegisteredName());
-            LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.strategies", modifier.strategies(), strategy).getString());
-            LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.acts_on", context.track().identifier(), modifier.actsOn(context.track())).getString());
+            LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.strategies", modifier.strategies().toString(), strategy.getSerializedName()).getString());
+            LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.acts_on", context.track() == null ? "null" : context.track().identifier().toString(), modifier.actsOn(context.track())).getString());
             LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.copy_state", modifier.modifiesCopies(), copying).getString());
         }
 
@@ -168,12 +168,12 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         }
     }
 
-    /// Creates the loot context for the {@link ModifyRecordableDiscModifier stancements:modify_recordable_disc} modifier
-    /// and for any {@linkplain ConditionalEffect conditional} modifiers, used mostly for *loot conditions*.
+    /// Creates the loot context for the [`stancements:modify_recordable_disc`][ModifyRecordableDiscModifier] modifier
+    /// and for any [conditional][ConditionalEffect] modifiers, used mostly for *loot conditions*.
     /// @param context The *modification context* of this current run of the pipeline.
     public static LootContext modifierContext(ModificationContext context) {
         LootParams params = new LootParams.Builder(context.level())
-                .withParameter(LootContextParams.ORIGIN, context.blockPosition().getCenter())
+                .withParameter(LootContextParams.ORIGIN, context.position())
                 .withParameter(LootContextParams.BLOCK_STATE, context.blockState())
                 .withOptionalParameter(LootContextParams.BLOCK_ENTITY, context.recorderOrNull())
                 .withOptionalParameter(LootContextParams.THIS_ENTITY, context.playerOrNull())
@@ -214,7 +214,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
             return this;
         }
 
-        /// Adds a **loot function** to the {@link ModifyRecordableDiscModifier stancements:modify_recordable_disc} modifier.
+        /// Adds a **loot function** to the [`stancements:modify_recordable_disc`][ModifyRecordableDiscModifier] modifier.
         /// @param function The loot function.
         public Builder withFunction(LootItemFunction function) {
             this.getFunctionsList(STModifierComponents.MODIFY_RECORDABLE_DISC.get()).add(function);
@@ -223,7 +223,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
 
         /// Makes the recordable disc be ejected out of the music recorder after **10 to 15 seconds** after being inserted.
         ///
-        /// This makes use of the {@link EjectAfterTicksModifier stancements:eject_after_ticks} modifier
+        /// This makes use of the [`stancements:eject_after_ticks`][EjectAfterTicksModifier] modifier
         public Builder ejectAfter15Seconds() {
             this.withSpecialModifier(STModifierComponents.EJECT_AFTER_TICKS.get(), List.of(new ConditionalEffect<>(
                     EjectAfterTicksModifier.tenToFifteenSeconds(1),
@@ -233,7 +233,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         }
 
         /// Adds a *modifier component* to this vinyl modifier. The modifier must be a `List<ConditionalEffect<E>>`.
-        /// @param <E> The component type. It is recommended to extend {@link ModifierComponentType} so it runs properly
+        /// @param <E> The component type. It is recommended to extend [ModifierComponentType] so it runs properly
         /// @param component The data component attached to the modifier.
         /// @param effect The modifier.
         public <E> Builder withModifier(DataComponentType<List<ConditionalEffect<E>>> component, E effect) {
@@ -242,7 +242,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         }
 
         /// Adds a *modifier component* to this vinyl modifier.
-        /// @param <E> The component type. It is recommended to extend {@link ModifierComponentType} so it runs properly
+        /// @param <E> The component type. It is recommended to extend [ModifierComponentType] so it runs properly
         /// @param component The data component attached to the modifier.
         /// @param value The modifier.
         public <E> Builder withSpecialModifier(DataComponentType<E> component, E value) {
@@ -250,7 +250,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
             return this;
         }
 
-        /// Adds a *modifier component* to this vinyl modifier. This component must be of the {@link Unit} type.
+        /// Adds a *modifier component* to this vinyl modifier. This component must be of the [Unit] type.
         /// @param component The data component attached to the modifier.
         public Builder withModifier(DataComponentType<Unit> component) {
             this.modifierMapBuilder.set(component, Unit.INSTANCE);
@@ -284,7 +284,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         /// Builds this builder into a vinyl modifier.
         public VinylModifier build() {
             if (this.modifiesAt.isEmpty()) {
-                throw new IllegalStateException("Vinyl modifier doesn't have any targeted strategies. Use 'modifiesAtStart()' and/or 'modifiesAtFinish()' to set one");
+                throw new IllegalStateException("Vinyl modifier doesn't have any selected modification strategies. Use 'modifiesAtStart()' and/or 'modifiesAtFinish()' to set one");
             }
             return new VinylModifier(this.recordingText, this.modifiesAt, this.targets, this.modifierMapBuilder.build(), this.modifiesCopies);
         }

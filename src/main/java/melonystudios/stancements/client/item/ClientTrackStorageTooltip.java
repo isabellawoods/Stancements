@@ -2,6 +2,7 @@ package melonystudios.stancements.client.item;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.client.STClient;
 import melonystudios.stancements.client.element.StackedRenderComponents;
 import melonystudios.stancements.component.custom.TrackStorage;
 import melonystudios.stancements.util.Alignment;
@@ -21,7 +22,6 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class ClientTrackStorageTooltip implements ClientTooltipComponent {
-    private static final int TRANSPARENT_TEXT_BACKDROP = 0x7F000000;
     private static final int FULLNESS_BAR_HEIGHT = 20;
     private static final Component DESCRIPTION_TEXT = Component.translatable("tooltip.stancements.cassette_tape").withStyle(ChatFormatting.GRAY);
     private final TrackStorage storage;
@@ -43,7 +43,7 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
             graphics.blitSprite(Stancements.stancements("container/inventory_recorder/track_storage_background"), x, y - 2, width, this.getHeight() - FULLNESS_BAR_HEIGHT + 3);
 
             for (MutableComponent line : lines) {
-                StackedRenderComponents.renderAlignedScrollingText(graphics, font, line, Alignment.LEFT, x + 3, y, x + width - 3, y + font.lineHeight, TrackStorage.TEXT_COLOR, TRANSPARENT_TEXT_BACKDROP);
+                StackedRenderComponents.renderAlignedScrollingText(graphics, font, line, Alignment.LEFT, x + 3, y, x + width - 3, y + font.lineHeight, TrackStorage.TEXT_COLOR, STClient.TRANSPARENT_TEXT_BACKDROP);
                 y += font.lineHeight + 2;
             }
             RenderSystem.disableBlend();
@@ -64,7 +64,7 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
         graphics.blitSprite(this.storage.backgroundSprite(), x, y, width, 14);
         graphics.blitSprite(this.storage.fillSprite(), x, y, (int) (width * fullnessFraction), 14);
         RenderSystem.disableBlend();
-        StackedRenderComponents.drawCenteredTextWithBackdrop(graphics, font, this.storage.getFullnessText(), x + 75, y + 3, 0xFFFFFF, TRANSPARENT_TEXT_BACKDROP);
+        StackedRenderComponents.drawCenteredTextWithBackdrop(graphics, font, this.storage.getFullnessText(), x + 75, y + 3, 0xFFFFFF, STClient.TRANSPARENT_TEXT_BACKDROP);
     }
 
     @Override

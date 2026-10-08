@@ -19,8 +19,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
-
 @Mixin(ServerPlayer.class)
 public abstract class STServerPlayerMixin extends Player {
     @Shadow
@@ -38,20 +36,20 @@ public abstract class STServerPlayerMixin extends Player {
 
         ModificationContext context = new ModificationContext(
                 (ServerLevel) this.level(),
-                this.blockPosition(),
+                this.position(),
                 STItems.VINYL_DISC.toStack(),
                 Tracks.C418_ALPHA,
                 true,
                 ticks -> {}
         );
         var result = VinylModifier.recordingPipeline(context, ModificationStrategy.FINISH);
-        RecordedDiscItem.setJukeboxSong(this.level(), result.stack(), context.track(), context.copying(), false);
+        if (context.track() != null) RecordedDiscItem.setJukeboxSong(this.level(), result.stack(), context.track(), context.copying(), false);
 
         STCriteriaTriggers.RECORD_SONG.trigger(
                 context.track(),
                 null,
                 context.copying(),
-                List.of(Tracks.C418_ALPHA),
+                Tracks.C418_ALPHA.listOf(),
                 (ServerPlayer) this.self()
         );
         if (!this.addItem(result.stack())) this.drop(result.stack(), false);

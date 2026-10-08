@@ -55,6 +55,14 @@
       }
     ]
   },
+  "music.biome.magnia_fields.flutters": {
+    "sounds": [
+      {
+        "name": "enderscape:music/biome/magnia_fields/flutters",
+        "stream": true
+      }
+    ]
+  },
   "music.biome.veiled_woodlands.respite": {
     "sounds": [
       {
@@ -67,6 +75,22 @@
     "sounds": [
       {
         "name": "enderscape:music/structure/end_city/grandeur",
+        "stream": true
+      }
+    ]
+  },
+  "music.structure.end_city.mystique": {
+    "sounds": [
+      {
+        "name": "enderscape:music/structure/end_city/mystique",
+        "stream": true
+      }
+    ]
+  },
+  "music.structure.stronghold.prelude": {
+    "sounds": [
+      {
+        "name": "enderscape:music/structure/stronghold/prelude",
         "stream": true
       }
     ]

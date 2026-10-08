@@ -33,7 +33,7 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
         return new RecorderData(
                 Optional.ofNullable(recorder.track()),
                 recorder.copying(),
-                !recorder.getTheItem().is(STItemTags.JADE_CONSIDERS_AS_RECORDING) && !recorder.getTheItem().isEmpty(),
+                !recorder.getTheItem().is(STItemTags.DISPLAYS_AS_RECORDING) && !recorder.getTheItem().isEmpty(),
                 recorder.ticksUntilFinishedRecording()
         );
     }

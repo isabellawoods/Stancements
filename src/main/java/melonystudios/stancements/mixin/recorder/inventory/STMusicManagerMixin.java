@@ -5,7 +5,6 @@ import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.misc.recording.Track;
 import melonystudios.stancements.network.SendClientTrack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicManager;
@@ -30,7 +29,9 @@ public class STMusicManagerMixin {
     @Inject(method = "startPlaying", at = @At("TAIL"))
     public void recordOnPlay(Music selector, CallbackInfo callback) {
         LocalPlayer player = this.minecraft.player;
-        if (player == null || this.currentMusic == null) return;
+        // this "getSound()" is required because Broken Script sends sound instances with no sound... ~isa 27-09-26
+        // noinspection ConstantValue
+        if (player == null || this.currentMusic == null || this.currentMusic.getSound() == null) return;
 
         // intentionally blocks the credits screen music ("C418 - Alpha") from being recorded
         if ((this.minecraft.screen != null && STClientOptions.SCREEN_MUSIC_BLACKLIST.get().contains(this.minecraft.screen.getClass().getName())) || Minecraft.getInstance().isPaused()) return;

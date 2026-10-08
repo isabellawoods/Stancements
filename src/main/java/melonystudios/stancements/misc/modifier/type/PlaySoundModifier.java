@@ -11,7 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.world.level.Level;
 
-/// Copy of {@link net.minecraft.world.item.enchantment.effects.PlaySoundEffect PlaySoundEffect} that works with vinyl modifiers.
+/// Copy of [`PlaySoundEffect`][net.minecraft.world.item.enchantment.effects.PlaySoundEffect] that works with vinyl modifiers.
 public record PlaySoundModifier(Holder<SoundEvent> soundEvent, FloatProvider volume, FloatProvider pitch) implements ModifierComponentType {
     public static final Codec<PlaySoundModifier> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             SoundEvent.CODEC.fieldOf("sound").forGetter(PlaySoundModifier::soundEvent),
@@ -25,9 +25,9 @@ public record PlaySoundModifier(Holder<SoundEvent> soundEvent, FloatProvider vol
         if (level != null) {
             level.playSound(
                     null,
-                    context.blockPosition().getX(),
-                    context.blockPosition().getY(),
-                    context.blockPosition().getZ(),
+                    context.position().x(),
+                    context.position().y(),
+                    context.position().z(),
                     this.soundEvent(),
                     SoundSource.BLOCKS,
                     this.volume().sample(level.getRandom()),

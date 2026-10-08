@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "enderscape.music.structure.end_city.mystique"
+  },
+  "length_in_seconds": 440.0,
+  "sound_event": {
+    "sound_id": "enderscape:music.structure.end_city.mystique"
+  }
+}

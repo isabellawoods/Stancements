@@ -11,6 +11,7 @@
     "logger.stancements.vinyl_modifier.not_available",
 
     "tag.item.stancements.recordable_discs",
+    "tag.item.stancements.jade_considers_as_recording",
 
     "music.minecraft.game.lilypad",
     "music.minecraft.game.below_and_above",
@@ -28,10 +29,45 @@
     "config.stancements.add_items_to_vanilla_tabs": "option.stancements.add_items_to_vanilla_tabs",
     "config.stancements.add_items_to_vanilla_tabs.tooltip": "option.stancements.add_items_to_vanilla_tabs.tooltip",
 
+    "commands.stancements.update_recorded_disc.both": "commands.mstudios.update_recorded_disc.both",
+    "commands.stancements.update_recorded_disc.music_id": "commands.mstudios.update_recorded_disc.music_id",
+    "commands.stancements.update_recorded_disc.label": "commands.mstudios.update_recorded_disc.label",
+    "commands.stancements.update_recorded_disc.fail": "commands.mstudios.update_recorded_disc.fail",
+    "commands.stancements.convert_to_js.success": "commands.mstudios.convert_disc_to_jukebox_song.success",
+    "commands.stancements.convert_to_js.fail": "commands.mstudios.convert_disc_to_jukebox_song.fail",
+
     "subtitles.item.cauldron.dye": "subtitles.block.cauldron.dye",
 
     "tooltip.stancements.author_song_separator": "tooltip.stancements.author_song_separator_regex",
     "logger.stancements.outside_bounds": "logger.reutilities.outside_bounds",
+
+    "musical_genre.classical": "musical_tag.classical",
+    "musical_genre.jazz": "musical_tag.jazz",
+    "musical_genre.rock": "musical_tag.rock",
+    "musical_genre.bass": "musical_tag.bass",
+    "musical_genre.dubstep": "musical_tag.dubstep",
+    "musical_genre.trap": "musical_tag.trap",
+    "musical_genre.lo_fi": "musical_tag.lo_fi",
+    "musical_genre.ambient": "musical_tag.ambient",
+    "musical_genre.chillwave": "musical_tag.chillwave",
+    "musical_genre.synthwave": "musical_tag.synthwave",
+    "musical_genre.vaporwave": "musical_tag.vaporwave",
+    "musical_genre.chill_out": "musical_tag.chill_out",
+    "musical_genre.downtempo": "musical_tag.downtempo",
+    "musical_genre.blues": "musical_tag.blues",
+    "musical_genre.rhythm_and_blues": "musical_tag.rhythm_and_blues",
+    "musical_genre.gospel": "musical_tag.gospel",
+    "musical_genre.hip_hop": "musical_tag.hip_hop",
+    "musical_genre.funk": "musical_tag.funk",
+    "musical_genre.psychedelic": "musical_tag.psychedelic",
+    "musical_genre.electronic": "musical_tag.electronic",
+
+    "musical_genre.samba": "musical_tag.samba",
+    "musical_genre.sertanejo": "musical_tag.sertanejo",
+    "musical_genre.pagode": "musical_tag.pagode",
+    "musical_genre.forro": "musical_tag.forro",
+    "musical_genre.bossa_nova": "musical_tag.bossa_nova",
+    "musical_genre.mpb": "musical_tag.mpb",
 
     "music.minecraft.game.minecraft": "music.game.minecraft",
     "music.minecraft.game.clark": "music.game.clark",

@@ -51,8 +51,8 @@ public class RecordedDiscItem extends Item {
         }
     }
 
-    /// Returns the location of a {@linkplain melonystudios.stancements.misc.STJukeboxSongs jukebox song} based on the recorded `track`.
-    /// @param trackID A resource location of the song's location within the game's files.
+    /// Returns the location of a [jukebox song][melonystudios.stancements.misc.STJukeboxSongs] based on the recorded `track`.
+    /// @param trackID An identifier of the song's location within the game's files.
     public static ResourceLocation getJukeboxSongLocation(ResourceLocation trackID) {
         return ResourceLocation.parse(trackID.toString()
                 .replace("sounds/", "")
@@ -86,7 +86,7 @@ public class RecordedDiscItem extends Item {
         super.inventoryTick(stack, level, entity, slot, selected);
         if (level.isClientSide() || !STCommonOptions.RECORDED_DISC_AUTO_CONVERSION.get()) return;
 
-        // remove old "music_id" component from 1.16
+        // remove old "music_id" component from pre-0.3.2
         ResourceLocation id = stack.get(STDataComponents.MUSIC_ID);
         if (!stack.has(DataComponents.JUKEBOX_PLAYABLE) && id != null) {
             setJukeboxSong(level, stack, new Track(id, false), false, true);

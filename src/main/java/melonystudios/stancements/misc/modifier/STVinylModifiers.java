@@ -42,7 +42,7 @@ public class STVinylModifiers {
         context.register(FINISH_RECORDING, VinylModifier.modifier(List.of())
                 .recordingText(Component.translatable("tooltip.stancements.finished_recording").withColor(Stancements.ACCENT_COLOR))
                 .withFunction(TransformRecordableFunction.withTransform(RecordableTransform.Transforms.ON_RECORD).build())
-                .withFunction(StyleDiscFromRegistryFunction.styleFromRegistry(
+                .withFunction(StyleRecordableDiscFunction.style(
                         recordedDiscDyes(),
                         (SetRandomLabelFunction) SetRandomLabelFunction.withDefaultLabelRange().build()
                 ).build())
@@ -54,7 +54,7 @@ public class STVinylModifiers {
         context.register(SCULK_EJECTION_CHANCE, VinylModifier.modifier(List.of())
                 .withSpecialModifier(STModifierComponents.EJECT_AFTER_TICKS.get(), List.of(new ConditionalEffect<>(
                         new EjectAfterTicksModifier(ConstantFloat.of(0.15F), ConstantInt.of(400)),
-                        Optional.of(new ItemRecorderStateCondition(HolderSet.direct(STItems.SCULK_INFESTED_RECORDED_DISC)))
+                        Optional.of(new ItemRecorderStateCondition(HolderSet.direct(STItems.SCULK_INFESTED_VINYL_DISC)))
                 )))
                 .modifiesAtStart()
                 .modifiesCopies()

@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import melonystudios.stancements.block.STBlockTypes;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.STBlockEntities;
+import melonystudios.stancements.command.argument.STArgumentTypes;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.container.STMenuTypes;
 import melonystudios.stancements.item.STItems;
@@ -56,6 +57,7 @@ public class Stancements {
         STLootConditions.CONDITIONS.register(eventBus);
         STNumberProviders.PROVIDERS.register(eventBus);
         STAttachmentTypes.ATTACHMENTS.register(eventBus);
+        STArgumentTypes.TYPES.register(eventBus);
 
         NeoForgeMod.enableMilkFluid();
         container.registerConfig(ModConfig.Type.COMMON, STCommonOptions.SPEC, "melonystudios/stancements-common.toml");

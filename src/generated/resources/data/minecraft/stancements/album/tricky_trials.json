@@ -4,15 +4,10 @@
     "color": "#A0A0A0",
     "translate": "album.minecraft.tricky_trials.description"
   },
-  "genre": [
-    "ambient",
-    "electronic",
-    "rock"
-  ],
   "link_tree": {
-    "link_tree.link_tree.bandcamp": "https://cherof.bandcamp.com/music",
-    "link_tree.link_tree.own_website.lena_raine": "https://lena.fyi/",
-    "link_tree.link_tree.twitter.kumi_tanioka": "https://twitter.com/tanikumi"
+    "link_tree.bandcamp": "https://cherof.bandcamp.com/music",
+    "link_tree.own_website.lena_raine": "https://lena.fyi/",
+    "link_tree.twitter.kumi_tanioka": "https://twitter.com/tanikumi"
   },
   "name": {
     "italic": true,
@@ -22,6 +17,11 @@
     "Aaron Cherof",
     "Kumi Tanioka",
     "Lena Raine"
+  ],
+  "tags": [
+    "ambient",
+    "electronic",
+    "rock"
   ],
   "track_listing": [
     [

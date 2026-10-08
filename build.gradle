@@ -133,15 +133,15 @@ dependencies {
 
     if (project.hasProperty("sophisticated_core_version")) {
         // Sophisticated Core
-        implementation files("build/libs/sophisticatedcore-${minecraft_version}-${sophisticated_core_version}.jar")
+        implementation "maven.modrinth:sophisticated-core:${minecraft_version}-${sophisticated_core_version}"
     }
     if (project.hasProperty("sophisticated_backpacks_version")) {
         // Sophisticated Backpacks
-        implementation files("build/libs/sophisticatedbackpacks-${minecraft_version}-${sophisticated_backpacks_version}.jar")
+        implementation "maven.modrinth:sophisticated-backpacks:${minecraft_version}-${sophisticated_backpacks_version}"
     }
     if (project.hasProperty("sophisticated_storage_version")) {
         // Sophisticated Storage
-        implementation files("build/libs/sophisticatedstorage-${minecraft_version}-${sophisticated_storage_version}.jar")
+        implementation "maven.modrinth:sophisticated-storage:${minecraft_version}-${sophisticated_storage_version}"
     }
 
     // Example mod dependency using a mod jar from ./libs with a flat directory repository:

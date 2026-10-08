@@ -4,18 +4,15 @@
     "color": "#A0A0A0",
     "translate": "album.minecraft.volume_alpha.description"
   },
-  "genre": [
-    "ambient"
-  ],
   "link_tree": {
-    "link_tree.link_tree.apple_music": "https://music.apple.com/album/minecraft-volume-alpha/1867885113",
-    "link_tree.link_tree.bandcamp": "https://c418.bandcamp.com/album/minecraft-volume-alpha",
-    "link_tree.link_tree.deezer": "https://deezer.com/album/9236757",
-    "link_tree.link_tree.own_website.c418": "https://c418.org/albums/minecraft-volume-alpha/",
-    "link_tree.link_tree.soundcloud": "https://soundcloud.com/c418/sets/minecraft-volume-alpha-4",
-    "link_tree.link_tree.spotify": "https://open.spotify.com/album/3Gt7rOjcZQoHCfnKl5AkK7",
-    "link_tree.link_tree.youtube": "https://www.youtube.com/playlist?list=OLAK5uy_lNojWuj8PKhbqVFZBpSkUpCYcrJbYt8s4",
-    "link_tree.link_tree.youtube_music": "https://music.youtube.com/playlist?list=OLAK5uy_nhQ2EVQRbH-uWJbaesYXRQGZMzinN0qqg"
+    "link_tree.apple_music": "https://music.apple.com/album/minecraft-volume-alpha/1867885113",
+    "link_tree.bandcamp": "https://c418.bandcamp.com/album/minecraft-volume-alpha",
+    "link_tree.deezer": "https://deezer.com/album/9236757",
+    "link_tree.own_website.c418": "https://c418.org/albums/minecraft-volume-alpha/",
+    "link_tree.soundcloud": "https://soundcloud.com/c418/sets/minecraft-volume-alpha-4",
+    "link_tree.spotify": "https://open.spotify.com/album/3Gt7rOjcZQoHCfnKl5AkK7",
+    "link_tree.youtube": "https://www.youtube.com/playlist?list=OLAK5uy_lNojWuj8PKhbqVFZBpSkUpCYcrJbYt8s4",
+    "link_tree.youtube_music": "https://music.youtube.com/playlist?list=OLAK5uy_nhQ2EVQRbH-uWJbaesYXRQGZMzinN0qqg"
   },
   "name": {
     "italic": true,
@@ -23,6 +20,9 @@
   },
   "songwriters": [
     "C418"
+  ],
+  "tags": [
+    "ambient"
   ],
   "track_listing": [
     [

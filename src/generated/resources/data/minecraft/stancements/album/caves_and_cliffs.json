@@ -4,13 +4,9 @@
     "color": "#A0A0A0",
     "translate": "album.minecraft.caves_and_cliffs.description"
   },
-  "genre": [
-    "ambient",
-    "electronic"
-  ],
   "link_tree": {
-    "link_tree.link_tree.own_website.lena_raine": "https://lena.fyi/projects/2021/12/31/minecraft-caves-amp-cliffs-2021",
-    "link_tree.link_tree.twitter.kumi_tanioka": "https://twitter.com/tanikumi"
+    "link_tree.own_website.lena_raine": "https://lena.fyi/projects/2021/12/31/minecraft-caves-amp-cliffs-2021",
+    "link_tree.twitter.kumi_tanioka": "https://twitter.com/tanikumi"
   },
   "name": {
     "italic": true,
@@ -19,6 +15,10 @@
   "songwriters": [
     "Lena Raine",
     "Kumi Tanioka"
+  ],
+  "tags": [
+    "ambient",
+    "electronic"
   ],
   "track_listing": [
     [

@@ -26,6 +26,9 @@ public class STSounds {
     // Entities
     public static final DeferredHolder<SoundEvent, SoundEvent> SHEAR_MINECART = STANCEMENTS.register("entity.minecart.shear", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("entity.minecart.shear")));
 
+    // Vinyl modifiers
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_DECAY_MODIFIER = STANCEMENTS.register("vinyl_modifier.music_disc_decay", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("vinyl_modifier.music_disc_decay")));
+
     // Volume Alpha
     public static final DeferredHolder<SoundEvent, SoundEvent> MINECRAFT_SONG = register("music.game.minecraft");
     public static final DeferredHolder<SoundEvent, SoundEvent> CLARK_SONG = register("music.game.clark");

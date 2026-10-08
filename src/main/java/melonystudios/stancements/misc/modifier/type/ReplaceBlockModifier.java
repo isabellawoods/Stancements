@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 
 import java.util.Optional;
 
-/// Copy of {@link net.minecraft.world.item.enchantment.effects.ReplaceBlock ReplaceBlock} that works with vinyl modifiers.
+/// Copy of [`ReplaceBlock`][net.minecraft.world.item.enchantment.effects.ReplaceBlock] that works with vinyl modifiers.
 public record ReplaceBlockModifier(Vec3i offset, Optional<BlockPredicate> predicate, BlockStateProvider blockState, Optional<Holder<GameEvent>> triggerGameEvent) implements ModifierComponentType {
     public static final Codec<ReplaceBlockModifier> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Vec3i.CODEC.optionalFieldOf("offset", Vec3i.ZERO).forGetter(ReplaceBlockModifier::offset),
@@ -25,7 +25,7 @@ public record ReplaceBlockModifier(Vec3i offset, Optional<BlockPredicate> predic
 
     @Override
     public void onApplyModifiers(ModificationContext context, Holder<VinylModifier> modifier) {
-        BlockPos pos = BlockPos.containing(context.blockPosition().getCenter()).offset(this.offset);
+        BlockPos pos = BlockPos.containing(context.position()).offset(this.offset);
         if (this.predicate.map(predicate -> predicate.test(context.level(), pos)).orElse(true) && context.level().setBlockAndUpdate(pos, this.blockState.getState(context.level().getRandom(), pos))) {
             this.triggerGameEvent.ifPresent(event -> context.level().gameEvent(context.playerOrNull(), event, pos));
         }

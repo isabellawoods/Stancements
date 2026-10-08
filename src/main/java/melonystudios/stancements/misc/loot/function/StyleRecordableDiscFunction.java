@@ -25,16 +25,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class StyleDiscFromRegistryFunction extends LootItemConditionalFunction implements ModificationContextAware {
-    public static final MapCodec<StyleDiscFromRegistryFunction> CODEC = RecordCodecBuilder.mapCodec(instance -> commonFields(instance).and(instance.group(
+public class StyleRecordableDiscFunction extends LootItemConditionalFunction implements ModificationContextAware {
+    public static final MapCodec<StyleRecordableDiscFunction> CODEC = RecordCodecBuilder.mapCodec(instance -> commonFields(instance).and(instance.group(
             SetRandomDyesFunction.CODEC.fieldOf("fallback_dyes_setter").forGetter(function -> function.dyesSetter),
             SetRandomLabelFunction.CODEC.fieldOf("fallback_label_setter").forGetter(function -> function.labelSetter)
-    )).apply(instance, StyleDiscFromRegistryFunction::new));
+    )).apply(instance, StyleRecordableDiscFunction::new));
     private final SetRandomDyesFunction dyesSetter;
     private final SetRandomLabelFunction labelSetter;
     private @Nullable ModificationContext context;
 
-    public StyleDiscFromRegistryFunction(List<LootItemCondition> conditions, SetRandomDyesFunction dyesSetter, SetRandomLabelFunction labelSetter) {
+    public StyleRecordableDiscFunction(List<LootItemCondition> conditions, SetRandomDyesFunction dyesSetter, SetRandomLabelFunction labelSetter) {
         super(conditions);
         this.dyesSetter = dyesSetter;
         this.labelSetter = labelSetter;
@@ -64,22 +64,22 @@ public class StyleDiscFromRegistryFunction extends LootItemConditionalFunction i
         }
 
         // label
-        if (copyStyle != null && copyStyle.label() <= RecordedDiscItem.DISC_LABEL_MIN) {
+        if (copyStyle != null && copyStyle.label() >= RecordedDiscItem.DISC_LABEL_MIN) {
             copyStack.set(STDataComponents.LABEL, copyStyle.label());
         } else {
             copyStack = this.labelSetter.run(copyStack, context);
         }
 
         // rarity
-        if (copyStyle != null && copyStyle.rarity() != Rarity.UNCOMMON) {
+        if (copyStyle != null) {
             copyStack.set(DataComponents.RARITY, copyStyle.rarity());
         }
 
         return copyStack;
     }
 
-    public static LootItemConditionalFunction.Builder<?> styleFromRegistry(SetRandomDyesFunction dyesSetter, SetRandomLabelFunction labelSetter) {
-        return simpleBuilder(conditions -> new StyleDiscFromRegistryFunction(conditions, dyesSetter, labelSetter));
+    public static LootItemConditionalFunction.Builder<?> style(SetRandomDyesFunction dyesSetter, SetRandomLabelFunction labelSetter) {
+        return simpleBuilder(conditions -> new StyleRecordableDiscFunction(conditions, dyesSetter, labelSetter));
     }
 
     @Override
@@ -90,6 +90,6 @@ public class StyleDiscFromRegistryFunction extends LootItemConditionalFunction i
     @Override
     @NotNull
     public LootItemFunctionType<? extends LootItemConditionalFunction> getType() {
-        return STLootFunctions.STYLE_DISC_FROM_REGISTRY.get();
+        return STLootFunctions.STYLE_RECORDABLE_DISC.get();
     }
 }
