@@ -25,7 +25,7 @@ public class StackedRenderComponents {
 
     /// @author isabellawoods, [*Mellow UI* `5.0.0-beta.4`](https://github.com/isabellawoods/Mellow-UI/blob/536a0b4e4dc3c3b472d1e2c6df149f4324f83740/src/main/java/melonystudios/mellowui/element/text/ScrollingText.java#L26-L50)
     public static void alignedScrollingText(GuiGraphicsExtractor graphics, Font font, Component text, Alignment alignment, int centerX, int minX, int minY, int maxX, int maxY, int color) {
-        int textWidth = font.width(text);
+        int textWidth = font.width(text) + 1; // +1 to account for the text shadow ~isa 21-10-26
         int textY = (minY + maxY - 9) / 2 + 1;
         int buttonWidth = maxX - minX;
         if (textWidth > buttonWidth) {
@@ -58,7 +58,7 @@ public class StackedRenderComponents {
         double i4 = Math.sin(Math.PI / 2 * Math.cos(Math.PI * 2 * time / i3)) / 2 + 0.5;
         double xOffset = Mth.lerp(i4, 0, widthDiff);
         graphics.enableScissor(minX, minY, maxX, maxY);
-        graphics.text(font, text, minX - (int) xOffset + 1, textY + 1, color, false);
+        graphics.text(font, text, minX - (int) xOffset, textY, color, false);
         graphics.disableScissor();
     }
 }

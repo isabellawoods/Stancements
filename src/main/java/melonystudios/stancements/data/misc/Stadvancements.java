@@ -226,7 +226,7 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
 
     private static ItemStackTemplate createRecordAllSongsIcon() {
         return new ItemStackTemplate(
-                STItems.RECORDED_DISC.get(),
+                STItems.RECORDED_DISC,
                 DataComponentPatch.builder()
                 .set(DataComponents.DYED_COLOR, new DyedItemColor(0xAA00AA))
                 .set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.DYED_COLOR, true))
@@ -237,7 +237,7 @@ public class Stadvancements implements AdvancementSubProvider { // stancements a
 
     private static ItemStackTemplate createCopyDiscIcon() {
         return new ItemStackTemplate(
-                STItems.RECORDED_DISC.get(),
+                STItems.RECORDED_DISC,
                 DataComponentPatch.builder()
                         .set(DataComponents.DYED_COLOR, new DyedItemColor(0xFFDD99))
                         .set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.DYED_COLOR, true))

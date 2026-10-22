@@ -2,7 +2,7 @@ package melonystudios.stancements.misc.loot;
 
 import com.mojang.serialization.MapCodec;
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.misc.loot.function.ApplyRecordingTurnsIntoFunction;
+import melonystudios.stancements.misc.loot.function.TransformRecordableFunction;
 import melonystudios.stancements.misc.loot.function.SetRandomLabelFunction;
 import melonystudios.stancements.misc.loot.function.StyleDiscFromRegistryFunction;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +17,6 @@ public class STLootFunctions {
             () -> SetRandomLabelFunction.CODEC);
     public static final DeferredHolder<MapCodec<? extends LootItemFunction>, MapCodec<StyleDiscFromRegistryFunction>> STYLE_DISC_FROM_REGISTRY = FUNCTIONS.register("style_disc_from_registry",
             () -> StyleDiscFromRegistryFunction.CODEC);
-    public static final DeferredHolder<MapCodec<? extends LootItemFunction>, MapCodec<ApplyRecordingTurnsIntoFunction>> APPLY_RECORDING_TURNS_INTO = FUNCTIONS.register("apply_recording_turns_into",
-            () -> ApplyRecordingTurnsIntoFunction.CODEC);
+    public static final DeferredHolder<MapCodec<? extends LootItemFunction>, MapCodec<TransformRecordableFunction>> TRANSFORM_RECORDABLE = FUNCTIONS.register("transform_recordable",
+            () -> TransformRecordableFunction.CODEC);
 }

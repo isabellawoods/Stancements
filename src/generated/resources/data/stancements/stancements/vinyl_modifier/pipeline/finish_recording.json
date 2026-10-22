@@ -2,7 +2,8 @@
   "effects": {
     "stancements:modify_recordable_disc": [
       {
-        "function": "stancements:apply_recording_turns_into"
+        "function": "stancements:transform_recordable",
+        "transform": "on_record"
       },
       {
         "fallback_dyes_setter": {

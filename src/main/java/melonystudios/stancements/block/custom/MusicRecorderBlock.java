@@ -10,6 +10,7 @@ import melonystudios.stancements.client.network.RequestRecordingAttempt;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.misc.recording.Track;
 import melonystudios.stancements.option.STCommonOptions;
 import melonystudios.stancements.sound.STSounds;
 import melonystudios.stancements.tag.STJukeboxSongTags;
@@ -84,7 +85,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder && !recorder.isEmpty()) {
-            interruptAndEject(level, pos, true);
+            interruptAndEject(level, pos, Component.empty(), true);
             level.setBlock(pos, state.setValue(RECORDING, false), 3);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
             return InteractionResult.SUCCESS_SERVER;
@@ -94,7 +95,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!state.getValue(RECORDING) && stack.has(STDataComponents.RECORDING_TURNS_INTO) && level.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
+        if (!state.getValue(RECORDING) && stack.has(STDataComponents.RECORDABLE_TRANSFORM) && level.getBlockEntity(pos) instanceof MusicRecorderBlockEntity recorder && recorder.isEmpty()) {
             ItemStack handStack = player.getItemInHand(hand);
             ItemStack splitStack = handStack.consumeAndReturn(1, player);
 
@@ -109,16 +110,16 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
-    public void tryRecordingFromPlayer(Level level, BlockState state, BlockPos recorderPosition, Player player, ItemStack recordableDisc, @Nullable Identifier musicID, int recordingDuration) {
+    public void tryRecordingFromPlayer(Level level, BlockState state, BlockPos recorderPosition, Player player, ItemStack recordableDisc, @Nullable Track track, int recordingDuration) {
         BlockEntity blockEntity = level.getBlockEntity(recorderPosition);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
 
         recorder.insertDisc(recordableDisc.copy());
 
-        if (musicID == null) {
+        if (track == null) {
             this.sendMessage(NO_MUSIC_PLAYING_TEXT, player);
         } else {
-            recorder.startRecording(musicID, false, recordingDuration, player);
+            recorder.startRecording(track, false, recordingDuration, player);
             level.setBlock(recorderPosition, state.setValue(RECORDING, true), 3);
             level.gameEvent(GameEvent.BLOCK_CHANGE, recorderPosition, GameEvent.Context.of(player, state));
         }
@@ -127,36 +128,33 @@ public class MusicRecorderBlock extends BaseEntityBlock {
     public void tryRecordingFromAdjacentBlock(Level level, BlockState state, BlockPos pos, @Nullable Player player, ItemStack recordableDisc) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (!(blockEntity instanceof MusicRecorderBlockEntity recorder)) return;
+        // todo: error messages might be passed from one recorder to the other, if one doesn't use the default
         Component errorMessage = NO_MUSIC_PLAYING_TEXT;
 
         recorder.insertDisc(recordableDisc.copy());
         for (Direction direction : DIRECTIONS) {
             BlockPos adjacentPos = pos.relative(direction);
-            BlockState adjacentState = level.getBlockState(adjacentPos);
             BlockEntity adjacentEntity = level.getBlockEntity(adjacentPos);
 
-            if (adjacentEntity instanceof BlockBasedMusicPlayer musicPlayer && adjacentEntity.isValidBlockState(adjacentState)) {
-                JukeboxSong song = musicPlayer.song();
-                var jukeboxSongs = level.registryAccess().lookup(Registries.JUKEBOX_SONG);
-                if (song == null) continue;
+            if (adjacentEntity instanceof BlockBasedMusicPlayer musicPlayer) {
+                var jukeboxSongs = level.registryAccess().lookupOrThrow(Registries.JUKEBOX_SONG);
+                if (musicPlayer.song() == null) continue;
+                var song = jukeboxSongs.wrapAsHolder(musicPlayer.song());
 
                 // block recording if the disc is a copy
-                if (jukeboxSongs.isEmpty() || MusicData.isCopied(musicPlayer.musicDisc())) {
+                if (MusicData.isCopied(musicPlayer.musicDisc())) {
                     errorMessage = CANNOT_COPY_TEXT;
                     continue;
                 }
-                Identifier songIdentifier = jukeboxSongs.get().getKey(song);
-                if (songIdentifier == null) continue;
 
                 // block recording if the jukebox song disallows copies (in #copying_prohibited tag)
-                var songHolder = jukeboxSongs.get().get(songIdentifier);
-                if (songHolder.isPresent() && songHolder.get().is(STJukeboxSongTags.COPYING_PROHIBITED)) {
+                if (song.is(STJukeboxSongTags.COPYING_PROHIBITED)) {
                     errorMessage = COPYING_PROHIBITED_TEXT;
                     continue;
                 }
 
                 // finally record the disc
-                recorder.startRecording(songIdentifier, true, musicPlayer.recordingDuration(), player);
+                recorder.startRecording(Track.forJukeboxSong(song), true, musicPlayer.recordingDuration(), player);
                 level.setBlock(pos, state.setValue(RECORDING, true), 3);
                 level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
                 return;
@@ -166,11 +164,11 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         if (errorMessage != null && !level.isClientSide()) this.sendMessage(errorMessage, player);
     }
 
-    public static void interruptAndEject(Level level, BlockPos pos, boolean fromTop) {
+    public static void interruptAndEject(Level level, BlockPos pos, Component recordingText, boolean fromTop) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MusicRecorderBlockEntity recorder) {
             ItemStack discStack = recorder.getTheItem();
-            recorder.finishRecording(ItemStack.EMPTY, Component.empty(), true);
+            recorder.finishRecording(ItemStack.EMPTY, recordingText, true);
             if (discStack.isEmpty()) return;
 
             if (fromTop) {
@@ -219,11 +217,11 @@ public class MusicRecorderBlock extends BaseEntityBlock {
         return component;
     }
 
-    public static MutableComponent getSongName(Registry<JukeboxSong> jukeboxSongs, Identifier musicID) {
-        var song = BlockBasedMusicPlayer.findJukeboxSongFromID(jukeboxSongs, musicID, true);
-        if (song.isPresent()) return song.get().value().description().copy();
+    public static MutableComponent getSongName(Registry<JukeboxSong> jukeboxSongs, Identifier trackID) {
+        Identifier sanitized = RecordedDiscItem.getJukeboxSongLocation(trackID);
+        var song = jukeboxSongs.getValue(sanitized);
+        if (song != null) return song.description().copy();
 
-        Identifier sanitized = RecordedDiscItem.getJukeboxSongLocation(musicID);
         String namespacePrefix = sanitized.getNamespace().equals("minecraft") ? "" : sanitized.getNamespace() + ".";
 
         return Component.translatable(namespacePrefix + "music." + sanitized.getPath().replace("/", "."));
@@ -231,7 +229,7 @@ public class MusicRecorderBlock extends BaseEntityBlock {
 
     @Override
     protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
-        interruptAndEject(level, pos, false);
+        interruptAndEject(level, pos, Component.empty(), false);
         super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
     }
 

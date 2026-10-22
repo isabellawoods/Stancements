@@ -47,7 +47,7 @@ public class STCauldronInteractions {
     public static void registerInteractions(RegisterCauldronInteractionEvent.Interaction event) {
         // dyed water
         event.register(DYED_WATER_ID, Items.BUCKET, (state, level, pos, player, hand, stack) -> {
-            ItemStack bucketStack = new ItemStack(STItems.DYED_WATER_BUCKET.get());
+            ItemStack bucketStack = STItems.DYED_WATER_BUCKET.toStack();
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof DyedWaterCauldronBlockEntity cauldron) {
                 DyedWaterBucketItem.setColor(bucketStack, cauldron.getWaterColor());

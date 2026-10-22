@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
-/// Copy of {@link net.minecraft.world.item.enchantment.effects.ExplodeEffect ExplodeEffect} that works with vinyl modifiers.
+/// Copy of [`ExplodeEffect`][net.minecraft.world.item.enchantment.effects.ExplodeEffect] that works with vinyl modifiers.
 public record ExplodeModifier(
         boolean attributeToRecordee,
         Optional<Holder<DamageType>> damageType,

@@ -12,7 +12,7 @@ import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.util.valueproviders.FloatProviders;
 import net.minecraft.world.level.Level;
 
-/// Copy of {@link net.minecraft.world.item.enchantment.effects.PlaySoundEffect PlaySoundEffect} that works with vinyl modifiers.
+/// Copy of [`PlaySoundEffect`][net.minecraft.world.item.enchantment.effects.PlaySoundEffect] that works with vinyl modifiers.
 public record PlaySoundModifier(Holder<SoundEvent> soundEvent, FloatProvider volume, FloatProvider pitch) implements ModifierComponentType {
     public static final Codec<PlaySoundModifier> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             SoundEvent.CODEC.fieldOf("sound").forGetter(PlaySoundModifier::soundEvent),

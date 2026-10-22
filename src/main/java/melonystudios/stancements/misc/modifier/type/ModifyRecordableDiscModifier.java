@@ -19,7 +19,7 @@ public record ModifyRecordableDiscModifier(List<LootItemFunction> functions) imp
     public void onApplyModifiers(ModificationContext context, Holder<VinylModifier> modifier) {
         ItemStack funcStack = context.transientStack().copy();
         for (LootItemFunction function : this.functions()) {
-            if (function instanceof ModificationContextAware condition) condition.withContext(context);
+            if (function instanceof ModificationContextAware awareFunction) awareFunction.withContext(context);
             funcStack = function.apply(funcStack, VinylModifier.modifierContext(context));
         }
 

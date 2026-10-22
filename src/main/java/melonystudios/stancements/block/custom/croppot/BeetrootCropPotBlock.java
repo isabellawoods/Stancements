@@ -1,8 +1,10 @@
 package melonystudios.stancements.block.custom.croppot;
 
+import melonystudios.stancements.block.PotPlantable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -12,11 +14,13 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
+import java.util.function.Function;
+
 public class BeetrootCropPotBlock extends WheatCropPotBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
-    public BeetrootCropPotBlock(Properties properties) {
-        super(properties);
+    public BeetrootCropPotBlock(Item seed, Function<Block, PotPlantable> plantable, Properties properties) {
+        super(seed, plantable, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(HOPPING, false));
     }
 

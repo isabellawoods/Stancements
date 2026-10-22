@@ -9,9 +9,11 @@ import melonystudios.stancements.client.item.ClientTrackStorageTooltip;
 import melonystudios.stancements.client.item.RecordedDiscClientExtension;
 import melonystudios.stancements.client.item.properties.InventoryRecorderState;
 import melonystudios.stancements.client.item.properties.StorageInserted;
+import melonystudios.stancements.client.screen.AlbumScreen;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.InventoryRecorder;
 import melonystudios.stancements.component.custom.TrackStorage;
+import melonystudios.stancements.container.STMenuTypes;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.network.SendClientTrack;
 import melonystudios.stancements.network.ServerPayloadHandler;
@@ -64,6 +66,11 @@ public class STClientEvents {
     @SubscribeEvent
     public static void registerClientTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(TrackStorage.class, ClientTrackStorageTooltip::new);
+    }
+
+    @SubscribeEvent
+    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(STMenuTypes.ALBUM.get(), AlbumScreen::new);
     }
 
     @SubscribeEvent

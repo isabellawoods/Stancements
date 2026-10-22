@@ -2,6 +2,7 @@ package melonystudios.stancements.blockentity;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlocks;
+import melonystudios.stancements.blockentity.custom.AlbumBlockEntity;
 import melonystudios.stancements.blockentity.custom.DyedWaterCauldronBlockEntity;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
 import net.minecraft.core.registries.Registries;
@@ -16,4 +17,6 @@ public class STBlockEntities { // block en-titties
             () -> new BlockEntityType<>(MusicRecorderBlockEntity::new, STBlocks.MUSIC_RECORDER.get()));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DyedWaterCauldronBlockEntity>> DYED_WATER_CAULDRON = BLOCK_ENTITIES.register("dyed_water_cauldron",
             () -> new BlockEntityType<>(DyedWaterCauldronBlockEntity::new, STBlocks.DYED_WATER_CAULDRON.get()));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AlbumBlockEntity>> ALBUM = BLOCK_ENTITIES.register("album",
+            () -> new BlockEntityType<>(AlbumBlockEntity::new, STBlocks.ALBUM.get()));
 }

@@ -1,0 +1,10 @@
+{
+  "comparator_output": 0,
+  "description": {
+    "translate": "enderscape.music.biome.veiled_woodlands.lullaby"
+  },
+  "length_in_seconds": 318.0,
+  "sound_event": {
+    "sound_id": "enderscape:music.biome.veiled_woodlands.lullaby"
+  }
+}

@@ -32,24 +32,25 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
         ClientLevel level = minecraft.level;
         if (level == null) return;
         int contentWidth = this.getWidth(font);
+        int contentX = x + (width - contentWidth) / 2;
 
         List<MutableComponent> lines = this.storage.getLinesToDisplay(level, minecraft.hasShiftDown(), 3);
 
         if (!lines.isEmpty()) {
-            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, Stancements.stancements("container/inventory_recorder/track_storage_background"), x, y - 2, contentWidth, this.getHeight(font) - FULLNESS_BAR_HEIGHT + 3);
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, Stancements.stancements("container/inventory_recorder/track_storage_background"), contentX, y - 2, contentWidth, this.getHeight(font) - FULLNESS_BAR_HEIGHT + 3);
 
             for (MutableComponent line : lines) {
                 MutableComponent backdroppedLine = line.copy().withStyle(style -> style.withShadowColor(TRANSPARENT_TEXT_BACKDROP));
-                StackedRenderComponents.alignedScrollingText(graphics, font, backdroppedLine, Alignment.LEFT, x + 3, y, x + contentWidth - 3, y + font.lineHeight, 0xFFFFFFFF);
+                StackedRenderComponents.alignedScrollingText(graphics, font, backdroppedLine, Alignment.LEFT, contentX + 3, y, contentX + contentWidth - 3, y + font.lineHeight + 1, 0xFFFFFFFF);
                 y += font.lineHeight + 2;
             }
             y += 3;
         } else {
-            StackedRenderComponents.centeredTextWithWordWrap(graphics, font, DESCRIPTION_TEXT, x + contentWidth / 2, y, contentWidth, 0xFFFFFFFF);
+            StackedRenderComponents.centeredTextWithWordWrap(graphics, font, DESCRIPTION_TEXT, contentX + contentWidth / 2, y, contentWidth, 0xFFFFFFFF);
             y += font.split(DESCRIPTION_TEXT, contentWidth).size() * font.lineHeight + 2;
         }
 
-        this.extractFullnessBar(graphics, font, x, y);
+        this.extractFullnessBar(graphics, font, contentX, y);
     }
 
     private void extractFullnessBar(GuiGraphicsExtractor graphics, Font font, int x, int y) {

@@ -81,9 +81,9 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
     }
 
     /// Whether this modifier can be applied to copies.
-    /// @param copyingSong Whether the recorder is copying a song.
-    public boolean actsOnCopies(boolean copyingSong) {
-        return this.modifiesCopies() || !copyingSong;
+    /// @param copying Whether the recorder is copying a song.
+    public boolean actsOnCopies(boolean copying) {
+        return this.modifiesCopies() || !copying;
     }
 
     /// Runs the **music recording pipeline** (runs all available vinyl modifiers).
@@ -110,7 +110,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         // first run all modifiers that are part of the recording pipeline
         for (Holder<VinylModifier> modifier : pipelineModifiers) {
             if (modifier.is(STVinylModifierTags.PRIORITY_MODIFICATION)) {
-                recordingText = checkAndRun(context, strategy, modifier, recordingText, context.copyingSong());
+                recordingText = checkAndRun(context, strategy, modifier, recordingText, context.copying());
             }
         }
 
@@ -118,7 +118,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         for (VinylModifier modifier : allModifiers) {
             var modifierHolder = allModifiers.wrapAsHolder(modifier);
             if (!modifierHolder.is(STVinylModifierTags.PRIORITY_MODIFICATION)) {
-                recordingText = checkAndRun(context, strategy, modifierHolder, recordingText, context.copyingSong());
+                recordingText = checkAndRun(context, strategy, modifierHolder, recordingText, context.copying());
             }
         }
 
@@ -130,16 +130,16 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         return new ModificationResult(ItemStackTemplate.fromNonEmptyStack(context.transientStack().isEmpty() ? context.musicDisc() : context.transientStack()), recordingText);
     }
 
-    private static Component checkAndRun(ModificationContext context, ModificationStrategy strategy, Holder<VinylModifier> modifierHolder, Component recordingText, boolean copyingSong) {
+    private static Component checkAndRun(ModificationContext context, ModificationStrategy strategy, Holder<VinylModifier> modifierHolder, Component recordingText, boolean copying) {
         VinylModifier modifier = modifierHolder.value();
         if (STDebuggingFlags.LOGGING) {
             Marker marker = MarkerFactory.getMarker(modifierHolder.getRegisteredName());
             LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.strategies", modifier.strategies().toString(), strategy.getSerializedName()).getString());
             LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.acts_on", context.track().identifier().toString(), modifier.actsOn(context.track())).getString());
-            LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.copy_state", modifier.modifiesCopies(), copyingSong).getString());
+            LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.copy_state", modifier.modifiesCopies(), copying).getString());
         }
 
-        if (modifier.strategies().contains(strategy) && modifier.actsOn(context.track()) && modifier.actsOnCopies(copyingSong)) {
+        if (modifier.strategies().contains(strategy) && modifier.actsOn(context.track()) && modifier.actsOnCopies(copying)) {
             modifier.effects().stream().forEach(component -> {
                 // run all component that extend ModifierComponentType
                 if (component.value() instanceof ModifierComponentType type) {

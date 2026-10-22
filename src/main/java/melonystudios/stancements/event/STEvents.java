@@ -18,9 +18,9 @@ import melonystudios.stancements.data.tag.STItemTagsProvider;
 import melonystudios.stancements.data.tag.STJukeboxSongTagsProvider;
 import melonystudios.stancements.data.tag.STVinylModifierTagsProvider;
 import melonystudios.stancements.misc.STRegistries;
+import melonystudios.stancements.misc.album.Album;
 import melonystudios.stancements.misc.attachment.STAttachmentTypes;
 import melonystudios.stancements.misc.attachment.STCapabilities;
-import melonystudios.stancements.misc.datamap.STDataMaps;
 import melonystudios.stancements.misc.discstyle.RecordedDiscStyle;
 import melonystudios.stancements.misc.modifier.VinylModifier;
 import net.minecraft.core.HolderLookup;
@@ -53,7 +53,6 @@ import net.neoforged.neoforge.fluids.RegisterCauldronFluidContentEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
-import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -106,11 +105,7 @@ public class STEvents {
     public static void addDataDrivenRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(STRegistries.RECORDED_DISC_STYLE, RecordedDiscStyle.CODEC, RecordedDiscStyle.CODEC);
         event.dataPackRegistry(STRegistries.VINYL_MODIFIER, VinylModifier.DIRECT_CODEC, VinylModifier.DIRECT_CODEC);
-    }
-
-    @SubscribeEvent
-    public static void registerDataMaps(RegisterDataMapTypesEvent event) {
-        event.register(STDataMaps.POT_PLANTABLES);
+        event.dataPackRegistry(STRegistries.ALBUM, Album.DIRECT_CODEC, Album.DIRECT_CODEC);
     }
 
     @SubscribeEvent

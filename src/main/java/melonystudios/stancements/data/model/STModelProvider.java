@@ -93,6 +93,7 @@ public class STModelProvider extends ModelProvider {
 
         // Functional
         this.createMusicRecorder(blockModels, STBlocks.MUSIC_RECORDER.get());
+        blockModels.createTrivialCube(STBlocks.ALBUM.get());
         this.createLayeredCauldron(blockModels, STBlocks.DYED_WATER_CAULDRON.get(), Identifier.withDefaultNamespace("block/water_still"));
         this.createLayeredCauldron(blockModels, STBlocks.MILK_CAULDRON.get(), Identifier.fromNamespaceAndPath(NeoForgeMod.MOD_ID, "block/milk_still"));
         this.createEmptyCropPot(blockModels, STBlocks.CROP_POT.get());

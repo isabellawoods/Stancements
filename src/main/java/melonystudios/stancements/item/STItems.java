@@ -5,7 +5,7 @@ import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.InventoryRecorder;
-import melonystudios.stancements.component.custom.RecordingTurnsInto;
+import melonystudios.stancements.component.custom.RecordableTransform;
 import melonystudios.stancements.component.custom.TrackStorage;
 import melonystudios.stancements.item.custom.*;
 import net.minecraft.core.component.DataComponentPatch;
@@ -81,10 +81,10 @@ public class STItems {
 
     // Items
     public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.registerItem("stancements_logo", properties -> new ReLogoItem(Stancements.ACCENT_COLOR, properties.fireResistant().rarity(Rarity.EPIC)));
-    public static final DeferredItem<Item> VINYL_DISC = ITEMS.registerItem("vinyl_disc", properties -> new Item(properties.stacksTo(16).component(STDataComponents.RECORDING_TURNS_INTO, RecordingTurnsInto.vinylDisc())));
+    public static final DeferredItem<Item> VINYL_DISC = ITEMS.registerItem("vinyl_disc", properties -> new Item(properties.stacksTo(16).component(STDataComponents.RECORDABLE_TRANSFORM, RecordableTransform.vinylDisc())));
     public static final DeferredItem<Item> RECORDED_DISC = ITEMS.registerItem("recorded_disc", properties -> new RecordedDiscItem(properties.rarity(Rarity.UNCOMMON).stacksTo(1)));
     public static final DeferredItem<Item> SHATTERED_DISC = ITEMS.registerItem("shattered_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.shattered_disc").withColor(0x808080), properties));
-    public static final DeferredItem<Item> SCULK_INFESTED_VINYL_DISC = ITEMS.registerItem("sculk_infested_vinyl_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.sculk_infested_vinyl_disc").withColor(0x05625D), properties.rarity(Rarity.RARE).stacksTo(16).component(STDataComponents.RECORDING_TURNS_INTO, RecordingTurnsInto.sculkInfestedVinylDisc())));
+    public static final DeferredItem<Item> SCULK_INFESTED_VINYL_DISC = ITEMS.registerItem("sculk_infested_vinyl_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.sculk_infested_vinyl_disc").withColor(0x05625D), properties.rarity(Rarity.RARE).stacksTo(16).component(STDataComponents.RECORDABLE_TRANSFORM, RecordableTransform.sculkInfestedVinylDisc())));
     public static final DeferredItem<Item> SCULK_INFESTED_RECORDED_DISC = ITEMS.registerItem("sculk_infested_recorded_disc", properties -> new RecordedDiscItem(properties.rarity(Rarity.RARE).stacksTo(1)));
     public static final DeferredItem<Item> SCULK_INFESTED_SHATTERED_DISC = ITEMS.registerItem("sculk_infested_shattered_disc", properties -> new TooltippedItem(Component.translatable("tooltip.stancements.shattered_disc").withColor(0x808080), properties.rarity(Rarity.RARE)));
     public static final DeferredItem<Item> POCKET_RECORDER = ITEMS.registerItem("pocket_recorder", properties -> new PocketRecorderItem(properties.stacksTo(1).component(STDataComponents.INVENTORY_RECORDER, InventoryRecorder.EMPTY)));
@@ -110,12 +110,12 @@ public class STItems {
     public static final DeferredItem<Item> MAGENTA_TAG = ITEMS.registerItem("magenta_tag", properties -> new Item(properties.stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.MAGENTA))));
     public static final DeferredItem<Item> PINK_TAG = ITEMS.registerItem("pink_tag", properties -> new Item(properties.stacksTo(16).component(STDataComponents.MINECART_TAG_COLOR, of(DyeColor.PINK))));
 
-    /// Makes an {@link ItemStackTemplate} of a crop pot with a variable count and "hopper-ness".
+    /// Makes an [ItemStackTemplate] of a crop pot with a variable count and "hopper-ness".
     /// @param count The amount of pots in the stack.
     /// @param hopping Whether this crop pot has a built-in hopper.
     public static ItemStackTemplate cropPot(int count, boolean hopping) {
         return new ItemStackTemplate(
-                STItems.CROP_POT.get(),
+                STItems.CROP_POT,
                 count,
                 DataComponentPatch.builder()
                 .set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, hopping))

@@ -55,31 +55,40 @@ public class StyleDiscFromRegistryFunction extends LootItemConditionalFunction i
     @NonNull
     protected ItemStack run(ItemStack stack, LootContext context) {
         ItemStack copyStack = stack.copy();
-        Identifier musicID;
+        Identifier stylesID;
         if (this.context != null) {
-            musicID = this.context.track().jukeboxSongID();
-        } else if (context.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof MusicRecorderBlockEntity recorder) {
+            stylesID = this.context.track().jukeboxSongID();
+        } else if (context.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof MusicRecorderBlockEntity recorder && recorder.track() != null) {
             // fix vanilla disc copies pointing to stancements' namespace, fixed in 5.0.0-beta.1 ~isa 21-08-26
-            musicID = recorder.copyingSong() ? recorder.musicID() : RecordedDiscItem.getJukeboxSongLocation(recorder.musicID());
+            stylesID = recorder.track().jukeboxSongID();
         } else {
             return copyStack;
         }
 
         var discStyles = context.getLevel().registryAccess().lookupOrThrow(STRegistries.RECORDED_DISC_STYLE);
-        RecordedDiscStyle copyStyle = discStyles.getValue(musicID);
+        RecordedDiscStyle copyStyle = discStyles.getValue(stylesID);
 
-        if (copyStyle != null) {
-            copyStack.set(STDataComponents.LABEL, copyStyle.label());
-            copyStack.set(DataComponents.DYED_COLOR, new DyedItemColor(copyStyle.color()));
-
+        // color
+        if (copyStyle != null && copyStyle.color().isPresent()) {
+            copyStack.set(DataComponents.DYED_COLOR, new DyedItemColor(copyStyle.color().get()));
             TooltipDisplay display = copyStack.get(DataComponents.TOOLTIP_DISPLAY);
             copyStack.set(DataComponents.TOOLTIP_DISPLAY, (display == null ? TooltipDisplay.DEFAULT : display).withHidden(DataComponents.DYED_COLOR, true));
-
-            if (copyStyle.rarity() != Rarity.UNCOMMON) copyStack.set(DataComponents.RARITY, copyStyle.rarity());
         } else {
             copyStack = this.dyesSetter.run(copyStack, context);
+        }
+
+        // label
+        if (copyStyle != null && copyStyle.label() <= RecordedDiscItem.DISC_LABEL_MIN) {
+            copyStack.set(STDataComponents.LABEL, copyStyle.label());
+        } else {
             copyStack = this.labelSetter.run(copyStack, context);
         }
+
+        // rarity
+        if (copyStyle != null && copyStyle.rarity() != Rarity.UNCOMMON) {
+            copyStack.set(DataComponents.RARITY, copyStyle.rarity());
+        }
+
         return copyStack;
     }
 

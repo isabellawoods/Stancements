@@ -2,7 +2,6 @@ package melonystudios.stancements.data.tag;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.misc.STRegistries;
-import melonystudios.stancements.misc.modifier.STVinylModifiers;
 import melonystudios.stancements.misc.modifier.VinylModifier;
 import melonystudios.stancements.tag.STVinylModifierTags;
 import net.minecraft.core.HolderLookup;
@@ -11,6 +10,8 @@ import net.minecraft.data.tags.KeyTagProvider;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
+
+import static melonystudios.stancements.misc.modifier.STVinylModifiers.*;
 
 public class STVinylModifierTagsProvider extends KeyTagProvider<VinylModifier> {
     public STVinylModifierTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
@@ -27,6 +28,6 @@ public class STVinylModifierTagsProvider extends KeyTagProvider<VinylModifier> {
     @SuppressWarnings("unchecked")
     protected void addTags(HolderLookup.Provider registries) {
         // Stancements tags
-        this.tag(STVinylModifierTags.PRIORITY_MODIFICATION).add(STVinylModifiers.FINISH_RECORDING, STVinylModifiers.SCULK_EJECTION_CHANCE);
+        this.tag(STVinylModifierTags.PRIORITY_MODIFICATION).add(FINISH_RECORDING, SCULK_EJECTION_CHANCE);
     }
 }

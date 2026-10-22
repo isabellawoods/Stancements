@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.component.custom.MusicData;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.misc.recording.Track;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -34,7 +35,7 @@ public class ConvertDiscToJukeboxSongCommand {
                 return 0;
             }
 
-            boolean converted = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), data.id().get(), false, true);
+            boolean converted = RecordedDiscItem.setJukeboxSong(source.getLevel(), handStack, new Track(data.id().get(), false), false, true);
             if (converted) {
                 if (data.copied()) {
                     handStack.set(STDataComponents.MUSIC_DATA, new MusicData(Optional.empty(), true));

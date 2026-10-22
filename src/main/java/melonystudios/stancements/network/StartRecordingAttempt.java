@@ -2,12 +2,12 @@ package melonystudios.stancements.network;
 
 import io.netty.buffer.ByteBuf;
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.misc.recording.Track;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 
@@ -18,17 +18,17 @@ import java.util.Optional;
 /// 1. The song playing on the client's [`MusicManager`][melonystudios.stancements.mixin.recorder.CurrentMusicAccessor];
 /// 2. The music disc playing on an adjacent jukebox.
 /// @param position The in-world position of the recorder (assuming it is in the same dimension).
-/// @param recordableDisc The item stack (any item with the [`recording_turns_into` component][melonystudios.stancements.component.STDataComponents#RECORDING_TURNS_INTO] inserted into the recorder.
-/// @param clientMusicID An *optional* [identifier][Identifier] indicating the song playing to the client.
+/// @param recordableDisc The item stack (any item with the [`recording_turns_into` component][melonystudios.stancements.component.STDataComponents#RECORDABLE_TRANSFORM] inserted into the recorder.
+/// @param clientTrack An *optional* music [track][Track] indicating the song playing to the client.
 /// @param volumes Whether the "Master Volume", "Music" and "Jukebox/Note Block" sound sliders allow sounds to be played.
-public record StartRecordingAttempt(BlockPos position, ItemStack recordableDisc, Optional<Identifier> clientMusicID, MusicVolumes volumes) implements CustomPacketPayload {
+public record StartRecordingAttempt(BlockPos position, ItemStack recordableDisc, Optional<Track> clientTrack, MusicVolumes volumes) implements CustomPacketPayload {
     public static final StreamCodec<RegistryFriendlyByteBuf, StartRecordingAttempt> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,
             StartRecordingAttempt::position,
             ItemStack.OPTIONAL_STREAM_CODEC,
             StartRecordingAttempt::recordableDisc,
-            ByteBufCodecs.optional(Identifier.STREAM_CODEC),
-            StartRecordingAttempt::clientMusicID,
+            ByteBufCodecs.optional(Track.STREAM_CODEC),
+            StartRecordingAttempt::clientTrack,
             MusicVolumes.STREAM_CODEC,
             StartRecordingAttempt::volumes,
             StartRecordingAttempt::new

@@ -31,6 +31,7 @@ public class STJukeboxSongTagsProvider extends KeyTagProvider<JukeboxSong> {
         // Stancements tags
         this.tag(STJukeboxSongTags.CANCELS_AMBIENT_MUSIC).addTag(STJukeboxSongTags.AMBIENT_MUSIC);
         this.tag(STJukeboxSongTags.COPYING_PROHIBITED);
+        this.tag(STJukeboxSongTags.NOT_REQUIRED_FOR_COMPLETION).add(BIOME_FEST, BLIND_SPOTS, HAUNT_MUSKIE, ARIA_MATH, DREITON, TASWELL);
 
         this.tag(STJukeboxSongTags.AMBIENT_MUSIC)
                 .add(MINECRAFT, CLARK, SWEDEN, SUBWOOFER_LULLABY, LIVING_MICE, HAGGSTROM, DANNY, KEY, OXYGENE, DRY_HANDS, WET_HANDS, MICE_ON_VENUS)

@@ -1,0 +1,28 @@
+{
+  "effects": {
+    "stancements:eject_after_ticks": [
+      {
+        "effect": {
+          "ejection_chance": 1.0,
+          "ticks_until_ejection": {
+            "type": "minecraft:uniform",
+            "max_inclusive": 300,
+            "min_inclusive": 200
+          }
+        }
+      }
+    ]
+  },
+  "modifies_copies": true,
+  "recording_text": {
+    "color": "#AAB9A6",
+    "translate": "vinyl_modifier.enderscape.music_disc_decay"
+  },
+  "strategies": [
+    "start"
+  ],
+  "targets": {
+    "id": "enderscape:decay",
+    "resolved": true
+  }
+}

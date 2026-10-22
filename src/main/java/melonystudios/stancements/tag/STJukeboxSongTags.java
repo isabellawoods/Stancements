@@ -17,6 +17,7 @@ public class STJukeboxSongTags {
     ///
     /// When attempting to copy, the message "This music disc cannot be copied by design" will be shown.
     public static final TagKey<JukeboxSong> COPYING_PROHIBITED = stancements("copying_prohibited");
+    public static final TagKey<JukeboxSong> NOT_REQUIRED_FOR_COMPLETION = stancements("not_required_for_completion");
 
     // Minecraft tags
     public static final TagKey<JukeboxSong> VOLUME_ALPHA = minecraft("album/volume_alpha");

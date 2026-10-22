@@ -222,7 +222,7 @@ public class STRecipeProvider extends RecipeProvider {
     /// @param shelf The shelf item itself.
     /// @param planks The planks used to craft this shelf.
     public void addShelf(ItemLike shelf, ItemLike planks) {
-        this.shaped(RecipeCategory.DECORATIONS, shelf, 3).define('#', planks).define('S', Tags.Items.RODS_WOODEN)
+        this.shaped(RecipeCategory.DECORATIONS, shelf, 6).define('#', planks).define('S', Tags.Items.RODS_WOODEN)
                 .pattern("###").pattern("S S").unlockedBy("has_planks", this.has(planks))
                 .group("wooden_shelves").save(this.output);
     }

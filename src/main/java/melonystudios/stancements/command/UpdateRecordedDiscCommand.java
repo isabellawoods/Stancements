@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.brigadier.CommandDispatcher;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.custom.RecordedDiscItem;
+import melonystudios.stancements.misc.recording.Track;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -38,7 +39,7 @@ public class UpdateRecordedDiscCommand {
             .put("trails_and_tales/", "")
             .put("tricky_trials/", "")
             .put("chase_the_skies/", "")
-            .put("drop_2_2025/", "") // existed at some point, don't know if discs could have this though
+            .put("drop_2_2025/", "") // existed at some point, don't know if any discs have/had this though
             .put("chaos_cubed/", "")
             .build();
 
@@ -74,7 +75,7 @@ public class UpdateRecordedDiscCommand {
                 }
                 tag.remove("music_id");
                 handStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-                updatedID = RecordedDiscItem.setJukeboxSong(handStack, source.getLevel(), Identifier.parse(musicID.get()), false, false);
+                updatedID = RecordedDiscItem.setJukeboxSong(source.getLevel(), handStack, new Track(Identifier.parse(musicID.get()), false), false, false);
             }
 
             if (tag.getInt("label").isPresent()) {

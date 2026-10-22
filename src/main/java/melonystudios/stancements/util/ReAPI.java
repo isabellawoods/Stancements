@@ -32,4 +32,11 @@ public final class ReAPI {
         if (itemTags == null || itemTags.isEmpty()) return true;
         return !itemTags.contains(name);
     }
+
+    /// Transforms the provided identifier into a texture path.
+    /// @param identifier The identifier.
+    /// @return A new identifier, with the `textures/` prefix and `.png` suffix added.
+    public static Identifier toTexturePath(Identifier identifier) {
+        return identifier.withPath(path -> (path.startsWith("textures/") ? "" : "textures/") + path + (path.endsWith(".png") ? "" : ".png"));
+    }
 }

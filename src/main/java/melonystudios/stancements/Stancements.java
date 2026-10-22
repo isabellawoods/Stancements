@@ -6,6 +6,7 @@ import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.STBlockEntities;
 import melonystudios.stancements.component.ReDataComponents;
 import melonystudios.stancements.component.STDataComponents;
+import melonystudios.stancements.container.STMenuTypes;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.item.tab.STCreativeTabs;
 import melonystudios.stancements.misc.STStatistics;
@@ -41,6 +42,7 @@ public class Stancements {
         STBlocks.BLOCKS.register(eventBus);
         STBlockTypes.TYPES.register(eventBus);
         STBlockEntities.BLOCK_ENTITIES.register(eventBus);
+        STMenuTypes.MENUS.register(eventBus);
         STItems.ITEMS.register(eventBus);
         STDataComponents.COMPONENTS.register(eventBus);
         ReDataComponents.COMPONENTS.register(eventBus);

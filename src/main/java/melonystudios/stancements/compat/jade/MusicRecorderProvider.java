@@ -32,8 +32,8 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
     public RecorderData streamData(BlockAccessor accessor) {
         MusicRecorderBlockEntity recorder = (MusicRecorderBlockEntity) accessor.getBlockEntity();
         return new RecorderData(
-                Optional.ofNullable(recorder.musicID()),
-                recorder.copyingSong(),
+                Optional.ofNullable(recorder.track()),
+                recorder.copying(),
                 !recorder.getTheItem().is(STItemTags.JADE_CONSIDERS_AS_RECORDING) && !recorder.getTheItem().isEmpty(),
                 recorder.ticksUntilFinishedRecording()
         );
@@ -64,15 +64,12 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
             } else if (data.get().ticksUntilFinishedRecording() <= BlockBasedMusicPlayer.DEFAULT_TICKS_UNTIL_FINISHED) {
                 tooltip.add(Component.translatable("tooltip.stancements.no_music_playing"));
             } else {
-                if (data.get().musicID().isEmpty()) return;
-                Component songName = IDisplayHelper.get().stripColor(new Track(
-                        data.get().musicID().get(),
-                        data.get().copyingSong()
-                ).displayName(accessor.getLevel().registryAccess().lookupOrThrow(Registries.JUKEBOX_SONG)));
+                if (data.get().track().isEmpty()) return;
+                Component songName = IDisplayHelper.get().stripColor(data.get().track().get().displayName(accessor.getLevel().registryAccess().lookupOrThrow(Registries.JUKEBOX_SONG)));
 
                 // todo: not 100% accurate -- having a "music." as the start of the translation will also make this return the sound id
                 if (songName.getString().startsWith("music.")) {
-                    songName = Component.translatable("tooltip.stancements.sound_id", data.get().musicID().get());
+                    songName = Component.translatable("tooltip.stancements.sound_id", data.get().track().get().identifier());
                 }
 
                 tooltip.add(Component.translatable("tooltip.stancements.recording", songName,
@@ -88,10 +85,10 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
         }
     }
 
-    public record RecorderData(Optional<Identifier> musicID, boolean copyingSong, boolean hasRecorded, int ticksUntilFinishedRecording) {
+    public record RecorderData(Optional<Track> track, boolean copying, boolean hasRecorded, int ticksUntilFinishedRecording) {
         public static final StreamCodec<RegistryFriendlyByteBuf, RecorderData> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.optional(Identifier.STREAM_CODEC), RecorderData::musicID,
-                ByteBufCodecs.BOOL, RecorderData::copyingSong,
+                ByteBufCodecs.optional(Track.STREAM_CODEC), RecorderData::track,
+                ByteBufCodecs.BOOL, RecorderData::copying,
                 ByteBufCodecs.BOOL, RecorderData::hasRecorded,
                 ByteBufCodecs.INT, RecorderData::ticksUntilFinishedRecording,
                 RecorderData::new

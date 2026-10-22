@@ -42,12 +42,12 @@ public abstract class STServerPlayerMixin extends Player {
         );
         var result = VinylModifier.recordingPipeline(context, ModificationStrategy.FINISH);
         ItemStack resultStack = result.stack();
-        RecordedDiscItem.setJukeboxSong(resultStack, this.level(), context.track().jukeboxSongID(), context.copyingSong(), false);
+        RecordedDiscItem.setJukeboxSong(this.level(), resultStack, context.track(), context.copying(), false);
 
         STCriteriaTriggers.RECORD_SONG.trigger(
                 context.track(),
                 null,
-                context.copyingSong(),
+                context.copying(),
                 Tracks.C418_ALPHA.listOf(),
                 (ServerPlayer) this.self()
         );
