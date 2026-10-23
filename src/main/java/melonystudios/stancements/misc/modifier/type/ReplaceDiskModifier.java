@@ -40,13 +40,13 @@ public record ReplaceDiskModifier(
     @Override
     public void onApplyModifiers(ModificationContext context, Holder<VinylModifier> modifier) {
         ServerLevel level = context.level();
-        BlockPos blockPos = BlockPos.containing(context.blockPosition().getCenter()).offset(this.offset);
+        BlockPos blockPos = BlockPos.containing(context.position()).offset(this.offset);
         RandomSource random = level.getRandom();
         int radius = Math.round(this.radius.sample(random));
         int height = Math.round(this.height.sample(random));
 
         for (BlockPos pos : BlockPos.betweenClosed(blockPos.offset(-radius, 0, -radius), blockPos.offset(radius, Math.min(height - 1, 0), radius))) {
-            if (pos.distToCenterSqr(context.blockPosition().getX(), (double) pos.getY() + 0.5, context.blockPosition().getZ()) < (double) Mth.square(radius)
+            if (pos.distToCenterSqr(context.position().x(), (double) pos.getY() + 0.5, context.position().z()) < (double) Mth.square(radius)
                     && this.predicate.map(predicate -> predicate.test(level, pos)).orElse(true)
                     && level.setBlockAndUpdate(pos, this.blockState.getState(level, random, pos))) {
                 this.triggerGameEvent.ifPresent(event -> level.gameEvent(context.playerOrNull(), event, pos));

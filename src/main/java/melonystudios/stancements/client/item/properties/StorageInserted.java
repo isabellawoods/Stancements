@@ -18,7 +18,7 @@ public record StorageInserted() implements ConditionalItemModelProperty {
     @Override
     public boolean get(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity owner, int seed, ItemDisplayContext displayContext) {
         InventoryRecorder recorder = stack.get(STDataComponents.INVENTORY_RECORDER);
-        return recorder != null && recorder.item().isPresent() && recorder.item().get().is(STItemTags.CASSETTE_TAPES);
+        return recorder != null && recorder.item().isPresent() && recorder.item().get().is(STItemTags.INSERTED_STORAGE_DISPLAYS);
     }
 
     @Override

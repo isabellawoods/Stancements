@@ -47,6 +47,8 @@ issueTrackerURL="https://github.com/isabellawoods/Stancements/issues" #optional
     ]
     # A file name (in the root of the mod JAR) containing a square logo to display in Forged Mod Menu's mods screen
     modMenuLogoFile="assets/${mod_id}/textures/icon.png"
+    # Defines an accent color to be used in places where the mod name is used, such as configuration screens
+    "rendersliceapi:accent_color"="#cf8eda"
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]

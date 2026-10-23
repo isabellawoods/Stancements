@@ -12,6 +12,8 @@ import java.util.Optional;
 /// Style used when **recording songs**, allowing mods to register custom looks for their discs when copied using the music recorder.
 ///
 /// `color` or `label` may be omitted to make a disc have the same color but different label, or same label with different colors, **but these fields cannot be omitted simultaneously!**
+///
+/// @author isabellawoods on [**Informational Mod Features**](https://github.com/isabellawoods/Informational-Mod-Features/blob/main/Stancements/Docs/Vinyl%20Modifier.md)
 /// @param color *(optional)* The color used for the disc's label color. Can be either in **decimal** or **hexadecimal**.
 /// @param label *(optional)* The label used for the disc's label. Can be any value from [`1`][RecordedDiscItem#DISC_LABEL_MIN] to [`14`][RecordedDiscItem#DISC_LABEL_MAX] for the existing record labels.
 /// @param rarity *(optional)* The rarity of the recorded disc item. Defaults to [uncommon][Rarity#UNCOMMON] (yellow).

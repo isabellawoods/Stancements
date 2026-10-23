@@ -1,4 +1,4 @@
-package melonystudios.stancements.mixin.recorder;
+package melonystudios.stancements.mixin.recorder.inventory;
 
 import melonystudios.stancements.client.option.STClientOptions;
 import melonystudios.stancements.component.custom.InventoryRecorder;
@@ -26,11 +26,12 @@ public class STMusicManagerMixin {
     @Shadow
     @Final
     private Minecraft minecraft;
-    @Shadow @Nullable
+    @Shadow
+    @Nullable
     private SoundInstance currentMusic;
 
     @Inject(method = "startPlaying", at = @At("TAIL"))
-    public void recordOnPlay(Music selector, CallbackInfo callback) {
+    public void recordOnPlay(Music music, CallbackInfo callback) {
         LocalPlayer player = this.minecraft.player;
         // backport "getSound()" crash fix from 5.0.0-beta.3: mojang finally made getSound() nullable ~isa 04-10-26
         if (player == null || this.currentMusic == null || this.currentMusic.getSound() == null) return;

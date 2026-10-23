@@ -34,7 +34,7 @@ public abstract class STServerPlayerMixin extends Player {
 
         ModificationContext context = new ModificationContext(
                 (ServerLevel) this.level(),
-                this.blockPosition(),
+                this.position(),
                 STItems.VINYL_DISC.toStack(),
                 Tracks.C418_ALPHA,
                 true,
@@ -42,7 +42,7 @@ public abstract class STServerPlayerMixin extends Player {
         );
         var result = VinylModifier.recordingPipeline(context, ModificationStrategy.FINISH);
         ItemStack resultStack = result.stack();
-        RecordedDiscItem.setJukeboxSong(this.level(), resultStack, context.track(), context.copying(), false);
+        if (context.track() != null) RecordedDiscItem.setJukeboxSong(this.level(), resultStack, context.track(), context.copying(), false);
 
         STCriteriaTriggers.RECORD_SONG.trigger(
                 context.track(),

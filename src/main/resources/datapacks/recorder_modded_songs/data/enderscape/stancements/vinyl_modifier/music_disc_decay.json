@@ -11,6 +11,15 @@
           }
         }
       }
+    ],
+    "stancements:play_sound": [
+      {
+        "effect": {
+          "sound": "stancements:vinyl_modifier.music_disc_decay",
+          "volume": 0.4,
+          "pitch": 1.0
+        }
+      }
     ]
   },
   "modifies_copies": true,

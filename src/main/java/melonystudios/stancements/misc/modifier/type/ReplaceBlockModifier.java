@@ -27,7 +27,7 @@ public record ReplaceBlockModifier(Vec3i offset, Optional<BlockPredicate> predic
     @Override
     public void onApplyModifiers(ModificationContext context, Holder<VinylModifier> modifier) {
         ServerLevel level = context.level();
-        BlockPos pos = BlockPos.containing(context.blockPosition().getCenter()).offset(this.offset);
+        BlockPos pos = BlockPos.containing(context.position()).offset(this.offset);
         if (this.predicate.map(predicate -> predicate.test(level, pos)).orElse(true) && level.setBlockAndUpdate(pos, this.blockState.getState(level, level.getRandom(), pos))) {
             this.triggerGameEvent.ifPresent(event -> level.gameEvent(context.playerOrNull(), event, pos));
         }

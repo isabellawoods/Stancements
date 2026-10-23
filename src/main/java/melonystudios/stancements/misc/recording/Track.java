@@ -17,7 +17,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.JukeboxSong;
+import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +53,11 @@ public record Track(Identifier identifier, boolean resolved) {
 
     public static Track forJukeboxSong(Holder<JukeboxSong> song) {
         return new Track(Identifier.parse(song.getRegisteredName()), true);
+    }
+
+    public static Track forJukeboxSong(@Nullable Level level, JukeboxSong song) {
+        if (level == null) return null;
+        return forJukeboxSong(level.registryAccess().lookupOrThrow(Registries.JUKEBOX_SONG).wrapAsHolder(song));
     }
 
     public Optional<Track> optionally() {

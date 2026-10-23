@@ -4,7 +4,9 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.client.network.ClientPayloadHandler;
 import melonystudios.stancements.client.network.RequestRecordingAttempt;
+import melonystudios.stancements.command.ApplyDiscStyleCommand;
 import melonystudios.stancements.command.ConvertDiscToJukeboxSongCommand;
+import melonystudios.stancements.command.RunVinylModifiersCommand;
 import melonystudios.stancements.command.UpdateRecordedDiscCommand;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.data.loot.STLootTableProvider;
@@ -123,6 +125,8 @@ public class STEvents {
     public static void registerCommands(RegisterCommandsEvent event) {
         UpdateRecordedDiscCommand.register(event.getDispatcher());
         ConvertDiscToJukeboxSongCommand.register(event.getDispatcher());
+        ApplyDiscStyleCommand.register(event.getDispatcher(), event.getBuildContext());
+        RunVinylModifiersCommand.register(event.getDispatcher());
     }
 
     @SubscribeEvent

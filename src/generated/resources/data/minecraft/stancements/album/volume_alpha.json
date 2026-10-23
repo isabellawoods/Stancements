@@ -4,9 +4,6 @@
     "color": "#A0A0A0",
     "translate": "album.minecraft.volume_alpha.description"
   },
-  "genre": [
-    "ambient"
-  ],
   "link_tree": {
     "link_tree.apple_music": "https://music.apple.com/album/minecraft-volume-alpha/1867885113",
     "link_tree.bandcamp": "https://c418.bandcamp.com/album/minecraft-volume-alpha",
@@ -23,6 +20,9 @@
   },
   "songwriters": [
     "C418"
+  ],
+  "tags": [
+    "ambient"
   ],
   "track_listing": [
     [

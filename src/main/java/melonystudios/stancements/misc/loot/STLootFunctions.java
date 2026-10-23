@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.misc.loot.function.TransformRecordableFunction;
 import melonystudios.stancements.misc.loot.function.SetRandomLabelFunction;
-import melonystudios.stancements.misc.loot.function.StyleDiscFromRegistryFunction;
+import melonystudios.stancements.misc.loot.function.StyleRecordableDiscFunction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -15,8 +15,8 @@ public class STLootFunctions {
 
     public static final DeferredHolder<MapCodec<? extends LootItemFunction>, MapCodec<SetRandomLabelFunction>> SET_RANDOM_LABEL = FUNCTIONS.register("set_random_label",
             () -> SetRandomLabelFunction.CODEC);
-    public static final DeferredHolder<MapCodec<? extends LootItemFunction>, MapCodec<StyleDiscFromRegistryFunction>> STYLE_DISC_FROM_REGISTRY = FUNCTIONS.register("style_disc_from_registry",
-            () -> StyleDiscFromRegistryFunction.CODEC);
+    public static final DeferredHolder<MapCodec<? extends LootItemFunction>, MapCodec<StyleRecordableDiscFunction>> STYLE_RECORDABLE_DISC = FUNCTIONS.register("style_recordable_disc",
+            () -> StyleRecordableDiscFunction.CODEC);
     public static final DeferredHolder<MapCodec<? extends LootItemFunction>, MapCodec<TransformRecordableFunction>> TRANSFORM_RECORDABLE = FUNCTIONS.register("transform_recordable",
             () -> TransformRecordableFunction.CODEC);
 }

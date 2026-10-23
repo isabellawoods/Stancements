@@ -37,7 +37,7 @@ public record RunFunctionModifier(Identifier function) implements ModifierCompon
                     .withPermission(LevelBasedPermissionSet.GAMEMASTER)
                     .withSuppressedOutput()
                     .withLevel(context.level())
-                    .withPosition(context.blockPosition().getCenter());
+                    .withPosition(context.position());
 
             Player player = context.playerOrNull();
             if (player != null) sourceStack.withEntity(player).withRotation(player.getRotationVector());

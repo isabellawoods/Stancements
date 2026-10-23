@@ -26,9 +26,9 @@ public record PlaySoundModifier(Holder<SoundEvent> soundEvent, FloatProvider vol
         if (level != null) {
             level.playSound(
                     null,
-                    context.blockPosition().getX(),
-                    context.blockPosition().getY(),
-                    context.blockPosition().getZ(),
+                    context.position().x(),
+                    context.position().y(),
+                    context.position().z(),
                     this.soundEvent(),
                     SoundSource.BLOCKS,
                     this.volume().sample(level.getRandom()),

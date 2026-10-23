@@ -7,7 +7,7 @@ import melonystudios.stancements.misc.STRegistries;
 import melonystudios.stancements.misc.loot.condition.ItemRecorderStateCondition;
 import melonystudios.stancements.misc.loot.function.TransformRecordableFunction;
 import melonystudios.stancements.misc.loot.function.SetRandomLabelFunction;
-import melonystudios.stancements.misc.loot.function.StyleDiscFromRegistryFunction;
+import melonystudios.stancements.misc.loot.function.StyleRecordableDiscFunction;
 import melonystudios.stancements.misc.modifier.type.EjectAfterTicksModifier;
 import melonystudios.stancements.misc.modifier.type.PlaySoundModifier;
 import melonystudios.stancements.misc.modifier.type.ReplaceRecordableDiscModifier;
@@ -46,7 +46,7 @@ public class STVinylModifiers {
         context.register(FINISH_RECORDING, VinylModifier.modifier(List.of())
                 .recordingText(Component.translatable("tooltip.stancements.finished_recording").withColor(Stancements.ACCENT_COLOR))
                 .withFunction(TransformRecordableFunction.withTransform(RecordableTransform.Transforms.ON_RECORD).build())
-                .withFunction(StyleDiscFromRegistryFunction.styleFromRegistry(
+                .withFunction(StyleRecordableDiscFunction.style(
                         recordedDiscDyes(),
                         (SetRandomLabelFunction) SetRandomLabelFunction.withDefaultLabelRange().build()
                 ).build())

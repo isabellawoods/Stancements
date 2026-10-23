@@ -1,6 +1,7 @@
 package melonystudios.stancements.client.item;
 
 import melonystudios.stancements.Stancements;
+import melonystudios.stancements.client.STClient;
 import melonystudios.stancements.client.element.StackedRenderComponents;
 import melonystudios.stancements.component.custom.TrackStorage;
 import melonystudios.stancements.util.Alignment;
@@ -17,7 +18,6 @@ import net.minecraft.network.chat.MutableComponent;
 import java.util.List;
 
 public class ClientTrackStorageTooltip implements ClientTooltipComponent {
-    private static final int TRANSPARENT_TEXT_BACKDROP = 0x7F000000;
     private static final int FULLNESS_BAR_HEIGHT = 20;
     private static final Component DESCRIPTION_TEXT = Component.translatable("tooltip.stancements.cassette_tape").withStyle(ChatFormatting.GRAY);
     private final TrackStorage storage;
@@ -40,7 +40,7 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
             graphics.blitSprite(RenderPipelines.GUI_TEXTURED, Stancements.stancements("container/inventory_recorder/track_storage_background"), contentX, y - 2, contentWidth, this.getHeight(font) - FULLNESS_BAR_HEIGHT + 3);
 
             for (MutableComponent line : lines) {
-                MutableComponent backdroppedLine = line.copy().withStyle(style -> style.withShadowColor(TRANSPARENT_TEXT_BACKDROP));
+                MutableComponent backdroppedLine = line.copy().withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_TEXT_BACKDROP));
                 StackedRenderComponents.alignedScrollingText(graphics, font, backdroppedLine, Alignment.LEFT, contentX + 3, y, contentX + contentWidth - 3, y + font.lineHeight + 1, 0xFFFFFFFF);
                 y += font.lineHeight + 2;
             }
@@ -56,7 +56,7 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
     private void extractFullnessBar(GuiGraphicsExtractor graphics, Font font, int x, int y) {
         float fullnessFraction = (float) this.storage.tracklist().size() / this.storage.capacity();
         int width = this.getWidth(font);
-        MutableComponent fullnessText = this.storage.getFullnessText().copy().withStyle(style -> style.withShadowColor(TRANSPARENT_TEXT_BACKDROP));
+        MutableComponent fullnessText = this.storage.getFullnessText().copy().withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_TEXT_BACKDROP));
 
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.storage.backgroundSprite(), x, y, width, 14);
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.storage.fillSprite(), x, y, (int) (width * fullnessFraction), 14);

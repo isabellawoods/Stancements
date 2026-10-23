@@ -39,14 +39,14 @@ import java.util.*;
 
 /// A **vinyl modifier** is a set of *modifier components* that are applied to recordable discs when starting and finishing a recording in the [music recorder][MusicRecorderBlockEntity].
 ///
-/// Vinyl modifiers can be defined using JSON files in a data pack at the path `data/<namespace>/stancemets/vinyl_modifier/`.
+/// Vinyl modifiers can be defined using JSON files in a data pack at the path `data/<namespace>/stancemets/vinyl_modifier/`, and can have tags defined at the path `data/<namespace>/tags/stancements/vinyl_modifier/`.
 ///
 /// Modifiers in the [`#stancements:priority_modification` tag][STVinylModifierTags#PRIORITY_MODIFICATION] run before other modifiers.
 /// @see ModifierComponentType
-/// @author isabellawoods
-/// @param recordingText A **text component** shown when starting and/or finishing a recording, such as *"Finished recording!"*.
+/// @author isabellawoods on [**Informational Mod Features**](https://github.com/isabellawoods/Informational-Mod-Features/blob/main/Stancements/Docs/Vinyl%20Modifier.md)
+/// @param recordingText A [text component][Component] shown when starting and/or finishing a recording, such as *"Finished recording!"*.
 /// @param strategies Whether this modifier runs when starting or finishing a recording (or both). Can be `[before]`, `[after]` or `[before, after]`, but not none of them.
-/// @param targets A [track][Track], or list of tracks, of which music discs this modifier acts on. Making this an empty list makes it run for **all** tracks.
+/// @param targets A [track][Track], or list of tracks, of which songs this modifier acts on. Making this an empty list makes it run for **all** tracks.
 /// @param effects A list of [modifier components][ModifierComponentType] that are applied by this modifier.
 /// @param modifiesCopies Whether this modifier applies when copying a music track, instead of only when recording.
 public record VinylModifier(Component recordingText, List<ModificationStrategy> strategies, List<Track> targets, DataComponentMap effects, boolean modifiesCopies) {
@@ -77,7 +77,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
     /// @param track A music track.
     /// @return `true` if [#targets] is empty or if `targets` contains the provided song.
     public boolean actsOn(Track track) {
-        return this.targets().isEmpty() || this.targets().contains(track);
+        return (this.targets().isEmpty() || this.targets().contains(track)) && track != null;
     }
 
     /// Whether this modifier can be applied to copies.
@@ -91,7 +91,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
     /// @param strategy Which stage of the recording this is. Only modifiers that run in this stage will be applied.
     /// @return The [ModificationResult] containing the modified recordable disc.
     public static ModificationResult recordingPipeline(MusicRecorderBlockEntity recorder, ModificationStrategy strategy) {
-        return recordingPipeline(ModificationContext.fromBlockEntity(recorder), strategy);
+        return recordingPipeline(ModificationContext.fromMusicRecorder(recorder), strategy);
     }
 
     /// Runs the **music recording pipeline** (runs all available vinyl modifiers).
@@ -99,13 +99,13 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
     /// @param strategy Which stage of the recording this is. Only modifiers that run in this stage will be applied.
     /// @return The [ModificationResult] containing the modified recordable disc.
     public static ModificationResult recordingPipeline(ModificationContext context, ModificationStrategy strategy) {
-        if (context.level().isClientSide()) return new ModificationResult(ItemStackTemplate.fromNonEmptyStack(context.musicDisc()), Component.empty());
+        if (context.level().isClientSide()) return new ModificationResult(ItemStackTemplate.fromNonEmptyStack(context.recordableDisc()), Component.empty());
         Level level = context.level();
         Component recordingText = Component.empty();
 
         var allModifiers = level.registryAccess().lookupOrThrow(STRegistries.VINYL_MODIFIER);
         var pipelineModifiers = allModifiers.getTagOrEmpty(STVinylModifierTags.PRIORITY_MODIFICATION);
-        context.withTransientStack(context.musicDisc().copy());
+        context.withTransientStack(context.recordableDisc().copy());
 
         // first run all modifiers that are part of the recording pipeline
         for (Holder<VinylModifier> modifier : pipelineModifiers) {
@@ -123,11 +123,11 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         }
 
         // if the recorder's stack was modified in this process, throw an exception
-        if (!ItemStack.matches(context.musicDisc(), context.musicDiscImmutable)) {
+        if (!ItemStack.matches(context.recordableDisc(), context.recordableDiscImmutable)) {
             throw new IllegalStateException("Recorder's disc stack was modified in the recording pipeline. Use 'ModificationContext.withTransientStack()' for this instead!");
         }
 
-        return new ModificationResult(ItemStackTemplate.fromNonEmptyStack(context.transientStack().isEmpty() ? context.musicDisc() : context.transientStack()), recordingText);
+        return new ModificationResult(ItemStackTemplate.fromNonEmptyStack(context.transientStack().isEmpty() ? context.recordableDisc() : context.transientStack()), recordingText);
     }
 
     private static Component checkAndRun(ModificationContext context, ModificationStrategy strategy, Holder<VinylModifier> modifierHolder, Component recordingText, boolean copying) {
@@ -135,7 +135,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         if (STDebuggingFlags.LOGGING) {
             Marker marker = MarkerFactory.getMarker(modifierHolder.getRegisteredName());
             LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.strategies", modifier.strategies().toString(), strategy.getSerializedName()).getString());
-            LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.acts_on", context.track().identifier().toString(), modifier.actsOn(context.track())).getString());
+            LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.acts_on", context.track() == null ? "null" : context.track().identifier().toString(), modifier.actsOn(context.track())).getString());
             LOGGER.debug(marker, Component.translatable("logger.stancements.vinyl_modifier.copy_state", modifier.modifiesCopies(), copying).getString());
         }
 
@@ -174,7 +174,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
     /// @param context The *modification context* of this current run of the pipeline.
     public static LootContext modifierContext(ModificationContext context) {
         LootParams params = new LootParams.Builder(context.level())
-                .withParameter(LootContextParams.ORIGIN, context.blockPosition().getCenter())
+                .withParameter(LootContextParams.ORIGIN, context.position())
                 .withParameter(LootContextParams.BLOCK_STATE, context.blockState())
                 .withOptionalParameter(LootContextParams.BLOCK_ENTITY, context.recorderOrNull())
                 .withOptionalParameter(LootContextParams.THIS_ENTITY, context.playerOrNull())
@@ -285,7 +285,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
         /// Builds this builder into a vinyl modifier.
         public VinylModifier build() {
             if (this.modifiesAt.isEmpty()) {
-                throw new IllegalStateException("Vinyl modifier doesn't have any targeted strategies. Use 'modifiesAtStart()' and/or 'modifiesAtFinish()' to set one");
+                throw new IllegalStateException("Vinyl modifier doesn't have any selected modifications strategies. Use 'modifiesAtStart()' and/or 'modifiesAtFinish()' to set one");
             }
             return new VinylModifier(this.recordingText, this.modifiesAt, this.targets, this.modifierMapBuilder.build(), this.modifiesCopies);
         }

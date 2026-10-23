@@ -60,7 +60,7 @@ public record ExplodeModifier(
 
     @Override
     public void onApplyModifiers(ModificationContext context, Holder<VinylModifier> modifier) {
-        Vec3 position = context.blockPosition().getCenter().add(this.offset);
+        Vec3 position = context.position().add(this.offset);
         Player player = context.playerOrNull();
 
         context.level().explode(
