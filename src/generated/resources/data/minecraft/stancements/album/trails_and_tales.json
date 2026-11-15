@@ -1,5 +1,5 @@
 {
-  "cover_art": "minecraft:textures/album/trails_and_tales.png",
+  "cover_art": "minecraft:gui/album_cover_art/trails_and_tales",
   "description": {
     "color": "#A0A0A0",
     "translate": "album.minecraft.trails_and_tales.description"

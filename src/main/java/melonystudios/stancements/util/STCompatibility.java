@@ -20,6 +20,7 @@ public class STCompatibility {
         flammable(MANGROVE_SHELF.get(), 5, 20);
         flammable(CHERRY_SHELF.get(), 5, 20);
         flammable(PALE_OAK_SHELF.get(), 5, 20);
+        flammable(POPLAR_SHELF.get(), 5, 20);
         flammable(BAMBOO_SHELF.get(), 5, 20);
 
         // Crafting Table Cloths

@@ -21,6 +21,7 @@ import melonystudios.stancements.item.custom.RecordedDiscItem;
 import melonystudios.stancements.network.SendClientTrack;
 import melonystudios.stancements.network.ServerPayloadHandler;
 import melonystudios.stancements.network.StartRecordingAttempt;
+import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
@@ -46,7 +47,7 @@ public class STClientEvents {
         event.addPackFinders(
                 Stancements.stancements("resourcepacks/" + Stancements.RMS_ID),
                 PackType.CLIENT_RESOURCES,
-                Component.translatable("pack.stancements." + Stancements.RMS_ID, Component.translatable("pack.stancements.prefix").withColor(Stancements.ACCENT_COLOR)),
+                Component.translatable(Util.makeDescriptionId("pack", Stancements.stancements(Stancements.RMS_ID)), Component.translatable("pack.stancements.prefix").withColor(Stancements.ACCENT_COLOR)),
                 PackSource.BUILT_IN,
                 false,
                 Pack.Position.TOP

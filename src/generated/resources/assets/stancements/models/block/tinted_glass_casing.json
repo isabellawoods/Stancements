@@ -1,0 +1,8 @@
+{
+  "parent": "stancements:block/template_casing",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "end": "stancements:block/tinted_glass_casing_end",
+    "side": "stancements:block/tinted_glass_casing_side"
+  }
+}

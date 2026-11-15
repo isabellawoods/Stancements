@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "vinyl_disc",
+  "group": "stancements:vinyl_discs",
   "ingredients": [
     {
       "item": "stancements:recorded_disc"

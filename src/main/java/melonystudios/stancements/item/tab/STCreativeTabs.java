@@ -25,6 +25,11 @@ public class STCreativeTabs {
                 if (STCommonOptions.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
                 // Functional blocks
                 output.accept(MUSIC_RECORDER);
+                output.accept(musicRemixer(MUSIC_REMIXER, 1, false));
+                output.accept(musicRemixer(TINTED_MUSIC_REMIXER, 1, false));
+                output.accept(musicRemixer(MUSIC_REMIXER, 1, true));
+                output.accept(GLASS_CASING);
+                output.accept(TINTED_GLASS_CASING);
                 // Vinyl & recorded discs (items but should be grouped together with the recorder)
                 output.accept(VINYL_DISC);
                 output.accept(RECORDED_DISC);
@@ -46,7 +51,10 @@ public class STCreativeTabs {
                 output.accept(DARK_OAK_SHELF);
                 output.accept(MANGROVE_SHELF);
                 output.accept(CHERRY_SHELF);
-                if (ModList.get().isLoaded("vanillabackport")) output.accept(PALE_OAK_SHELF);
+                if (ModList.get().isLoaded("vanillabackport")) {
+                    output.accept(PALE_OAK_SHELF);
+                    output.accept(POPLAR_SHELF);
+                }
                 output.accept(BAMBOO_SHELF);
                 output.accept(CRIMSON_SHELF);
                 output.accept(WARPED_SHELF);

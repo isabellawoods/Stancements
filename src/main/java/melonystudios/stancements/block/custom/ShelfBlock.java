@@ -1,9 +1,11 @@
 package melonystudios.stancements.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -23,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public class ShelfBlock extends Block {
+    public static final MapCodec<ShelfBlock> CODEC = simpleCodec(ShelfBlock::new);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final VoxelShape NORTH_SHAPE = Stream.of(Shapes.box(0, 0.8125, 0, 1, 1, 1),
@@ -38,9 +41,23 @@ public class ShelfBlock extends Block {
             Shapes.box(0, 0.5625, 0.125, 0.3125, 0.8125, 0.25),
             Shapes.box(0, 0.5625, 0.75, 0.3125, 0.8125, 0.875)).reduce((shape, shape1) -> Shapes.join(shape, shape1, BooleanOp.OR)).get();
 
+    @Override
+    protected MapCodec<? extends ShelfBlock> codec() {
+        return CODEC;
+    }
+
     public ShelfBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     @Override

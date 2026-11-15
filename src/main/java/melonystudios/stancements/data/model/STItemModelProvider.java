@@ -44,6 +44,7 @@ public class STItemModelProvider extends ReItemModelProvider {
         block("mangrove_shelf");
         block("cherry_shelf");
         block("pale_oak_shelf");
+        block("poplar_shelf");
         block("bamboo_shelf");
         block("crimson_shelf");
         block("warped_shelf");
@@ -53,11 +54,17 @@ public class STItemModelProvider extends ReItemModelProvider {
 
         // Functional blocks
         block("music_recorder");
+        musicRemixer("music_remixer");
+        musicRemixer("tinted_music_remixer");
         cropPot(this.generated, "crop_pot");
 
         // Rails
         blockItem("gilded_rail");
         forAllColors(color -> blockItem(color + "_tagging_rail"));
+
+        // Glass casings
+        block("glass_casing");
+        block("tinted_glass_casing");
 
         // Items
         standard("stancements_logo");
@@ -125,9 +132,9 @@ public class STItemModelProvider extends ReItemModelProvider {
 
     /// Makes a {@linkplain melonystudios.stancements.item.custom.RecordedDiscItem recorded disc} model, with {@linkplain RecordedDiscItem#DISC_LABEL_MAX **14**} different
     /// override models for each music disc {@linkplain melonystudios.stancements.component.STDataComponents#LABEL label} and an **overlay model** on the second layer (`layer1`).
-    /// @param parent The location of the parent model, usually `item/generated`.
+    /// @param parent The identifier of the parent model, usually `minecraft:item/generated`.
     /// @param name The item's registry ID, used for the model name and texture locations.
-    /// @param baseTexture The resource location of the base music disc texture.
+    /// @param baseTexture The location of the base music disc texture.
     /// @param overlayTexture The location of the overlay texture, usually `stancements:item/sculk_disc_overlay`.
     /// @param lightLevel The block and light level emitted by this item model. No *actual* light is emitted, as this doesn't have the usual dynamic lighting.
     public void recordedDiscOverlaid(ModelFile parent, String name, ResourceLocation baseTexture, ResourceLocation overlayTexture, int lightLevel) {
@@ -162,9 +169,9 @@ public class STItemModelProvider extends ReItemModelProvider {
         this.existingFileHelper.trackGenerated(outputLocation, MODEL);
     }
 
-    /// Makes an {@linkplain InventoryRecorder inventory recorder} model, with **6** different overrides for every possible {@linkplain melonystudios.stancements.component.custom.InventoryRecorder.State state} and storage combination.
+    /// Makes an [inventory recorder][InventoryRecorder] model, with **6** different overrides for every possible [state][melonystudios.stancements.component.custom.InventoryRecorder.State] and storage combination.
     /// @param parent The location of the parent model, usually `item/generated`.
-    /// @param name The item's registry ID, used for the model and exture locations.
+    /// @param name The item's registry ID, used for the model and texture locations.
     /// @param lightLevel The block and light level emitted by this item model. No *actual* light is emitted, as this doesn't have the usual dynamic lighting.
     public void inventoryRecorder(ModelFile parent, String name, int lightLevel) {
         ResourceLocation state = Stancements.stancements("state");
@@ -203,8 +210,20 @@ public class STItemModelProvider extends ReItemModelProvider {
         this.existingFileHelper.trackGenerated(outputLocation, MODEL);
     }
 
-    /// Runs the provided consumer for every registered {@link DyeColor} in the game.
-    /// @param forColor The consumer, ran for every color.
+    /// Makes a [music remixer][melonystudios.stancements.block.custom.MusicRemixerBlock] model, with **open** and **closed** states.
+    /// @param name The item's registry ID, used for the model and texture locations.
+    public void musicRemixer(String name) {
+        this.withExistingParent(name + "_closed", this.modLoc("block/" + name + "_closed"));
+        this.withExistingParent(name + "_open", this.modLoc("block/" + name + "_open"));
+
+        this.withExistingParent(name, this.modLoc("block/" + name + "_closed")).override()
+                .predicate(Stancements.stancements("open"), 1)
+                .model(this.getExistingFile(this.modLoc("item/" + name + "_open")))
+                .end();
+    }
+
+    /// Runs the provided consumer for every registered [DyeColor] in the game.
+    /// @param forColor A [Consumer] with the name of the color.
     public void forAllColors(Consumer<String> forColor) {
         for (DyeColor color : COLORS) forColor.accept(color.getName());
     }

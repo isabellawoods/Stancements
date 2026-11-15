@@ -1,0 +1,11 @@
+{
+  "parent": "stancements:block/tinted_music_remixer_closed",
+  "overrides": [
+    {
+      "model": "stancements:item/tinted_music_remixer_open",
+      "predicate": {
+        "stancements:open": 1.0
+      }
+    }
+  ]
+}

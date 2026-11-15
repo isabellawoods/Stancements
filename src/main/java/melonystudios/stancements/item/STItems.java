@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DyedItemColor;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -33,6 +34,7 @@ public class STItems {
     public static final DeferredItem<Item> MANGROVE_SHELF = ITEMS.register("mangrove_shelf", () -> new BlockItem(STBlocks.MANGROVE_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> CHERRY_SHELF = ITEMS.register("cherry_shelf", () -> new BlockItem(STBlocks.CHERRY_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> PALE_OAK_SHELF = ITEMS.register("pale_oak_shelf", () -> new BlockItem(STBlocks.PALE_OAK_SHELF.get(), new Item.Properties()));
+    public static final DeferredItem<Item> POPLAR_SHELF = ITEMS.register("poplar_shelf", () -> new BlockItem(STBlocks.POPLAR_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> BAMBOO_SHELF = ITEMS.register("bamboo_shelf", () -> new BlockItem(STBlocks.BAMBOO_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> CRIMSON_SHELF = ITEMS.register("crimson_shelf", () -> new BlockItem(STBlocks.CRIMSON_SHELF.get(), new Item.Properties()));
     public static final DeferredItem<Item> WARPED_SHELF = ITEMS.register("warped_shelf", () -> new BlockItem(STBlocks.WARPED_SHELF.get(), new Item.Properties()));
@@ -57,6 +59,8 @@ public class STItems {
 
     // Functional blocks
     public static final DeferredItem<Item> MUSIC_RECORDER = ITEMS.register("music_recorder", () -> new BlockItem(STBlocks.MUSIC_RECORDER.get(), new Item.Properties()));
+    public static final DeferredItem<Item> MUSIC_REMIXER = ITEMS.register("music_remixer", () -> new BlockItem(STBlocks.MUSIC_REMIXER.get(), new Item.Properties()));
+    public static final DeferredItem<Item> TINTED_MUSIC_REMIXER = ITEMS.register("tinted_music_remixer", () -> new BlockItem(STBlocks.TINTED_MUSIC_REMIXER.get(), new Item.Properties()));
     public static final DeferredItem<Item> CROP_POT = ITEMS.register("crop_pot", () -> new CropPotBlockItem(STBlocks.CROP_POT.get(), new Item.Properties()));
 
     // Rails
@@ -77,6 +81,10 @@ public class STItems {
     public static final DeferredItem<Item> PURPLE_TAGGING_RAIL = ITEMS.register("purple_tagging_rail", () -> new BlockItem(STBlocks.PURPLE_TAGGING_RAIL.get(), new Item.Properties()));
     public static final DeferredItem<Item> MAGENTA_TAGGING_RAIL = ITEMS.register("magenta_tagging_rail", () -> new BlockItem(STBlocks.MAGENTA_TAGGING_RAIL.get(), new Item.Properties()));
     public static final DeferredItem<Item> PINK_TAGGING_RAIL = ITEMS.register("pink_tagging_rail", () -> new BlockItem(STBlocks.PINK_TAGGING_RAIL.get(), new Item.Properties()));
+
+    // Glass casings
+    public static final DeferredItem<Item> GLASS_CASING = ITEMS.register("glass_casing", () -> new BlockItem(STBlocks.GLASS_CASING.get(), new Item.Properties()));
+    public static final DeferredItem<Item> TINTED_GLASS_CASING = ITEMS.register("tinted_glass_casing", () -> new BlockItem(STBlocks.TINTED_GLASS_CASING.get(), new Item.Properties()));
 
     // Items
     public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.register("stancements_logo", () -> new LogoItem(Stancements.ACCENT_COLOR, new Item.Properties().fireResistant().rarity(Rarity.EPIC)));
@@ -113,8 +121,18 @@ public class STItems {
     /// @param count The amount of pots in the stack.
     /// @param hopping Whether this crop pot has a built-in hopper.
     public static ItemStack cropPot(int count, boolean hopping) {
-        ItemStack stack = STItems.CROP_POT.toStack(count);
+        ItemStack stack = CROP_POT.toStack(count);
         stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, hopping));
+        return stack;
+    }
+
+    /// Makes an [ItemStack] of a music remixer with a variable count.
+    /// @param remixer The music remixer item.
+    /// @param count The amount of remixers in the stack.
+    /// @param open Whether this music remixer is open (has no glass casing with it).
+    public static ItemStack musicRemixer(DeferredItem<Item> remixer, int count, boolean open) {
+        ItemStack stack = remixer.toStack(count);
+        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(BlockStateProperties.OPEN, open));
         return stack;
     }
 }

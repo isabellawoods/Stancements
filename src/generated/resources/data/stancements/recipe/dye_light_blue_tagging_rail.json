@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "dye_tagging_rail",
+  "group": "stancements:dye_tagging_rail",
   "ingredients": [
     {
       "type": "neoforge:difference",

@@ -10,6 +10,7 @@ import melonystudios.stancements.command.ConvertDiscToJukeboxSongCommand;
 import melonystudios.stancements.command.RunVinylModifiersCommand;
 import melonystudios.stancements.command.UpdateRecordedDiscCommand;
 import melonystudios.stancements.component.STDataComponents;
+import melonystudios.stancements.data.loot.STLootModifierProvider;
 import melonystudios.stancements.data.loot.STLootTableProvider;
 import melonystudios.stancements.data.misc.STDataMapsProvider;
 import melonystudios.stancements.data.misc.STDataPackRegistriesProvider;
@@ -27,6 +28,7 @@ import melonystudios.stancements.misc.attachment.STAttachmentTypes;
 import melonystudios.stancements.misc.attachment.STCapabilities;
 import melonystudios.stancements.misc.discstyle.RecordedDiscStyle;
 import melonystudios.stancements.misc.modifier.VinylModifier;
+import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
@@ -78,6 +80,7 @@ public class STEvents {
             generator.addProvider(true, new AdvancementProvider(output, registries, fileHelper, List.of(new Stadvancements())));
             generator.addProvider(true, new STRecipeProvider(output, registries));
             generator.addProvider(true, new STLootTableProvider(output, registries));
+            generator.addProvider(true, new STLootModifierProvider(output, registries));
             generator.addProvider(true, new STDataMapsProvider(output, registries));
 
             // Tags
@@ -100,7 +103,7 @@ public class STEvents {
         event.addPackFinders(
                 Stancements.stancements("datapacks/" + Stancements.RMS_ID),
                 PackType.SERVER_DATA,
-                Component.translatable("pack.stancements." + Stancements.RMS_ID, Component.translatable("pack.stancements.prefix").withColor(Stancements.ACCENT_COLOR)),
+                Component.translatable(Util.makeDescriptionId("pack", Stancements.stancements(Stancements.RMS_ID)), Component.translatable("pack.stancements.prefix").withColor(Stancements.ACCENT_COLOR)),
                 PackSource.BUILT_IN,
                 false,
                 Pack.Position.TOP

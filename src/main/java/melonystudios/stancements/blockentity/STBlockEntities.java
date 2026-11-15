@@ -5,6 +5,7 @@ import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.blockentity.custom.AlbumBlockEntity;
 import melonystudios.stancements.blockentity.custom.DyedWaterCauldronBlockEntity;
 import melonystudios.stancements.blockentity.custom.MusicRecorderBlockEntity;
+import melonystudios.stancements.blockentity.custom.MusicRemixerBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -15,6 +16,8 @@ public class STBlockEntities { // block en-titties
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MusicRecorderBlockEntity>> MUSIC_RECORDER = BLOCK_ENTITIES.register("music_recorder",
             () -> BlockEntityType.Builder.of(MusicRecorderBlockEntity::new, STBlocks.MUSIC_RECORDER.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MusicRemixerBlockEntity>> MUSIC_REMIXER = BLOCK_ENTITIES.register("music_remixer",
+            () -> BlockEntityType.Builder.of(MusicRemixerBlockEntity::new, STBlocks.MUSIC_REMIXER.get(), STBlocks.TINTED_MUSIC_REMIXER.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DyedWaterCauldronBlockEntity>> DYED_WATER_CAULDRON = BLOCK_ENTITIES.register("dyed_water_cauldron",
             () -> BlockEntityType.Builder.of(DyedWaterCauldronBlockEntity::new, STBlocks.DYED_WATER_CAULDRON.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AlbumBlockEntity>> ALBUM = BLOCK_ENTITIES.register("album",

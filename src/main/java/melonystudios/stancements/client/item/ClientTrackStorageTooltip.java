@@ -1,11 +1,10 @@
 package melonystudios.stancements.client.item;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import melonystudios.renderslice.api.Alignment;
+import melonystudios.renderslice.api.SliceComponents;
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.client.STClient;
-import melonystudios.stancements.client.element.StackedRenderComponents;
 import melonystudios.stancements.component.custom.TrackStorage;
-import melonystudios.stancements.util.Alignment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -43,13 +42,13 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
             graphics.blitSprite(Stancements.stancements("container/inventory_recorder/track_storage_background"), x, y - 2, width, this.getHeight() - FULLNESS_BAR_HEIGHT + 3);
 
             for (MutableComponent line : lines) {
-                StackedRenderComponents.renderAlignedScrollingText(graphics, font, line, Alignment.LEFT, x + 3, y, x + width - 3, y + font.lineHeight, TrackStorage.TEXT_COLOR, STClient.TRANSPARENT_TEXT_BACKDROP);
+                SliceComponents.alignedScrollingText(graphics, font, line, Alignment.LEFT, x + 3, y, x + width - 3, y + font.lineHeight + 1, TrackStorage.TEXT_COLOR, SliceComponents.TRANSPARENT_DROP_SHADOW_COLOR);
                 y += font.lineHeight + 2;
             }
             RenderSystem.disableBlend();
             y += 3;
         } else {
-            StackedRenderComponents.drawCenteredWordWrap(graphics, font, DESCRIPTION_TEXT, x + this.getWidth() / 2, y, width, 0xFFFFFF);
+            SliceComponents.centeredTextWithWordWrap(graphics, font, DESCRIPTION_TEXT, x + this.getWidth() / 2, y, width, 0xFFFFFF);
             y += font.split(DESCRIPTION_TEXT, width).size() * font.lineHeight + 2;
         }
 
@@ -64,7 +63,7 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
         graphics.blitSprite(this.storage.backgroundSprite(), x, y, width, 14);
         graphics.blitSprite(this.storage.fillSprite(), x, y, (int) (width * fullnessFraction), 14);
         RenderSystem.disableBlend();
-        StackedRenderComponents.drawCenteredTextWithBackdrop(graphics, font, this.storage.getFullnessText(), x + 75, y + 3, 0xFFFFFF, STClient.TRANSPARENT_TEXT_BACKDROP);
+        SliceComponents.centeredTextWithDropShadow(graphics, font, this.storage.getFullnessText(), x + 75, y + 3, 0xFFFFFF, SliceComponents.TRANSPARENT_DROP_SHADOW_COLOR);
     }
 
     @Override

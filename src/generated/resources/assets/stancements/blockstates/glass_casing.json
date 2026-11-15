@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "supported=false": {
+      "model": "stancements:block/glass_casing"
+    },
+    "supported=true": {
+      "model": "stancements:block/supported_glass_casing"
+    }
+  }
+}

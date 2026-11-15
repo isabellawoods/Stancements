@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "absentbydesign"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stancements:glass_casings",
+  "key": {
+    "#": {
+      "tag": "c:nuggets/iron"
+    },
+    "G": {
+      "item": "absentbydesign:slab_glass"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "#G#",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "stancements:glass_casing"
+  }
+}

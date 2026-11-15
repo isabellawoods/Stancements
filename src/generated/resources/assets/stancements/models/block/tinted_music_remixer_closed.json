@@ -1,0 +1,8 @@
+{
+  "parent": "stancements:block/template_music_remixer_closed",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "casing_end": "stancements:block/tinted_glass_casing_end",
+    "casing_side": "stancements:block/tinted_glass_casing_side"
+  }
+}

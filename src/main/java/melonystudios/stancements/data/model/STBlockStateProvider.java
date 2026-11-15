@@ -3,7 +3,8 @@ package melonystudios.stancements.data.model;
 import melonystudios.reutilities.data.model.ReBlockStateProvider;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
-import melonystudios.stancements.block.custom.croppot.WheatCropPotBlock;
+import melonystudios.stancements.block.custom.CasingBlock;
+import melonystudios.stancements.block.custom.croppot.FilledCropPotBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.RailShape;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +46,7 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         shelf(MANGROVE_SHELF.get());
         shelf(CHERRY_SHELF.get());
         shelf(PALE_OAK_SHELF.get());
+        shelf(POPLAR_SHELF.get());
         shelf(BAMBOO_SHELF.get());
         shelf(CRIMSON_SHELF.get());
         shelf(WARPED_SHELF.get());
@@ -67,18 +70,20 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         craftingTableCloth(PINK_CRAFTING_TABLE_CLOTH.get());
 
         // Functional
-        simpleBlock(MUSIC_RECORDER.get(), models().cubeBottomTop("music_recorder",
-                modLoc("block/music_recorder_side"),
-                modLoc("block/music_recorder_bottom"),
-                modLoc("block/music_recorder_top")));
+        simpleBlock(MUSIC_RECORDER.get(), this.models().cubeBottomTop("music_recorder",
+                this.modLoc("block/music_recorder_side"),
+                this.modLoc("block/music_recorder_bottom"),
+                this.modLoc("block/music_recorder_top")));
+        musicRemixer(MUSIC_REMIXER.get(), "cutout", this.modLoc("block/glass_casing_side"), this.modLoc("block/glass_casing_end"));
+        musicRemixer(TINTED_MUSIC_REMIXER.get(), "translucent", this.modLoc("block/tinted_glass_casing_side"), this.modLoc("block/tinted_glass_casing_end"));
         layeredCauldron(DYED_WATER_CAULDRON.get(), this.mcLoc("block/water_still"));
         layeredCauldron(MILK_CAULDRON.get(), ResourceLocation.fromNamespaceAndPath("neoforge", "block/milk_still"));
         emptyCropPot(CROP_POT.get());
-        fullCropPot((WheatCropPotBlock) WHEAT_CROP_POT.get(), age -> this.mcLoc("block/wheat_stage" + wheatAgeIndex(age)));
-        fullCropPot((WheatCropPotBlock) CARROT_CROP_POT.get(), age -> this.mcLoc("block/carrots_stage" + potatoAgeIndex(age)));
-        fullCropPot((WheatCropPotBlock) POTATO_CROP_POT.get(), age -> this.mcLoc("block/potatoes_stage" + potatoAgeIndex(age)));
-        fullCropPot((WheatCropPotBlock) BEETROOT_CROP_POT.get(), age -> this.mcLoc("block/beetroots_stage" + wheatAgeIndex(age)));
-        fullCropPot((WheatCropPotBlock) NETHER_WART_CROP_POT.get(), age -> this.modLoc("block/nether_wart_stage" + netherWartAgeIndex(age)));
+        fullCropPot((FilledCropPotBlock) WHEAT_CROP_POT.get(), age -> this.mcLoc("block/wheat_stage" + wheatAgeIndex(age)), ReBlockStateProvider::wheatAgeIndex);
+        fullCropPot((FilledCropPotBlock) CARROT_CROP_POT.get(), age -> this.mcLoc("block/carrots_stage" + potatoAgeIndex(age)), ReBlockStateProvider::potatoAgeIndex);
+        fullCropPot((FilledCropPotBlock) POTATO_CROP_POT.get(), age -> this.mcLoc("block/potatoes_stage" + potatoAgeIndex(age)), ReBlockStateProvider::potatoAgeIndex);
+        fullCropPot((FilledCropPotBlock) BEETROOT_CROP_POT.get(), age -> this.mcLoc("block/beetroots_stage" + wheatAgeIndex(age)), ReBlockStateProvider::wheatAgeIndex);
+        fullCropPot((FilledCropPotBlock) NETHER_WART_CROP_POT.get(), age -> this.modLoc("block/nether_wart_stage" + netherWartAgeIndex(age)), ReBlockStateProvider::netherWartAgeIndex);
 
         // Rails
         straightRail((BaseRailBlock) GILDED_RAIL.get());
@@ -98,9 +103,13 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         straightRail((BaseRailBlock) PURPLE_TAGGING_RAIL.get());
         straightRail((BaseRailBlock) MAGENTA_TAGGING_RAIL.get());
         straightRail((BaseRailBlock) PINK_TAGGING_RAIL.get());
+
+        // Glass casings
+        casing((CasingBlock) GLASS_CASING.get(), "cutout");
+        casing((CasingBlock) TINTED_GLASS_CASING.get(), "translucent");
     }
 
-    /// Makes the block states and models for a {@linkplain melonystudios.stancements.block.custom.ShelfBlock shelf block}.
+    /// Makes the block states and models for a [*Stancements* shelf block][melonystudios.stancements.block.custom.ShelfBlock].
     /// @param shelf The shelf block.
     public void shelf(Block shelf) {
         this.getVariantBuilder(shelf).forAllStatesExcept(state -> {
@@ -115,7 +124,7 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         }, BlockStateProperties.WATERLOGGED);
     }
 
-    /// Makes the block states and models for a {@linkplain melonystudios.stancements.block.custom.CraftingTableClothBlock crafting table cloth block}.
+    /// Makes the block states and models for a [crafting table cloth block][melonystudios.stancements.block.custom.CraftingTableClothBlock].
     /// @param tableCloth The table cloth block.
     public void craftingTableCloth(Block tableCloth) {
         ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(tableCloth);
@@ -124,7 +133,7 @@ public class STBlockStateProvider extends ReBlockStateProvider {
                 .texture("side", registry.getNamespace() + ":block/" + registry.getPath() + "_side"));
     }
 
-    /// Makes the block states and models for an {@linkplain melonystudios.stancements.block.custom.croppot.CropPotBlock empty crop pot block}.
+    /// Makes the block states and models for an [empty crop pot block][melonystudios.stancements.block.custom.croppot.EmptyCropPotBlock].
     /// @param cropPot The crop pot block.
     public void emptyCropPot(Block cropPot) {
         this.getVariantBuilder(cropPot).forAllStates(state -> {
@@ -139,17 +148,18 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         });
     }
 
-    /// Makes the block states and models for a {@linkplain WheatCropPotBlock full crop pot block}.
+    /// Makes the block states and models for a [filled crop pot block][FilledCropPotBlock].
     /// @param cropPot The crop pot block.
-    /// @param crop A function for getting the correct crop texture.
-    public void fullCropPot(WheatCropPotBlock cropPot, Function<Integer, ResourceLocation> crop) {
+    /// @param crop A [Function] for getting the correct crop texture.
+    /// @param modelAge A `Function` for getting the age of the crop pot model, as it may not necessarily match the block's `age` property.
+    public void fullCropPot(FilledCropPotBlock cropPot, Function<Integer, ResourceLocation> crop, Function<Integer, Integer> modelAge) {
         this.getVariantBuilder(cropPot).forAllStates(state -> {
             ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(cropPot);
             boolean hopping = state.getValue(STBlockStateProperties.HOPPING);
             int age = state.getValue(cropPot.getAgeProperty());
             String name = hopping ? "hopping_" : "";
 
-            return ConfiguredModel.builder().modelFile(this.models().getBuilder(name + registry.getPath() + "_stage" + age)
+            return ConfiguredModel.builder().modelFile(this.models().getBuilder(name + registry.getPath() + "_stage" + modelAge.apply(age))
                     .parent(this.models().getExistingFile(this.modLoc("block/template_full_crop_pot")))
                     .texture("pot", this.modLoc("block/" + name + "crop_pot"))
                     .texture("crop", crop.apply(age))
@@ -157,8 +167,8 @@ public class STBlockStateProvider extends ReBlockStateProvider {
         });
     }
 
-    /// Makes the block states and models for an {@linkplain net.minecraft.world.level.block.PoweredRailBlock axis-aligned rail}
-    /// (like powered or detector rails).
+    /// Makes the block states and models for an [axis-aligned rail][net.minecraft.world.level.block.PoweredRailBlock],
+    /// like powered or detector rails.
     /// @param rail The rail block.
     // if I ever make a method for making curved rails, I'll call it "gayRail" ~isa 19-02-26
     public void straightRail(BaseRailBlock rail) {
@@ -188,5 +198,42 @@ public class STBlockStateProvider extends ReBlockStateProvider {
             case ASCENDING_SOUTH, ASCENDING_WEST -> "_raised_sw";
             default -> "";
         };
+    }
+
+    /// Makes the block states and models for a [casing block][CasingBlock].
+    /// @param casing The casing block.
+    /// @param renderType Which render type to use when rendering. Uses `cutout` for regular glass casings and `translucent` for tinted and stained glass casings.
+    public void casing(CasingBlock casing, String renderType) {
+        this.getVariantBuilder(casing).forAllStatesExcept(state -> {
+            ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(casing);
+            boolean supported = state.getValue(STBlockStateProperties.SUPPORTED);
+            String supportedName = (supported ? "supported_" : "");
+
+            return ConfiguredModel.builder().modelFile(this.models().getBuilder(supportedName + registry.getPath())
+                    .parent(this.models().getExistingFile(Stancements.stancements("block/template_" + supportedName + "casing")))
+                    .texture("side", registry.getNamespace() + ":block/" + registry.getPath() + "_side")
+                    .texture("end", registry.getNamespace() + ":block/" + registry.getPath() + "_end")
+                    .renderType(renderType)
+            ).build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
+    /// Makes the block states and models for a [music remixer][melonystudios.stancements.block.custom.MusicRemixerBlock].
+    /// @param remixer The music remixer block.
+    /// @param renderType Which render type to use when rendering. Uses `cutout` for regular glass casings and `translucent` for tinted and stained glass casings.
+    /// @param casingSide An [identifier][ResourceLocation] of the glass casing side texture.
+    /// @param casingEnd An identifier of the glass casing top and bottom textures.
+    public void musicRemixer(Block remixer, String renderType, ResourceLocation casingSide, ResourceLocation casingEnd) {
+        this.getVariantBuilder(remixer).forAllStatesExcept(state -> {
+            ResourceLocation registry = BuiltInRegistries.BLOCK.getKey(remixer);
+            boolean open = state.getValue(BlockStateProperties.OPEN);
+            String suffix = open ? "_open" : "_closed";
+
+            BlockModelBuilder modelBuilder = this.models().getBuilder(registry.getPath() + suffix);
+            modelBuilder.parent(this.models().getExistingFile(Stancements.stancements("block/template_music_remixer" + suffix)));
+            if (!open) modelBuilder.renderType(renderType).texture("casing_side", casingSide).texture("casing_end", casingEnd);
+
+            return ConfiguredModel.builder().modelFile(modelBuilder).build();
+        }, STBlockStateProperties.RECORDING, BlockStateProperties.POWERED);
     }
 }

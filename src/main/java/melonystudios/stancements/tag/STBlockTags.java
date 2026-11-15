@@ -11,6 +11,8 @@ public class STBlockTags {
     public static final TagKey<Block> CRAFTING_TABLE_CLOTHS = stancements("crafting_table_cloths");
     public static final TagKey<Block> CROP_POTS = stancements("crop_pots");
     public static final TagKey<Block> TAGGING_RAILS = stancements("tagging_rails");
+    public static final TagKey<Block> REPLACEABLE_BY_CASINGS = stancements("replaceable_by_casings");
+    public static final TagKey<Block> CASINGS = stancements("casings");
 
     // Common tags
     public static final TagKey<Block> MINEABLE_WITH_SHEARS = common("mineable/shears");

@@ -1,6 +1,8 @@
 {
   "values": [
     "#stancements:shelves",
-    "stancements:music_recorder"
+    "stancements:music_recorder",
+    "stancements:music_remixer",
+    "stancements:tinted_music_remixer"
   ]
 }

@@ -13,16 +13,16 @@
       "model": "stancements:block/hopping_nether_wart_crop_pot_stage1"
     },
     "age=2,hopping=false": {
-      "model": "stancements:block/nether_wart_crop_pot_stage2"
+      "model": "stancements:block/nether_wart_crop_pot_stage1"
     },
     "age=2,hopping=true": {
-      "model": "stancements:block/hopping_nether_wart_crop_pot_stage2"
+      "model": "stancements:block/hopping_nether_wart_crop_pot_stage1"
     },
     "age=3,hopping=false": {
-      "model": "stancements:block/nether_wart_crop_pot_stage3"
+      "model": "stancements:block/nether_wart_crop_pot_stage2"
     },
     "age=3,hopping=true": {
-      "model": "stancements:block/hopping_nether_wart_crop_pot_stage3"
+      "model": "stancements:block/hopping_nether_wart_crop_pot_stage2"
     }
   }
 }

@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "stancements:sculk_infested_vinyl_discs",
   "ingredients": [
     {
       "item": "stancements:sculk_infested_recorded_disc"

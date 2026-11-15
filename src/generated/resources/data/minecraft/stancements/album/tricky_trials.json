@@ -1,5 +1,5 @@
 {
-  "cover_art": "minecraft:textures/album/tricky_trials.png",
+  "cover_art": "minecraft:gui/album_cover_art/tricky_trials",
   "description": {
     "color": "#A0A0A0",
     "translate": "album.minecraft.tricky_trials.description"

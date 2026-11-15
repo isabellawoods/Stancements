@@ -2,7 +2,7 @@ package melonystudios.stancements.data.misc;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlocks;
-import melonystudios.stancements.block.custom.croppot.CropPotBlock;
+import melonystudios.stancements.block.custom.croppot.EmptyCropPotBlock;
 import melonystudios.stancements.component.STDataComponents;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.misc.advancement.RecordSongTrigger;
@@ -208,7 +208,7 @@ public class Stadvancements implements AdvancementProvider.AdvancementGenerator 
                         ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
                                 LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block()
                                         .of(STBlocks.CROP_POT.get())
-                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropPotBlock.HOPPING, true))
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(EmptyCropPotBlock.HOPPING, true))
                                 ),
                                 ItemPredicate.Builder.item().of(Items.WHEAT_SEEDS, Items.CARROT, Items.POTATO, Items.BEETROOT_SEEDS, Items.NETHER_WART)
                         )

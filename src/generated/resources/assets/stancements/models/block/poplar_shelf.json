@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_shelf",
+  "textures": {
+    "shelf": "stancements:block/poplar_shelf",
+    "support": "stancements:block/poplar_shelf_support"
+  }
+}

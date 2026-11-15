@@ -1,5 +1,5 @@
 {
-  "cover_art": "minecraft:textures/album/nether_update.png",
+  "cover_art": "minecraft:gui/album_cover_art/nether_update",
   "description": {
     "color": "#A0A0A0",
     "translate": "album.minecraft.nether_update.description"

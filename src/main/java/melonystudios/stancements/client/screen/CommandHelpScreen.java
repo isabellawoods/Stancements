@@ -1,10 +1,11 @@
 package melonystudios.stancements.client.screen;
 
-import melonystudios.stancements.client.STClient;
-import melonystudios.stancements.client.element.BackdropStringWidget;
-import melonystudios.stancements.client.element.NotificationOverlayWidget;
+import melonystudios.renderslice.api.SliceComponents;
+import melonystudios.renderslice.api.component.DropShadowStringWidget;
+import melonystudios.renderslice.api.component.NotificationOverlayWidget;
 import melonystudios.stancements.client.screen.list.CommandHelpList;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
@@ -18,7 +19,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.neoforged.fml.ModList;
 
 public class CommandHelpScreen extends Screen {
+    public static final Component COPIED_TO_CLIPBOARD = Component.translatable("menu.stancements.command_help.copied_text");
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
+    private NotificationOverlayWidget copyOverlay;
     private CommandHelpList list;
     private final String modID;
     private final String commandID;
@@ -39,7 +42,7 @@ public class CommandHelpScreen extends Screen {
 
     @Override
     public Component getTitle() {
-        int accentColor = STClient.accentColorOrDefault(this.modID(), 0xFFFFA0);
+        int accentColor = SliceComponents.accentColorOrDefault(this.modID(), 0xFFFFA0);
         String category = this.commandID().split("/")[0];
         String modName = this.getModName();
 
@@ -64,7 +67,7 @@ public class CommandHelpScreen extends Screen {
     // todo: [Reutilities] add a screen that lists all of these commands, with the title text being clickable to navigate the screens
     @Override
     protected void init() {
-        this.layout.addToHeader(new BackdropStringWidget(this.getTitle(), this.font));
+        this.layout.addToHeader(new DropShadowStringWidget(this.getTitle(), this.font));
         this.list = this.layout.addToContents(new CommandHelpList(this.minecraft, this));
         LinearLayout footerLayout = this.layout.addToFooter(LinearLayout.horizontal()).spacing(8);
         footerLayout.defaultCellSetting().alignHorizontallyCenter();
@@ -73,14 +76,14 @@ public class CommandHelpScreen extends Screen {
                 .width(20)
                 .tooltip(Tooltip.create(Component.translatable(
                         "menu.stancements.command_help.shortcuts.title",
-                        Component.translatable("menu.stancements.command_help.shortcuts.copy")
+                        Component.translatable("menu.stancements.command_help.shortcuts.copy" + (Minecraft.ON_OSX ? ".mac" : ""))
                                 .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GRAY))
                 ).withStyle(style -> style.withBold(true))))
                 .build()
         );
         this.layout.arrangeElements();
         this.layout.visitWidgets(this::addRenderableWidget);
-        this.addRenderableWidget(new NotificationOverlayWidget(this.width / 2, this.height - 33 - 30, this.list.getRowWidth(), this.font.lineHeight + 3 * 6, NotificationOverlayWidget.COPIED_TO_CLIPBOARD));
+        this.copyOverlay = this.addRenderableWidget(new NotificationOverlayWidget(this.width / 2, this.height - 33 - 30, this.list.getRowWidth(), this.font.lineHeight + 3 * 6, COPIED_TO_CLIPBOARD));
     }
 
     @Override
@@ -91,8 +94,6 @@ public class CommandHelpScreen extends Screen {
 
     public void resetCopyNotificationTicks() {
         this.minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.value(), 1));
-        this.children().stream()
-                .filter(listener -> listener instanceof NotificationOverlayWidget)
-                .forEach(widget -> ((NotificationOverlayWidget) widget).displayNotificationOverlay());
+        this.copyOverlay.displayNotificationOverlay();
     }
 }

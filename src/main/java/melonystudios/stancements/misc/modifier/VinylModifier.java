@@ -55,7 +55,7 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
             Track.LIST_CODEC.fieldOf("targets").forGetter(VinylModifier::targets),
             ModifierComponentType.CODEC.optionalFieldOf("effects", DataComponentMap.EMPTY).forGetter(VinylModifier::effects),
             Codec.BOOL.optionalFieldOf("modifies_copies", false).forGetter(VinylModifier::modifiesCopies)
-    ).apply(instance, VinylModifier::new)).validate(modifier -> modifier.strategies().isEmpty() ? DataResult.error(() -> "Vinyl modifier doesn't have any targeted strategies") : DataResult.success(modifier));
+    ).apply(instance, VinylModifier::new)).validate(VinylModifier::validateVinylModifier);
     public static final Codec<Holder<VinylModifier>> CODEC = RegistryFixedCodec.create(STRegistries.VINYL_MODIFIER);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<VinylModifier>> STREAM_CODEC = ByteBufCodecs.holderRegistry(STRegistries.VINYL_MODIFIER);
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -83,6 +83,12 @@ public record VinylModifier(Component recordingText, List<ModificationStrategy> 
     /// @param copying Whether the recorder is copying a song.
     public boolean actsOnCopies(boolean copying) {
         return this.modifiesCopies() || !copying;
+    }
+
+    /// Validates a vinyl modifier instance. For it to be valid, it **must have selected at least one [modification strategy][ModificationStrategy]**.
+    /// @param modifier The vinyl modifier to validate.
+    public static DataResult<VinylModifier> validateVinylModifier(VinylModifier modifier) {
+        return modifier.strategies().isEmpty() ? DataResult.error(() -> "Vinyl modifier doesn't have any selected modification strategies") : DataResult.success(modifier);
     }
 
     /// Runs the **music recording pipeline** (runs all available vinyl modifiers).

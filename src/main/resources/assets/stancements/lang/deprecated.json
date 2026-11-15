@@ -11,7 +11,6 @@
     "logger.stancements.vinyl_modifier.not_available",
 
     "tag.item.stancements.recordable_discs",
-    "tag.item.stancements.jade_considers_as_recording",
 
     "music.minecraft.game.lilypad",
     "music.minecraft.game.below_and_above",
@@ -40,6 +39,8 @@
 
     "tooltip.stancements.author_song_separator": "tooltip.stancements.author_song_separator_regex",
     "logger.stancements.outside_bounds": "logger.reutilities.outside_bounds",
+
+    "tag.item.stancements.jade_considers_as_recording": "tag.item.stancements.displays_as_recording",
 
     "musical_genre.classical": "musical_tag.classical",
     "musical_genre.jazz": "musical_tag.jazz",

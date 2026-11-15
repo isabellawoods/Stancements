@@ -60,7 +60,7 @@ public class Stancements {
         STArgumentTypes.TYPES.register(eventBus);
 
         NeoForgeMod.enableMilkFluid();
-        container.registerConfig(ModConfig.Type.COMMON, STCommonOptions.SPEC, "melonystudios/stancements-common.toml");
+        container.registerConfig(ModConfig.Type.COMMON, STCommonOptions.SPEC, "melonystudios/" + MOD_ID + "-common.toml");
     }
 
     /// Creates a name for a data generator using ***Stancements***' name.
@@ -69,14 +69,14 @@ public class Stancements {
         return "Stancements — " + name;
     }
 
-    /// Creates a new resource location under ***Stancements***' namespace.
-    /// @param name The path of this resource location.
+    /// Creates a new identifier under ***Stancements***' namespace.
+    /// @param name The path of this identifier.
     public static ResourceLocation stancements(String name) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 
-    /// Creates a new resource location under the **Common** (`c`) namespace.
-    /// @param name The path of this resource location.
+    /// Creates a new identifier under the **Common** (`c`) namespace.
+    /// @param name The path of this identifier.
     public static ResourceLocation common(String name) {
         return ResourceLocation.fromNamespaceAndPath("c", name);
     }

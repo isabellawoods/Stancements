@@ -1,6 +1,6 @@
 package melonystudios.stancements.client.screen.list;
 
-import melonystudios.stancements.client.STClient;
+import melonystudios.renderslice.api.SliceComponents;
 import melonystudios.stancements.client.screen.CommandHelpScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,7 +19,7 @@ public class CommandHelpList extends ObjectSelectionList<CommandHelpList.Entry> 
         super(minecraft, screen.width, screen.height - 33 * 2, 33, 16);
         this.screen = screen;
         var font = screen.getMinecraft().font;
-        int accentColor = STClient.accentColorOrDefault(screen.modID(), 0xFFFFA0);
+        int accentColor = SliceComponents.accentColorOrDefault(screen.modID(), 0xFFFFA0);
         int maxTextWidth = this.getRowWidth() - 8;
         String translationKey = "commands.mstudios." + screen.commandID().replace('/', '.');
 
@@ -46,7 +46,7 @@ public class CommandHelpList extends ObjectSelectionList<CommandHelpList.Entry> 
                         .withStyle(style -> style.withBold(true).withColor(accentColor)), maxTextWidth)
                 .forEach(line -> this.addEntry(new TextEntry(line, false)));
 
-        this.addEntry(new SeparatorEntry(accentColor, STClient.TRANSPARENT_TEXT_BACKDROP));
+        this.addEntry(new SeparatorEntry(accentColor, SliceComponents.TRANSPARENT_DROP_SHADOW_COLOR));
 
         // CONTENTS
         font.split(Component.translatable(translationKey + ".description"), maxTextWidth)

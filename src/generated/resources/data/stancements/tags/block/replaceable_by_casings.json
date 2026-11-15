@@ -1,0 +1,22 @@
+{
+  "values": [
+    "#minecraft:replaceable",
+    "#minecraft:candles",
+    "#minecraft:wool_carpets",
+    "#minecraft:buttons",
+    "#minecraft:pressure_plates",
+    "#minecraft:flower_pots",
+    "#stancements:crop_pots",
+    "#stancements:casings",
+    "#c:skulls",
+    "#c:clusters",
+    "minecraft:scaffolding",
+    "minecraft:tripwire",
+    "minecraft:lever",
+    "minecraft:redstone_wire",
+    "minecraft:moss_carpet",
+    "minecraft:sea_pickle",
+    "minecraft:sculk_vein",
+    "minecraft:turtle_egg"
+  ]
+}

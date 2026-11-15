@@ -1,13 +1,13 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:mod_loaded",
-      "modid": "vanillabackport"
+      "type": "neoforge:item_exists",
+      "item": "minecraft:pale_oak_planks"
     }
   ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "wooden_shelves",
+  "group": "stancements:wooden_shelves",
   "key": {
     "#": {
       "item": "minecraft:pale_oak_planks"
@@ -21,7 +21,7 @@
     "S S"
   ],
   "result": {
-    "count": 3,
+    "count": 6,
     "id": "stancements:pale_oak_shelf"
   }
 }

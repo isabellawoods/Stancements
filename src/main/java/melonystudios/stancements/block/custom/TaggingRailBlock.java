@@ -33,14 +33,14 @@ import java.util.function.Predicate;
 
 public class TaggingRailBlock extends BaseRailBlock {
     public static final MapCodec<? extends TaggingRailBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            DyeColor.CODEC.listOf().fieldOf("colors_to_detect").forGetter(TaggingRailBlock::detectsColors),
-            TagMatcherType.CODEC.optionalFieldOf("matcher_type", TagMatcherType.ANY_OF).forGetter(TaggingRailBlock::matcherType),
+            DyeColor.CODEC.listOf().fieldOf("detects_colors").forGetter(TaggingRailBlock::detectsColors),
+            TagMatcherType.CODEC.fieldOf("tag_matcher").forGetter(TaggingRailBlock::matcherType),
             propertiesCodec()
     ).apply(instance, TaggingRailBlock::new));
     public static final EnumProperty<RailShape> SHAPE = BlockStateProperties.RAIL_SHAPE_STRAIGHT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final int PRESSED_CHECK_PERIOD = 20;
-    private final List<DyeColor> colorsToDetect;
+    private final List<DyeColor> detectsColors;
     private final TagMatcherType matcherType;
 
     @Override
@@ -48,17 +48,17 @@ public class TaggingRailBlock extends BaseRailBlock {
         return CODEC;
     }
 
-    public TaggingRailBlock(DyeColor colorToDetect, Properties properties) {
-        this(colorToDetect, TagMatcherType.ANY_OF, properties);
+    public TaggingRailBlock(DyeColor detectsColor, Properties properties) {
+        this(detectsColor, TagMatcherType.ANY_OF, properties);
     }
 
-    public TaggingRailBlock(DyeColor colorToDetect, TagMatcherType matcherType, Properties properties) {
-        this(List.of(colorToDetect), matcherType, properties);
+    public TaggingRailBlock(DyeColor detectsColor, TagMatcherType matcherType, Properties properties) {
+        this(List.of(detectsColor), matcherType, properties);
     }
 
-    public TaggingRailBlock(List<DyeColor> colorsToDetect, TagMatcherType matcherType, Properties properties) {
+    public TaggingRailBlock(List<DyeColor> detectsColors, TagMatcherType matcherType, Properties properties) {
         super(true, properties);
-        this.colorsToDetect = colorsToDetect;
+        this.detectsColors = detectsColors;
         this.matcherType = matcherType;
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(POWERED, false)
@@ -68,7 +68,7 @@ public class TaggingRailBlock extends BaseRailBlock {
     }
 
     public List<DyeColor> detectsColors() {
-        return this.colorsToDetect;
+        return this.detectsColors;
     }
 
     public TagMatcherType matcherType() {
@@ -190,18 +190,18 @@ public class TaggingRailBlock extends BaseRailBlock {
         }
     }
 
-    /// Takes a list of {@link DyeColor DyeColors} and puts them into a single text component.
-    /// @param matcher A {@linkplain TagMatcherType tag matcher} used for the list. Can be `all` for "and" and `any_of` for "or".
+    /// Takes a list of [DyeColor]s and puts them into a single text component.
+    /// @param matcher A [tag matcher][TagMatcherType] used for the list. Can be `all` for "and" and `any_of` for "or".
     /// @param colors The list of dye colors to print.
-    /// @param italicize Whether the "and" or "or" at the end should be italicized.
-    public static MutableComponent prettyPrintTagColors(TagMatcherType matcher, List<DyeColor> colors, boolean italicize) {
+    /// @param italicizeConnector Whether the "and" or "or" at the end should be italicized.
+    public static MutableComponent prettyPrintTagColors(TagMatcherType matcher, List<DyeColor> colors, boolean italicizeConnector) {
         MutableComponent component = Component.empty();
         for (int i = 0; i < colors.size(); ++i) {
             DyeColor color = colors.get(i);
             component.append(Component.translatable("color.minecraft." + color).withColor(color.getTextureDiffuseColor()));
 
             if (i == colors.size() - 2) {
-                component.append(Component.translatable("tooltip.stancements.delimiter." + matcher.getSerializedName()).withStyle(style -> style.withItalic(italicize)));
+                component.append(Component.translatable("tooltip.stancements.delimiter." + matcher.getSerializedName()).withStyle(style -> style.withItalic(italicizeConnector)));
             } else if (i != colors.size() - 1) {
                 component.append(Component.translatable("tooltip.stancements.delimiter"));
             }

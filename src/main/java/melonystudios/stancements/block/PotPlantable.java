@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Block;
 
-/// Registers new plants that can be added to {@linkplain melonystudios.stancements.block.custom.croppot.CropPotBlock crop pots}.
+/// Registers new plants that can be added to [crop pots][melonystudios.stancements.block.custom.croppot.FilledCropPotBlock].
 /// @param cropPot The crop pot placed after using the equivalent seed item.
 /// @param plantingSound The sound played when planting this item.
 public record PotPlantable(Block cropPot, SoundEvent plantingSound) {
