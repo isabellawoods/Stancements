@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "minecart_tags",
+  "group": "stancements:minecart_tags",
   "ingredients": [
     "minecraft:paper",
     "#c:strings",

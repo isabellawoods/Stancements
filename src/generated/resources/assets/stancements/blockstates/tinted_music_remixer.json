@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "stancements:block/tinted_music_remixer_closed"
+    },
+    "open=true": {
+      "model": "stancements:block/tinted_music_remixer_open"
+    }
+  }
+}

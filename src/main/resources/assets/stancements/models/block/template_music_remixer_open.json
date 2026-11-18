@@ -1,0 +1,89 @@
+{
+  "format_version": "1.9.0",
+  "credit": "Made by isabellawoods using Blockbench (27-09-26)",
+  "parent": "minecraft:block/block",
+  "textures": {
+    "side": "stancements:block/music_remixer_side_open",
+    "bottom": "stancements:block/music_remixer_bottom",
+    "top": "stancements:block/music_remixer_top",
+    "lid": "stancements:block/music_remixer_lid",
+    "particle": "#bottom"
+  },
+  "elements": [
+    {
+      "name": "Remixer base",
+      "from": [0, 0, 0],
+      "to": [16, 10, 16],
+      "faces": {
+        "north": {"uv": [0, 6, 16, 16], "texture": "#side", "cullface": "north"},
+        "east": {"uv": [0, 6, 16, 16], "texture": "#side", "cullface": "east"},
+        "south": {"uv": [0, 6, 16, 16], "texture": "#side", "cullface": "south"},
+        "west": {"uv": [0, 6, 16, 16], "texture": "#side", "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#top"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#bottom", "cullface": "down"}
+      }
+    },
+    {
+      "name": "Lid north",
+      "from": [2, 1, -6],
+      "to": [14, 2, 0],
+      "rotation": {"angle": 0, "axis": "y", "origin": [2, 1, -1]},
+      "faces": {
+        "north": {"uv": [0, 12, 12, 13], "texture": "#lid", "cullface": "north"},
+        "east": {"uv": [0, 13, 6, 14], "texture": "#lid", "cullface": "north"},
+        "west": {"uv": [6, 13, 12, 14], "texture": "#lid", "cullface": "north"},
+        "up": {"uv": [0, 6, 12, 12], "texture": "#lid", "cullface": "north"},
+        "down": {"uv": [0, 6, 12, 0], "texture": "#lid", "cullface": "north"}
+      }
+    },
+    {
+      "name": "Lid south",
+      "from": [2, 1, 16],
+      "to": [14, 2, 22],
+      "rotation": {"angle": 0, "axis": "y", "origin": [2, 1, 16]},
+      "faces": {
+        "east": {"uv": [0, 13, 6, 14], "texture": "#lid", "cullface": "south"},
+        "south": {"uv": [0, 12, 12, 13], "texture": "#lid", "cullface": "south"},
+        "west": {"uv": [6, 13, 12, 14], "texture": "#lid", "cullface": "south"},
+        "up": {"uv": [0, 12, 12, 6], "texture": "#lid", "cullface": "south"},
+        "down": {"uv": [0, 0, 12, 6], "texture": "#lid", "cullface": "south"}
+      }
+    },
+    {
+      "name": "Lid west",
+      "from": [-6, 1, 2],
+      "to": [0, 2, 14],
+      "rotation": {"angle": 0, "axis": "y", "origin": [-1, 1, 2]},
+      "faces": {
+        "north": {"uv": [0, 13, 6, 14], "texture": "#lid", "cullface": "west"},
+        "south": {"uv": [6, 13, 12, 14], "texture": "#lid", "cullface": "west"},
+        "west": {"uv": [0, 12, 12, 13], "texture": "#lid", "cullface": "west"},
+        "up": {"uv": [0, 12, 12, 6], "rotation": 90, "texture": "#lid", "cullface": "west"},
+        "down": {"uv": [0, 0, 12, 6], "rotation": 270, "texture": "#lid", "cullface": "west"}
+      }
+    },
+    {
+      "name": "Lid east",
+      "from": [16, 1, 2],
+      "to": [22, 2, 14],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 1, 2]},
+      "faces": {
+        "north": {"uv": [6, 13, 12, 14], "texture": "#lid", "cullface": "east"},
+        "east": {"uv": [0, 12, 12, 13], "texture": "#lid", "cullface": "east"},
+        "south": {"uv": [0, 13, 6, 14], "texture": "#lid", "cullface": "east"},
+        "up": {"uv": [0, 6, 12, 12], "rotation": 90, "texture": "#lid", "cullface": "east"},
+        "down": {"uv": [0, 0, 12, 6], "rotation": 90, "texture": "#lid", "cullface": "east"}
+      }
+    }
+  ],
+  "groups": [
+    0,
+    {
+      "name": "Lids",
+      "origin": [8, 8, 8],
+      "scope": 0,
+      "color": 0,
+      "children": [1, 2, 3, 4]
+    }
+  ]
+}

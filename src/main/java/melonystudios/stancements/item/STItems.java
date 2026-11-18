@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.DyedItemColor;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -34,6 +35,7 @@ public class STItems {
     public static final DeferredItem<Item> MANGROVE_SHELF = ITEMS.registerItem("mangrove_shelf", properties -> new BlockItem(STBlocks.MANGROVE_SHELF.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> CHERRY_SHELF = ITEMS.registerItem("cherry_shelf", properties -> new BlockItem(STBlocks.CHERRY_SHELF.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> PALE_OAK_SHELF = ITEMS.registerItem("pale_oak_shelf", properties -> new BlockItem(STBlocks.PALE_OAK_SHELF.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> POPLAR_SHELF = ITEMS.registerItem("poplar_shelf", properties -> new BlockItem(STBlocks.POPLAR_SHELF.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> BAMBOO_SHELF = ITEMS.registerItem("bamboo_shelf", properties -> new BlockItem(STBlocks.BAMBOO_SHELF.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> CRIMSON_SHELF = ITEMS.registerItem("crimson_shelf", properties -> new BlockItem(STBlocks.CRIMSON_SHELF.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> WARPED_SHELF = ITEMS.registerItem("warped_shelf", properties -> new BlockItem(STBlocks.WARPED_SHELF.get(), properties.useBlockDescriptionPrefix()));
@@ -57,27 +59,33 @@ public class STItems {
     public static final DeferredItem<Item> PINK_CRAFTING_TABLE_CLOTH = ITEMS.registerItem("pink_crafting_table_cloth", properties -> new BlockItem(STBlocks.PINK_CRAFTING_TABLE_CLOTH.get(), properties.useBlockDescriptionPrefix()));
 
     // Functional blocks
-    public static final DeferredItem<Item> MUSIC_RECORDER = ITEMS.registerItem("music_recorder", properties -> new MusicRecorderItem(STBlocks.MUSIC_RECORDER.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> MUSIC_RECORDER = ITEMS.registerItem("music_recorder", properties -> new BlockItem(STBlocks.MUSIC_RECORDER.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> MUSIC_REMIXER = ITEMS.registerItem("music_remixer", properties -> new BlockItem(STBlocks.MUSIC_REMIXER.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> TINTED_MUSIC_REMIXER = ITEMS.registerItem("tinted_music_remixer", properties -> new BlockItem(STBlocks.TINTED_MUSIC_REMIXER.get(), properties.useBlockDescriptionPrefix()));
     public static final DeferredItem<Item> CROP_POT = ITEMS.registerItem("crop_pot", properties -> new CropPotBlockItem(STBlocks.CROP_POT.get(), properties.useBlockDescriptionPrefix()));
 
     // Rails
-    public static final DeferredItem<Item> GILDED_RAIL = ITEMS.registerItem("gilded_rail", properties -> new GildedRailItem(STBlocks.GILDED_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> WHITE_TAGGING_RAIL = ITEMS.registerItem("white_tagging_rail", properties -> new TaggingRailItem(STBlocks.WHITE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> LIGHT_GRAY_TAGGING_RAIL = ITEMS.registerItem("light_gray_tagging_rail", properties -> new TaggingRailItem(STBlocks.LIGHT_GRAY_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> GRAY_TAGGING_RAIL = ITEMS.registerItem("gray_tagging_rail", properties -> new TaggingRailItem(STBlocks.GRAY_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> BLACK_TAGGING_RAIL = ITEMS.registerItem("black_tagging_rail", properties -> new TaggingRailItem(STBlocks.BLACK_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> BROWN_TAGGING_RAIL = ITEMS.registerItem("brown_tagging_rail", properties -> new TaggingRailItem(STBlocks.BROWN_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> RED_TAGGING_RAIL = ITEMS.registerItem("red_tagging_rail", properties -> new TaggingRailItem(STBlocks.RED_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> ORANGE_TAGGING_RAIL = ITEMS.registerItem("orange_tagging_rail", properties -> new TaggingRailItem(STBlocks.ORANGE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> YELLOW_TAGGING_RAIL = ITEMS.registerItem("yellow_tagging_rail", properties -> new TaggingRailItem(STBlocks.YELLOW_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> LIME_TAGGING_RAIL = ITEMS.registerItem("lime_tagging_rail", properties -> new TaggingRailItem(STBlocks.LIME_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> GREEN_TAGGING_RAIL = ITEMS.registerItem("green_tagging_rail", properties -> new TaggingRailItem(STBlocks.GREEN_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> CYAN_TAGGING_RAIL = ITEMS.registerItem("cyan_tagging_rail", properties -> new TaggingRailItem(STBlocks.CYAN_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> LIGHT_BLUE_TAGGING_RAIL = ITEMS.registerItem("light_blue_tagging_rail", properties -> new TaggingRailItem(STBlocks.LIGHT_BLUE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> BLUE_TAGGING_RAIL = ITEMS.registerItem("blue_tagging_rail", properties -> new TaggingRailItem(STBlocks.BLUE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> PURPLE_TAGGING_RAIL = ITEMS.registerItem("purple_tagging_rail", properties -> new TaggingRailItem(STBlocks.PURPLE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> MAGENTA_TAGGING_RAIL = ITEMS.registerItem("magenta_tagging_rail", properties -> new TaggingRailItem(STBlocks.MAGENTA_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
-    public static final DeferredItem<Item> PINK_TAGGING_RAIL = ITEMS.registerItem("pink_tagging_rail", properties -> new TaggingRailItem(STBlocks.PINK_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> GILDED_RAIL = ITEMS.registerItem("gilded_rail", properties -> new BlockItem(STBlocks.GILDED_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> WHITE_TAGGING_RAIL = ITEMS.registerItem("white_tagging_rail", properties -> new BlockItem(STBlocks.WHITE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> LIGHT_GRAY_TAGGING_RAIL = ITEMS.registerItem("light_gray_tagging_rail", properties -> new BlockItem(STBlocks.LIGHT_GRAY_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> GRAY_TAGGING_RAIL = ITEMS.registerItem("gray_tagging_rail", properties -> new BlockItem(STBlocks.GRAY_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> BLACK_TAGGING_RAIL = ITEMS.registerItem("black_tagging_rail", properties -> new BlockItem(STBlocks.BLACK_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> BROWN_TAGGING_RAIL = ITEMS.registerItem("brown_tagging_rail", properties -> new BlockItem(STBlocks.BROWN_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> RED_TAGGING_RAIL = ITEMS.registerItem("red_tagging_rail", properties -> new BlockItem(STBlocks.RED_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> ORANGE_TAGGING_RAIL = ITEMS.registerItem("orange_tagging_rail", properties -> new BlockItem(STBlocks.ORANGE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> YELLOW_TAGGING_RAIL = ITEMS.registerItem("yellow_tagging_rail", properties -> new BlockItem(STBlocks.YELLOW_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> LIME_TAGGING_RAIL = ITEMS.registerItem("lime_tagging_rail", properties -> new BlockItem(STBlocks.LIME_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> GREEN_TAGGING_RAIL = ITEMS.registerItem("green_tagging_rail", properties -> new BlockItem(STBlocks.GREEN_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> CYAN_TAGGING_RAIL = ITEMS.registerItem("cyan_tagging_rail", properties -> new BlockItem(STBlocks.CYAN_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> LIGHT_BLUE_TAGGING_RAIL = ITEMS.registerItem("light_blue_tagging_rail", properties -> new BlockItem(STBlocks.LIGHT_BLUE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> BLUE_TAGGING_RAIL = ITEMS.registerItem("blue_tagging_rail", properties -> new BlockItem(STBlocks.BLUE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> PURPLE_TAGGING_RAIL = ITEMS.registerItem("purple_tagging_rail", properties -> new BlockItem(STBlocks.PURPLE_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> MAGENTA_TAGGING_RAIL = ITEMS.registerItem("magenta_tagging_rail", properties -> new BlockItem(STBlocks.MAGENTA_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> PINK_TAGGING_RAIL = ITEMS.registerItem("pink_tagging_rail", properties -> new BlockItem(STBlocks.PINK_TAGGING_RAIL.get(), properties.useBlockDescriptionPrefix()));
+
+    // Glass casings
+    public static final DeferredItem<Item> GLASS_CASING = ITEMS.registerItem("glass_casing", properties -> new BlockItem(STBlocks.GLASS_CASING.get(), properties.useBlockDescriptionPrefix()));
+    public static final DeferredItem<Item> TINTED_GLASS_CASING = ITEMS.registerItem("tinted_glass_casing", properties -> new BlockItem(STBlocks.TINTED_GLASS_CASING.get(), properties.useBlockDescriptionPrefix()));
 
     // Items
     public static final DeferredItem<Item> STANCEMENTS_LOGO = ITEMS.registerItem("stancements_logo", properties -> new ReLogoItem(Stancements.ACCENT_COLOR, properties.fireResistant().rarity(Rarity.EPIC)));
@@ -115,11 +123,25 @@ public class STItems {
     /// @param hopping Whether this crop pot has a built-in hopper.
     public static ItemStackTemplate cropPot(int count, boolean hopping) {
         return new ItemStackTemplate(
-                STItems.CROP_POT,
+                CROP_POT,
                 count,
                 DataComponentPatch.builder()
-                .set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, hopping))
-                .build()
+                        .set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(STBlockStateProperties.HOPPING, hopping))
+                        .build()
+        );
+    }
+
+    /// Makes an [ItemStackTemplate] of a music remixer with a variable.
+    /// @param remixer The music remixer item.
+    /// @param count The amount of remixers in the stack.
+    /// @param open Whether this music remixer is open (has no glass casing with it).
+    public static ItemStackTemplate musicRemixer(DeferredItem<Item> remixer, int count, boolean open) {
+        return new ItemStackTemplate(
+                remixer,
+                count,
+                DataComponentPatch.builder()
+                        .set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY.with(BlockStateProperties.OPEN, open))
+                        .build()
         );
     }
 }

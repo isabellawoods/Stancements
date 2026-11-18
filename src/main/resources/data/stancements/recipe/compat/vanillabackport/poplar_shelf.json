@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "registry": "minecraft:item",
+      "value": "minecraft:poplar_planks"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stancements:wooden_shelves",
+  "key": {
+    "#": "minecraft:poplar_planks",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "###",
+    "S S"
+  ],
+  "result": {
+    "count": 6,
+    "id": "stancements:poplar_shelf"
+  }
+}

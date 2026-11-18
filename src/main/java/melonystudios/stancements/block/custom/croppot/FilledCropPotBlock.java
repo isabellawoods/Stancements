@@ -1,9 +1,12 @@
 package melonystudios.stancements.block.custom.croppot;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import melonystudios.stancements.block.PotPlantable;
 import melonystudios.stancements.option.STCommonOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -14,12 +17,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
@@ -38,13 +39,30 @@ import net.neoforged.neoforge.common.CommonHooks;
 import java.util.*;
 import java.util.function.Function;
 
-public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock {
+public class FilledCropPotBlock extends EmptyCropPotBlock implements BonemealableBlock {
+    public static final MapCodec<FilledCropPotBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            BuiltInRegistries.ITEM.byNameCodec().fieldOf("seeds").forGetter(block -> block.seeds),
+            BuiltInRegistries.BLOCK.byNameCodec().fieldOf("equivalent_crop").forGetter(block -> block.equivalentCrop),
+            PotPlantable.CODEC.fieldOf("planting_result").forGetter(block -> block.plantableGetter.apply(block)),
+            propertiesCodec()
+    ).apply(instance, (seed, equivalentCrop, plantable, properties) -> new FilledCropPotBlock(seed, equivalentCrop, block -> plantable, properties)));
     protected static final Map<Item, PotPlantable> PLANTABLE_IN_POTS = new HashMap<>();
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
+    private final Item seeds;
+    private final Block equivalentCrop;
+    protected final Function<Block, PotPlantable> plantableGetter;
 
-    public WheatCropPotBlock(Item seed, Function<Block, PotPlantable> plantable, Properties properties) {
+    @Override
+    protected MapCodec<? extends FilledCropPotBlock> codec() {
+        return CODEC;
+    }
+
+    public FilledCropPotBlock(Item seeds, Block equivalentCrop, Function<Block, PotPlantable> plantableGetter, Properties properties) {
         super(properties);
-        PLANTABLE_IN_POTS.put(seed, plantable.apply(this));
+        this.seeds = seeds;
+        this.equivalentCrop = equivalentCrop;
+        this.plantableGetter = plantableGetter;
+        PLANTABLE_IN_POTS.put(seeds, plantableGetter.apply(this));
         this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeProperty(), 0).setValue(HOPPING, false));
     }
 
@@ -144,11 +162,15 @@ public class WheatCropPotBlock extends CropPotBlock implements BonemealableBlock
     }
 
     protected BlockState getEquivalentCrop(BlockState state) {
-        return Blocks.WHEAT.defaultBlockState().setValue(this.getAgeProperty(), this.getAge(state));
+        return this.getEquivalentCrop().defaultBlockState().setValue(this.getAgeProperty(), this.getAge(state));
     }
 
     protected ItemLike getSeedItem() {
-        return Items.WHEAT_SEEDS;
+        return this.seeds;
+    }
+
+    protected Block getEquivalentCrop() {
+        return this.equivalentCrop;
     }
 
     @Override

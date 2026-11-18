@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mo_glass"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stancements:glass_casings",
+  "key": {
+    "#": "#c:nuggets/iron",
+    "G": "mo_glass:glass_slab",
+    "I": "#c:ingots/iron"
+  },
+  "pattern": [
+    "#G#",
+    " I "
+  ],
+  "result": {
+    "id": "stancements:glass_casing"
+  }
+}

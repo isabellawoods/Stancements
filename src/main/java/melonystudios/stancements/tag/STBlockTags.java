@@ -11,6 +11,8 @@ public class STBlockTags {
     public static final TagKey<Block> CRAFTING_TABLE_CLOTHS = stancements("crafting_table_cloths");
     public static final TagKey<Block> CROP_POTS = stancements("crop_pots");
     public static final TagKey<Block> TAGGING_RAILS = stancements("tagging_rails");
+    public static final TagKey<Block> REPLACEABLE_BY_CASINGS = stancements("replaceable_by_casings");
+    public static final TagKey<Block> CASINGS = stancements("casings");
 
     public static TagKey<Block> stancements(String name) {
         return TagKey.create(Registries.BLOCK, Stancements.stancements(name));

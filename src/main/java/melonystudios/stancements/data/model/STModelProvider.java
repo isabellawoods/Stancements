@@ -69,6 +69,7 @@ public class STModelProvider extends ModelProvider {
         this.createShelf(blockModels, STBlocks.MANGROVE_SHELF.get());
         this.createShelf(blockModels, STBlocks.CHERRY_SHELF.get());
         this.createShelf(blockModels, STBlocks.PALE_OAK_SHELF.get());
+        this.createShelf(blockModels, STBlocks.POPLAR_SHELF.get());
         this.createShelf(blockModels, STBlocks.BAMBOO_SHELF.get());
         this.createShelf(blockModels, STBlocks.CRIMSON_SHELF.get());
         this.createShelf(blockModels, STBlocks.WARPED_SHELF.get());
@@ -93,6 +94,8 @@ public class STModelProvider extends ModelProvider {
 
         // Functional
         this.createMusicRecorder(blockModels, STBlocks.MUSIC_RECORDER.get());
+        this.createMusicRemixer(blockModels, itemModels, STBlocks.MUSIC_REMIXER.get(), Stancements.stancements("block/glass_casing_side"), Stancements.stancements("block/glass_casing_end"));
+        this.createMusicRemixer(blockModels, itemModels, STBlocks.TINTED_MUSIC_REMIXER.get(), Stancements.stancements("block/tinted_glass_casing_side"), Stancements.stancements("block/tinted_glass_casing_end"));
         blockModels.createTrivialCube(STBlocks.ALBUM.get());
         this.createLayeredCauldron(blockModels, STBlocks.DYED_WATER_CAULDRON.get(), Identifier.withDefaultNamespace("block/water_still"));
         this.createLayeredCauldron(blockModels, STBlocks.MILK_CAULDRON.get(), Identifier.fromNamespaceAndPath(NeoForgeMod.MOD_ID, "block/milk_still"));
@@ -122,6 +125,10 @@ public class STModelProvider extends ModelProvider {
         blockModels.createActiveRail(STBlocks.MAGENTA_TAGGING_RAIL.get());
         blockModels.createActiveRail(STBlocks.PINK_TAGGING_RAIL.get());
 
+        // Glass casings
+        this.createCasing(blockModels, STBlocks.GLASS_CASING.get());
+        this.createCasing(blockModels, STBlocks.TINTED_GLASS_CASING.get());
+
         // === ITEMS ===
 
         // Decorative blocks
@@ -135,6 +142,7 @@ public class STModelProvider extends ModelProvider {
         blockModels.registerSimpleItemModel(STItems.MANGROVE_SHELF.get(), Stancements.stancements("block/mangrove_shelf"));
         blockModels.registerSimpleItemModel(STItems.CHERRY_SHELF.get(), Stancements.stancements("block/cherry_shelf"));
         blockModels.registerSimpleItemModel(STItems.PALE_OAK_SHELF.get(), Stancements.stancements("block/pale_oak_shelf"));
+        blockModels.registerSimpleItemModel(STItems.POPLAR_SHELF.get(), Stancements.stancements("block/poplar_shelf"));
         blockModels.registerSimpleItemModel(STItems.BAMBOO_SHELF.get(), Stancements.stancements("block/bamboo_shelf"));
         blockModels.registerSimpleItemModel(STItems.CRIMSON_SHELF.get(), Stancements.stancements("block/crimson_shelf"));
         blockModels.registerSimpleItemModel(STItems.WARPED_SHELF.get(), Stancements.stancements("block/warped_shelf"));
@@ -277,6 +285,44 @@ public class STModelProvider extends ModelProvider {
                     }));
                 }))
         );
+    }
+
+    public void createMusicRemixer(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block remixer, Identifier casingSide, Identifier casingEnd) {
+        Identifier openID = ModelLocationUtils.getModelLocation(remixer).withPath(path -> path + "_open");
+        Identifier closedID = ModelLocationUtils.getModelLocation(remixer).withPath(path -> path + "_closed");
+
+        Identifier open = STModelTemplates.MUSIC_REMIXER_OPEN.create(openID, new TextureMapping(), blockModels.modelOutput);
+        Identifier closed = STModelTemplates.MUSIC_REMIXER_CLOSED.create(closedID, new TextureMapping()
+                        .put(STTextureSlots.CASING_SIDE, new Material(casingSide))
+                        .put(STTextureSlots.CASING_END, new Material(casingEnd)),
+                blockModels.modelOutput);
+
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(remixer).with(
+                createBooleanModelDispatch(BlockStateProperties.OPEN, plainVariant(open), plainVariant(closed))
+        ));
+        itemModels.itemModelOutput.accept(remixer.asItem(), ItemModelUtils.selectBlockItemProperty(
+                BlockStateProperties.OPEN,
+                ItemModelUtils.plainModel(closed), Map.of(true, ItemModelUtils.plainModel(open))
+        ));
+    }
+
+    public void createCasing(BlockModelGenerators blockModels, Block casing) {
+        Identifier unsupportedID = ModelLocationUtils.getModelLocation(casing);
+        Identifier supportedID = BuiltInRegistries.BLOCK.getKey(casing).withPath(path -> "block/supported_" + path);
+
+        Identifier unsupported = STModelTemplates.CASING_UNSUPPORTED.create(unsupportedID, new TextureMapping()
+                        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(casing, "_side"))
+                        .put(TextureSlot.END, TextureMapping.getBlockTexture(casing, "_end")),
+                blockModels.modelOutput);
+        Identifier supported = STModelTemplates.CASING_SUPPORTED.create(supportedID, new TextureMapping()
+                        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(casing, "_side"))
+                        .put(TextureSlot.END, TextureMapping.getBlockTexture(casing, "_end")),
+                blockModels.modelOutput);
+
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(casing).with(
+                createBooleanModelDispatch(STBlockStateProperties.SUPPORTED, plainVariant(supported), plainVariant(unsupported))
+        ));
+        blockModels.registerSimpleItemModel(casing, unsupportedID);
     }
 
     public void generateCropPot(ItemModelGenerators itemModels, Item item, ModelTemplate template) {

@@ -1,0 +1,20 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "block_state_property": "open",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stancements:block/tinted_music_remixer_open"
+        },
+        "when": "true"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "stancements:block/tinted_music_remixer_closed"
+    },
+    "property": "minecraft:block_state"
+  }
+}

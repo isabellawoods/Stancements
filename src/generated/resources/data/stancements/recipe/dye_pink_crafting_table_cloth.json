@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "crafting_table_cloths",
+  "group": "stancements:crafting_table_cloths",
   "ingredients": [
     "#c:dyes/pink",
     {

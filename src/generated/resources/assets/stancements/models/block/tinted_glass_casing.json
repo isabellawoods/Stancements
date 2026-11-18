@@ -1,0 +1,7 @@
+{
+  "parent": "stancements:block/template_casing",
+  "textures": {
+    "end": "stancements:block/tinted_glass_casing_end",
+    "side": "stancements:block/tinted_glass_casing_side"
+  }
+}

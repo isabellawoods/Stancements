@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "supported=false": {
+      "model": "stancements:block/tinted_glass_casing"
+    },
+    "supported=true": {
+      "model": "stancements:block/supported_tinted_glass_casing"
+    }
+  }
+}

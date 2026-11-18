@@ -7,7 +7,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.PoweredRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.text.DecimalFormat;
+
 public class GildedRailBlock extends PoweredRailBlock {
+    public static final DecimalFormat FORMAT = new DecimalFormat("0.##");
+
     public GildedRailBlock(Properties properties) {
         super(properties, true);
     }

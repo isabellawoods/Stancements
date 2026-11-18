@@ -1,5 +1,7 @@
 {
   "values": [
-    "#stancements:crop_pots"
+    "#stancements:crop_pots",
+    "stancements:music_remixer",
+    "stancements:tinted_music_remixer"
   ]
 }

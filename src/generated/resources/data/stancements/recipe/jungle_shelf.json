@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "wooden_shelves",
+  "group": "stancements:wooden_shelves",
   "key": {
     "#": "minecraft:jungle_planks",
     "S": "#c:rods/wooden"

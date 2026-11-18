@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sculk_infested_shattered_disc": {
+      "conditions": {
+        "items": [
+          {
+            "items": "stancements:sculk_infested_shattered_disc"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "stancements:sculk_infested_vinyl_disc_from_repairing_shattered_disc"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sculk_infested_shattered_disc"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "stancements:sculk_infested_vinyl_disc_from_repairing_shattered_disc"
+    ]
+  }
+}

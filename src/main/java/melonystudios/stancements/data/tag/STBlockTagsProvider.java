@@ -5,6 +5,7 @@ import melonystudios.stancements.tag.STBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import org.jspecify.annotations.NonNull;
@@ -28,7 +29,7 @@ public class STBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider registries) {
         // Stancements' tags
         this.tag(STBlockTags.SHELVES).add(OAK_SHELF.get(), SPRUCE_SHELF.get(), BIRCH_SHELF.get(), JUNGLE_SHELF.get(), ACACIA_SHELF.get(), DARK_OAK_SHELF.get(), MANGROVE_SHELF.get(), CHERRY_SHELF.get(),
-                PALE_OAK_SHELF.get(), BAMBOO_SHELF.get(), CRIMSON_SHELF.get(), WARPED_SHELF.get());
+                PALE_OAK_SHELF.get(), POPLAR_SHELF.get(), BAMBOO_SHELF.get(), CRIMSON_SHELF.get(), WARPED_SHELF.get());
         this.tag(STBlockTags.CRAFTING_TABLE_CLOTHS).add(WHITE_CRAFTING_TABLE_CLOTH.get(), LIGHT_GRAY_CRAFTING_TABLE_CLOTH.get(), GRAY_CRAFTING_TABLE_CLOTH.get(), BLACK_CRAFTING_TABLE_CLOTH.get(),
                 BROWN_CRAFTING_TABLE_CLOTH.get(), RED_CRAFTING_TABLE_CLOTH.get(), ORANGE_CRAFTING_TABLE_CLOTH.get(), YELLOW_CRAFTING_TABLE_CLOTH.get(), LIME_CRAFTING_TABLE_CLOTH.get(),
                 GREEN_CRAFTING_TABLE_CLOTH.get(), CYAN_CRAFTING_TABLE_CLOTH.get(), LIGHT_BLUE_CRAFTING_TABLE_CLOTH.get(), BLUE_CRAFTING_TABLE_CLOTH.get(), PURPLE_CRAFTING_TABLE_CLOTH.get(),
@@ -37,6 +38,10 @@ public class STBlockTagsProvider extends BlockTagsProvider {
         this.tag(STBlockTags.TAGGING_RAILS).add(WHITE_TAGGING_RAIL.get(), LIGHT_GRAY_TAGGING_RAIL.get(), GRAY_TAGGING_RAIL.get(), BLACK_TAGGING_RAIL.get(), BROWN_TAGGING_RAIL.get(), RED_TAGGING_RAIL.get(),
                 ORANGE_TAGGING_RAIL.get(), YELLOW_TAGGING_RAIL.get(), LIME_TAGGING_RAIL.get(), GREEN_TAGGING_RAIL.get(), CYAN_TAGGING_RAIL.get(), LIGHT_BLUE_TAGGING_RAIL.get(), BLUE_TAGGING_RAIL.get(),
                 PURPLE_TAGGING_RAIL.get(), MAGENTA_TAGGING_RAIL.get(), PINK_TAGGING_RAIL.get());
+        this.tag(STBlockTags.REPLACEABLE_BY_CASINGS).addTag(BlockTags.REPLACEABLE).addTag(BlockTags.CANDLES).addTag(BlockTags.WOOL_CARPETS).addTag(BlockTags.BUTTONS).addTag(BlockTags.PRESSURE_PLATES)
+                .addTag(BlockTags.FLOWER_POTS).addTag(STBlockTags.CROP_POTS).addTag(STBlockTags.CASINGS).addTag(Tags.Blocks.SKULLS).addTag(Tags.Blocks.CLUSTERS).add(Blocks.SCAFFOLDING, Blocks.TRIPWIRE,
+                        Blocks.LEVER, Blocks.REDSTONE_WIRE, Blocks.MOSS_CARPET, Blocks.SEA_PICKLE, Blocks.SCULK_VEIN, Blocks.TURTLE_EGG, Blocks.CACTUS_FLOWER, Blocks.DRIED_GHAST);
+        this.tag(STBlockTags.CASINGS).add(GLASS_CASING.get(), TINTED_GLASS_CASING.get());
 
         // Common tags
         this.tag(Tags.Blocks.VILLAGER_JOB_SITES).add(DYED_WATER_CAULDRON.get(), MILK_CAULDRON.get());
@@ -59,8 +64,8 @@ public class STBlockTagsProvider extends BlockTagsProvider {
         this.tag(Tags.Blocks.DYED_PINK).add(PINK_CRAFTING_TABLE_CLOTH.get(), PINK_TAGGING_RAIL.get());
 
         // Minecraft tags
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(STBlockTags.CROP_POTS);
-        this.tag(BlockTags.MINEABLE_WITH_AXE).addTag(STBlockTags.SHELVES).add(MUSIC_RECORDER.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(STBlockTags.CROP_POTS).add(MUSIC_REMIXER.get(), TINTED_MUSIC_REMIXER.get());
+        this.tag(BlockTags.MINEABLE_WITH_AXE).addTag(STBlockTags.SHELVES).add(MUSIC_RECORDER.get(), MUSIC_REMIXER.get(), TINTED_MUSIC_REMIXER.get());
         this.tag(BlockTags.COMBINATION_STEP_SOUND_BLOCKS).addTag(STBlockTags.CRAFTING_TABLE_CLOTHS);
         this.tag(BlockTags.DAMPENS_VIBRATIONS).addTag(STBlockTags.CRAFTING_TABLE_CLOTHS);
         this.tag(BlockTags.CAULDRONS).add(DYED_WATER_CAULDRON.get(), MILK_CAULDRON.get());

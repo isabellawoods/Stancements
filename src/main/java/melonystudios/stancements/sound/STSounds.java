@@ -14,6 +14,8 @@ public class STSounds {
     // Blocks
     public static final DeferredHolder<SoundEvent, SoundEvent> DYE_ITEM = STANCEMENTS.register("block.cauldron.dye", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.cauldron.dye")));
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_RECORDER_EJECT = STANCEMENTS.register("block.music_recorder.eject", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.music_recorder.eject")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_REMIXER_OPEN = STANCEMENTS.register("block.music_remixer.open", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.music_remixer.open")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_REMIXER_CLOSE = STANCEMENTS.register("block.music_remixer.close", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("block.music_remixer.close")));
 
     // Items
     public static final DeferredHolder<SoundEvent, SoundEvent> INVENTORY_RECORDER_TOGGLE = STANCEMENTS.register("item.inventory_recorder.toggle", () -> SoundEvent.createVariableRangeEvent(Stancements.stancements("item.inventory_recorder.toggle")));

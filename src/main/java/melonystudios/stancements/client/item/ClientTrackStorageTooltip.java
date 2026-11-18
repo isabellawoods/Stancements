@@ -40,7 +40,7 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
             graphics.blitSprite(RenderPipelines.GUI_TEXTURED, Stancements.stancements("container/inventory_recorder/track_storage_background"), contentX, y - 2, contentWidth, this.getHeight(font) - FULLNESS_BAR_HEIGHT + 3);
 
             for (MutableComponent line : lines) {
-                MutableComponent backdroppedLine = line.copy().withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_TEXT_BACKDROP));
+                MutableComponent backdroppedLine = line.copy().withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_DROP_SHADOW_COLOR));
                 StackedRenderComponents.alignedScrollingText(graphics, font, backdroppedLine, Alignment.LEFT, contentX + 3, y, contentX + contentWidth - 3, y + font.lineHeight + 1, 0xFFFFFFFF);
                 y += font.lineHeight + 2;
             }
@@ -56,7 +56,7 @@ public class ClientTrackStorageTooltip implements ClientTooltipComponent {
     private void extractFullnessBar(GuiGraphicsExtractor graphics, Font font, int x, int y) {
         float fullnessFraction = (float) this.storage.tracklist().size() / this.storage.capacity();
         int width = this.getWidth(font);
-        MutableComponent fullnessText = this.storage.getFullnessText().copy().withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_TEXT_BACKDROP));
+        MutableComponent fullnessText = this.storage.getFullnessText().copy().withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_DROP_SHADOW_COLOR));
 
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.storage.backgroundSprite(), x, y, width, 14);
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.storage.fillSprite(), x, y, (int) (width * fullnessFraction), 14);

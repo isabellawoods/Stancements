@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "stancements:tinted_glass_casing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tinted_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:glass_blocks/tinted"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tinted_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "stancements:tinted_glass_casing"
+    ]
+  }
+}

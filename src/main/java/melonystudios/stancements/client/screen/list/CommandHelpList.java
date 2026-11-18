@@ -46,7 +46,7 @@ public class CommandHelpList extends ObjectSelectionList<CommandHelpList.Entry> 
                         .withStyle(style -> style.withBold(true).withColor(accentColor)), maxTextWidth)
                 .forEach(line -> this.addEntry(new TextEntry(line, false)));
 
-        this.addEntry(new SeparatorEntry(accentColor, STClient.TRANSPARENT_TEXT_BACKDROP));
+        this.addEntry(new SeparatorEntry(accentColor, STClient.TRANSPARENT_DROP_SHADOW_COLOR));
 
         // CONTENTS
         font.split(Component.translatable(translationKey + ".description"), maxTextWidth)

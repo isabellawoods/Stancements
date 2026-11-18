@@ -1,5 +1,5 @@
 {
-  "cover_art": "minecraft:textures/album/volume_alpha.png",
+  "cover_art": "minecraft:gui/album_cover_art/volume_alpha",
   "description": {
     "color": "#A0A0A0",
     "translate": "album.minecraft.volume_alpha.description"

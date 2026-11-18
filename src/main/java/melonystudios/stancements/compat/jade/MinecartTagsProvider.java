@@ -2,7 +2,7 @@ package melonystudios.stancements.compat.jade;
 
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.TagMatcherType;
-import melonystudios.stancements.item.custom.TaggingRailItem;
+import melonystudios.stancements.block.custom.TaggingRailBlock;
 import melonystudios.stancements.misc.attachment.STCapabilities;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -60,7 +60,7 @@ public class MinecartTagsProvider implements StreamServerDataProvider<EntityAcce
             Optional<TagData> data = MinecartTagsProvider.INSTANCE.decodeFromData(accessor);
             if (data.isEmpty() || data.get().colors().isEmpty()) return;
 
-            tooltip.add(Component.translatable("tooltip.stancements.tags", TaggingRailItem.prettyPrintTagColors(TagMatcherType.ALL, data.get().colors(), false)));
+            tooltip.add(Component.translatable("tooltip.stancements.tags", TaggingRailBlock.prettyPrintTagColors(TagMatcherType.ALL, data.get().colors(), false)));
         }
 
         @Override

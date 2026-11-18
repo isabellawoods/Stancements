@@ -1,4 +1,11 @@
 {
+  "block.cauldron.dye": {
+    "sounds": [
+      "stancements:block/cauldron/dye1",
+      "stancements:block/cauldron/dye2"
+    ],
+    "subtitle": "subtitles.block.cauldron.dye"
+  },
   "block.music_recorder.eject": {
     "sounds": [
       {
@@ -18,12 +25,25 @@
     ],
     "subtitle": "subtitles.block.music_recorder.eject"
   },
-  "block.cauldron.dye": {
+  "block.music_remixer.open": {
     "sounds": [
-      "stancements:block/cauldron/dye1",
-      "stancements:block/cauldron/dye2"
+      {
+        "name": "stancements:block/music_remixer/open",
+        "volume": 0.5,
+        "attenuation_distance": 5
+      }
     ],
-    "subtitle": "subtitles.block.cauldron.dye"
+    "subtitle": "subtitles.block.music_remixer.open"
+  },
+  "block.music_remixer.close": {
+    "sounds": [
+      {
+        "name": "stancements:block/music_remixer/close",
+        "volume": 0.5,
+        "attenuation_distance": 5
+      }
+    ],
+    "subtitle": "subtitles.block.music_remixer.close"
   },
   "item.inventory_recorder.toggle": {
     "sounds": [

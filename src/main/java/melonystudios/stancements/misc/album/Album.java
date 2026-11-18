@@ -45,34 +45,41 @@ public record Album(Component name, Component description, Optional<Identifier> 
             Codec.STRING.listOf().optionalFieldOf("songwriters", List.of()).forGetter(Album::songwriters),
             Codec.unboundedMap(Codec.STRING, Codec.STRING).optionalFieldOf("link_tree", Map.of()).forGetter(Album::linkTree),
             Codec.STRING.listOf().optionalFieldOf("tags", List.of()).forGetter(Album::tags)
-    ).apply(instance, Album::new)).validate(album -> {
-        if (album.trackListing().listings().isEmpty()) return DataResult.error(() -> "Album must have at least one listing in its tracklist");
-
-        if (STDebuggingFlags.LOGGING) {
-            StringBuilder builder = new StringBuilder("Registered album contains " + album.trackListing().listings().size() + " listings:");
-            for (int i = 0; i < album.trackListing().listings().size(); i++) {
-                List<Track> tracks = album.trackListing().listings().get(i);
-                if (!tracks.isEmpty()) builder.append("\n ").append(FORMATTER.format(i + 1)).append(" // ").append(tracks.getFirst().identifier());
-                List<Track> trackVariants = new ArrayList<>(tracks);
-                trackVariants.removeFirst();
-                if (!trackVariants.isEmpty()) {
-                    builder.append(" (with variant(s):");
-
-                    for (Track track : trackVariants) builder.append(" \"").append(track.identifier()).append("\"");
-                    builder.append(")");
-                }
-            }
-            LOGGER.debug(builder.toString());
-        }
-
-        return DataResult.success(album);
-    });
+    ).apply(instance, Album::new)).validate(album -> validateAlbum(album, STDebuggingFlags.LOGGING));
     public static final Codec<Holder<Album>> CODEC = RegistryFixedCodec.create(STRegistries.ALBUM);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<Album>> STREAM_CODEC = ByteBufCodecs.holderRegistry(STRegistries.ALBUM);
 
     /// Creates an instance of the **album definition builder**.
     public static Builder album() {
         return new Builder();
+    }
+
+    /// Validates an album definition and optionally logs its tracklist. For an album to be valid it **must contain at least one [track][Track] in its `track_listing`**.
+    /// @param album The album to validate.
+    /// @param logTrackListings Whether to dump the whole tracklist, including track variants, to the logs. The [#DIRECT_CODEC] defaults to using the `-Dstdebug.`[`logging`][STDebuggingFlags#LOGGING] debugging flag.
+    public static DataResult<Album> validateAlbum(Album album, boolean logTrackListings) {
+        if (album.trackListing().listings().isEmpty()) {
+            return DataResult.error(() -> "Album must have at least one listing in its tracklist");
+        }
+
+        if (!logTrackListings) return DataResult.success(album);
+
+        StringBuilder builder = new StringBuilder("Registered album contains " + album.trackListing().listings().size() + " listings:");
+        for (int i = 0; i < album.trackListing().listings().size(); i++) {
+            List<Track> tracks = album.trackListing().listings().get(i);
+            if (!tracks.isEmpty()) builder.append("\n ").append(FORMATTER.format(i + 1)).append(" // ").append(tracks.getFirst().identifier());
+            List<Track> trackVariants = new ArrayList<>(tracks);
+            trackVariants.removeFirst();
+            if (!trackVariants.isEmpty()) {
+                builder.append(" (with variant(s):");
+
+                for (Track track : trackVariants) builder.append(" \"").append(track.identifier()).append("\"");
+                builder.append(")");
+            }
+        }
+
+        LOGGER.debug(builder.toString());
+        return DataResult.success(album);
     }
 
     /// @param listings A list of [track lists][Track#LIST_CODEC] — Each top level entry (a `List<Track>`) is an entry in the [album UI][melonystudios.stancements.container.custom.AlbumMenu], and each track within one list represents the same song but in different formats.<br>This will use a matcher for both `music_data.id` and `jukebox_playable`, preferring the latter.<br><pre>{@code
@@ -134,7 +141,7 @@ public record Album(Component name, Component description, Optional<Identifier> 
         /// Defines a texture to be used as the cover art for this album.
         /// @param texturePath The path to the cover art, optionally omitting the `textures/` prefix and `.png` suffix.<br>These textures are usually located in `textures/gui/album_cover_art/`.
         public Builder coverArt(Identifier texturePath) {
-            this.coverArt = ReAPI.toTexturePath(texturePath);
+            this.coverArt = texturePath.withPath(path -> path.startsWith("gui/") ? path : "gui/" + path);
             return this;
         }
 

@@ -25,6 +25,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -54,7 +55,7 @@ public class STClientEvents {
         event.addPackFinders(
                 Stancements.stancements("resourcepacks/" + Stancements.RMS_ID),
                 PackType.CLIENT_RESOURCES,
-                Component.translatable("pack.stancements." + Stancements.RMS_ID, Component.translatable("pack.stancements.prefix").withColor(Stancements.ACCENT_COLOR)),
+                Component.translatable(Util.makeDescriptionId("pack", Stancements.stancements(Stancements.RMS_ID)), Component.translatable("pack.stancements.prefix").withColor(Stancements.ACCENT_COLOR)),
                 PackSource.BUILT_IN,
                 false,
                 Pack.Position.TOP

@@ -3,8 +3,8 @@ package melonystudios.stancements.data.loot;
 import melonystudios.stancements.Stancements;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.custom.croppot.BeetrootCropPotBlock;
+import melonystudios.stancements.block.custom.croppot.FilledCropPotBlock;
 import melonystudios.stancements.block.custom.croppot.NetherWartCropPotBlock;
-import melonystudios.stancements.block.custom.croppot.WheatCropPotBlock;
 import melonystudios.stancements.item.STItems;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
@@ -16,6 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -51,6 +52,7 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(MANGROVE_SHELF.get());
         this.dropSelf(CHERRY_SHELF.get());
         this.dropSelf(PALE_OAK_SHELF.get());
+        this.dropSelf(POPLAR_SHELF.get());
         this.dropSelf(BAMBOO_SHELF.get());
         this.dropSelf(CRIMSON_SHELF.get());
         this.dropSelf(WARPED_SHELF.get());
@@ -75,16 +77,18 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
 
         // Functional
         this.dropSelf(MUSIC_RECORDER.get());
+        this.musicRemixer(MUSIC_REMIXER.get());
+        this.musicRemixer(TINTED_MUSIC_REMIXER.get());
         this.add(ALBUM.get(), _ -> noDrop());
         this.dropOther(DYED_WATER_CAULDRON.get(), Items.CAULDRON);
         this.dropOther(MILK_CAULDRON.get(), Items.CAULDRON);
         this.cropPot(CROP_POT.get());
         this.cropPot(WHEAT_CROP_POT.get(), Items.WHEAT_SEEDS, Items.WHEAT, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
-                WHEAT_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WheatCropPotBlock.AGE, 7)));
+                WHEAT_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FilledCropPotBlock.AGE, 7)));
         this.cropPot(CARROT_CROP_POT.get(), Items.CARROT, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
-                CARROT_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WheatCropPotBlock.AGE, 7)));
+                CARROT_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FilledCropPotBlock.AGE, 7)));
         this.cropPot(POTATO_CROP_POT.get(), Items.POTATO, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
-                POTATO_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WheatCropPotBlock.AGE, 7)));
+                POTATO_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FilledCropPotBlock.AGE, 7)));
         this.cropPot(BEETROOT_CROP_POT.get(), Items.BEETROOT_SEEDS, Items.BEETROOT, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
                 BEETROOT_CROP_POT.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BeetrootCropPotBlock.AGE, 3)));
         this.netherWartCropPot(NETHER_WART_CROP_POT.get(), Items.NETHER_WART, LootItemBlockStatePropertyCondition.hasBlockStateProperties(
@@ -108,9 +112,13 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(PURPLE_TAGGING_RAIL.get());
         this.dropSelf(MAGENTA_TAGGING_RAIL.get());
         this.dropSelf(PINK_TAGGING_RAIL.get());
+
+        // Glass casings
+        this.dropSelf(GLASS_CASING.get());
+        this.dropSelf(TINTED_GLASS_CASING.get());
     }
 
-    /// Creates a loot table for an empty {@linkplain melonystudios.stancements.block.custom.croppot.CropPotBlock crop pot block}.
+    /// Creates a loot table for an [empty crop pot block][melonystudios.stancements.block.custom.croppot.EmptyCropPotBlock].
     /// @param cropPot The crop pot block.
     public void cropPot(Block cropPot) {
         this.add(cropPot, LootTable.lootTable()
@@ -118,7 +126,7 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
                         .apply(CopyBlockState.copyState(cropPot).copy(STBlockStateProperties.HOPPING)))));
     }
 
-    /// Creates a loot table for a full {@linkplain melonystudios.stancements.block.custom.croppot.WheatCropPotBlock crop pot block}.
+    /// Creates a loot table for a [filled crop pot block][FilledCropPotBlock].
     /// @param cropPot The crop pot block.
     /// @param seeds The seeds item that drops when breaking this block.
     /// @param grownCrop The item that drops when this crop pot is fully grown.
@@ -130,7 +138,7 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         );
     }
 
-    /// Creates a loot table for a full {@linkplain melonystudios.stancements.block.custom.croppot.WheatCropPotBlock crop pot block}.
+    /// Creates a loot table for a [filled crop pot block][FilledCropPotBlock].
     /// @param cropPot The crop pot block.
     /// @param seeds The seeds item that drops when breaking this block.
     /// @param grownCropDropCondition When the crop pot should drop the fully grown crop contents.
@@ -153,7 +161,7 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
         ));
     }
 
-    /// Creates a loot table for a full {@linkplain melonystudios.stancements.block.custom.croppot.NetherWartCropPotBlock Nether wart crop pot block}.
+    /// Creates a loot table for a [Nether wart crop pot block][melonystudios.stancements.block.custom.croppot.NetherWartCropPotBlock].
     /// @param cropPot The crop pot block.
     /// @param wart The Nether warts that drop when breaking this block.
     /// @param grownCropDropCondition When the crop pot should drop the fully grown crop contents.
@@ -173,6 +181,16 @@ public class STBlockLootSubProvider extends BlockLootSubProvider {
                 .withPool(this.applyExplosionCondition(cropPot, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(STItems.CROP_POT))
                         .apply(CopyBlockState.copyState(cropPot).copy(STBlockStateProperties.HOPPING))))
         ));
+    }
+
+    /// Creates the loot table for a [music remixer][melonystudios.stancements.block.custom.MusicRemixerBlock].
+    /// @param musicRemixer The remixer block.
+    public void musicRemixer(Block musicRemixer) {
+        this.add(musicRemixer, LootTable.lootTable().withPool(this.applyExplosionCondition(musicRemixer, LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(musicRemixer))
+                .apply(CopyBlockState.copyState(musicRemixer).copy(BlockStateProperties.OPEN))
+        )));
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "hopping_crop_pot",
+  "group": "stancements:hopping_crop_pots",
   "key": {
     "#": "stancements:crop_pot",
     "H": "minecraft:hopper"

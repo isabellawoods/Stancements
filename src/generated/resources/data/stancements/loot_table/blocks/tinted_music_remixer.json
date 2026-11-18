@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "stancements:tinted_music_remixer"
+        }
+      ],
+      "functions": [
+        {
+          "block": "stancements:tinted_music_remixer",
+          "function": "minecraft:copy_state",
+          "properties": [
+            "open"
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "stancements:blocks/tinted_music_remixer"
+}

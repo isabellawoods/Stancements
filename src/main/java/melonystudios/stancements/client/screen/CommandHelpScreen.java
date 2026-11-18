@@ -10,6 +10,7 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.InputQuirks;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -18,7 +19,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.neoforged.fml.ModList;
 
 public class CommandHelpScreen extends Screen {
+    public static final Component COPIED_TO_CLIPBOARD = Component.translatable("menu.stancements.command_help.copied_text").withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_DROP_SHADOW_COLOR));
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
+    private NotificationOverlayWidget copyOverlay;
     private CommandHelpList list;
     private final String modID;
     private final String commandID;
@@ -64,7 +67,7 @@ public class CommandHelpScreen extends Screen {
     // todo: [Reutilities] add a screen that lists all of these commands, with the title text being clickable to navigate the screens
     @Override
     protected void init() {
-        this.layout.addToHeader(new StringWidget(this.getTitle().copy().withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_TEXT_BACKDROP)), this.font));
+        this.layout.addToHeader(new StringWidget(this.getTitle().copy().withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_DROP_SHADOW_COLOR)), this.font));
         this.list = this.layout.addToContents(new CommandHelpList(this.minecraft, this));
         LinearLayout footerLayout = this.layout.addToFooter(LinearLayout.horizontal()).spacing(8);
         footerLayout.defaultCellSetting().alignHorizontallyCenter();
@@ -73,14 +76,14 @@ public class CommandHelpScreen extends Screen {
                 .width(20)
                 .tooltip(Tooltip.create(Component.translatable(
                         "menu.stancements.command_help.shortcuts.title",
-                        Component.translatable("menu.stancements.command_help.shortcuts.copy")
+                        Component.translatable("menu.stancements.command_help.shortcuts.copy" + (InputQuirks.REPLACE_CTRL_KEY_WITH_CMD_KEY ? ".mac" : ""))
                                 .withStyle(style -> style.withBold(false).withColor(ChatFormatting.GRAY))
                 ).withStyle(style -> style.withBold(true))))
                 .build()
         );
         this.layout.arrangeElements();
         this.layout.visitWidgets(this::addRenderableWidget);
-        this.addRenderableWidget(new NotificationOverlayWidget(this.width / 2, this.height - 33 - 30, this.list.getRowWidth(), this.font.lineHeight + 3 * 6, NotificationOverlayWidget.COPIED_TO_CLIPBOARD));
+        this.copyOverlay = this.addRenderableWidget(new NotificationOverlayWidget(this.width / 2, this.height - 33 - 30, this.list.getRowWidth(), this.font.lineHeight + 3 * 6, COPIED_TO_CLIPBOARD));
     }
 
     @Override
@@ -91,8 +94,6 @@ public class CommandHelpScreen extends Screen {
 
     public void resetCopyNotificationTicks() {
         this.minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.value(), 1));
-        this.children().stream()
-                .filter(listener -> listener instanceof NotificationOverlayWidget)
-                .forEach(widget -> ((NotificationOverlayWidget) widget).displayNotificationOverlay());
+        this.copyOverlay.displayNotificationOverlay();
     }
 }

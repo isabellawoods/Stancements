@@ -27,4 +27,23 @@ public class STModelTemplates {
             Optional.empty(),
             STTextureSlots.POT, TextureSlot.CROP
     );
+    public static final ModelTemplate MUSIC_REMIXER_OPEN = new ModelTemplate(
+            Optional.of(Stancements.stancements("block/template_music_remixer_open")),
+            Optional.empty()
+    );
+    public static final ModelTemplate MUSIC_REMIXER_CLOSED = new ModelTemplate(
+            Optional.of(Stancements.stancements("block/template_music_remixer_closed")),
+            Optional.empty(),
+            STTextureSlots.CASING_SIDE, STTextureSlots.CASING_END
+    );
+    public static final ModelTemplate CASING_UNSUPPORTED = new ModelTemplate(
+            Optional.of(Stancements.stancements("block/template_casing")),
+            Optional.empty(),
+            TextureSlot.SIDE, TextureSlot.END
+    );
+    public static final ModelTemplate CASING_SUPPORTED = new ModelTemplate(
+            Optional.of(Stancements.stancements("block/template_supported_casing")),
+            Optional.empty(),
+            TextureSlot.SIDE, TextureSlot.END
+    );
 }

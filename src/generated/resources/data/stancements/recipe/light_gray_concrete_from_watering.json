@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "dye_concrete",
+  "group": "stancements:dye_concrete",
   "key": {
     "#": "minecraft:light_gray_concrete_powder",
     "W": "#c:buckets/water"

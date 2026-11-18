@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "stancements:music_remixers",
+  "key": {
+    "#": "#minecraft:planks",
+    "C": "stancements:glass_casing",
+    "D": "#c:gems/diamond",
+    "R": "#c:dusts/redstone",
+    "T": "#minecraft:wooden_trapdoors"
+  },
+  "pattern": [
+    "#C#",
+    "TDT",
+    "#R#"
+  ],
+  "result": {
+    "components": {
+      "minecraft:block_state": {
+        "open": "false"
+      }
+    },
+    "id": "stancements:music_remixer"
+  }
+}

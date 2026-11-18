@@ -77,7 +77,7 @@ public class RecordedDiscItem extends Item {
 
         if (song.isPresent()) {
             MusicData data = stack.getOrDefault(STDataComponents.MUSIC_DATA, MusicData.data()).withTrack(track);
-            if (!data.copied() && copying) data.markAsCopy(true);
+            if (data.copied() || copying) data = data.markAsCopy(true);
 
             stack.set(STDataComponents.MUSIC_DATA, data);
             stack.set(DataComponents.JUKEBOX_PLAYABLE, new JukeboxPlayable(song.get()));

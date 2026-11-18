@@ -1,5 +1,6 @@
 package melonystudios.stancements.block.custom.croppot;
 
+import com.mojang.serialization.MapCodec;
 import melonystudios.stancements.block.STBlockStateProperties;
 import melonystudios.stancements.block.STBlocks;
 import melonystudios.stancements.misc.STStatistics;
@@ -27,11 +28,17 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CropPotBlock extends Block {
+public class EmptyCropPotBlock extends Block {
+    public static final MapCodec<EmptyCropPotBlock> CODEC = simpleCodec(EmptyCropPotBlock::new);
     public static final BooleanProperty HOPPING = STBlockStateProperties.HOPPING;
     protected static final VoxelShape SHAPE = Block.box(5, 0, 5, 11, 6, 11);
 
-    public CropPotBlock(Properties properties) {
+    @Override
+    protected MapCodec<? extends EmptyCropPotBlock> codec() {
+        return CODEC;
+    }
+
+    public EmptyCropPotBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(HOPPING, false));
     }
@@ -63,7 +70,7 @@ public class CropPotBlock extends Block {
         }
 
         ItemStack handStack = player.getItemInHand(hand);
-        var plantable = WheatCropPotBlock.PLANTABLE_IN_POTS.get(handStack.getItem());
+        var plantable = FilledCropPotBlock.PLANTABLE_IN_POTS.get(handStack.getItem());
         if (plantable != null) return this.placeSeed(level, state, pos, handStack, player, plantable.cropPot(), plantable.plantingSound());
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);

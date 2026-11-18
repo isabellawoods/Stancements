@@ -18,11 +18,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
 
 public class AlbumBlock extends BaseEntityBlock {
+    public static final MapCodec<AlbumBlock> CODEC = simpleCodec(AlbumBlock::new);
     public static final EnumProperty<Direction> ATTACHMENT = STBlockStateProperties.ATTACHMENT;
 
     @Override
     protected MapCodec<? extends AlbumBlock> codec() {
-        return simpleCodec(AlbumBlock::new);
+        return CODEC;
     }
 
     public AlbumBlock(Properties properties) {

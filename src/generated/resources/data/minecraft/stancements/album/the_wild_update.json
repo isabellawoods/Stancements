@@ -1,5 +1,5 @@
 {
-  "cover_art": "minecraft:textures/album/the_wild_update.png",
+  "cover_art": "minecraft:gui/album_cover_art/the_wild_update",
   "description": {
     "color": "#A0A0A0",
     "translate": "album.minecraft.the_wild_update.description"

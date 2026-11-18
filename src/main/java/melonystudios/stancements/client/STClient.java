@@ -28,21 +28,21 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Mod(value = Stancements.MOD_ID, dist = Dist.CLIENT)
 public class STClient {
-    /// A **queue** of all music discs blocking the {@link net.minecraft.client.sounds.MusicManager MusicManager} from playing.
+    /// A **queue** of all music discs blocking the [`MusicManager`][net.minecraft.client.sounds.MusicManager] from playing.
     public static final Queue<SoundInstance> DISCS_BLOCKING_MUSIC = new ConcurrentLinkedQueue<>();
-    public static final int TRANSPARENT_TEXT_BACKDROP = 0x7F000000;
+    public static final int TRANSPARENT_DROP_SHADOW_COLOR = 0x7F000000;
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public STClient(IEventBus eventBus, ModContainer container) {
         eventBus.addListener(this::clientSetup);
 
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-        container.registerConfig(ModConfig.Type.CLIENT, STClientOptions.SPEC, "melonystudios/stancements-client.toml");
+        container.registerConfig(ModConfig.Type.CLIENT, STClientOptions.SPEC, "melonystudios/" + Stancements.MOD_ID + "-client.toml");
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {}
 
-    /// @return Whether a music disc in the {@link melonystudios.stancements.tag.STJukeboxSongTags#CANCELS_AMBIENT_MUSIC #stancements:cancels_ambient_music}
+    /// @return Whether a music disc in the [`#stancements:cancels_ambient_music`][melonystudios.stancements.tag.STJukeboxSongTags#CANCELS_AMBIENT_MUSIC]
     /// jukebox song tag is currently playing.
     public static boolean isMusicDiscPlaying() {
         for (SoundInstance sound : DISCS_BLOCKING_MUSIC) {

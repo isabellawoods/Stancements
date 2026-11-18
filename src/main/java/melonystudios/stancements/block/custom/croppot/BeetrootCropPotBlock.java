@@ -1,5 +1,6 @@
 package melonystudios.stancements.block.custom.croppot;
 
+import com.mojang.serialization.MapCodec;
 import melonystudios.stancements.block.PotPlantable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -16,11 +17,20 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 import java.util.function.Function;
 
-public class BeetrootCropPotBlock extends WheatCropPotBlock {
+public class BeetrootCropPotBlock extends FilledCropPotBlock {
+    public static final MapCodec<BeetrootCropPotBlock> CODEC = FilledCropPotBlock.CODEC.xmap(
+            filledPot -> (BeetrootCropPotBlock) filledPot,
+            beetrootPot -> beetrootPot
+    );
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
-    public BeetrootCropPotBlock(Item seed, Function<Block, PotPlantable> plantable, Properties properties) {
-        super(seed, plantable, properties);
+    @Override
+    protected MapCodec<? extends BeetrootCropPotBlock> codec() {
+        return CODEC;
+    }
+
+    public BeetrootCropPotBlock(Item seeds, Block equivalentCrop, Function<Block, PotPlantable> plantableGetter, Properties properties) {
+        super(seeds, equivalentCrop, plantableGetter, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(HOPPING, false));
     }
 
@@ -32,16 +42,6 @@ public class BeetrootCropPotBlock extends WheatCropPotBlock {
     @Override
     public int getMaxAge() {
         return 3;
-    }
-
-    @Override
-    protected ItemLike getSeedItem() {
-        return Items.BEETROOT_SEEDS;
-    }
-
-    @Override
-    protected BlockState getEquivalentCrop(BlockState state) {
-        return Blocks.BEETROOTS.defaultBlockState().setValue(AGE, state.getValue(AGE));
     }
 
     @Override

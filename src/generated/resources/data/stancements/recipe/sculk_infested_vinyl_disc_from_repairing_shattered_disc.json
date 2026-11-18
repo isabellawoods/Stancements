@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "stancements:sculk_infested_vinyl_discs",
+  "ingredients": [
+    "stancements:sculk_infested_shattered_disc",
+    "stancements:sculk_infested_shattered_disc",
+    "stancements:sculk_infested_shattered_disc",
+    "stancements:sculk_infested_shattered_disc",
+    "#c:cobblestones/deepslate"
+  ],
+  "result": {
+    "count": 4,
+    "id": "stancements:sculk_infested_vinyl_disc"
+  }
+}

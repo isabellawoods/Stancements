@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "stancements:vinyl_discs",
+  "ingredients": [
+    "stancements:shattered_disc",
+    "stancements:shattered_disc",
+    "stancements:shattered_disc",
+    "stancements:shattered_disc",
+    "#minecraft:coals"
+  ],
+  "result": {
+    "count": 4,
+    "id": "stancements:vinyl_disc"
+  }
+}

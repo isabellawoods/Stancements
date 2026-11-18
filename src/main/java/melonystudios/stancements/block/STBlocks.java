@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -30,6 +31,7 @@ public class STBlocks {
     public static final DeferredBlock<Block> MANGROVE_SHELF = BLOCKS.registerBlock("mangrove_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.MANGROVE_PLANKS)));
     public static final DeferredBlock<Block> CHERRY_SHELF = BLOCKS.registerBlock("cherry_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.CHERRY_PLANKS)));
     public static final DeferredBlock<Block> PALE_OAK_SHELF = BLOCKS.registerBlock("pale_oak_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.PALE_OAK_PLANKS)));
+    public static final DeferredBlock<Block> POPLAR_SHELF = BLOCKS.registerBlock("poplar_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.OAK_PLANKS).mapColor(MapColor.COLOR_LIGHT_GRAY)));
     public static final DeferredBlock<Block> BAMBOO_SHELF = BLOCKS.registerBlock("bamboo_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.BAMBOO_PLANKS)));
     public static final DeferredBlock<Block> CRIMSON_SHELF = BLOCKS.registerBlock("crimson_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.CRIMSON_PLANKS)));
     public static final DeferredBlock<Block> WARPED_SHELF = BLOCKS.registerBlock("warped_shelf", properties -> new STShelfBlock(ofFullCopy(properties, Blocks.WARPED_PLANKS)));
@@ -54,15 +56,17 @@ public class STBlocks {
 
     // Functional
     public static final DeferredBlock<Block> MUSIC_RECORDER = BLOCKS.registerBlock("music_recorder", properties -> new MusicRecorderBlock(ofFullCopy(properties, Blocks.JUKEBOX)));
+    public static final DeferredBlock<Block> MUSIC_REMIXER = BLOCKS.registerBlock("music_remixer", properties -> new MusicRemixerBlock(STBlocks.GLASS_CASING, ofFullCopy(properties, Blocks.JUKEBOX)));
+    public static final DeferredBlock<Block> TINTED_MUSIC_REMIXER = BLOCKS.registerBlock("tinted_music_remixer", properties -> new MusicRemixerBlock(STBlocks.TINTED_GLASS_CASING, ofFullCopy(properties, Blocks.JUKEBOX)));
     public static final DeferredBlock<Block> ALBUM = BLOCKS.registerBlock("album", properties -> new AlbumBlock(properties.strength(1).noOcclusion().sound(SoundType.BAMBOO_WOOD)));
     public static final DeferredBlock<Block> DYED_WATER_CAULDRON = BLOCKS.registerBlock("dyed_water_cauldron", properties -> new DyedWaterCauldronBlock(ofFullCopy(properties, Blocks.CAULDRON)));
     public static final DeferredBlock<Block> MILK_CAULDRON = BLOCKS.registerBlock("milk_cauldron", properties -> new MilkCauldronBlock(ofFullCopy(properties, Blocks.CAULDRON)));
-    public static final DeferredBlock<Block> CROP_POT = BLOCKS.registerBlock("crop_pot", properties -> new CropPotBlock(properties.noOcclusion().pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops().strength(1.25F, 4.2F)));
-    public static final DeferredBlock<Block> WHEAT_CROP_POT = BLOCKS.registerBlock("wheat_crop_pot", properties -> new WheatCropPotBlock(Items.WHEAT_SEEDS, PotPlantable::defaultPlantingSound, ofFullCopy(properties, CROP_POT.get()).randomTicks()));
-    public static final DeferredBlock<Block> CARROT_CROP_POT = BLOCKS.registerBlock("carrot_crop_pot", properties -> new CarrotCropPotBlock(Items.CARROT, PotPlantable::defaultPlantingSound, ofFullCopy(properties, CROP_POT.get()).randomTicks()));
-    public static final DeferredBlock<Block> POTATO_CROP_POT = BLOCKS.registerBlock("potato_crop_pot", properties -> new PotatoCropPotBlock(Items.POTATO, PotPlantable::defaultPlantingSound, ofFullCopy(properties, CROP_POT.get()).randomTicks()));
-    public static final DeferredBlock<Block> BEETROOT_CROP_POT = BLOCKS.registerBlock("beetroot_crop_pot", properties -> new BeetrootCropPotBlock(Items.BEETROOT_SEEDS, PotPlantable::defaultPlantingSound, ofFullCopy(properties, CROP_POT.get()).randomTicks()));
-    public static final DeferredBlock<Block> NETHER_WART_CROP_POT = BLOCKS.registerBlock("nether_wart_crop_pot", properties -> new NetherWartCropPotBlock(Items.WHEAT_SEEDS, block -> new PotPlantable(block, SoundEvents.NETHER_WART_PLANTED), ofFullCopy(properties, CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> CROP_POT = BLOCKS.registerBlock("crop_pot", properties -> new EmptyCropPotBlock(properties.noOcclusion().pushReaction(PushReaction.DESTROY).requiresCorrectToolForDrops().strength(1.25F, 4.2F)));
+    public static final DeferredBlock<Block> WHEAT_CROP_POT = BLOCKS.registerBlock("wheat_crop_pot", properties -> new FilledCropPotBlock(Items.WHEAT_SEEDS, Blocks.WHEAT, PotPlantable::defaultPlantingSound, ofFullCopy(properties, CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> CARROT_CROP_POT = BLOCKS.registerBlock("carrot_crop_pot", properties -> new FilledCropPotBlock(Items.CARROT, Blocks.CARROTS, PotPlantable::defaultPlantingSound, ofFullCopy(properties, CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> POTATO_CROP_POT = BLOCKS.registerBlock("potato_crop_pot", properties -> new FilledCropPotBlock(Items.POTATO, Blocks.POTATOES, PotPlantable::defaultPlantingSound, ofFullCopy(properties, CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> BEETROOT_CROP_POT = BLOCKS.registerBlock("beetroot_crop_pot", properties -> new BeetrootCropPotBlock(Items.BEETROOT_SEEDS, Blocks.BEETROOTS, PotPlantable::defaultPlantingSound, ofFullCopy(properties, CROP_POT.get()).randomTicks()));
+    public static final DeferredBlock<Block> NETHER_WART_CROP_POT = BLOCKS.registerBlock("nether_wart_crop_pot", properties -> new NetherWartCropPotBlock(Items.WHEAT_SEEDS, Blocks.NETHER_WART, block -> new PotPlantable(block, SoundEvents.NETHER_WART_PLANTED), ofFullCopy(properties, CROP_POT.get()).randomTicks()));
 
     // Rails
     public static final DeferredBlock<Block> GILDED_RAIL = BLOCKS.registerBlock("gilded_rail", properties -> new GildedRailBlock(ofFullCopy(properties, Blocks.POWERED_RAIL)));
@@ -82,6 +86,10 @@ public class STBlocks {
     public static final DeferredBlock<Block> PURPLE_TAGGING_RAIL = BLOCKS.registerBlock("purple_tagging_rail", properties -> new TaggingRailBlock(DyeColor.PURPLE, ofFullCopy(properties, Blocks.POWERED_RAIL)));
     public static final DeferredBlock<Block> MAGENTA_TAGGING_RAIL = BLOCKS.registerBlock("magenta_tagging_rail", properties -> new TaggingRailBlock(DyeColor.MAGENTA, ofFullCopy(properties, Blocks.POWERED_RAIL)));
     public static final DeferredBlock<Block> PINK_TAGGING_RAIL = BLOCKS.registerBlock("pink_tagging_rail", properties -> new TaggingRailBlock(DyeColor.PINK, ofFullCopy(properties, Blocks.POWERED_RAIL)));
+
+    // Glass casings
+    public static final DeferredBlock<Block> GLASS_CASING = BLOCKS.registerBlock("glass_casing", properties -> new CasingBlock(ofFullCopy(properties, Blocks.GLASS)));
+    public static final DeferredBlock<Block> TINTED_GLASS_CASING = BLOCKS.registerBlock("tinted_glass_casing", properties -> new CasingBlock(true, ofFullCopy(properties, Blocks.TINTED_GLASS)));
 
     public static BlockBehaviour.Properties ofFullCopy(BlockBehaviour.Properties source, BlockBehaviour block) {
         ResourceKey<Block> id = ((BlockBehaviourIDAccessor) source).stancements$id();

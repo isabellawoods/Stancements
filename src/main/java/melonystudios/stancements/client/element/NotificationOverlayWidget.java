@@ -1,7 +1,6 @@
 package melonystudios.stancements.client.element;
 
 import melonystudios.stancements.Stancements;
-import melonystudios.stancements.client.STClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -13,7 +12,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 
 public class NotificationOverlayWidget extends AbstractWidget {
-    public static final Component COPIED_TO_CLIPBOARD = Component.translatable("menu.stancements.command_help.copied_text").withStyle(style -> style.withShadowColor(STClient.TRANSPARENT_TEXT_BACKDROP));
     private long notificationOverlayMillis = -1;
     private final int horizontalPadding;
     private final int verticalPadding;

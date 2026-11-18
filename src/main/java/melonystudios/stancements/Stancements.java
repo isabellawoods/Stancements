@@ -59,7 +59,7 @@ public class Stancements {
         STArgumentTypes.TYPES.register(eventBus);
 
         NeoForgeMod.enableMilkFluid();
-        container.registerConfig(ModConfig.Type.COMMON, STCommonOptions.SPEC, "melonystudios/stancements-common.toml");
+        container.registerConfig(ModConfig.Type.COMMON, STCommonOptions.SPEC, "melonystudios/" + MOD_ID + "-common.toml");
     }
 
     /// Creates a name for a data generator using ***Stancements***' name.

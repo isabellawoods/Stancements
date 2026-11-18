@@ -23,12 +23,7 @@ public record RecordedDiscStyle(Optional<Integer> color, float label, Rarity rar
             ExtraCodecs.STRING_RGB_COLOR.optionalFieldOf("color").forGetter(RecordedDiscStyle::color),
             ExtraCodecs.floatRange(RecordedDiscItem.DISC_LABEL_MIN - 1F, RecordedDiscItem.DISC_LABEL_MAX).optionalFieldOf("label", 0F).forGetter(RecordedDiscStyle::label),
             Rarity.CODEC.optionalFieldOf("rarity", Rarity.UNCOMMON).forGetter(RecordedDiscStyle::rarity)
-    ).apply(instance, RecordedDiscStyle::new)).validate(discStyle -> {
-        if (discStyle.color().isEmpty() && discStyle.label() < RecordedDiscItem.DISC_LABEL_MIN) {
-            return DataResult.error(() -> "Recorded disc style must have 'color' and/or 'label', but not neither!");
-        }
-        return DataResult.success(discStyle);
-    });
+    ).apply(instance, RecordedDiscStyle::new)).validate(RecordedDiscStyle::validateDiscStyle);
 
     /// Style used when **recording songs**, allowing mods to register custom looks for their discs when copied using the music recorder.
     /// @param color *(optional)* The color used for the disc's label color. Can be either in **decimal** or **hexadecimal**.
@@ -55,5 +50,14 @@ public record RecordedDiscStyle(Optional<Integer> color, float label, Rarity rar
     /// @param label *(optional)* The label used for the disc's label. Can be any value from [`1`][RecordedDiscItem#DISC_LABEL_MIN] to [`14`][RecordedDiscItem#DISC_LABEL_MAX] for the existing record labels.
     public RecordedDiscStyle(float label) {
         this(Optional.empty(), label, Rarity.UNCOMMON);
+    }
+
+    /// Validates a recorded disc style definition. For it to be valid, it **must have the `color` or `label` fields, or both simultaneously, *but not neither***.
+    /// @param discStyle The recorded disc style to validate.
+    public static DataResult<RecordedDiscStyle> validateDiscStyle(RecordedDiscStyle discStyle) {
+        if (discStyle.color().isEmpty() && discStyle.label() < RecordedDiscItem.DISC_LABEL_MIN) {
+            return DataResult.error(() -> "Recorded disc style must have 'color' and/or 'label', but not neither!");
+        }
+        return DataResult.success(discStyle);
     }
 }

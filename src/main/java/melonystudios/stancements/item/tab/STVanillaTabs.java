@@ -4,7 +4,11 @@ import melonystudios.stancements.Stancements;
 import melonystudios.stancements.item.STItems;
 import melonystudios.stancements.option.STCommonOptions;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.DyedItemColor;
@@ -35,6 +39,11 @@ public class STVanillaTabs {
             event.insertAfter(new ItemStack(Items.BAMBOO_BUTTON), STItems.BAMBOO_SHELF.toStack(), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.CRIMSON_BUTTON), STItems.CRIMSON_SHELF.toStack(), PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.WARPED_BUTTON), STItems.WARPED_SHELF.toStack(), PARENT_AND_SEARCH_TABS);
+
+            ResourceKey<Item> poplarButton = ResourceKey.create(Registries.ITEM, Identifier.withDefaultNamespace("poplar_button"));
+            event.getParameters().holders().lookupOrThrow(Registries.ITEM).get(poplarButton).ifPresent(
+                    item -> event.insertAfter(new ItemStack(item), STItems.POPLAR_SHELF.toStack(), PARENT_AND_SEARCH_TABS)
+            );
         }
 
         if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS) {
@@ -58,6 +67,11 @@ public class STVanillaTabs {
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS || event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
             event.insertAfter(new ItemStack(Items.JUKEBOX), STItems.MUSIC_RECORDER.toStack(), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(STItems.MUSIC_RECORDER.toStack(), STItems.musicRemixer(STItems.MUSIC_REMIXER, 1, false).create(), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(STItems.musicRemixer(STItems.MUSIC_REMIXER, 1, false).create(), STItems.musicRemixer(STItems.TINTED_MUSIC_REMIXER, 1, false).create(), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(STItems.musicRemixer(STItems.TINTED_MUSIC_REMIXER, 1, false).create(), STItems.musicRemixer(STItems.MUSIC_REMIXER, 1, true).create(), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(STItems.musicRemixer(STItems.MUSIC_REMIXER, 1, true).create(), STItems.GLASS_CASING.toStack(), PARENT_AND_SEARCH_TABS);
+            event.insertAfter(STItems.GLASS_CASING.toStack(), STItems.TINTED_GLASS_CASING.toStack(), PARENT_AND_SEARCH_TABS);
         }
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS || event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {

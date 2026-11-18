@@ -125,15 +125,24 @@ public class STRecipeProvider extends RecipeProvider {
         this.shaped(RecipeCategory.REDSTONE, STItems.MUSIC_RECORDER).define('#', ItemTags.PLANKS).define('R', Tags.Items.DUSTS_REDSTONE).define('I', Tags.Items.GEMS_DIAMOND).define('D', Tags.Items.DYES)
                 .pattern("#R#").pattern("DID").pattern("#R#").unlockedBy("has_diamond", this.has(Tags.Items.GEMS_DIAMOND))
                 .save(this.output);
+        this.shaped(RecipeCategory.REDSTONE, STItems.musicRemixer(STItems.MUSIC_REMIXER, 1, true)).define('#', ItemTags.PLANKS).define('T', ItemTags.WOODEN_TRAPDOORS).define('R', Tags.Items.DUSTS_REDSTONE).define('D', Tags.Items.GEMS_DIAMOND)
+                .pattern("# #").pattern("TDT").pattern("#R#").unlockedBy("has_diamond", this.has(Tags.Items.GEMS_DIAMOND))
+                .group(Stancements.stancements("music_remixers").toString()).save(this.output);
+        this.shaped(RecipeCategory.REDSTONE, STItems.musicRemixer(STItems.MUSIC_REMIXER, 1, false)).define('#', ItemTags.PLANKS).define('T', ItemTags.WOODEN_TRAPDOORS).define('R', Tags.Items.DUSTS_REDSTONE).define('D', Tags.Items.GEMS_DIAMOND).define('C', STItems.GLASS_CASING)
+                .pattern("#C#").pattern("TDT").pattern("#R#").unlockedBy("has_diamond", this.has(Tags.Items.GEMS_DIAMOND))
+                .group(Stancements.stancements("music_remixers").toString()).save(this.output, Stancements.stancements("colorless_music_remixer").toString());
+        this.shaped(RecipeCategory.REDSTONE, STItems.musicRemixer(STItems.TINTED_MUSIC_REMIXER, 1, false)).define('#', ItemTags.PLANKS).define('T', ItemTags.WOODEN_TRAPDOORS).define('R', Tags.Items.DUSTS_REDSTONE).define('D', Tags.Items.GEMS_DIAMOND).define('C', STItems.TINTED_GLASS_CASING)
+                .pattern("#C#").pattern("TDT").pattern("#R#").unlockedBy("has_diamond", this.has(Tags.Items.GEMS_DIAMOND))
+                .group(Stancements.stancements("music_remixers").toString()).save(this.output);
         this.shaped(RecipeCategory.MISC, STItems.cropPot(8, false)).define('#', Items.TERRACOTTA)
                 .pattern("# #").pattern(" # ").unlockedBy("has_terracotta", this.has(Items.TERRACOTTA))
                 .save(this.output);
         this.shaped(RecipeCategory.MISC, STItems.cropPot(8, true)).define('#', Items.TERRACOTTA).define('H', Items.HOPPER)
                 .pattern("#H#").pattern(" # ").unlockedBy("has_terracotta", this.has(Items.TERRACOTTA)).unlockedBy("has_hopper", this.has(Items.HOPPER))
-                .group("hopping_crop_pot").save(this.output, Stancements.stancements("hopping_crop_pot").toString());
+                .group(Stancements.stancements("hopping_crop_pots").toString()).save(this.output, Stancements.stancements("hopping_crop_pot").toString());
         this.shaped(RecipeCategory.MISC, STItems.cropPot(8, true)).define('#', STItems.CROP_POT).define('H', Items.HOPPER)
                 .pattern("###").pattern("#H#").pattern("###").unlockedBy("has_hopper", this.has(Items.HOPPER))
-                .group("hopping_crop_pot").save(this.output, Stancements.stancements("hopping_crop_pot_from_existing").toString());
+                .group(Stancements.stancements("hopping_crop_pots").toString()).save(this.output, Stancements.stancements("hopping_crop_pot_from_existing").toString());
 
         // Rails
         this.shaped(RecipeCategory.TRANSPORTATION, STItems.GILDED_RAIL, 6).define('#', Tags.Items.INGOTS_GOLD).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Tags.Items.RODS_WOODEN)
@@ -179,25 +188,39 @@ public class STRecipeProvider extends RecipeProvider {
         this.dyeTaggingRail(STItems.MAGENTA_TAGGING_RAIL, Tags.Items.DYES_MAGENTA);
         this.dyeTaggingRail(STItems.PINK_TAGGING_RAIL, Tags.Items.DYES_PINK);
 
+        // Glass casings
+        this.shaped(RecipeCategory.DECORATIONS, STItems.GLASS_CASING, 2).define('G', Tags.Items.GLASS_BLOCKS_COLORLESS).define('#', Tags.Items.NUGGETS_IRON).define('I', Tags.Items.INGOTS_IRON)
+                .pattern("#G#").pattern(" I ").unlockedBy("has_glass", this.has(Tags.Items.GLASS_BLOCKS_COLORLESS))
+                .group(Stancements.stancements("glass_casings").toString()).save(this.output);
+        this.shaped(RecipeCategory.DECORATIONS, STItems.TINTED_GLASS_CASING, 2).define('G', Tags.Items.GLASS_BLOCKS_TINTED).define('#', Tags.Items.NUGGETS_IRON).define('I', Tags.Items.INGOTS_IRON)
+                .pattern("#G#").pattern(" I ").unlockedBy("has_tinted_glass", this.has(Tags.Items.GLASS_BLOCKS_TINTED))
+                .group(Stancements.stancements("glass_casings").toString()).save(this.output);
+
         // Items
         this.shaped(RecipeCategory.MISC, STItems.VINYL_DISC, 4).define('C', ItemTags.COALS).define('D', STItemTags.VINYL_DISC_DYES).define('H', Items.HONEYCOMB)
-                .pattern("DC").pattern("CH").unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
-                .group("vinyl_disc").save(this.output);
+                .pattern("DC").pattern("CH").unlockedBy("has_honeycomb", this.has(Items.HONEYCOMB))
+                .group(Stancements.stancements("vinyl_discs").toString()).save(this.output);
         this.shapeless(RecipeCategory.MISC, STItems.VINYL_DISC).requires(STItems.RECORDED_DISC)
-                .unlockedBy("has_recorded_disc", has(STItems.RECORDED_DISC))
-                .group("vinyl_disc").save(this.output, Stancements.stancements("vinyl_disc_from_clearing").toString());
+                .unlockedBy("has_recorded_disc", this.has(STItems.RECORDED_DISC))
+                .group(Stancements.stancements("vinyl_discs").toString()).save(this.output, Stancements.stancements("vinyl_disc_from_clearing").toString());
         this.shapeless(RecipeCategory.MISC, STItems.SCULK_INFESTED_VINYL_DISC).requires(STItems.SCULK_INFESTED_RECORDED_DISC)
-                .unlockedBy("has_sculk_infested_recorded_disc", has(STItems.SCULK_INFESTED_RECORDED_DISC))
-                .save(this.output, Stancements.stancements("sculk_infested_vinyl_disc_from_clearing").toString());
+                .unlockedBy("has_sculk_infested_recorded_disc", this.has(STItems.SCULK_INFESTED_RECORDED_DISC))
+                .group(Stancements.stancements("sculk_infested_vinyl_discs").toString()).save(this.output, Stancements.stancements("sculk_infested_vinyl_disc_from_clearing").toString());
         this.shaped(RecipeCategory.TOOLS, STItems.POCKET_RECORDER).define('#', Tags.Items.INGOTS_COPPER).define('S', Tags.Items.STRINGS).define('R', STItems.MUSIC_RECORDER)
-                .pattern("RS").pattern("##").unlockedBy("has_music_recorder", has(STItems.MUSIC_RECORDER))
+                .pattern("RS").pattern("##").unlockedBy("has_music_recorder", this.has(STItems.MUSIC_RECORDER))
                 .save(this.output);
         this.shaped(RecipeCategory.MISC, STItems.SHORT_CASSETTE_TAPE, 2).define('#', Tags.Items.INGOTS_COPPER).define('I', Tags.Items.INGOTS_IRON).define('R', Tags.Items.DUSTS_REDSTONE)
-                .pattern("RIR").pattern("###").unlockedBy("has_redstone_dust", has(Tags.Items.DUSTS_REDSTONE))
+                .pattern("RIR").pattern("###").unlockedBy("has_redstone_dust", this.has(Tags.Items.DUSTS_REDSTONE))
                 .save(this.output);
         this.shaped(RecipeCategory.MISC, STItems.LONG_CASSETTE_TAPE, 2).define('#', Tags.Items.INGOTS_COPPER).define('G', Tags.Items.INGOTS_GOLD).define('R', Tags.Items.DUSTS_REDSTONE)
-                .pattern("RGR").pattern("###").unlockedBy("has_redstone_dust", has(Tags.Items.DUSTS_REDSTONE))
+                .pattern("RGR").pattern("###").unlockedBy("has_redstone_dust", this.has(Tags.Items.DUSTS_REDSTONE))
                 .save(this.output);
+        this.shapeless(RecipeCategory.MISC, STItems.VINYL_DISC, 4).requires(STItems.SHATTERED_DISC, 4).requires(ItemTags.COALS)
+                .unlockedBy("has_shattered_disc", this.has(STItems.SHATTERED_DISC))
+                .group(Stancements.stancements("vinyl_discs").toString()).save(this.output, Stancements.stancements("vinyl_disc_from_repairing_shattered_disc").toString());
+        this.shapeless(RecipeCategory.MISC, STItems.SCULK_INFESTED_VINYL_DISC, 4).requires(STItems.SCULK_INFESTED_SHATTERED_DISC, 4).requires(Tags.Items.COBBLESTONES_DEEPSLATE)
+                .unlockedBy("has_sculk_infested_shattered_disc", this.has(STItems.SCULK_INFESTED_SHATTERED_DISC))
+                .group(Stancements.stancements("sculk_infested_vinyl_discs").toString()).save(this.output, Stancements.stancements("sculk_infested_vinyl_disc_from_repairing_shattered_disc").toString());
 
         // Minecart tags
         this.addMinecartTag(STItems.WHITE_TAG, Tags.Items.DYES_WHITE);
@@ -224,7 +247,7 @@ public class STRecipeProvider extends RecipeProvider {
     public void addShelf(ItemLike shelf, ItemLike planks) {
         this.shaped(RecipeCategory.DECORATIONS, shelf, 6).define('#', planks).define('S', Tags.Items.RODS_WOODEN)
                 .pattern("###").pattern("S S").unlockedBy("has_planks", this.has(planks))
-                .group("wooden_shelves").save(this.output);
+                .group(Stancements.stancements("wooden_shelves").toString()).save(this.output);
     }
 
     /// Makes a crafting table cloth recipe.
@@ -233,16 +256,16 @@ public class STRecipeProvider extends RecipeProvider {
     public void addCraftingTableCloth(ItemLike tableCloth, Item carpet) {
         this.shaped(RecipeCategory.DECORATIONS, tableCloth, 2).define('#', carpet)
                 .pattern("##").unlockedBy("has_carpet", this.has(carpet))
-                .group("crafting_table_cloths").save(this.output);
+                .group(Stancements.stancements("crafting_table_cloths").toString()).save(this.output);
     }
 
     /// Makes a crafting table cloth coloring/dyeing recipe.
     /// @param tableCloth The table cloth item.
-    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_LIGHT_BLUE #c:dyes/light_blue}.
+    /// @param dyeTag An item tag for the dye to color with, like [`#c:dyes/light_blue`][Tags.Items#DYES_LIGHT_BLUE].
     public void dyeCraftingTableCloth(ItemLike tableCloth, TagKey<Item> dyeTag) {
         Identifier identifier = BuiltInRegistries.ITEM.getKey(tableCloth.asItem());
         this.shapeless(RecipeCategory.DECORATIONS, tableCloth).requires(dyeTag).requires(DifferenceIngredient.of(Ingredient.of(this.items.getOrThrow(STItemTags.CRAFTING_TABLE_CLOTHS)), Ingredient.of(tableCloth)))
-                .unlockedBy("has_needed_dye", this.has(dyeTag)).group("crafting_table_cloths")
+                .unlockedBy("has_needed_dye", this.has(dyeTag)).group(Stancements.stancements("crafting_table_cloths").toString())
                 .save(this.output, Identifier.fromNamespaceAndPath(identifier.getNamespace(), "dye_" + identifier.getPath()).toString());
     }
 
@@ -253,21 +276,21 @@ public class STRecipeProvider extends RecipeProvider {
         Identifier identifier = BuiltInRegistries.ITEM.getKey(concrete.asItem());
         this.shaped(RecipeCategory.BUILDING_BLOCKS, concrete, 8).define('#', concretePowder).define('W', Tags.Items.BUCKETS_WATER)
                 .pattern("###").pattern("#W#").pattern("###").unlockedBy("has_concrete_powder", this.has(concretePowder))
-                .group("dye_concrete").save(this.output, Stancements.stancements(identifier.getPath() + "_from_watering").toString());
+                .group(Stancements.stancements("dye_concrete").toString()).save(this.output, Stancements.stancements(identifier.getPath() + "_from_watering").toString());
     }
 
     /// Makes a minecart tag recipe.
     /// @param tag The tag item.
-    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_PINK #c:dyes/pink}.
+    /// @param dyeTag An item tag for the dye to color with, like [`#c:dyes/pink`][Tags.Items#DYES_PINK].
     public void addMinecartTag(ItemLike tag, TagKey<Item> dyeTag) {
         this.shapeless(RecipeCategory.TRANSPORTATION, tag).requires(Items.PAPER).requires(Tags.Items.STRINGS).requires(dyeTag)
-                .unlockedBy("has_paper", this.has(Items.PAPER)).group("minecart_tags")
+                .unlockedBy("has_paper", this.has(Items.PAPER)).group(Stancements.stancements("minecart_tags").toString())
                 .save(this.output);
     }
 
     /// Makes a tagging rail recipe.
     /// @param rail The tagging rail item.
-    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_WHITE #c:dyes/white}.
+    /// @param dyeTag An item tag for the dye to color with, like [`#c:dyes/white`][Tags.Items#DYES_WHITE].
     public void addTaggingRail(ItemLike rail, TagKey<Item> dyeTag) {
         this.shaped(RecipeCategory.TRANSPORTATION, rail, 6).define('#', Tags.Items.INGOTS_IRON).define('R', Tags.Items.DUSTS_REDSTONE).define('S', Items.STONE_PRESSURE_PLATE).define('D', dyeTag)
                 .pattern("#D#").pattern("#R#").pattern("#S#").unlockedBy("has_rail", this.has(Items.RAIL))
@@ -276,13 +299,13 @@ public class STRecipeProvider extends RecipeProvider {
 
     /// Makes a tagging rails dyeing/coloring recipe.
     /// @param rail The tagging rail item.
-    /// @param dyeTag An item tag for the dye to color with, like {@link Tags.Items#DYES_PINK #c:dyes/pink}.
+    /// @param dyeTag An item tag for the dye to color with, like [`#c:dyes/pink`][Tags.Items#DYES_PINK].
     public void dyeTaggingRail(ItemLike rail, TagKey<Item> dyeTag) {
         Ingredient ingredient = DifferenceIngredient.of(Ingredient.of(this.items.getOrThrow(STItemTags.TAGGING_RAILS)), Ingredient.of(rail));
         Identifier identifier = BuiltInRegistries.ITEM.getKey(rail.asItem());
 
         this.shapeless(RecipeCategory.TRANSPORTATION, rail, 6).requires(ingredient, 6).requires(dyeTag)
                 .unlockedBy("has_tagging_rail", this.has(STItemTags.TAGGING_RAILS))
-                .group("dye_tagging_rail").save(this.output, Identifier.fromNamespaceAndPath(identifier.getNamespace(), "dye_" + identifier.getPath()).toString());
+                .group(Stancements.stancements("dye_tagging_rail").toString()).save(this.output, Identifier.fromNamespaceAndPath(identifier.getNamespace(), "dye_" + identifier.getPath()).toString());
     }
 }

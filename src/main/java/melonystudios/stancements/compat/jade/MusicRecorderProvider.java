@@ -69,7 +69,7 @@ public class MusicRecorderProvider implements StreamServerDataProvider<BlockAcce
 
                 // todo: not 100% accurate -- having a "music." as the start of the translation will also make this return the sound id
                 if (songName.getString().startsWith("music.")) {
-                    songName = Component.translatable("tooltip.stancements.sound_id", data.get().track().get().identifier());
+                    songName = Component.translatable("tooltip.stancements.sound_id", data.get().track().get().identifier().toString());
                 }
 
                 tooltip.add(Component.translatable("tooltip.stancements.recording", songName,

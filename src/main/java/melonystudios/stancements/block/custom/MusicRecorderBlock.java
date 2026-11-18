@@ -52,20 +52,21 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jspecify.annotations.Nullable;
 
 public class MusicRecorderBlock extends BaseEntityBlock {
+    public static final MapCodec<MusicRecorderBlock> CODEC = simpleCodec(MusicRecorderBlock::new);
     public static final BooleanProperty RECORDING = STBlockStateProperties.RECORDING;
     public static final Component NO_MUSIC_PLAYING_TEXT = Component.translatable("tooltip.stancements.no_music_playing").withStyle(ChatFormatting.GRAY);
     public static final Component CANNOT_COPY_TEXT = Component.translatable("tooltip.stancements.cannot_copy").withStyle(ChatFormatting.GRAY);
     public static final Component COPYING_PROHIBITED_TEXT = Component.translatable("tooltip.stancements.copying_prohibited").withStyle(ChatFormatting.RED);
     private static final Direction[] DIRECTIONS = Direction.values();
 
+    @Override
+    protected MapCodec<? extends MusicRecorderBlock> codec() {
+        return CODEC;
+    }
+
     public MusicRecorderBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(RECORDING, false));
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec(MusicRecorderBlock::new);
     }
 
     @Override

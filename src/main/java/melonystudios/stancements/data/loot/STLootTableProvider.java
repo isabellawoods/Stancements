@@ -11,6 +11,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class STLootTableProvider extends LootTableProvider {
     public STLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, Set.of(), List.of(new SubProviderEntry(STBlockLootSubProvider::new, LootContextParamSets.BLOCK)), registries);
+        super(output, Set.of(), List.of(
+                new SubProviderEntry(STBlockLootSubProvider::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(STChestLootSubProvider::new, LootContextParamSets.CHEST)
+        ), registries);
     }
 }

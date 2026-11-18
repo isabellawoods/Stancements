@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -24,6 +25,11 @@ public class STCreativeTabs {
                 if (STCommonOptions.ADD_ITEMS_TO_VANILLA_TABS.get()) return;
                 // Functional blocks
                 output.accept(MUSIC_RECORDER);
+                output.accept(musicRemixer(MUSIC_REMIXER, 1, false).create());
+                output.accept(musicRemixer(TINTED_MUSIC_REMIXER, 1, false).create());
+                output.accept(musicRemixer(MUSIC_REMIXER, 1, true).create());
+                output.accept(GLASS_CASING);
+                output.accept(TINTED_GLASS_CASING);
                 // Vinyl & recorded discs (items but should be grouped together with the recorder)
                 output.accept(VINYL_DISC);
                 output.accept(RECORDED_DISC);
@@ -46,6 +52,7 @@ public class STCreativeTabs {
                 output.accept(MANGROVE_SHELF);
                 output.accept(CHERRY_SHELF);
                 output.accept(PALE_OAK_SHELF);
+                if (ModList.get().isLoaded("vanillabackport")) output.accept(POPLAR_SHELF);
                 output.accept(BAMBOO_SHELF);
                 output.accept(CRIMSON_SHELF);
                 output.accept(WARPED_SHELF);
